@@ -1,0 +1,1120 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/zodj5v",
+    "id": "zodj5v",
+    "slide": 9,
+    "layoutId": "/ppt/slideLayouts/slideLayout5.xml",
+    "layoutName": "Blank Page",
+    "masterLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "OneSystems Colour",
+    "colors": {
+      "accent1": "#FF8C00",
+      "accent2": "#0066CC",
+      "accent3": "#0000A5",
+      "accent4": "#C0C0C0",
+      "accent5": "#0066CC",
+      "accent6": "#333333",
+      "dk1": "#003366",
+      "lt1": "#F5F5F5",
+      "dk2": "#333333",
+      "lt2": "#9FC9EB",
+      "hlink": "#FF8C00",
+      "folHlink": "#0066CC"
+    },
+    "fontScheme": {
+      "name": "OST Font",
+      "majorFont": {
+        "latinTypeface": "Bahnschrift"
+      },
+      "minorFont": {
+        "latinTypeface": "Segoe UI"
+      }
+    },
+    "typefaces": [
+      "Bahnschrift",
+      "Segoe UI"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "/ppt/slideLayouts/slideLayout5.xml",
+      "name": "Blank Page",
+      "parentLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+      "backgroundImage": {
+        "assetId": "/ppt/media/image3.jpg",
+        "contentType": "image/jpeg",
+        "byteLength": 45542
+      },
+      "elements": [
+        {
+          "order": 1,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout5.xml/5",
+          "id": "5",
+          "name": "Rectangle 4",
+          "bbox": [
+            0,
+            0,
+            1280,
+            720
+          ],
+          "geometry": "rect",
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "verticalAlignment": "middle"
+          },
+          "fillColor": "#FFFFFF",
+          "lineWidth": 0
+        }
+      ]
+    },
+    {
+      "scope": "master",
+      "id": "/ppt/slideMasters/slideMaster1.xml",
+      "type": "master",
+      "backgroundImage": {
+        "assetId": "/ppt/media/image1.jpg",
+        "contentType": "image/jpeg",
+        "byteLength": 73341
+      },
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/0jidwved",
+      "id": "1",
+      "bbox": [
+        74,
+        116,
+        44,
+        36
+      ],
+      "geometry": "rect",
+      "text": "08",
+      "textPreview": "08",
+      "resolvedFontSize": 20,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 20,
+        "typeface": "Bahnschrift",
+        "color": "#F26B43",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "wrap": "square",
+        "autoFit": "shrinkText",
+        "autoFitScale": 1,
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "08"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "08",
+          "resolvedTextStyle": {
+            "fontSize": 20,
+            "typeface": "Bahnschrift",
+            "color": "#F26B43",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "08",
+              "fontSize": 20,
+              "typeface": "Bahnschrift",
+              "color": "#F26B43",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/zi9cnqd8",
+      "id": "2",
+      "bbox": [
+        136,
+        108,
+        1054,
+        58
+      ],
+      "geometry": "rect",
+      "text": "Policy decisions required before schema freeze",
+      "textPreview": "Policy decisions required before schema freeze",
+      "resolvedFontSize": 36,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 36,
+        "typeface": "Bahnschrift",
+        "color": "#0B1F4D",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "wrap": "square",
+        "autoFit": "none",
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Policy decisions required before schema freeze"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Policy decisions required before schema freeze",
+          "resolvedTextStyle": {
+            "fontSize": 36,
+            "typeface": "Bahnschrift",
+            "color": "#0B1F4D",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Policy decisions required before schema freeze",
+              "fontSize": 36,
+              "typeface": "Bahnschrift",
+              "color": "#0B1F4D",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/eh0vu5wn",
+      "id": "3",
+      "bbox": [
+        136,
+        158,
+        1040,
+        34
+      ],
+      "geometry": "rect",
+      "text": "The supplied sources differ on six behaviours that directly affect data structures and workflow code",
+      "textPreview": "The supplied sources differ on six behaviours that directly affect data structures and workflow code",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 18.67,
+        "typeface": "Segoe UI",
+        "color": "#5D6675",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "wrap": "square",
+        "autoFit": "none",
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "The supplied sources differ on six behaviours that directly affect data structures and workflow code"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "The supplied sources differ on six behaviours that directly affect data structures and workflow code",
+          "resolvedTextStyle": {
+            "fontSize": 18.67,
+            "typeface": "Segoe UI",
+            "color": "#5D6675",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "The supplied sources differ on six behaviours that directly affect data structures and workflow code",
+              "fontSize": 18.67,
+              "typeface": "Segoe UI",
+              "color": "#5D6675",
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "table",
+      "scope": "slide",
+      "aid": "tb/s7m1kryl",
+      "id": "4",
+      "bbox": [
+        55,
+        211,
+        1170,
+        425
+      ],
+      "text": "Decision | Requirements review | Backend or prototype position | Recommended action\nApproval roles | Company-driven Host chain with optional stages | Prototype uses Individual Reviewer, MT Group and PM | Confirm one canonical role and stage model\nParent-child gating | Parent and child approval may proceed independently | Prototype blocks parent final approval until required child approval | Confirm whether approval or only work start is gated\nReviewer group changes | Changes update every live permit | Database proposal snapshots eligibility at submission | Choose audit certainty or live reassignment semantics\nTemplate changes | Labels and ordering may change after publish | Database proposal makes published versions immutable | Version every published change and define edit rules\nPDF history | Generate on demand from current state | Schema includes revisions and generated document records | Confirm retention, evidence and regeneration policy\nExpiry | No dedicated Expired status proposed | Prototype contains EXPIRED and automatic expiry | Confirm status, flag and reporting behaviour",
+      "textPreview": "Decision | Requirements review | Backend or prototype position | Recommended action | Approval roles | Company-driven Host chain with opt...",
+      "rows": 7,
+      "cols": 4,
+      "cells": [
+        {
+          "index": 1,
+          "row": 1,
+          "column": 1,
+          "bbox": [
+            55,
+            211,
+            180,
+            60.71
+          ],
+          "text": "Decision",
+          "textPreview": "Decision",
+          "fillColor": "#0B1F4D",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Decision",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Decision"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "row": 1,
+          "column": 2,
+          "bbox": [
+            235,
+            211,
+            300,
+            60.71
+          ],
+          "text": "Requirements review",
+          "textPreview": "Requirements review",
+          "fillColor": "#0B1F4D",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Requirements review",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Requirements review"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "row": 1,
+          "column": 3,
+          "bbox": [
+            535,
+            211,
+            320,
+            60.71
+          ],
+          "text": "Backend or prototype position",
+          "textPreview": "Backend or prototype position",
+          "fillColor": "#0B1F4D",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Backend or prototype position",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Backend or prototype position"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 4,
+          "row": 1,
+          "column": 4,
+          "bbox": [
+            855,
+            211,
+            370,
+            60.71
+          ],
+          "text": "Recommended action",
+          "textPreview": "Recommended action",
+          "fillColor": "#0B1F4D",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Recommended action",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Recommended action"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 5,
+          "row": 2,
+          "column": 1,
+          "bbox": [
+            55,
+            271.71,
+            180,
+            60.71
+          ],
+          "text": "Approval roles",
+          "textPreview": "Approval roles",
+          "fillColor": "#FFFFFF",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Approval roles",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Approval roles"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 6,
+          "row": 2,
+          "column": 2,
+          "bbox": [
+            235,
+            271.71,
+            300,
+            60.71
+          ],
+          "text": "Company-driven Host chain with optional stages",
+          "textPreview": "Company-driven Host chain with optional stages",
+          "fillColor": "#FFFFFF",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Company-driven Host chain with optional stages",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Company-driven Host chain with optional stages"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 7,
+          "row": 2,
+          "column": 3,
+          "bbox": [
+            535,
+            271.71,
+            320,
+            60.71
+          ],
+          "text": "Prototype uses Individual Reviewer, MT Group and PM",
+          "textPreview": "Prototype uses Individual Reviewer, MT Group and PM",
+          "fillColor": "#FFFFFF",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Prototype uses Individual Reviewer, MT Group and PM",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Prototype uses Individual Reviewer, MT Group and PM"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 8,
+          "row": 2,
+          "column": 4,
+          "bbox": [
+            855,
+            271.71,
+            370,
+            60.71
+          ],
+          "text": "Confirm one canonical role and stage model",
+          "textPreview": "Confirm one canonical role and stage model",
+          "fillColor": "#FFFFFF",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Confirm one canonical role and stage model",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Confirm one canonical role and stage model"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 9,
+          "row": 3,
+          "column": 1,
+          "bbox": [
+            55,
+            332.43,
+            180,
+            60.71
+          ],
+          "text": "Parent-child gating",
+          "textPreview": "Parent-child gating",
+          "fillColor": "#F5F8FB",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Parent-child gating",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Parent-child gating"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 10,
+          "row": 3,
+          "column": 2,
+          "bbox": [
+            235,
+            332.43,
+            300,
+            60.71
+          ],
+          "text": "Parent and child approval may proceed independently",
+          "textPreview": "Parent and child approval may proceed independently",
+          "fillColor": "#F5F8FB",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Parent and child approval may proceed independently",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Parent and child approval may proceed independently"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 11,
+          "row": 3,
+          "column": 3,
+          "bbox": [
+            535,
+            332.43,
+            320,
+            60.71
+          ],
+          "text": "Prototype blocks parent final approval until required child approval",
+          "textPreview": "Prototype blocks parent final approval until required child approval",
+          "fillColor": "#F5F8FB",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Prototype blocks parent final approval until required child approval",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Prototype blocks parent final approval until required child approval"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 12,
+          "row": 3,
+          "column": 4,
+          "bbox": [
+            855,
+            332.43,
+            370,
+            60.71
+          ],
+          "text": "Confirm whether approval or only work start is gated",
+          "textPreview": "Confirm whether approval or only work start is gated",
+          "fillColor": "#F5F8FB",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Confirm whether approval or only work start is gated",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Confirm whether approval or only work start is gated"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 13,
+          "row": 4,
+          "column": 1,
+          "bbox": [
+            55,
+            393.14,
+            180,
+            60.71
+          ],
+          "text": "Reviewer group changes",
+          "textPreview": "Reviewer group changes",
+          "fillColor": "#FFFFFF",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Reviewer group changes",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Reviewer group changes"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 14,
+          "row": 4,
+          "column": 2,
+          "bbox": [
+            235,
+            393.14,
+            300,
+            60.71
+          ],
+          "text": "Changes update every live permit",
+          "textPreview": "Changes update every live permit",
+          "fillColor": "#FFFFFF",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Changes update every live permit",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Changes update every live permit"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 15,
+          "row": 4,
+          "column": 3,
+          "bbox": [
+            535,
+            393.14,
+            320,
+            60.71
+          ],
+          "text": "Database proposal snapshots eligibility at submission",
+          "textPreview": "Database proposal snapshots eligibility at submission",
+          "fillColor": "#FFFFFF",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Database proposal snapshots eligibility at submission",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Database proposal snapshots eligibility at submission"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 16,
+          "row": 4,
+          "column": 4,
+          "bbox": [
+            855,
+            393.14,
+            370,
+            60.71
+          ],
+          "text": "Choose audit certainty or live reassignment semantics",
+          "textPreview": "Choose audit certainty or live reassignment semantics",
+          "fillColor": "#FFFFFF",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Choose audit certainty or live reassignment semantics",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Choose audit certainty or live reassignment semantics"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 17,
+          "row": 5,
+          "column": 1,
+          "bbox": [
+            55,
+            453.86,
+            180,
+            60.71
+          ],
+          "text": "Template changes",
+          "textPreview": "Template changes",
+          "fillColor": "#F5F8FB",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Template changes",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Template changes"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 18,
+          "row": 5,
+          "column": 2,
+          "bbox": [
+            235,
+            453.86,
+            300,
+            60.71
+          ],
+          "text": "Labels and ordering may change after publish",
+          "textPreview": "Labels and ordering may change after publish",
+          "fillColor": "#F5F8FB",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Labels and ordering may change after publish",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Labels and ordering may change after publish"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 19,
+          "row": 5,
+          "column": 3,
+          "bbox": [
+            535,
+            453.86,
+            320,
+            60.71
+          ],
+          "text": "Database proposal makes published versions immutable",
+          "textPreview": "Database proposal makes published versions immutable",
+          "fillColor": "#F5F8FB",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Database proposal makes published versions immutable",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Database proposal makes published versions immutable"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 20,
+          "row": 5,
+          "column": 4,
+          "bbox": [
+            855,
+            453.86,
+            370,
+            60.71
+          ],
+          "text": "Version every published change and define edit rules",
+          "textPreview": "Version every published change and define edit rules",
+          "fillColor": "#F5F8FB",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Version every published change and define edit rules",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Version every published change and define edit rules"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 21,
+          "row": 6,
+          "column": 1,
+          "bbox": [
+            55,
+            514.57,
+            180,
+            60.71
+          ],
+          "text": "PDF history",
+          "textPreview": "PDF history",
+          "fillColor": "#FFFFFF",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "PDF history",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "PDF history"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 22,
+          "row": 6,
+          "column": 2,
+          "bbox": [
+            235,
+            514.57,
+            300,
+            60.71
+          ],
+          "text": "Generate on demand from current state",
+          "textPreview": "Generate on demand from current state",
+          "fillColor": "#FFFFFF",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Generate on demand from current state",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Generate on demand from current state"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 23,
+          "row": 6,
+          "column": 3,
+          "bbox": [
+            535,
+            514.57,
+            320,
+            60.71
+          ],
+          "text": "Schema includes revisions and generated document records",
+          "textPreview": "Schema includes revisions and generated document records",
+          "fillColor": "#FFFFFF",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Schema includes revisions and generated document records",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Schema includes revisions and generated document records"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 24,
+          "row": 6,
+          "column": 4,
+          "bbox": [
+            855,
+            514.57,
+            370,
+            60.71
+          ],
+          "text": "Confirm retention, evidence and regeneration policy",
+          "textPreview": "Confirm retention, evidence and regeneration policy",
+          "fillColor": "#FFFFFF",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Confirm retention, evidence and regeneration policy",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Confirm retention, evidence and regeneration policy"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 25,
+          "row": 7,
+          "column": 1,
+          "bbox": [
+            55,
+            575.29,
+            180,
+            60.71
+          ],
+          "text": "Expiry",
+          "textPreview": "Expiry",
+          "fillColor": "#F5F8FB",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Expiry",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Expiry"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 26,
+          "row": 7,
+          "column": 2,
+          "bbox": [
+            235,
+            575.29,
+            300,
+            60.71
+          ],
+          "text": "No dedicated Expired status proposed",
+          "textPreview": "No dedicated Expired status proposed",
+          "fillColor": "#F5F8FB",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "No dedicated Expired status proposed",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "No dedicated Expired status proposed"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 27,
+          "row": 7,
+          "column": 3,
+          "bbox": [
+            535,
+            575.29,
+            320,
+            60.71
+          ],
+          "text": "Prototype contains EXPIRED and automatic expiry",
+          "textPreview": "Prototype contains EXPIRED and automatic expiry",
+          "fillColor": "#F5F8FB",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Prototype contains EXPIRED and automatic expiry",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Prototype contains EXPIRED and automatic expiry"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 28,
+          "row": 7,
+          "column": 4,
+          "bbox": [
+            855,
+            575.29,
+            370,
+            60.71
+          ],
+          "text": "Confirm status, flag and reporting behaviour",
+          "textPreview": "Confirm status, flag and reporting behaviour",
+          "fillColor": "#F5F8FB",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Confirm status, flag and reporting behaviour",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Confirm status, flag and reporting behaviour"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/cfydsveh",
+      "id": "5",
+      "bbox": [
+        70,
+        649,
+        1140,
+        32
+      ],
+      "geometry": "rect",
+      "text": "Recommendation: close these decisions in a short design authority workshop and record them as testable acceptance rules.",
+      "textPreview": "Recommendation: close these decisions in a short design authority workshop and record them as testable acceptance rules.",
+      "resolvedFontSize": 19.33,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 19.33,
+        "typeface": "Bahnschrift",
+        "color": "#0072BC",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "wrap": "square",
+        "autoFit": "shrinkText",
+        "autoFitScale": 1,
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Recommendation: close these decisions in a short design authority workshop and record them as testable acceptance rules."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Recommendation: close these decisions in a short design authority workshop and record them as testable acceptance rules.",
+          "resolvedTextStyle": {
+            "fontSize": 19.33,
+            "typeface": "Bahnschrift",
+            "color": "#0072BC",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Recommendation: close these decisions in a short design authority workshop and record them as testable acceptance rules.",
+              "fontSize": 19.33,
+              "typeface": "Bahnschrift",
+              "color": "#0072BC",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

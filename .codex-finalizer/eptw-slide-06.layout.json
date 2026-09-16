@@ -1,0 +1,1419 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/fqkrel",
+    "id": "fqkrel",
+    "slide": 6,
+    "layoutId": "/ppt/slideLayouts/slideLayout5.xml",
+    "layoutName": "Blank Page",
+    "masterLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "OneSystems Colour",
+    "colors": {
+      "accent1": "#FF8C00",
+      "accent2": "#0066CC",
+      "accent3": "#0000A5",
+      "accent4": "#C0C0C0",
+      "accent5": "#0066CC",
+      "accent6": "#333333",
+      "dk1": "#003366",
+      "lt1": "#F5F5F5",
+      "dk2": "#333333",
+      "lt2": "#9FC9EB",
+      "hlink": "#FF8C00",
+      "folHlink": "#0066CC"
+    },
+    "fontScheme": {
+      "name": "OST Font",
+      "majorFont": {
+        "latinTypeface": "Bahnschrift"
+      },
+      "minorFont": {
+        "latinTypeface": "Segoe UI"
+      }
+    },
+    "typefaces": [
+      "Bahnschrift",
+      "Segoe UI"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "/ppt/slideLayouts/slideLayout5.xml",
+      "name": "Blank Page",
+      "parentLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+      "backgroundImage": {
+        "assetId": "/ppt/media/image3.jpg",
+        "contentType": "image/jpeg",
+        "byteLength": 45542
+      },
+      "elements": [
+        {
+          "order": 1,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout5.xml/5",
+          "id": "5",
+          "name": "Rectangle 4",
+          "bbox": [
+            0,
+            0,
+            1280,
+            720
+          ],
+          "geometry": "rect",
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "verticalAlignment": "middle"
+          },
+          "fillColor": "#FFFFFF",
+          "lineWidth": 0
+        }
+      ]
+    },
+    {
+      "scope": "master",
+      "id": "/ppt/slideMasters/slideMaster1.xml",
+      "type": "master",
+      "backgroundImage": {
+        "assetId": "/ppt/media/image1.jpg",
+        "contentType": "image/jpeg",
+        "byteLength": 73341
+      },
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/hkrat072",
+      "id": "1",
+      "bbox": [
+        74,
+        116,
+        44,
+        36
+      ],
+      "geometry": "rect",
+      "text": "05",
+      "textPreview": "05",
+      "resolvedFontSize": 20,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 20,
+        "typeface": "Bahnschrift",
+        "color": "#F26B43",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "wrap": "square",
+        "autoFit": "shrinkText",
+        "autoFitScale": 1,
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "05"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "05",
+          "resolvedTextStyle": {
+            "fontSize": 20,
+            "typeface": "Bahnschrift",
+            "color": "#F26B43",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "05",
+              "fontSize": 20,
+              "typeface": "Bahnschrift",
+              "color": "#F26B43",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/uh0bi58r",
+      "id": "2",
+      "bbox": [
+        136,
+        108,
+        1054,
+        58
+      ],
+      "geometry": "rect",
+      "text": "Target application architecture",
+      "textPreview": "Target application architecture",
+      "resolvedFontSize": 41.33,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 41.33,
+        "typeface": "Bahnschrift",
+        "color": "#0B1F4D",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "wrap": "square",
+        "autoFit": "none",
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Target application architecture"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Target application architecture",
+          "resolvedTextStyle": {
+            "fontSize": 41.33,
+            "typeface": "Bahnschrift",
+            "color": "#0B1F4D",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Target application architecture",
+              "fontSize": 41.33,
+              "typeface": "Bahnschrift",
+              "color": "#0B1F4D",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/vi9srqpc",
+      "id": "3",
+      "bbox": [
+        136,
+        158,
+        1040,
+        34
+      ],
+      "geometry": "rect",
+      "text": "A dedicated service boundary moves security and workflow rules out of the browser",
+      "textPreview": "A dedicated service boundary moves security and workflow rules out of the browser",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 18.67,
+        "typeface": "Segoe UI",
+        "color": "#5D6675",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "wrap": "square",
+        "autoFit": "none",
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "A dedicated service boundary moves security and workflow rules out of the browser"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "A dedicated service boundary moves security and workflow rules out of the browser",
+          "resolvedTextStyle": {
+            "fontSize": 18.67,
+            "typeface": "Segoe UI",
+            "color": "#5D6675",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "A dedicated service boundary moves security and workflow rules out of the browser",
+              "fontSize": 18.67,
+              "typeface": "Segoe UI",
+              "color": "#5D6675",
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/4n2tof6t",
+      "id": "4",
+      "bbox": [
+        80,
+        268,
+        250,
+        184
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#E8F4FB",
+      "lineColor": "#A9CFE8",
+      "lineWidth": 1
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/5obaxk7e",
+      "id": "5",
+      "bbox": [
+        103,
+        292,
+        204,
+        42
+      ],
+      "geometry": "rect",
+      "text": "React web application",
+      "textPreview": "React web application",
+      "resolvedFontSize": 20.07,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 28,
+        "typeface": "Bahnschrift",
+        "color": "#0B1F4D",
+        "bold": true,
+        "alignment": "center",
+        "verticalAlignment": "top",
+        "wrap": "square",
+        "autoFit": "shrinkText",
+        "autoFitScale": 0.72,
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "React web application"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "React web application",
+          "resolvedTextStyle": {
+            "fontSize": 28,
+            "typeface": "Bahnschrift",
+            "color": "#0B1F4D",
+            "bold": true,
+            "alignment": "center"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "React web application",
+              "fontSize": 28,
+              "typeface": "Bahnschrift",
+              "color": "#0B1F4D",
+              "bold": true,
+              "alignment": "center"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/il0bm5on",
+      "id": "6",
+      "bbox": [
+        103,
+        350,
+        204,
+        86
+      ],
+      "geometry": "rect",
+      "text": "Role-aware navigation\nPermit forms and lists\nAdmin and reporting views",
+      "textPreview": "Role-aware navigation | Permit forms and lists | Admin and reporting views",
+      "resolvedFontSize": 16.48,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 20,
+        "typeface": "Segoe UI",
+        "color": "#5D6675",
+        "alignment": "center",
+        "verticalAlignment": "top",
+        "wrap": "square",
+        "autoFit": "shrinkText",
+        "autoFitScale": 0.82,
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Role-aware navigation"
+          },
+          {
+            "index": 2,
+            "text": "Permit forms and lists"
+          },
+          {
+            "index": 3,
+            "text": "Admin and reporting views"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Role-aware navigation",
+          "resolvedTextStyle": {
+            "fontSize": 20,
+            "typeface": "Segoe UI",
+            "color": "#5D6675",
+            "alignment": "center"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Role-aware navigation",
+              "fontSize": 20,
+              "typeface": "Segoe UI",
+              "color": "#5D6675",
+              "alignment": "center"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "Permit forms and lists",
+          "resolvedTextStyle": {
+            "fontSize": 20,
+            "typeface": "Segoe UI",
+            "color": "#5D6675",
+            "alignment": "center"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Permit forms and lists",
+              "fontSize": 20,
+              "typeface": "Segoe UI",
+              "color": "#5D6675",
+              "alignment": "center"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 3,
+          "text": "Admin and reporting views",
+          "resolvedTextStyle": {
+            "fontSize": 20,
+            "typeface": "Segoe UI",
+            "color": "#5D6675",
+            "alignment": "center"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Admin and reporting views",
+              "fontSize": 20,
+              "typeface": "Segoe UI",
+              "color": "#5D6675",
+              "alignment": "center"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/jm9svap8",
+      "id": "7",
+      "bbox": [
+        445,
+        232,
+        365,
+        256
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#FFFFFF",
+      "lineColor": "#0072BC",
+      "lineWidth": 1
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/kry9cbqp",
+      "id": "8",
+      "bbox": [
+        470,
+        258,
+        315,
+        44
+      ],
+      "geometry": "rect",
+      "text": "API and workflow service",
+      "textPreview": "API and workflow service",
+      "resolvedFontSize": 26.93,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 30.67,
+        "typeface": "Bahnschrift",
+        "color": "#0B1F4D",
+        "bold": true,
+        "alignment": "center",
+        "verticalAlignment": "top",
+        "wrap": "square",
+        "autoFit": "shrinkText",
+        "autoFitScale": 0.88,
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "API and workflow"
+          },
+          {
+            "index": 2,
+            "text": "service"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "API and workflow service",
+          "resolvedTextStyle": {
+            "fontSize": 30.67,
+            "typeface": "Bahnschrift",
+            "color": "#0B1F4D",
+            "bold": true,
+            "alignment": "center"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "API and workflow service",
+              "fontSize": 30.67,
+              "typeface": "Bahnschrift",
+              "color": "#0B1F4D",
+              "bold": true,
+              "alignment": "center"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ls7alg7u",
+      "id": "9",
+      "bbox": [
+        478,
+        325,
+        300,
+        125
+      ],
+      "geometry": "rect",
+      "text": "Authentication and authorization\nValidation and state transitions\nApproval sequencing and audit events\nSearch, document and report orchestration",
+      "textPreview": "Authentication and authorization | Validation and state transitions | Approval sequencing and audit events | Search, document and report ...",
+      "resolvedFontSize": 17.32,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 21.33,
+        "typeface": "Segoe UI",
+        "color": "#172033",
+        "alignment": "center",
+        "verticalAlignment": "top",
+        "wrap": "square",
+        "autoFit": "shrinkText",
+        "autoFitScale": 0.81,
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 5,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Authentication and authorization"
+          },
+          {
+            "index": 2,
+            "text": "Validation and state transitions"
+          },
+          {
+            "index": 3,
+            "text": "Approval sequencing and audit events"
+          },
+          {
+            "index": 4,
+            "text": "Search, document and report"
+          },
+          {
+            "index": 5,
+            "text": "orchestration"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Authentication and authorization",
+          "resolvedTextStyle": {
+            "fontSize": 21.33,
+            "typeface": "Segoe UI",
+            "color": "#172033",
+            "alignment": "center"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Authentication and authorization",
+              "fontSize": 21.33,
+              "typeface": "Segoe UI",
+              "color": "#172033",
+              "alignment": "center"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "Validation and state transitions",
+          "resolvedTextStyle": {
+            "fontSize": 21.33,
+            "typeface": "Segoe UI",
+            "color": "#172033",
+            "alignment": "center"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Validation and state transitions",
+              "fontSize": 21.33,
+              "typeface": "Segoe UI",
+              "color": "#172033",
+              "alignment": "center"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 3,
+          "text": "Approval sequencing and audit events",
+          "resolvedTextStyle": {
+            "fontSize": 21.33,
+            "typeface": "Segoe UI",
+            "color": "#172033",
+            "alignment": "center"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Approval sequencing and audit events",
+              "fontSize": 21.33,
+              "typeface": "Segoe UI",
+              "color": "#172033",
+              "alignment": "center"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 4,
+          "text": "Search, document and report orchestration",
+          "resolvedTextStyle": {
+            "fontSize": 21.33,
+            "typeface": "Segoe UI",
+            "color": "#172033",
+            "alignment": "center"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Search, document and report orchestration",
+              "fontSize": 21.33,
+              "typeface": "Segoe UI",
+              "color": "#172033",
+              "alignment": "center"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/1cza9cve",
+      "id": "10",
+      "bbox": [
+        930,
+        192,
+        260,
+        120
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#0B1F4D",
+      "lineColor": "#0B1F4D",
+      "lineWidth": 1
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/0bq9g7et",
+      "id": "11",
+      "bbox": [
+        953,
+        211,
+        214,
+        40
+      ],
+      "geometry": "rect",
+      "text": "PostgreSQL",
+      "textPreview": "PostgreSQL",
+      "resolvedFontSize": 26.67,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 30.67,
+        "typeface": "Bahnschrift",
+        "color": "#FFFFFF",
+        "bold": true,
+        "alignment": "center",
+        "verticalAlignment": "top",
+        "wrap": "square",
+        "autoFit": "shrinkText",
+        "autoFitScale": 0.87,
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "PostgreSQL"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "PostgreSQL",
+          "resolvedTextStyle": {
+            "fontSize": 30.67,
+            "typeface": "Bahnschrift",
+            "color": "#FFFFFF",
+            "bold": true,
+            "alignment": "center"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "PostgreSQL",
+              "fontSize": 30.67,
+              "typeface": "Bahnschrift",
+              "color": "#FFFFFF",
+              "bold": true,
+              "alignment": "center"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/zahs72d8",
+      "id": "12",
+      "bbox": [
+        953,
+        258,
+        214,
+        30
+      ],
+      "geometry": "rect",
+      "text": "System of record",
+      "textPreview": "System of record",
+      "resolvedFontSize": 18.33,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 18.67,
+        "typeface": "Segoe UI",
+        "color": "#CFE5F6",
+        "alignment": "center",
+        "verticalAlignment": "top",
+        "wrap": "square",
+        "autoFit": "shrinkText",
+        "autoFitScale": 0.98,
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "System of record"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "System of record",
+          "resolvedTextStyle": {
+            "fontSize": 18.67,
+            "typeface": "Segoe UI",
+            "color": "#CFE5F6",
+            "alignment": "center"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "System of record",
+              "fontSize": 18.67,
+              "typeface": "Segoe UI",
+              "color": "#CFE5F6",
+              "alignment": "center"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 13,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/eporexw3",
+      "id": "13",
+      "bbox": [
+        930,
+        350,
+        260,
+        94
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#FFFFFF",
+      "lineColor": "#B8C7D5",
+      "lineWidth": 1
+    },
+    {
+      "order": 14,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/9gzadwvq",
+      "id": "14",
+      "bbox": [
+        948,
+        369,
+        224,
+        34
+      ],
+      "geometry": "rect",
+      "text": "Protected file storage",
+      "textPreview": "Protected file storage",
+      "resolvedFontSize": 21.67,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 24,
+        "typeface": "Bahnschrift",
+        "color": "#0B1F4D",
+        "bold": true,
+        "alignment": "center",
+        "verticalAlignment": "top",
+        "wrap": "square",
+        "autoFit": "shrinkText",
+        "autoFitScale": 0.9,
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Protected file storage"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Protected file storage",
+          "resolvedTextStyle": {
+            "fontSize": 24,
+            "typeface": "Bahnschrift",
+            "color": "#0B1F4D",
+            "bold": true,
+            "alignment": "center"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Protected file storage",
+              "fontSize": 24,
+              "typeface": "Bahnschrift",
+              "color": "#0B1F4D",
+              "bold": true,
+              "alignment": "center"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 15,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ofq9kre5",
+      "id": "15",
+      "bbox": [
+        948,
+        407,
+        224,
+        25
+      ],
+      "geometry": "rect",
+      "text": "Attachments and generated output",
+      "textPreview": "Attachments and generated output",
+      "resolvedFontSize": 13.93,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 16.67,
+        "typeface": "Segoe UI",
+        "color": "#5D6675",
+        "alignment": "center",
+        "verticalAlignment": "top",
+        "wrap": "square",
+        "autoFit": "shrinkText",
+        "autoFitScale": 0.84,
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Attachments and generated output"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Attachments and generated output",
+          "resolvedTextStyle": {
+            "fontSize": 16.67,
+            "typeface": "Segoe UI",
+            "color": "#5D6675",
+            "alignment": "center"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Attachments and generated output",
+              "fontSize": 16.67,
+              "typeface": "Segoe UI",
+              "color": "#5D6675",
+              "alignment": "center"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 16,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/nehsbmdk",
+      "id": "16",
+      "bbox": [
+        930,
+        482,
+        260,
+        94
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#FFFFFF",
+      "lineColor": "#B8C7D5",
+      "lineWidth": 1
+    },
+    {
+      "order": 17,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/md8rihwz",
+      "id": "17",
+      "bbox": [
+        948,
+        501,
+        224,
+        34
+      ],
+      "geometry": "rect",
+      "text": "Email delivery worker",
+      "textPreview": "Email delivery worker",
+      "resolvedFontSize": 21.67,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 24,
+        "typeface": "Bahnschrift",
+        "color": "#0B1F4D",
+        "bold": true,
+        "alignment": "center",
+        "verticalAlignment": "top",
+        "wrap": "square",
+        "autoFit": "shrinkText",
+        "autoFitScale": 0.9,
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Email delivery worker"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Email delivery worker",
+          "resolvedTextStyle": {
+            "fontSize": 24,
+            "typeface": "Bahnschrift",
+            "color": "#0B1F4D",
+            "bold": true,
+            "alignment": "center"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Email delivery worker",
+              "fontSize": 24,
+              "typeface": "Bahnschrift",
+              "color": "#0B1F4D",
+              "bold": true,
+              "alignment": "center"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 18,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/xkjahwvm",
+      "id": "18",
+      "bbox": [
+        948,
+        539,
+        224,
+        25
+      ],
+      "geometry": "rect",
+      "text": "Transactional outbox and retries",
+      "textPreview": "Transactional outbox and retries",
+      "resolvedFontSize": 14.17,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 16.67,
+        "typeface": "Segoe UI",
+        "color": "#5D6675",
+        "alignment": "center",
+        "verticalAlignment": "top",
+        "wrap": "square",
+        "autoFit": "shrinkText",
+        "autoFitScale": 0.85,
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Transactional outbox and retries"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Transactional outbox and retries",
+          "resolvedTextStyle": {
+            "fontSize": 16.67,
+            "typeface": "Segoe UI",
+            "color": "#5D6675",
+            "alignment": "center"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Transactional outbox and retries",
+              "fontSize": 16.67,
+              "typeface": "Segoe UI",
+              "color": "#5D6675",
+              "alignment": "center"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 19,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/wja9ore1",
+      "id": "19",
+      "bbox": [
+        330,
+        360,
+        115,
+        0
+      ],
+      "geometry": "straightConnector1",
+      "lineColor": "#8CA1B8",
+      "lineWidth": 2
+    },
+    {
+      "order": 20,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/gz2l0zqp",
+      "id": "20",
+      "bbox": [
+        810,
+        252,
+        120,
+        108
+      ],
+      "verticalFlip": true,
+      "geometry": "straightConnector1",
+      "lineColor": "#8CA1B8",
+      "lineWidth": 2
+    },
+    {
+      "order": 21,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/h0b2947u",
+      "id": "21",
+      "bbox": [
+        810,
+        360,
+        120,
+        37
+      ],
+      "geometry": "straightConnector1",
+      "lineColor": "#8CA1B8",
+      "lineWidth": 2
+    },
+    {
+      "order": 22,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ux03yp8j",
+      "id": "22",
+      "bbox": [
+        810,
+        360,
+        120,
+        169
+      ],
+      "geometry": "straightConnector1",
+      "lineColor": "#8CA1B8",
+      "lineWidth": 2
+    },
+    {
+      "order": 23,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/fy9k7up4",
+      "id": "23",
+      "bbox": [
+        346,
+        290,
+        90,
+        25
+      ],
+      "geometry": "rect",
+      "text": "Security boundary",
+      "textPreview": "Security boundary",
+      "resolvedFontSize": 9.49,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 16,
+        "typeface": "Segoe UI",
+        "color": "#F26B43",
+        "bold": true,
+        "alignment": "center",
+        "verticalAlignment": "top",
+        "wrap": "square",
+        "autoFit": "shrinkText",
+        "autoFitScale": 0.59,
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Security boundary"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Security boundary",
+          "resolvedTextStyle": {
+            "fontSize": 16,
+            "typeface": "Segoe UI",
+            "color": "#F26B43",
+            "bold": true,
+            "alignment": "center"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Security boundary",
+              "fontSize": 16,
+              "typeface": "Segoe UI",
+              "color": "#F26B43",
+              "bold": true,
+              "alignment": "center"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 24,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/432l4zql",
+      "id": "24",
+      "bbox": [
+        445,
+        553,
+        365,
+        65
+      ],
+      "geometry": "rect",
+      "text": "Read models and scheduled exports use the same canonical data and status rules as the operational API.",
+      "textPreview": "Read models and scheduled exports use the same canonical data and status rules as the operational API.",
+      "resolvedFontSize": 15.83,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 20,
+        "typeface": "Segoe UI",
+        "color": "#2E7D5A",
+        "bold": true,
+        "alignment": "center",
+        "verticalAlignment": "top",
+        "wrap": "square",
+        "autoFit": "shrinkText",
+        "autoFitScale": 0.79,
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Read models and scheduled exports use the"
+          },
+          {
+            "index": 2,
+            "text": "same canonical data and status rules as the"
+          },
+          {
+            "index": 3,
+            "text": "operational API."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Read models and scheduled exports use the same canonical data and status rules as the operational API.",
+          "resolvedTextStyle": {
+            "fontSize": 20,
+            "typeface": "Segoe UI",
+            "color": "#2E7D5A",
+            "bold": true,
+            "alignment": "center"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Read models and scheduled exports use the same canonical data and status rules as the operational API.",
+              "fontSize": 20,
+              "typeface": "Segoe UI",
+              "color": "#2E7D5A",
+              "bold": true,
+              "alignment": "center"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

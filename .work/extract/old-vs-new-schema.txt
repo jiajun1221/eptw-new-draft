@@ -1,0 +1,470 @@
+[Title] ePTW Database Old Schema Versus New Schema
+[Normal] Current MongoDB and proposed PostgreSQL comparison
+[Normal] This document compares the current MongoDB/Mongoose schema with the proposed PostgreSQL schema. It should be read together with:
+[Normal] • docs/database-redesign-proposal.md for architecture, feature coverage, and migration strategy.
+[Normal] • docs/postgresql-schema.sql for the complete executable PostgreSQL reference schema.
+[Heading 1] Contents
+[Normal] 1. Summary of the redesign
+[Normal] 2. Naming and datatype conversion
+[Normal] 3. Legacy collection-by-collection comparison
+[Normal] 4. New workflow and audit tables
+[Normal] 5. New file and notification tables
+[Normal] 6. New migration-control tables
+[Normal] 7. New read models for tables and dashboards
+[Normal] 8. Status conversion
+[Normal] 9. What is deliberately not stored twice
+[Normal] 10. Migration notes for each major change
+[Normal] 11. Result
+[Heading 1] 1. Summary of the redesign
+[Normal] The current design has 15 active MongoDB collections. The proposed design has 27 application tables and three migration-control tables.
+[Normal] The increase in supporting tables is intentional normalization, but the central permit model becomes much simpler:
+[Normal] OLD
+permits
+  + embedded children[]
+drafts
+  + embedded children[]
+childpermits
+logpdfs (another copy of permit data)
+
+NEW
+permits
+  + parent_permit_id for children
+  + status = DRAFT for drafts
+permit_revisions
+generated_documents
+[Normal] The main improvements are:
+[Normal] • One source of truth for parent, child, and draft permits.
+[Normal] • Foreign keys instead of ObjectIds or free-text references.
+[Normal] • Typed dates instead of strings inside arbitrary submission keys.
+[Normal] • Explicit ordered approval steps instead of four overlapping reviewer arrays.
+[Normal] • Immutable form-template versions.
+[Normal] • Structured, append-only events instead of human-readable string arrays.
+[Normal] • Indexed datatable columns and reusable database views.
+[Normal] • Atomic permit-number allocation.
+[Normal] • Restartable and auditable data migration.
+[Heading 1] 2. Naming and datatype conversion
+[Normal] All timestamps use timestamptz. The application stores UTC and interprets date/time-only form input using the site's IANA timezone, such as Asia/Singapore.
+[Heading 1] 3. Legacy collection-by-collection comparison
+[Heading 2] 3.1 users to users, organizations, user_sites, user_action_tokens
+[Heading 3] Old schema
+[Heading 3] Improvements
+[Normal] • citext makes email uniqueness case-insensitive.
+[Normal] • Companies are normalized once instead of storing variants such as Micron, micron, or whitespace variations.
+[Normal] • site and sites no longer conflict.
+[Normal] • Group membership no longer exists in both the user and group records.
+[Normal] • email_verified_at records when verification occurred instead of only storing a Boolean.
+[Normal] • Nullable password hashes support SSO-only users.
+[Normal] • deleted_at provides soft deletion so historical permit references remain valid.
+[Normal] • user_action_tokens stores hashed, expiring, one-time verification/reset tokens rather than relying only on reusable stateless links.
+[Heading 2] 3.2 sites to sites
+[Heading 3] Old schema
+[Heading 3] New fields
+[Heading 3] Improvements
+[Normal] • Site codes become required and unique.
+[Normal] • Permit queries use site_id, not regex matching against the permit number.
+[Normal] • Hard-coded groupings such as F10NX become API filter presets based on site IDs.
+[Heading 2] 3.3 mtgroups to review_groups, review_group_members
+[Heading 3] Old schema
+[Heading 3] Improvements
+[Normal] • A join table prevents duplicate members and enforces valid users.
+[Normal] • joined_at and left_at provide membership history.
+[Normal] • The same group name can exist at different sites without collision.
+[Normal] • Active permit approval eligibility is snapshotted separately, so changing a group does not silently change an in-progress approval.
+[Heading 2] 3.4 disciplines to disciplines
+[Heading 3] Old schema
+[Heading 3] Improvements
+[Normal] • Removes two redundant string-date columns.
+[Normal] • Enforces case-insensitive unique discipline codes.
+[Normal] • Adds is_active to retire a discipline safely.
+[Heading 2] 3.5 templates to form_templates, form_template_versions
+[Heading 3] Old schema
+[Heading 3] Improvements
+[Normal] • A permit references an immutable template version, so later template edits cannot change an old permit.
+[Normal] • Stable template codes replace hard-coded Mongo ObjectIds and exact title comparisons.
+[Normal] • field_map jsonb maps form-specific keys such as D03startDate to canonical fields such as planned_start_at.
+[Normal] • Published versions cannot be edited; a change creates a new version.
+[Normal] • checksum detects accidental changes.
+[Normal] • Keeping the ordered form definition as JSONB is simpler than splitting every layout element into relational rows, while workflow and reporting data remain relational.
+[Heading 2] 3.6 permits to unified permits and supporting workflow/history tables
+[Heading 3] Old schema
+[Heading 3] Canonical submission fields
+[Normal] The following frequently queried values leave the arbitrary submission object and become first-class columns:
+[Normal] All other template-specific answers remain in answers jsonb.
+[Heading 3] New permit fields
+[Heading 3] Improvements
+[Normal] • Parent and child listing no longer merges embedded and standalone collections.
+[Normal] • Typed dates make range filters and monthly reports reliable.
+[Normal] • The database enforces that parent rows have no parent and child rows have one.
+[Normal] • One permit-number index replaces regex searches across codes.
+[Normal] • Common datatable columns have composite and trigram indexes.
+[Normal] • Lifecycle timestamps no longer have to be inferred from logs.
+[Normal] • Optimistic locking prevents one update from overwriting another reviewer action.
+[Heading 2] 3.7 drafts to permits
+[Normal] The legacy draft model repeats almost all permit columns.
+[Heading 3] Improvements
+[Normal] • Draft-to-submitted becomes a transactionally validated status transition, not copying between collections.
+[Normal] • The same update code handles draft and submitted permit data.
+[Normal] • Duplicating a permit creates a new DRAFT row and omits signature/file links based on template field metadata.
+[Heading 2] 3.8 childpermits to child rows in permits
+[Heading 3] Improvements
+[Normal] • Removes the special child-permit model and duplicated mutations.
+[Normal] • LSS, SIPP, and other child permits use the same lifecycle engine.
+[Normal] • Parent code, site, host, and discipline are joined through valid foreign keys.
+[Normal] • Child templates are selected using stable template codes/categories.
+[Heading 2] 3.9 logpdfs to permit_revisions, generated_documents, files
+[Heading 3] Old schema
+[Normal] logpdfs duplicates permit code, form, site, submission, children, status, reviewer arrays, rejection, submitter, logs, and reason. Its only PDF-specific value is pdfFileName.
+[Heading 3] Improvements
+[Normal] • PDF lookup uses permit/revision foreign keys instead of filename regex.
+[Normal] • A generated PDF is tied to the exact immutable revision used to generate it.
+[Normal] • File metadata supports size, content type, checksum, and controlled deletion.
+[Normal] • Permit data is not copied into a vaguely defined PDF collection.
+[Heading 2] 3.10 permitnumbers to permit_number_sequences
+[Heading 3] Improvements
+[Normal] • The database allocates the next number atomically with INSERT ... ON CONFLICT ... DO UPDATE ... RETURNING.
+[Normal] • Concurrent submissions cannot receive the same counter value.
+[Normal] • A new month creates a new sequence row; no reset flag is necessary.
+[Normal] • Parent and child numbering use the same mechanism.
+[Normal] The final sequence scope—global monthly, site monthly, or site/type monthly—requires business approval. The reference schema uses site/month/type.
+[Heading 2] 3.11 permitexpireds to system_settings and indexed permit dates
+[Heading 3] Improvements
+[Normal] • Removes the hard-coded Mongo document ID.
+[Normal] • Configuration is separated from runtime permit counts.
+[Normal] • Stale/open permit counts use indexed planned_end_at and status columns.
+[Normal] • Automatic closure uses an indexed auto_close_due_at, separate from the permit-creation policy.
+[Heading 2] 3.12 maps to site_maps, files
+[Heading 3] Improvements
+[Normal] • A map cannot reference a misspelled/nonexistent site.
+[Normal] • File URLs and storage keys are centrally managed.
+[Normal] • (site_id, name) uniqueness prevents accidental duplicate maps.
+[Heading 2] 3.13 annoucements to announcements
+[Heading 3] New fields
+[Normal] • ends_at supports scheduled expiry.
+[Normal] • created_by, created_at, and updated_at provide ownership and auditability.
+[Heading 3] Improvements
+[Normal] • Corrects the collection/table spelling.
+[Normal] • Uses typed availability dates.
+[Normal] • Prevents an announcement from ending before it starts.
+[Heading 2] 3.14 changelogs to release_notes, release_note_items
+[Heading 3] New fields
+[Normal] • release_notes.version text UNIQUE
+[Normal] • release_notes.title text
+[Normal] • created_by and created_at
+[Normal] • release_note_items.sequence_no smallint
+[Heading 3] Improvements
+[Normal] • Release versions become addressable and unique.
+[Normal] • Individual entries retain order without using an opaque array.
+[Normal] • Entries can be queried or extended without replacing the whole release document.
+[Heading 2] 3.15 blockedwords to blocked_terms
+[Heading 3] New fields
+[Normal] • is_active boolean avoids destructive deletion.
+[Normal] • created_by uuid records who added a term.
+[Heading 3] Improvements
+[Normal] • Removes the unusual leading underscore.
+[Normal] • Case-insensitive uniqueness prevents duplicate variants.
+[Normal] • Terms can be disabled without losing their administrative history.
+[Heading 2] 3.16 admin.js
+[Normal] The file is empty and defines no collection. No replacement table is required. Administration is authorization behavior based on users.role, site access, and service permissions.
+[Heading 1] 4. New workflow and audit tables
+[Normal] These tables replace duplicated arrays and implicit application logic rather than mapping one-to-one from a collection.
+[Heading 2] 4.1 permit_approval_steps
+[Normal] Only one step may be active per permit. “Awaiting my approval” becomes an indexed lookup rather than loading permits and reconstructing the next reviewer in JavaScript.
+[Heading 2] 4.2 permit_approval_step_members
+[Normal] Stores the eligible user snapshot for group and organization-role steps. It replaces selectedMTGroupUsers and prevents later group changes from rewriting historical workflow eligibility.
+[Heading 2] 4.3 permit_approval_actions
+[Normal] Stores every approve, reject, recall, reset, or skip action with actor, reason, timestamp, and metadata. It replaces approvedBy[], rejectedBy, and approval-related log strings.
+[Heading 2] 4.4 permit_events
+[Normal] Stores the full append-only permit timeline. Unlike legacy log messages, every event has a type, actor, old/new status, reason, occurrence time, and optional display message/metadata.
+[Heading 2] 4.5 permit_revisions
+[Normal] Stores immutable versioned snapshots for audit/PDF generation. It avoids copying operational data into logpdfs while preserving exactly what a user submitted or changed at a point in time.
+[Heading 1] 5. New file and notification tables
+[Heading 2] 5.1 files
+[Normal] Central metadata for S3/object-storage files: provider, bucket, object key, original name, content type, size, hash, uploader, and timestamps.
+[Heading 2] 5.2 permit_files
+[Normal] Associates a file with a permit, form field, and optional revision. This covers file inputs and e-signatures without embedding uncontrolled URLs throughout JSON answers.
+[Heading 2] 5.3 generated_documents
+[Normal] Associates a generated PDF with its permit, immutable revision, file, generator, and generation time.
+[Heading 2] 5.4 notification_outbox
+[Normal] Stores email work in the same transaction as the permit event. A worker retries delivery and records failures. The permit mutation no longer partly succeeds because an external email service is slow or unavailable.
+[Heading 1] 6. New migration-control tables
+[Heading 2] 6.1 migration_runs
+[Normal] Records the source snapshot, ETL version, timing, status, and aggregate statistics for each rehearsal or production migration.
+[Heading 2] 6.2 legacy_id_map
+[Normal] Maps every Mongo collection/ObjectId to its target table/UUID and records a source hash. This makes migration traceable, restartable, and idempotent.
+[Heading 2] 6.3 migration_errors
+[Normal] Stores warnings and errors such as orphaned references, invalid dates, ambiguous reviewers, duplicate codes, and unresolved sites. Invalid data is quarantined instead of silently discarded.
+[Heading 1] 7. New read models for tables and dashboards
+[Heading 2] permit_list_v
+[Normal] A one-row-per-permit view containing the display fields needed by the new datatable: permit and parent numbers, status, site, template, discipline, contractor, submitter, host owner, work details, dates, and the active approval target.
+[Normal] Benefits:
+[Normal] • The API does not repeatedly populate large Mongo object graphs.
+[Normal] • All filter combinations use one composable query.
+[Normal] • Sort columns can be whitelisted and indexed.
+[Normal] • Cursor pagination can use (sort_value, id) for stable pages.
+[Heading 2] lss_impairment_v
+[Normal] Returns LSS child permit rows from the unified permit table using a stable template code/category. It removes the current need to query embedded children and childpermits, manually merge them, and calculate source flags.
+[Heading 2] dashboard_daily_mv
+[Normal] A materialized daily aggregate for created, planned-start, planned-end, and approval dates, grouped by site, contractor, discipline, template, child category, kind, and status.
+[Normal] Benefits:
+[Normal] • Replaces many repeated count queries and template-specific collection scans.
+[Normal] • Supports existing site, contractor, discipline, permit-type, status, and monthly dashboard breakdowns.
+[Normal] • Can be refreshed concurrently without blocking reads.
+[Normal] If production volume makes full refreshes too expensive, replace this materialized view with an event-maintained summary table after measurement.
+[Heading 1] 8. Status conversion
+[Heading 1] 9. What is deliberately not stored twice
+[Heading 1] 10. Migration notes for each major change
+[Normal] 1. Generate deterministic UUIDs from the source collection and Mongo ObjectId.
+[Normal] 2. Preserve the original unmodified Mongo document in the first migration revision or controlled migration archive.
+[Normal] 3. Load sites, organizations, users, groups, disciplines, and templates before permits.
+[Normal] 4. Convert each legacy template into a master plus immutable version 1.
+[Normal] 5. Convert drafts, permits, embedded children, and childpermits into unified permit rows.
+[Normal] 6. Deduplicate child records only when IDs or non-empty child codes provide strong proof. Similar answer JSON alone is a review candidate, not proof.
+[Normal] 7. Extract canonical submission values through a per-template field map.
+[Normal] 8. Reconstruct direct reviewer steps from selectedUser - selectedMTGroupUsers, followed by group steps in selectedMTGroup order.
+[Normal] 9. Preserve raw approval arrays and logs in the migration revision when historical meaning is ambiguous.
+[Normal] 10. Link PDF logs to permit revisions by permit code and timestamp; quarantine unresolved records.
+[Normal] 11. Seed sequence rows from the highest valid existing permit number.
+[Normal] 12. Reconcile counts by collection, status, site, template, month, parent/child relationship, reviewer, and PDF record before cutover.
+[Heading 1] 11. Result
+[Normal] The redesign does not remove any intended user-facing capability. It removes duplicated storage and implicit business rules, then represents those capabilities through typed relationships:
+[Normal] • Flexible forms remain flexible through versioned JSONB.
+[Normal] • Permit operations become relational, transactional, and auditable.
+[Normal] • Approval order becomes explicit and queryable.
+[Normal] • Datatable and dashboard queries operate on indexed columns/read models.
+[Normal] • Historical PDFs, revisions, signatures, and events remain traceable.
+[Normal] • Migration discrepancies are recorded rather than hidden.
+[Normal] The final table definitions, constraints, indexes, and read models are in docs/postgresql-schema.sql.
+
+[TABLE 1]
+Current MongoDB/Mongoose	PostgreSQL replacement	Reason
+Mongo _id: ObjectId	id uuid	Stable distributed identifiers; deterministic UUIDv5 can be used during migration
+String date	date or timestamptz	Correct comparison, sorting, timezone handling, and validation
+Mongoose Date	timestamptz	Store UTC instants consistently
+Reference ObjectId	uuid foreign key	Database-enforced referential integrity
+[ObjectId]	Join table	Uniqueness, history, filtering, and foreign-key validation
+Object submission	Typed columns plus jsonb	Fast common filters while retaining dynamic forms
+[String] logs	Event rows	Structured audit trail with actor, type, status, reason, and timestamp
+Boolean flags encoded by state	Enum/status	Avoid contradictory values
+Free-text enum-like values	PostgreSQL enum or validated master row	Prevent spelling and casing drift
+
+[TABLE 2]
+Old field	Mongoose type	New destination
+_id	ObjectId	users.id uuid
+fullname	String	users.full_name text
+image	String	users.image_url text
+phone	String	users.phone text
+email	String, unique	users.email citext, unique
+password	String	users.password_hash text
+role	String enum	users.role user_role
+site	ObjectId → site	Removed; merged into user_sites and optionally marked is_default
+sites[]	[ObjectId → site]	user_sites(user_id, site_id)
+group	ObjectId → mtgroup	Removed; membership is owned by review_group_members
+company	String	users.organization_id → organizations.id
+status	String enum	users.status user_status
+isEmailVerified	Boolean	users.email_verified_at timestamptz
+createdAt, updatedAt	Date	timestamptz
+
+[TABLE 3]
+Old field	Mongoose type	New field
+_id	ObjectId	id uuid
+name	String, required	name text NOT NULL
+code	String	code citext NOT NULL UNIQUE
+address	String	address text
+createdAt, updatedAt	Date	timestamptz
+
+[TABLE 4]
+Field	Type	Purpose
+timezone	text	Correctly converts site-local permit dates/times to UTC
+is_active	boolean	Retires a site without deleting history
+
+[TABLE 5]
+Old field	Mongoose type	New destination
+_id	ObjectId	review_groups.id uuid
+name	String, globally unique	review_groups.name citext, unique within a site
+members[]	[ObjectId → user]	review_group_members rows
+createdBy	ObjectId → user	review_groups.created_by uuid
+site	ObjectId → site	review_groups.site_id uuid NOT NULL
+permitCloser	Boolean	review_groups.can_close_permit boolean
+createdAt, updatedAt	Date	timestamptz
+
+[TABLE 6]
+Old field	Mongoose type	New field
+_id	ObjectId	id uuid
+code	String, required	code citext NOT NULL UNIQUE
+description	String	description text
+date_created	String	Removed
+date_updated	String	Removed
+createdAt, updatedAt	Date	created_at, updated_at timestamptz
+
+[TABLE 7]
+Old field	Mongoose type	New destination
+_id	ObjectId	form_templates.id uuid
+title	String	form_templates.title text
+type	String	form_templates.code citext after controlled mapping
+showInCreatePermit	Boolean	form_templates.show_in_create boolean
+status	draft/active	Version status: DRAFT, PUBLISHED, or RETIRED
+asParentPermit	Boolean	Removed as redundant with permit_kind
+typeOfPermit	PARENT/CHILD	form_templates.permit_kind
+typeOfChildPermit	String	form_templates.child_category text
+permitColor	String	form_templates.permit_color varchar(32)
+sections[]	Nested objects	form_template_versions.schema_json jsonb
+section title	String	Versioned inside schema_json
+field label, name, type	String	Versioned inside schema_json
+field required, tooltip	Boolean	Versioned inside schema_json
+field tooltipText, defaultValue, placeholder	String	Versioned inside schema_json
+field col	Number	Versioned numeric layout property
+field options[]	Nested value/label	Versioned inside schema_json
+createdAt, updatedAt	Date	Master/version timestamps
+
+[TABLE 8]
+Old field	Mongoose type	New destination
+_id	ObjectId	permits.id uuid
+code	String	permits.permit_number text UNIQUE
+form	ObjectId → template	permits.template_version_id uuid
+site	ObjectId → site	permits.site_id uuid NOT NULL
+children[]	Embedded {form, submission, createdAt, code, logs}	Separate child rows in permits using parent_permit_id
+submission	Object	Canonical typed columns plus answers jsonb
+status	String enum	permits.status permit_status
+approvedBy[]	[ObjectId → user]	permit_approval_actions and completed approval steps
+selectedUser[]	[ObjectId → user]	Ordered permit_approval_steps
+selectedMTGroupUsers[]	[ObjectId → user]	Removed; eligible users are in permit_approval_step_members
+selectedMTGroup[]	[ObjectId → mtgroup]	Ordered group permit_approval_steps
+rejectedBy	ObjectId → user	Rejection action and event
+submittedBy	ObjectId → user	permits.submitted_by uuid
+logs[]	[String]	permit_events rows
+reason	String	Current status_reason; full history remains in actions/events
+hostSystemOwner	ObjectId → user	permits.host_owner_id uuid
+approveAt	Date	permits.approved_at timestamptz
+discipline	ObjectId → discipline	permits.discipline_id uuid
+createdAt, updatedAt	Date	timestamptz
+
+[TABLE 9]
+New field	Type	Legacy examples
+planned_start_at	timestamptz	startDate, D1startDate, D03startDate, C11StartDate, datePerformed plus time
+planned_end_at	timestamptz	dateEnd, endDate, timeEnd combinations
+work_description	text	workDetails, reasonOfImpairnent where appropriate
+contractor_organization_id	uuid	normalized companyName/submitter company
+contractor_name_snapshot	text	exact historical submitted company display value
+requester_name	text	template requester-name fields
+location_text	text	area/map/location answers
+building	text	buildingDropdown and mapped equivalents
+level	text	Level and mapped equivalents
+
+[TABLE 10]
+New field	Type	Purpose
+kind	permit_kind	Parent or child
+parent_permit_id	uuid	Self-reference for a child permit
+lifecycle timestamps	timestamptz	Submitted, approved, executed, closed, and cancelled facts
+auto_close_due_at	timestamptz	Indexed scheduled-job target
+lock_version	integer	Prevents lost updates from concurrent reviewers/editors
+deleted_at	timestamptz	Controlled soft deletion
+
+[TABLE 11]
+Old draft field	New destination
+All permit identity and form fields	Same columns in permits
+status = DraftPermit	status = DRAFT
+code	permit_number, normally null until submission
+embedded children[]	Child permit rows with a draft parent
+reviewer arrays	Approval steps created or activated at submission
+logs[]	Permit events
+
+[TABLE 12]
+Old child field	New destination
+_id, code, form, submission, status	Normal permits fields
+parentPermit	parent_permit_id
+site	site_id; inherited from parent during migration if missing
+Reviewer, approval, rejection, logs	Shared approval/action/event tables
+Host owner and discipline	Shared typed foreign keys
+approveAt	approved_at
+
+[TABLE 13]
+Old field/group	New destination
+Repeated permit content	permit_revisions.snapshot jsonb
+pdfFileName	generated_documents.display_name
+Actual storage location	files.bucket and files.object_key
+Permit relationship	generated_documents.permit_id
+Revision relationship	generated_documents.revision_id
+Generator/time	generated_by, generated_at
+
+[TABLE 14]
+Old field	Mongoose type	New field
+permitcount	String	last_value bigint
+permitCountNeedsReset	Boolean	Removed; period is part of the primary key
+implicit global scope	One document	site_id, period_start, permit_kind composite key
+createdAt, updatedAt	Date	updated_at timestamptz
+
+[TABLE 15]
+Old field	Mongoose type	New destination
+days	Number	system_settings['permit_creation_policy'].value.stale_after_days
+countPermit	Number	...max_open_stale_permits
+timerCount	Number	...timer_count
+hard-coded singleton ObjectId	Application constant	Stable setting key
+
+[TABLE 16]
+Old field	Mongoose type	New destination
+_id	ObjectId	site_maps.id uuid
+name	String	site_maps.name text
+site	String	site_maps.site_id uuid foreign key
+mapImage	String	site_maps.file_id uuid → files
+no timestamps	—	created_at, updated_at timestamptz
+
+[TABLE 17]
+Old field	Mongoose type	New field
+dateDeployed	String	starts_at timestamptz
+message	String	message text NOT NULL
+active	Boolean	is_active boolean
+type	String	kind text
+title	String	title text NOT NULL
+color	String	color varchar(32)
+
+[TABLE 18]
+Old field	Mongoose type	New destination
+_id	ObjectId	release_notes.id uuid
+dateDeployed	Date	release_notes.deployed_at timestamptz
+logs[]	[String]	Ordered release_note_items rows
+
+[TABLE 19]
+Old field	Mongoose type	New field
+_word	String	term citext UNIQUE NOT NULL
+createdAt, updatedAt	Date	timestamptz
+
+[TABLE 20]
+Column	Type	Replaces/improves
+permit_id	uuid	Ownership by one permit
+sequence_no	smallint	Reviewer array order becomes explicit
+target_type	enum	Distinguishes user, group, and contractor-role steps
+target user/group/role	uuid/enum	Replaces mixed reviewer arrays
+quorum	smallint	Group “any one member” is explicitly quorum 1
+status	enum	Waiting, active, completed, or stopped state
+activation/completion dates	timestamptz	Makes pending-duration reporting possible
+
+[TABLE 21]
+Old status	New status	Improvement
+DraftPermit	DRAFT	Draft is a lifecycle state, not another collection
+Pending	PENDING_CONTRACTOR_APPROVAL	Explains what is actually pending
+PendingApproval	PENDING_REVIEW	Consistent terminology
+Approved	APPROVED	Typed enum plus approved_at
+Rejected	REJECTED	Reason and actor history preserved
+PendingClosure	PENDING_CLOSURE	Explicit state-machine transition
+PendingCancel	PENDING_CANCELLATION	Clear wording
+Cancelled	CANCELLED	Typed timestamped terminal state
+Executed	EXECUTED	Preserves LSS behavior
+Completed	COMPLETED	Typed timestamped terminal state
+CompletedTest	Quarantine or COMPLETED	Requires business confirmation
+PendingClosure-test	Quarantine or PENDING_CLOSURE	Requires business confirmation
+
+[TABLE 22]
+Removed duplication	New source of truth
+users.site and users.sites	user_sites
+users.group and mtgroups.members	review_group_members
+templates.asParentPermit and typeOfPermit	form_templates.permit_kind
+Draft permit document shape	permits.status = DRAFT
+Embedded child and standalone child shapes	permits.parent_permit_id
+Reviewer and MT-group member copies on permits	Approval steps and member snapshots
+approvedBy, rejectedBy, and approval logs	Approval actions/events
+Current form template used by historical permit	Pinned template version
+String lifecycle dates in form answers	Typed permit timestamps
+Full permit copies in PDF logs	Revisions plus generated documents
+Permit-number reset Boolean	Sequence period key
+Discipline string dates and timestamps	PostgreSQL timestamps
+File URL values scattered in forms/maps	files plus relationship tables

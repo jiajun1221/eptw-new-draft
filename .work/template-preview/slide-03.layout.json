@@ -1,0 +1,551 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/ofy9wn61",
+    "id": "ofy9wn61",
+    "slide": 3,
+    "layoutId": "/ppt/slideLayouts/slideLayout3.xml",
+    "layoutName": "1_BACKGROUND",
+    "masterLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "OneSystems Colour",
+    "colors": {
+      "accent1": "#FF8C00",
+      "accent2": "#0066CC",
+      "accent3": "#0000A5",
+      "accent4": "#C0C0C0",
+      "accent5": "#0066CC",
+      "accent6": "#333333",
+      "dk1": "#003366",
+      "lt1": "#F5F5F5",
+      "dk2": "#333333",
+      "lt2": "#9FC9EB",
+      "hlink": "#FF8C00",
+      "folHlink": "#0066CC"
+    },
+    "fontScheme": {
+      "name": "OST Font",
+      "majorFont": {
+        "latinTypeface": "Bahnschrift"
+      },
+      "minorFont": {
+        "latinTypeface": "Segoe UI"
+      }
+    },
+    "typefaces": [
+      "Bahnschrift",
+      "Segoe UI"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "/ppt/slideLayouts/slideLayout3.xml",
+      "name": "1_BACKGROUND",
+      "parentLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+      "backgroundImage": {
+        "assetId": "/ppt/media/image3.jpg",
+        "contentType": "image/jpeg",
+        "byteLength": 45542
+      },
+      "elements": [
+        {
+          "order": 1,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout3.xml/9",
+          "id": "9",
+          "name": "Title 8",
+          "bbox": [
+            40.89,
+            28.62,
+            912.5,
+            57.67
+          ],
+          "geometry": "rect",
+          "text": "Click to edit Master title style",
+          "textPreview": "Click to edit Master title style",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Click to edit Master title style",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Click to edit Master title style"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "order": 2,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout3.xml/10",
+          "id": "10",
+          "name": "Content Placeholder 3",
+          "bbox": [
+            137.42,
+            199.43,
+            1005.17,
+            408
+          ],
+          "geometry": "rect",
+          "text": "BODY TEXT",
+          "textPreview": "BODY TEXT",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "BODY TEXT",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "BODY TEXT"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "order": 3,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout3.xml/11",
+          "id": "11",
+          "name": "TextBox 10",
+          "bbox": [
+            1033.99,
+            680.3,
+            200.81,
+            22.62
+          ],
+          "geometry": "rect",
+          "text": "Ownership. Sustainability. Trustworthy",
+          "textPreview": "Ownership. Sustainability. Trustworthy",
+          "resolvedTextStyle": {
+            "wrap": "none",
+            "autoFit": "resizeShapeToFitText"
+          },
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Ownership. Sustainability. Trustworthy",
+              "lineSpacingPercent": 100000,
+              "resolvedTextStyle": {
+                "alignment": "right"
+              },
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Ownership. Sustainability. Trustworthy",
+                  "fontSize": 10.67,
+                  "typeface": "Segoe UI",
+                  "color": "tx2"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "order": 4,
+          "kind": "image",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout3.xml/12",
+          "id": "12",
+          "name": "Picture 2",
+          "bbox": [
+            1050.71,
+            31.25,
+            175.09,
+            51.4
+          ],
+          "contentType": "image/png",
+          "asset": {
+            "assetId": "/ppt/media/image2.png",
+            "contentType": "image/png",
+            "byteLength": 37083
+          },
+          "fillImage": {
+            "assetId": "/ppt/media/image2.png",
+            "contentType": "image/png",
+            "byteLength": 37083
+          }
+        },
+        {
+          "order": 5,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout3.xml/2",
+          "id": "2",
+          "name": "TextBox 1",
+          "bbox": [
+            1033.99,
+            680.3,
+            200.81,
+            22.62
+          ],
+          "geometry": "rect",
+          "text": "Ownership. Sustainability. Trustworthy",
+          "textPreview": "Ownership. Sustainability. Trustworthy",
+          "resolvedTextStyle": {
+            "wrap": "none",
+            "autoFit": "resizeShapeToFitText"
+          },
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Ownership. Sustainability. Trustworthy",
+              "lineSpacingPercent": 100000,
+              "resolvedTextStyle": {
+                "alignment": "right"
+              },
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Ownership. Sustainability. Trustworthy",
+                  "fontSize": 10.67,
+                  "typeface": "Segoe UI",
+                  "color": "tx2"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "order": 6,
+          "kind": "image",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout3.xml/13",
+          "id": "13",
+          "name": "Picture 3",
+          "bbox": [
+            1050.71,
+            31.25,
+            175.09,
+            51.4
+          ],
+          "contentType": "image/png",
+          "asset": {
+            "assetId": "/ppt/media/image2.png",
+            "contentType": "image/png",
+            "byteLength": 37083
+          },
+          "fillImage": {
+            "assetId": "/ppt/media/image2.png",
+            "contentType": "image/png",
+            "byteLength": 37083
+          }
+        }
+      ]
+    },
+    {
+      "scope": "master",
+      "id": "/ppt/slideMasters/slideMaster1.xml",
+      "type": "master",
+      "backgroundImage": {
+        "assetId": "/ppt/media/image1.jpg",
+        "contentType": "image/jpeg",
+        "byteLength": 73341
+      },
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/cza94vmx",
+      "id": "2",
+      "name": "Title 1",
+      "bbox": [
+        40.89,
+        28.62,
+        912.5,
+        57.67
+      ],
+      "text": "OST BRANDING GOOD PRACTICE RULES",
+      "textPreview": "OST BRANDING GOOD PRACTICE RULES",
+      "resolvedFontSize": 42.67,
+      "resolvedTextStyle": {
+        "fontSize": 42.67,
+        "typeface": "Bahnschrift",
+        "color": "bg1",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "OST BRANDING GOOD PRACTICE RULES"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "OST BRANDING GOOD PRACTICE RULES",
+          "lineSpacingPercent": 100000,
+          "runs": [
+            {
+              "index": 1,
+              "text": "OST BRANDING GOOD PRACTICE RULES",
+              "bold": true
+            }
+          ],
+          "bulletCharacter": ""
+        }
+      ]
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/d0jax03i",
+      "id": "3",
+      "name": "Content Placeholder 2",
+      "bbox": [
+        137.42,
+        199.43,
+        1005.17,
+        408
+      ],
+      "text": "Title: 32 – 44pt\nHeaders: 28 – 36pt \nBody Text: 12 – 20pt\nBullet Points: 12 – 18pt\nChart / Legends: 12 – 14 pt\n\n\n\nOST standard font sizes have been embedded in this template. \nPlease refer to the guide above should you need to make any adjustments.",
+      "textPreview": "Title: 32 – 44pt | Headers: 28 – 36pt  | Body Text: 12 – 20pt | Bullet Points: 12 – 18pt | Chart / Legends: 12 – 14 pt |  |  |  | OST sta...",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Segoe UI",
+        "color": {
+          "type": "theme",
+          "value": "bg1",
+          "transform": {
+            "darken": 0.9
+          }
+        },
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 17,
+        "lines": [
+          {
+            "index": 1,
+            "text": "1. Title: 32 – 44pt"
+          },
+          {
+            "index": 2,
+            "text": ""
+          },
+          {
+            "index": 3,
+            "text": "2. Headers: 28 – 36pt"
+          },
+          {
+            "index": 4,
+            "text": ""
+          },
+          {
+            "index": 5,
+            "text": "3. Body Text: 12 – 20pt"
+          },
+          {
+            "index": 6,
+            "text": ""
+          },
+          {
+            "index": 7,
+            "text": "4. Bullet Points: 12 – 18pt"
+          },
+          {
+            "index": 8,
+            "text": ""
+          },
+          {
+            "index": 9,
+            "text": "5. Chart / Legends: 12 – 14 pt"
+          },
+          {
+            "index": 10,
+            "text": ""
+          },
+          {
+            "index": 11,
+            "text": ""
+          },
+          {
+            "index": 12,
+            "text": ""
+          },
+          {
+            "index": 13,
+            "text": ""
+          },
+          {
+            "index": 14,
+            "text": ""
+          },
+          {
+            "index": 15,
+            "text": ""
+          },
+          {
+            "index": 16,
+            "text": "OST standard font sizes have been embedded in this template."
+          },
+          {
+            "index": 17,
+            "text": "Please refer to the guide above should you need to make any adjustments."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Title: 32 – 44pt",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Title: 32 – 44pt",
+              "fontSize": 48,
+              "color": "tx1",
+              "bold": true
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0,
+          "indent": 0,
+          "lineSpacingPercent": 94000
+        },
+        {
+          "index": 2,
+          "text": "Headers: 28 – 36pt ",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Headers: 28 – 36pt ",
+              "fontSize": 37.33,
+              "color": "tx1",
+              "bold": true
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0,
+          "indent": 0,
+          "lineSpacingPercent": 94000
+        },
+        {
+          "index": 3,
+          "text": "Body Text: 12 – 20pt",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Body Text: 12 – 20pt",
+              "color": "tx1",
+              "bold": true
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0,
+          "indent": 0,
+          "lineSpacingPercent": 94000
+        },
+        {
+          "index": 4,
+          "text": "Bullet Points: 12 – 18pt",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Bullet Points: 12 – 18pt",
+              "color": "tx1",
+              "bold": true
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0,
+          "indent": 0,
+          "lineSpacingPercent": 94000
+        },
+        {
+          "index": 5,
+          "text": "Chart / Legends: 12 – 14 pt",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Chart / Legends: 12 – 14 pt",
+              "fontSize": 14.67,
+              "color": "tx1",
+              "bold": true
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0,
+          "indent": 0,
+          "lineSpacingPercent": 94000
+        },
+        {
+          "index": 9,
+          "text": "OST standard font sizes have been embedded in this template. ",
+          "resolvedTextStyle": {
+            "alignment": "center"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "OST standard font sizes have been embedded in this template. ",
+              "fontSize": 14.67,
+              "color": "tx1",
+              "bold": true
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0,
+          "indent": 0,
+          "lineSpacingPercent": 94000
+        },
+        {
+          "index": 10,
+          "text": "Please refer to the guide above should you need to make any adjustments.",
+          "resolvedTextStyle": {
+            "alignment": "center"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Please refer to the guide above should you need to make any adjustments.",
+              "fontSize": 14.67,
+              "color": "tx1",
+              "bold": true
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0,
+          "indent": 0,
+          "lineSpacingPercent": 94000
+        }
+      ]
+    }
+  ],
+  "composeRuns": []
+}

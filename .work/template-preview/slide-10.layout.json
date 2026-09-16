@@ -1,0 +1,1644 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/m90b6t0r",
+    "id": "m90b6t0r",
+    "slide": 10,
+    "layoutId": "/ppt/slideLayouts/slideLayout3.xml",
+    "layoutName": "1_BACKGROUND",
+    "masterLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "OneSystems Colour",
+    "colors": {
+      "accent1": "#FF8C00",
+      "accent2": "#0066CC",
+      "accent3": "#0000A5",
+      "accent4": "#C0C0C0",
+      "accent5": "#0066CC",
+      "accent6": "#333333",
+      "dk1": "#003366",
+      "lt1": "#F5F5F5",
+      "dk2": "#333333",
+      "lt2": "#9FC9EB",
+      "hlink": "#FF8C00",
+      "folHlink": "#0066CC"
+    },
+    "fontScheme": {
+      "name": "OST Font",
+      "majorFont": {
+        "latinTypeface": "Bahnschrift"
+      },
+      "minorFont": {
+        "latinTypeface": "Segoe UI"
+      }
+    },
+    "typefaces": [
+      "Bahnschrift",
+      "Montserrat SemiBold",
+      "Segoe UI"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "/ppt/slideLayouts/slideLayout3.xml",
+      "name": "1_BACKGROUND",
+      "parentLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+      "backgroundImage": {
+        "assetId": "/ppt/media/image3.jpg",
+        "contentType": "image/jpeg",
+        "byteLength": 45542
+      },
+      "elements": [
+        {
+          "order": 1,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout3.xml/9",
+          "id": "9",
+          "name": "Title 8",
+          "bbox": [
+            40.89,
+            28.62,
+            912.5,
+            57.67
+          ],
+          "geometry": "rect",
+          "text": "Click to edit Master title style",
+          "textPreview": "Click to edit Master title style",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Click to edit Master title style",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Click to edit Master title style"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "order": 2,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout3.xml/10",
+          "id": "10",
+          "name": "Content Placeholder 3",
+          "bbox": [
+            137.42,
+            199.43,
+            1005.17,
+            408
+          ],
+          "geometry": "rect",
+          "text": "BODY TEXT",
+          "textPreview": "BODY TEXT",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "BODY TEXT",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "BODY TEXT"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "order": 3,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout3.xml/11",
+          "id": "11",
+          "name": "TextBox 10",
+          "bbox": [
+            1033.99,
+            680.3,
+            200.81,
+            22.62
+          ],
+          "geometry": "rect",
+          "text": "Ownership. Sustainability. Trustworthy",
+          "textPreview": "Ownership. Sustainability. Trustworthy",
+          "resolvedTextStyle": {
+            "wrap": "none",
+            "autoFit": "resizeShapeToFitText"
+          },
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Ownership. Sustainability. Trustworthy",
+              "lineSpacingPercent": 100000,
+              "resolvedTextStyle": {
+                "alignment": "right"
+              },
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Ownership. Sustainability. Trustworthy",
+                  "fontSize": 10.67,
+                  "typeface": "Segoe UI",
+                  "color": "tx2"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "order": 4,
+          "kind": "image",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout3.xml/12",
+          "id": "12",
+          "name": "Picture 2",
+          "bbox": [
+            1050.71,
+            31.25,
+            175.09,
+            51.4
+          ],
+          "contentType": "image/png",
+          "asset": {
+            "assetId": "/ppt/media/image2.png",
+            "contentType": "image/png",
+            "byteLength": 37083
+          },
+          "fillImage": {
+            "assetId": "/ppt/media/image2.png",
+            "contentType": "image/png",
+            "byteLength": 37083
+          }
+        },
+        {
+          "order": 5,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout3.xml/2",
+          "id": "2",
+          "name": "TextBox 1",
+          "bbox": [
+            1033.99,
+            680.3,
+            200.81,
+            22.62
+          ],
+          "geometry": "rect",
+          "text": "Ownership. Sustainability. Trustworthy",
+          "textPreview": "Ownership. Sustainability. Trustworthy",
+          "resolvedTextStyle": {
+            "wrap": "none",
+            "autoFit": "resizeShapeToFitText"
+          },
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Ownership. Sustainability. Trustworthy",
+              "lineSpacingPercent": 100000,
+              "resolvedTextStyle": {
+                "alignment": "right"
+              },
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Ownership. Sustainability. Trustworthy",
+                  "fontSize": 10.67,
+                  "typeface": "Segoe UI",
+                  "color": "tx2"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "order": 6,
+          "kind": "image",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout3.xml/13",
+          "id": "13",
+          "name": "Picture 3",
+          "bbox": [
+            1050.71,
+            31.25,
+            175.09,
+            51.4
+          ],
+          "contentType": "image/png",
+          "asset": {
+            "assetId": "/ppt/media/image2.png",
+            "contentType": "image/png",
+            "byteLength": 37083
+          },
+          "fillImage": {
+            "assetId": "/ppt/media/image2.png",
+            "contentType": "image/png",
+            "byteLength": 37083
+          }
+        }
+      ]
+    },
+    {
+      "scope": "master",
+      "id": "/ppt/slideMasters/slideMaster1.xml",
+      "type": "master",
+      "backgroundImage": {
+        "assetId": "/ppt/media/image1.jpg",
+        "contentType": "image/jpeg",
+        "byteLength": 73341
+      },
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/1cru1g3y",
+      "id": "15",
+      "name": "Rounded Rectangle 14",
+      "bbox": [
+        814.79,
+        202.82,
+        411.43,
+        409.14
+      ],
+      "geometry": "roundRect",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Segoe UI",
+        "color": "lt1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": "bg2",
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/xc3mho32",
+      "id": "2",
+      "name": "Title 1",
+      "bbox": [
+        40.89,
+        28.62,
+        912.5,
+        57.67
+      ],
+      "text": "CONTACT US\n",
+      "textPreview": "CONTACT US |",
+      "resolvedFontSize": 42.67,
+      "resolvedTextStyle": {
+        "fontSize": 42.67,
+        "typeface": "Bahnschrift",
+        "color": "bg1",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "CONTACT US"
+          },
+          {
+            "index": 2,
+            "text": ""
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "CONTACT US\n",
+          "runs": [
+            {
+              "index": 1,
+              "text": "CONTACT US",
+              "fontSize": 53.33,
+              "typeface": "Bahnschrift",
+              "bold": true
+            },
+            {
+              "index": 2,
+              "text": "\n"
+            }
+          ],
+          "bulletCharacter": "",
+          "lineSpacingPercent": 89000
+        }
+      ]
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/zelojyl8",
+      "id": "4",
+      "name": "Content Placeholder 2",
+      "bbox": [
+        62,
+        141.99,
+        687.01,
+        72.72
+      ],
+      "geometry": "rect",
+      "text": "Thank you for your interest in OneSystems Technologies.\nOur team is here to help with technical-specific questions or general inquiries.\n",
+      "textPreview": "Thank you for your interest in OneSystems Technologies. | Our team is here to help with technical-specific questions or general inquiries. |",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Segoe UI",
+        "color": {
+          "type": "theme",
+          "value": "bg1",
+          "transform": {
+            "darken": 0.9
+          }
+        },
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Thank you for your interest in OneSystems Technologies."
+          },
+          {
+            "index": 2,
+            "text": "Our team is here to help with technical-specific questions or general inquiries."
+          },
+          {
+            "index": 3,
+            "text": ""
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Thank you for your interest in OneSystems Technologies.\nOur team is here to help with technical-specific questions or general inquiries.\n",
+          "lineSpacingPercent": 150000,
+          "runs": [
+            {
+              "index": 1,
+              "text": "Thank you for your interest in ",
+              "fontSize": 18.67,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 2,
+              "text": "OneSystems Technologies",
+              "fontSize": 18.67,
+              "typeface": "Segoe UI",
+              "color": "accent2",
+              "bold": true
+            },
+            {
+              "index": 3,
+              "text": ".",
+              "fontSize": 18.67,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 4,
+              "text": "\n"
+            },
+            {
+              "index": 5,
+              "text": "Our team is here to help with technical-specific questions or general inquiries.",
+              "fontSize": 18.67,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 6,
+              "text": "\n"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0,
+          "indent": 0
+        }
+      ]
+    },
+    {
+      "order": 4,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/hczel0bq",
+      "id": "38",
+      "name": "Picture 6",
+      "bbox": [
+        883.82,
+        252.33,
+        107.72,
+        108.37
+      ],
+      "contentType": "image/png",
+      "imageCrop": {
+        "left": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0
+      },
+      "asset": {
+        "assetId": "/ppt/media/image4.png",
+        "contentType": "image/png",
+        "byteLength": 4894
+      },
+      "fillImage": {
+        "assetId": "/ppt/media/image4.png",
+        "contentType": "image/png",
+        "byteLength": 4894
+      }
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/725onyl4",
+      "id": "8",
+      "name": "TextBox 7",
+      "bbox": [
+        879.6,
+        366.38,
+        116.16,
+        29.08
+      ],
+      "geometry": "rect",
+      "text": "LinkedIn",
+      "textPreview": "LinkedIn",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Segoe UI",
+        "color": "tx1",
+        "alignment": "left",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "LinkedIn"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "LinkedIn",
+          "resolvedTextStyle": {
+            "alignment": "center"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "LinkedIn",
+              "fontSize": 16,
+              "typeface": "Segoe UI",
+              "color": "tx2",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 6,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/wb6dcval",
+      "id": "39",
+      "name": "Picture 8",
+      "bbox": [
+        1053.89,
+        252.33,
+        107.72,
+        108.37
+      ],
+      "contentType": "image/png",
+      "imageCrop": {
+        "left": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0
+      },
+      "asset": {
+        "assetId": "/ppt/media/image5.png",
+        "contentType": "image/png",
+        "byteLength": 3348
+      },
+      "fillImage": {
+        "assetId": "/ppt/media/image5.png",
+        "contentType": "image/png",
+        "byteLength": 3348
+      }
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/s7yt4b21",
+      "id": "10",
+      "name": "TextBox 9",
+      "bbox": [
+        1049.67,
+        365.69,
+        116.16,
+        29.08
+      ],
+      "geometry": "rect",
+      "text": "Facebook",
+      "textPreview": "Facebook",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Segoe UI",
+        "color": "tx1",
+        "alignment": "left",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Facebook"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Facebook",
+          "resolvedTextStyle": {
+            "alignment": "center"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Facebook",
+              "fontSize": 16,
+              "typeface": "Segoe UI",
+              "color": "tx2",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 8,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/0rehk3ut",
+      "id": "40",
+      "name": "Picture 10",
+      "bbox": [
+        883.82,
+        428.69,
+        107.72,
+        108.37
+      ],
+      "contentType": "image/png",
+      "imageCrop": {
+        "left": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0
+      },
+      "asset": {
+        "assetId": "/ppt/media/image6.png",
+        "contentType": "image/png",
+        "byteLength": 6495
+      },
+      "fillImage": {
+        "assetId": "/ppt/media/image6.png",
+        "contentType": "image/png",
+        "byteLength": 6495
+      }
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/q5gb21kb",
+      "id": "12",
+      "name": "TextBox 11",
+      "bbox": [
+        869.04,
+        543.26,
+        137.28,
+        29.08
+      ],
+      "geometry": "rect",
+      "text": "Instagram",
+      "textPreview": "Instagram",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Segoe UI",
+        "color": "tx1",
+        "alignment": "left",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Instagram"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Instagram",
+          "resolvedTextStyle": {
+            "alignment": "center"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Instagram",
+              "fontSize": 16,
+              "typeface": "Segoe UI",
+              "color": "tx2",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 10,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/lsnit8be",
+      "id": "41",
+      "name": "Picture 12",
+      "bbox": [
+        1058.11,
+        428.69,
+        107.72,
+        108.37
+      ],
+      "contentType": "image/png",
+      "imageCrop": {
+        "left": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0
+      },
+      "asset": {
+        "assetId": "/ppt/media/image7.png",
+        "contentType": "image/png",
+        "byteLength": 6160
+      },
+      "fillImage": {
+        "assetId": "/ppt/media/image7.png",
+        "contentType": "image/png",
+        "byteLength": 6160
+      }
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/0bit8b2d",
+      "id": "14",
+      "name": "TextBox 13",
+      "bbox": [
+        1043.33,
+        541.91,
+        137.28,
+        29.08
+      ],
+      "geometry": "rect",
+      "text": "YouTube",
+      "textPreview": "YouTube",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Segoe UI",
+        "color": "tx1",
+        "alignment": "left",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "YouTube"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "YouTube",
+          "resolvedTextStyle": {
+            "alignment": "center"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "YouTube",
+              "fontSize": 16,
+              "typeface": "Segoe UI",
+              "color": "tx2",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ydcnatkn",
+      "id": "5",
+      "name": "TextBox 4",
+      "bbox": [
+        108.68,
+        281.24,
+        252.6,
+        190.64
+      ],
+      "geometry": "rect",
+      "text": "Singapore\n190 Woodlands Industrial Park E5\n#06-11 Woodlands Bizhub S757516\nT: +65 6776 7611 \n\n\nPhilippines\nEast Tower 1904b Tektite Building, \nExchange Road, San Antonio Pasig, Philippines 1600\nT: +63 945 6111 180",
+      "textPreview": "Singapore | 190 Woodlands Industrial Park E5 | #06-11 Woodlands Bizhub S757516 | T: +65 6776 7611  |  |  | Philippines | East Tower 1904b...",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Segoe UI",
+        "color": "tx1",
+        "alignment": "left",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 11,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Singapore"
+          },
+          {
+            "index": 2,
+            "text": "190 Woodlands Industrial Park E5"
+          },
+          {
+            "index": 3,
+            "text": "#06-11 Woodlands Bizhub S757516"
+          },
+          {
+            "index": 4,
+            "text": "T: +65 6776 7611"
+          },
+          {
+            "index": 5,
+            "text": ""
+          },
+          {
+            "index": 6,
+            "text": ""
+          },
+          {
+            "index": 7,
+            "text": "Philippines"
+          },
+          {
+            "index": 8,
+            "text": "East Tower 1904b Tektite Building,"
+          },
+          {
+            "index": 9,
+            "text": "Exchange Road, San Antonio Pasig,"
+          },
+          {
+            "index": 10,
+            "text": "Philippines 1600"
+          },
+          {
+            "index": 11,
+            "text": "T: +63 945 6111 180"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Singapore",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Singapore",
+              "fontSize": 14,
+              "typeface": "Segoe UI",
+              "color": "tx2",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "190 Woodlands Industrial Park E5",
+          "runs": [
+            {
+              "index": 1,
+              "text": "190 Woodlands Industrial Park E5",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI",
+              "color": "tx2"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 3,
+          "text": "#06-11 Woodlands Bizhub S757516",
+          "runs": [
+            {
+              "index": 1,
+              "text": "#06-11 Woodlands Bizhub S757516",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI",
+              "color": "tx2"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 4,
+          "text": "T: +65 6776 7611 ",
+          "runs": [
+            {
+              "index": 1,
+              "text": "T: +65 6776 7611 ",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI",
+              "color": "tx2"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 7,
+          "text": "Philippines",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Philippines",
+              "fontSize": 14,
+              "typeface": "Segoe UI",
+              "color": "tx2",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 8,
+          "text": "East Tower 1904b Tektite Building, ",
+          "runs": [
+            {
+              "index": 1,
+              "text": "East Tower 1904b Tektite Building, ",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI",
+              "color": "tx2"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 9,
+          "text": "Exchange Road, San Antonio Pasig, Philippines 1600",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Exchange Road, San Antonio Pasig, Philippines 1600",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI",
+              "color": "tx2"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 10,
+          "text": "T: +63 945 6111 180",
+          "runs": [
+            {
+              "index": 1,
+              "text": "T: +63 945 6111 180",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI",
+              "color": "tx2"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 13,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/l036l83y",
+      "id": "6",
+      "name": "TextBox 5",
+      "bbox": [
+        391.92,
+        281.24,
+        274.38,
+        189.84
+      ],
+      "geometry": "rect",
+      "text": "Malaysia\n02-08, Blok G, Komersil Southkey Mozek,\nPersiaran Southkey 1, Kota Southkey, \n80150 Johor Bahru, Malaysia\nT: +607 6907 866\n\nIndia\nPlot No.23A Kk Salai Main, Road Akkarai, Sholinganallur,Kanchipuram, Saidapet, Tamil Nadu, India, 600119​\nT: +91 98842 13454",
+      "textPreview": "Malaysia | 02-08, Blok G, Komersil Southkey Mozek, | Persiaran Southkey 1, Kota Southkey,  | 80150 Johor Bahru, Malaysia | T: +607 6907 8...",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Segoe UI",
+        "color": "tx1",
+        "alignment": "left",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 11,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Malaysia"
+          },
+          {
+            "index": 2,
+            "text": "02-08, Blok G, Komersil Southkey Mozek,"
+          },
+          {
+            "index": 3,
+            "text": "Persiaran Southkey 1, Kota Southkey,"
+          },
+          {
+            "index": 4,
+            "text": "80150 Johor Bahru, Malaysia"
+          },
+          {
+            "index": 5,
+            "text": "T: +607 6907 866"
+          },
+          {
+            "index": 6,
+            "text": ""
+          },
+          {
+            "index": 7,
+            "text": "India"
+          },
+          {
+            "index": 8,
+            "text": "Plot No.23A Kk Salai Main, Road Akkarai,"
+          },
+          {
+            "index": 9,
+            "text": "Sholinganallur,Kanchipuram, Saidapet,"
+          },
+          {
+            "index": 10,
+            "text": "Tamil Nadu, India, 600119​"
+          },
+          {
+            "index": 11,
+            "text": "T: +91 98842 13454"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Malaysia",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Malaysia",
+              "fontSize": 14,
+              "typeface": "Segoe UI",
+              "color": "tx2",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "02-08, Blok G, Komersil Southkey Mozek,\nPersiaran Southkey 1, Kota Southkey, ",
+          "runs": [
+            {
+              "index": 1,
+              "text": "02-08, Blok G, Komersil Southkey ",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI",
+              "color": "tx2"
+            },
+            {
+              "index": 2,
+              "text": "Mozek",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI",
+              "color": "tx2"
+            },
+            {
+              "index": 3,
+              "text": ",",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI",
+              "color": "tx2"
+            },
+            {
+              "index": 4,
+              "text": "\n"
+            },
+            {
+              "index": 5,
+              "text": "Persiaran ",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI",
+              "color": "tx2"
+            },
+            {
+              "index": 6,
+              "text": "Southkey",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI",
+              "color": "tx2"
+            },
+            {
+              "index": 7,
+              "text": " 1, Kota ",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI",
+              "color": "tx2"
+            },
+            {
+              "index": 8,
+              "text": "Southkey",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI",
+              "color": "tx2"
+            },
+            {
+              "index": 9,
+              "text": ", ",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI",
+              "color": "tx2"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 3,
+          "text": "80150 Johor Bahru, Malaysia",
+          "runs": [
+            {
+              "index": 1,
+              "text": "80150 Johor Bahru, Malaysia",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI",
+              "color": "tx2"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 4,
+          "text": "T: +607 6907 866",
+          "runs": [
+            {
+              "index": 1,
+              "text": "T: +607 6907 866",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI",
+              "color": "tx2"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 6,
+          "text": "India",
+          "runs": [
+            {
+              "index": 1,
+              "text": "India",
+              "fontSize": 14,
+              "typeface": "Segoe UI",
+              "color": "tx2",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 7,
+          "text": "Plot No.23A Kk Salai Main, Road Akkarai, Sholinganallur,Kanchipuram, Saidapet, Tamil Nadu, India, 600119​",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Plot No.23A Kk Salai Main, Road ",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI",
+              "color": "tx2"
+            },
+            {
+              "index": 2,
+              "text": "Akkarai",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI",
+              "color": "tx2"
+            },
+            {
+              "index": 3,
+              "text": ", ",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI",
+              "color": "tx2"
+            },
+            {
+              "index": 4,
+              "text": "Sholinganallur,Kanchipuram",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI",
+              "color": "tx2"
+            },
+            {
+              "index": 5,
+              "text": ", ",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI",
+              "color": "tx2"
+            },
+            {
+              "index": 6,
+              "text": "Saidapet",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI",
+              "color": "tx2"
+            },
+            {
+              "index": 7,
+              "text": ", Tamil Nadu, India, 600119​",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI",
+              "color": "tx2"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 8,
+          "text": "T: +91 98842 13454",
+          "runs": [
+            {
+              "index": 1,
+              "text": "T: +91 98842 13454",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI",
+              "color": "tx2"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 14,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/wvetgbud",
+      "id": "21",
+      "name": "TextBox 20",
+      "bbox": [
+        108.68,
+        246.43,
+        109.26,
+        32.31
+      ],
+      "geometry": "rect",
+      "text": "Addresses",
+      "textPreview": "Addresses",
+      "resolvedFontSize": 16,
+      "resolvedTextStyle": {
+        "fontSize": 16,
+        "typeface": "Montserrat SemiBold",
+        "color": "#00B0F0",
+        "alignment": "left",
+        "wrap": "none",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Addresses"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Addresses",
+          "lineSpacingPercent": 100000,
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Addresses",
+              "fontSize": 18.67,
+              "typeface": "Bahnschrift",
+              "color": "accent1",
+              "bold": true,
+              "textTransform": "none"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 15,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/q9srixs3",
+      "id": "30",
+      "name": "TextBox 29",
+      "bbox": [
+        391.92,
+        521.77,
+        85.7,
+        32.31
+      ],
+      "rotation": 0,
+      "geometry": "rect",
+      "text": "Website",
+      "textPreview": "Website",
+      "resolvedFontSize": 16,
+      "resolvedTextStyle": {
+        "fontSize": 16,
+        "typeface": "Montserrat SemiBold",
+        "color": "#00B0F0",
+        "alignment": "left",
+        "wrap": "none",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Website"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Website",
+          "lineSpacingPercent": 100000,
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Website",
+              "fontSize": 18.67,
+              "typeface": "Bahnschrift",
+              "color": "accent1",
+              "bold": true,
+              "textTransform": "none"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 16,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ru18r2to",
+      "id": "31",
+      "name": "TextBox 30",
+      "bbox": [
+        391.92,
+        552.16,
+        252.6,
+        25.85
+      ],
+      "rotation": 0,
+      "geometry": "rect",
+      "text": "www.onesystemstech.com ",
+      "textPreview": "www.onesystemstech.com",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Segoe UI",
+        "color": "tx1",
+        "alignment": "left",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "www.onesystemstech.com"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "www.onesystemstech.com ",
+          "runs": [
+            {
+              "index": 1,
+              "text": "www.onesystemstech.com",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI",
+              "color": "tx2"
+            },
+            {
+              "index": 2,
+              "text": " ",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI",
+              "color": "tx2"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 17,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/0zu9ora5",
+      "id": "36",
+      "name": "TextBox 35",
+      "bbox": [
+        108.68,
+        521.77,
+        67.01,
+        38.98
+      ],
+      "rotation": 0,
+      "geometry": "rect",
+      "text": "Email",
+      "textPreview": "Email",
+      "resolvedFontSize": 16,
+      "resolvedTextStyle": {
+        "fontSize": 16,
+        "typeface": "Montserrat SemiBold",
+        "color": "#00B0F0",
+        "alignment": "left",
+        "wrap": "none",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Email"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Email",
+          "lineSpacingPercent": 100000,
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Email",
+              "fontSize": 18.67,
+              "typeface": "Bahnschrift",
+              "color": "accent1",
+              "bold": true,
+              "textTransform": "none"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 18,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/103qxcbq",
+      "id": "37",
+      "name": "TextBox 36",
+      "bbox": [
+        108.68,
+        541.47,
+        252.6,
+        38.78
+      ],
+      "rotation": 0,
+      "geometry": "rect",
+      "text": "​enquiries@onesystemstech.com              ",
+      "textPreview": "​enquiries@onesystemstech.com",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Segoe UI",
+        "color": "tx1",
+        "alignment": "left",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "​enquiries@onesystemstech.com"
+          },
+          {
+            "index": 2,
+            "text": "  "
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "​enquiries@onesystemstech.com              ",
+          "runs": [
+            {
+              "index": 1,
+              "text": "​",
+              "typeface": "Segoe UI",
+              "color": "tx2",
+              "bold": true
+            },
+            {
+              "index": 2,
+              "text": "enquiries@onesystemstech.com",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI",
+              "color": "tx2"
+            },
+            {
+              "index": 3,
+              "text": "              ",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI",
+              "color": "tx2"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    }
+  ],
+  "composeRuns": []
+}

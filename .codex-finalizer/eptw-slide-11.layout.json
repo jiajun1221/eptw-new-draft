@@ -1,0 +1,1489 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/ymczpu",
+    "id": "ymczpu",
+    "slide": 11,
+    "layoutId": "/ppt/slideLayouts/slideLayout5.xml",
+    "layoutName": "Blank Page",
+    "masterLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "OneSystems Colour",
+    "colors": {
+      "accent1": "#FF8C00",
+      "accent2": "#0066CC",
+      "accent3": "#0000A5",
+      "accent4": "#C0C0C0",
+      "accent5": "#0066CC",
+      "accent6": "#333333",
+      "dk1": "#003366",
+      "lt1": "#F5F5F5",
+      "dk2": "#333333",
+      "lt2": "#9FC9EB",
+      "hlink": "#FF8C00",
+      "folHlink": "#0066CC"
+    },
+    "fontScheme": {
+      "name": "OST Font",
+      "majorFont": {
+        "latinTypeface": "Bahnschrift"
+      },
+      "minorFont": {
+        "latinTypeface": "Segoe UI"
+      }
+    },
+    "typefaces": [
+      "Bahnschrift",
+      "Segoe UI"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "/ppt/slideLayouts/slideLayout5.xml",
+      "name": "Blank Page",
+      "parentLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+      "backgroundImage": {
+        "assetId": "/ppt/media/image3.jpg",
+        "contentType": "image/jpeg",
+        "byteLength": 45542
+      },
+      "elements": [
+        {
+          "order": 1,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout5.xml/5",
+          "id": "5",
+          "name": "Rectangle 4",
+          "bbox": [
+            0,
+            0,
+            1280,
+            720
+          ],
+          "geometry": "rect",
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "verticalAlignment": "middle"
+          },
+          "fillColor": "#FFFFFF",
+          "lineWidth": 0
+        }
+      ]
+    },
+    {
+      "scope": "master",
+      "id": "/ppt/slideMasters/slideMaster1.xml",
+      "type": "master",
+      "backgroundImage": {
+        "assetId": "/ppt/media/image1.jpg",
+        "contentType": "image/jpeg",
+        "byteLength": 73341
+      },
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/el83ix0b",
+      "id": "1",
+      "bbox": [
+        74,
+        116,
+        44,
+        36
+      ],
+      "geometry": "rect",
+      "text": "10",
+      "textPreview": "10",
+      "resolvedFontSize": 20,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 20,
+        "typeface": "Bahnschrift",
+        "color": "#F26B43",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "wrap": "square",
+        "autoFit": "shrinkText",
+        "autoFitScale": 1,
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "10"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "10",
+          "resolvedTextStyle": {
+            "fontSize": 20,
+            "typeface": "Bahnschrift",
+            "color": "#F26B43",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "10",
+              "fontSize": 20,
+              "typeface": "Bahnschrift",
+              "color": "#F26B43",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/1ozmdsz2",
+      "id": "2",
+      "bbox": [
+        136,
+        108,
+        1054,
+        58
+      ],
+      "geometry": "rect",
+      "text": "Delivery sequencing",
+      "textPreview": "Delivery sequencing",
+      "resolvedFontSize": 41.33,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 41.33,
+        "typeface": "Bahnschrift",
+        "color": "#0B1F4D",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "wrap": "square",
+        "autoFit": "none",
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Delivery sequencing"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Delivery sequencing",
+          "resolvedTextStyle": {
+            "fontSize": 41.33,
+            "typeface": "Bahnschrift",
+            "color": "#0B1F4D",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Delivery sequencing",
+              "fontSize": 41.33,
+              "typeface": "Bahnschrift",
+              "color": "#0B1F4D",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/gnqlk7ih",
+      "id": "3",
+      "bbox": [
+        136,
+        158,
+        1040,
+        34
+      ],
+      "geometry": "rect",
+      "text": "The sequence protects domain decisions first and postpones irreversible migration work",
+      "textPreview": "The sequence protects domain decisions first and postpones irreversible migration work",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 18.67,
+        "typeface": "Segoe UI",
+        "color": "#5D6675",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "wrap": "square",
+        "autoFit": "none",
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "The sequence protects domain decisions first and postpones irreversible migration work"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "The sequence protects domain decisions first and postpones irreversible migration work",
+          "resolvedTextStyle": {
+            "fontSize": 18.67,
+            "typeface": "Segoe UI",
+            "color": "#5D6675",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "The sequence protects domain decisions first and postpones irreversible migration work",
+              "fontSize": 18.67,
+              "typeface": "Segoe UI",
+              "color": "#5D6675",
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/rix47ih0",
+      "id": "4",
+      "bbox": [
+        83,
+        216,
+        54,
+        52
+      ],
+      "geometry": "roundRect",
+      "text": "A",
+      "textPreview": "A",
+      "resolvedFontSize": 28,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 28,
+        "typeface": "Bahnschrift",
+        "color": "#FFFFFF",
+        "bold": true,
+        "alignment": "center",
+        "verticalAlignment": "middle",
+        "wrap": "square",
+        "autoFit": "shrinkText",
+        "autoFitScale": 1,
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "A"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "A",
+          "resolvedTextStyle": {
+            "fontSize": 28,
+            "typeface": "Bahnschrift",
+            "color": "#FFFFFF",
+            "bold": true,
+            "alignment": "center"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "A",
+              "fontSize": 28,
+              "typeface": "Bahnschrift",
+              "color": "#FFFFFF",
+              "bold": true,
+              "alignment": "center"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "#F26B43",
+      "lineWidth": 0
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/6xo3ed0f",
+      "id": "5",
+      "bbox": [
+        166,
+        214,
+        280,
+        40
+      ],
+      "geometry": "rect",
+      "text": "Domain alignment",
+      "textPreview": "Domain alignment",
+      "resolvedFontSize": 25.33,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 25.33,
+        "typeface": "Bahnschrift",
+        "color": "#0B1F4D",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "wrap": "square",
+        "autoFit": "shrinkText",
+        "autoFitScale": 1,
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Domain alignment"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Domain alignment",
+          "resolvedTextStyle": {
+            "fontSize": 25.33,
+            "typeface": "Bahnschrift",
+            "color": "#0B1F4D",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Domain alignment",
+              "fontSize": 25.33,
+              "typeface": "Bahnschrift",
+              "color": "#0B1F4D",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/tkfm9szq",
+      "id": "6",
+      "bbox": [
+        460,
+        214,
+        690,
+        54
+      ],
+      "geometry": "rect",
+      "text": "Close the six policy decisions, acceptance rules and role matrix.",
+      "textPreview": "Close the six policy decisions, acceptance rules and role matrix.",
+      "resolvedFontSize": 21.33,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 21.33,
+        "typeface": "Segoe UI",
+        "color": "#172033",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "wrap": "square",
+        "autoFit": "shrinkText",
+        "autoFitScale": 1,
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Close the six policy decisions, acceptance rules and role matrix."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Close the six policy decisions, acceptance rules and role matrix.",
+          "resolvedTextStyle": {
+            "fontSize": 21.33,
+            "typeface": "Segoe UI",
+            "color": "#172033",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Close the six policy decisions, acceptance rules and role matrix.",
+              "fontSize": 21.33,
+              "typeface": "Segoe UI",
+              "color": "#172033",
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/sj6lgnil",
+      "id": "7",
+      "bbox": [
+        110,
+        274,
+        0,
+        28
+      ],
+      "geometry": "line",
+      "lineColor": "#B6C4D1",
+      "lineWidth": 2
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/jux43iho",
+      "id": "8",
+      "bbox": [
+        83,
+        302,
+        54,
+        52
+      ],
+      "geometry": "roundRect",
+      "text": "B",
+      "textPreview": "B",
+      "resolvedFontSize": 28,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 28,
+        "typeface": "Bahnschrift",
+        "color": "#FFFFFF",
+        "bold": true,
+        "alignment": "center",
+        "verticalAlignment": "middle",
+        "wrap": "square",
+        "autoFit": "shrinkText",
+        "autoFitScale": 1,
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "B"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "B",
+          "resolvedTextStyle": {
+            "fontSize": 28,
+            "typeface": "Bahnschrift",
+            "color": "#FFFFFF",
+            "bold": true,
+            "alignment": "center"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "B",
+              "fontSize": 28,
+              "typeface": "Bahnschrift",
+              "color": "#FFFFFF",
+              "bold": true,
+              "alignment": "center"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "#0072BC",
+      "lineWidth": 0
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/it43ad03",
+      "id": "9",
+      "bbox": [
+        166,
+        300,
+        280,
+        40
+      ],
+      "geometry": "rect",
+      "text": "Platform foundation",
+      "textPreview": "Platform foundation",
+      "resolvedFontSize": 25.33,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 25.33,
+        "typeface": "Bahnschrift",
+        "color": "#0B1F4D",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "wrap": "square",
+        "autoFit": "shrinkText",
+        "autoFitScale": 1,
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Platform foundation"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Platform foundation",
+          "resolvedTextStyle": {
+            "fontSize": 25.33,
+            "typeface": "Bahnschrift",
+            "color": "#0B1F4D",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Platform foundation",
+              "fontSize": 25.33,
+              "typeface": "Bahnschrift",
+              "color": "#0B1F4D",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/orulw7yp",
+      "id": "10",
+      "bbox": [
+        460,
+        300,
+        690,
+        54
+      ],
+      "geometry": "rect",
+      "text": "Authentication, authorization, schema, files, event logging and deployment pipeline.",
+      "textPreview": "Authentication, authorization, schema, files, event logging and deployment pipeline.",
+      "resolvedFontSize": 19.17,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 21.33,
+        "typeface": "Segoe UI",
+        "color": "#172033",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "wrap": "square",
+        "autoFit": "shrinkText",
+        "autoFitScale": 0.9,
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Authentication, authorization, schema, files, event logging and deployment"
+          },
+          {
+            "index": 2,
+            "text": "pipeline."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Authentication, authorization, schema, files, event logging and deployment pipeline.",
+          "resolvedTextStyle": {
+            "fontSize": 21.33,
+            "typeface": "Segoe UI",
+            "color": "#172033",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Authentication, authorization, schema, files, event logging and deployment pipeline.",
+              "fontSize": 21.33,
+              "typeface": "Segoe UI",
+              "color": "#172033",
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/9s325sfu",
+      "id": "11",
+      "bbox": [
+        110,
+        360,
+        0,
+        28
+      ],
+      "geometry": "line",
+      "lineColor": "#B6C4D1",
+      "lineWidth": 2
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/mpc3uxgj",
+      "id": "12",
+      "bbox": [
+        83,
+        388,
+        54,
+        52
+      ],
+      "geometry": "roundRect",
+      "text": "C",
+      "textPreview": "C",
+      "resolvedFontSize": 28,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 28,
+        "typeface": "Bahnschrift",
+        "color": "#FFFFFF",
+        "bold": true,
+        "alignment": "center",
+        "verticalAlignment": "middle",
+        "wrap": "square",
+        "autoFit": "shrinkText",
+        "autoFitScale": 1,
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "C"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "C",
+          "resolvedTextStyle": {
+            "fontSize": 28,
+            "typeface": "Bahnschrift",
+            "color": "#FFFFFF",
+            "bold": true,
+            "alignment": "center"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "C",
+              "fontSize": 28,
+              "typeface": "Bahnschrift",
+              "color": "#FFFFFF",
+              "bold": true,
+              "alignment": "center"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "#0072BC",
+      "lineWidth": 0
+    },
+    {
+      "order": 13,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/nqlk32x4",
+      "id": "13",
+      "bbox": [
+        166,
+        386,
+        280,
+        40
+      ],
+      "geometry": "rect",
+      "text": "Permit lifecycle",
+      "textPreview": "Permit lifecycle",
+      "resolvedFontSize": 25.33,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 25.33,
+        "typeface": "Bahnschrift",
+        "color": "#0B1F4D",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "wrap": "square",
+        "autoFit": "shrinkText",
+        "autoFitScale": 1,
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Permit lifecycle"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Permit lifecycle",
+          "resolvedTextStyle": {
+            "fontSize": 25.33,
+            "typeface": "Bahnschrift",
+            "color": "#0B1F4D",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Permit lifecycle",
+              "fontSize": 25.33,
+              "typeface": "Bahnschrift",
+              "color": "#0B1F4D",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 14,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/0nu1snyd",
+      "id": "14",
+      "bbox": [
+        460,
+        386,
+        690,
+        54
+      ],
+      "geometry": "rect",
+      "text": "Creation, child logic, approvals, operational actions, closure and revisions.",
+      "textPreview": "Creation, child logic, approvals, operational actions, closure and revisions.",
+      "resolvedFontSize": 21.08,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 21.33,
+        "typeface": "Segoe UI",
+        "color": "#172033",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "wrap": "square",
+        "autoFit": "shrinkText",
+        "autoFitScale": 0.99,
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Creation, child logic, approvals, operational actions, closure and"
+          },
+          {
+            "index": 2,
+            "text": "revisions."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Creation, child logic, approvals, operational actions, closure and revisions.",
+          "resolvedTextStyle": {
+            "fontSize": 21.33,
+            "typeface": "Segoe UI",
+            "color": "#172033",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Creation, child logic, approvals, operational actions, closure and revisions.",
+              "fontSize": 21.33,
+              "typeface": "Segoe UI",
+              "color": "#172033",
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 15,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/1o321sfy",
+      "id": "15",
+      "bbox": [
+        110,
+        446,
+        0,
+        28
+      ],
+      "geometry": "line",
+      "lineColor": "#B6C4D1",
+      "lineWidth": 2
+    },
+    {
+      "order": 16,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/elcjqdg7",
+      "id": "16",
+      "bbox": [
+        83,
+        474,
+        54,
+        52
+      ],
+      "geometry": "roundRect",
+      "text": "D",
+      "textPreview": "D",
+      "resolvedFontSize": 28,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 28,
+        "typeface": "Bahnschrift",
+        "color": "#FFFFFF",
+        "bold": true,
+        "alignment": "center",
+        "verticalAlignment": "middle",
+        "wrap": "square",
+        "autoFit": "shrinkText",
+        "autoFitScale": 1,
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "D"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "D",
+          "resolvedTextStyle": {
+            "fontSize": 28,
+            "typeface": "Bahnschrift",
+            "color": "#FFFFFF",
+            "bold": true,
+            "alignment": "center"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "D",
+              "fontSize": 28,
+              "typeface": "Bahnschrift",
+              "color": "#FFFFFF",
+              "bold": true,
+              "alignment": "center"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "#0072BC",
+      "lineWidth": 0
+    },
+    {
+      "order": 17,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/zmlkzihs",
+      "id": "17",
+      "bbox": [
+        166,
+        472,
+        280,
+        40
+      ],
+      "geometry": "rect",
+      "text": "Administration and reporting",
+      "textPreview": "Administration and reporting",
+      "resolvedFontSize": 21.05,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 25.33,
+        "typeface": "Bahnschrift",
+        "color": "#0B1F4D",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "wrap": "square",
+        "autoFit": "shrinkText",
+        "autoFitScale": 0.83,
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Administration and reporting"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Administration and reporting",
+          "resolvedTextStyle": {
+            "fontSize": 25.33,
+            "typeface": "Bahnschrift",
+            "color": "#0B1F4D",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Administration and reporting",
+              "fontSize": 25.33,
+              "typeface": "Bahnschrift",
+              "color": "#0B1F4D",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 18,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/kjel4ryh",
+      "id": "18",
+      "bbox": [
+        460,
+        472,
+        690,
+        54
+      ],
+      "geometry": "rect",
+      "text": "Configuration screens, search, dashboards, PDF and scheduled exports.",
+      "textPreview": "Configuration screens, search, dashboards, PDF and scheduled exports.",
+      "resolvedFontSize": 21.33,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 21.33,
+        "typeface": "Segoe UI",
+        "color": "#172033",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "wrap": "square",
+        "autoFit": "shrinkText",
+        "autoFitScale": 1,
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Configuration screens, search, dashboards, PDF and scheduled exports."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Configuration screens, search, dashboards, PDF and scheduled exports.",
+          "resolvedTextStyle": {
+            "fontSize": 21.33,
+            "typeface": "Segoe UI",
+            "color": "#172033",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Configuration screens, search, dashboards, PDF and scheduled exports.",
+              "fontSize": 21.33,
+              "typeface": "Segoe UI",
+              "color": "#172033",
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 19,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/5k72dcf2",
+      "id": "19",
+      "bbox": [
+        110,
+        532,
+        0,
+        28
+      ],
+      "geometry": "line",
+      "lineColor": "#B6C4D1",
+      "lineWidth": 2
+    },
+    {
+      "order": 20,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/toju1s3a",
+      "id": "20",
+      "bbox": [
+        83,
+        560,
+        54,
+        52
+      ],
+      "geometry": "roundRect",
+      "text": "E",
+      "textPreview": "E",
+      "resolvedFontSize": 28,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 28,
+        "typeface": "Bahnschrift",
+        "color": "#FFFFFF",
+        "bold": true,
+        "alignment": "center",
+        "verticalAlignment": "middle",
+        "wrap": "square",
+        "autoFit": "shrinkText",
+        "autoFitScale": 1,
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "E"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "E",
+          "resolvedTextStyle": {
+            "fontSize": 28,
+            "typeface": "Bahnschrift",
+            "color": "#FFFFFF",
+            "bold": true,
+            "alignment": "center"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "E",
+              "fontSize": 28,
+              "typeface": "Bahnschrift",
+              "color": "#FFFFFF",
+              "bold": true,
+              "alignment": "center"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "#0072BC",
+      "lineWidth": 0
+    },
+    {
+      "order": 21,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/83at8nmp",
+      "id": "21",
+      "bbox": [
+        166,
+        558,
+        280,
+        40
+      ],
+      "geometry": "rect",
+      "text": "Migration and launch",
+      "textPreview": "Migration and launch",
+      "resolvedFontSize": 25.33,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 25.33,
+        "typeface": "Bahnschrift",
+        "color": "#0B1F4D",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "wrap": "square",
+        "autoFit": "shrinkText",
+        "autoFitScale": 1,
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Migration and launch"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Migration and launch",
+          "resolvedTextStyle": {
+            "fontSize": 25.33,
+            "typeface": "Bahnschrift",
+            "color": "#0B1F4D",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Migration and launch",
+              "fontSize": 25.33,
+              "typeface": "Bahnschrift",
+              "color": "#0B1F4D",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 22,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/721czil4",
+      "id": "22",
+      "bbox": [
+        460,
+        558,
+        690,
+        54
+      ],
+      "geometry": "rect",
+      "text": "Profiling, ETL rehearsals, reconciliation, training, cutover and hypercare.",
+      "textPreview": "Profiling, ETL rehearsals, reconciliation, training, cutover and hypercare.",
+      "resolvedFontSize": 21.33,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 21.33,
+        "typeface": "Segoe UI",
+        "color": "#172033",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "wrap": "square",
+        "autoFit": "shrinkText",
+        "autoFitScale": 1,
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Profiling, ETL rehearsals, reconciliation, training, cutover and hypercare."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Profiling, ETL rehearsals, reconciliation, training, cutover and hypercare.",
+          "resolvedTextStyle": {
+            "fontSize": 21.33,
+            "typeface": "Segoe UI",
+            "color": "#172033",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Profiling, ETL rehearsals, reconciliation, training, cutover and hypercare.",
+              "fontSize": 21.33,
+              "typeface": "Segoe UI",
+              "color": "#172033",
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 23,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/618b6d4j",
+      "id": "23",
+      "bbox": [
+        80,
+        646,
+        1100,
+        34
+      ],
+      "geometry": "rect",
+      "text": "Each track ends with working software, automated controls and explicit exit criteria. Time and staffing estimates follow the profiling and domain-alignment work.",
+      "textPreview": "Each track ends with working software, automated controls and explicit exit criteria. Time and staffing estimates follow the profiling an...",
+      "resolvedFontSize": 14.32,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 18.67,
+        "typeface": "Segoe UI",
+        "color": "#5D6675",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "wrap": "square",
+        "autoFit": "shrinkText",
+        "autoFitScale": 0.77,
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Each track ends with working software, automated controls and explicit exit criteria. Time and staffing estimates follow the profiling and domain-alignment"
+          },
+          {
+            "index": 2,
+            "text": "work."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Each track ends with working software, automated controls and explicit exit criteria. Time and staffing estimates follow the profiling and domain-alignment work.",
+          "resolvedTextStyle": {
+            "fontSize": 18.67,
+            "typeface": "Segoe UI",
+            "color": "#5D6675",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Each track ends with working software, automated controls and explicit exit criteria. Time and staffing estimates follow the profiling and domain-alignment work.",
+              "fontSize": 18.67,
+              "typeface": "Segoe UI",
+              "color": "#5D6675",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

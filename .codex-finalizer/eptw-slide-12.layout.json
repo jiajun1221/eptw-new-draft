@@ -1,0 +1,938 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/6xsbjl",
+    "id": "6xsbjl",
+    "slide": 12,
+    "layoutId": "/ppt/slideLayouts/slideLayout5.xml",
+    "layoutName": "Blank Page",
+    "masterLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "OneSystems Colour",
+    "colors": {
+      "accent1": "#FF8C00",
+      "accent2": "#0066CC",
+      "accent3": "#0000A5",
+      "accent4": "#C0C0C0",
+      "accent5": "#0066CC",
+      "accent6": "#333333",
+      "dk1": "#003366",
+      "lt1": "#F5F5F5",
+      "dk2": "#333333",
+      "lt2": "#9FC9EB",
+      "hlink": "#FF8C00",
+      "folHlink": "#0066CC"
+    },
+    "fontScheme": {
+      "name": "OST Font",
+      "majorFont": {
+        "latinTypeface": "Bahnschrift"
+      },
+      "minorFont": {
+        "latinTypeface": "Segoe UI"
+      }
+    },
+    "typefaces": [
+      "Bahnschrift",
+      "Segoe UI"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "/ppt/slideLayouts/slideLayout5.xml",
+      "name": "Blank Page",
+      "parentLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+      "backgroundImage": {
+        "assetId": "/ppt/media/image3.jpg",
+        "contentType": "image/jpeg",
+        "byteLength": 45542
+      },
+      "elements": [
+        {
+          "order": 1,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout5.xml/5",
+          "id": "5",
+          "name": "Rectangle 4",
+          "bbox": [
+            0,
+            0,
+            1280,
+            720
+          ],
+          "geometry": "rect",
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "verticalAlignment": "middle"
+          },
+          "fillColor": "#FFFFFF",
+          "lineWidth": 0
+        }
+      ]
+    },
+    {
+      "scope": "master",
+      "id": "/ppt/slideMasters/slideMaster1.xml",
+      "type": "master",
+      "backgroundImage": {
+        "assetId": "/ppt/media/image1.jpg",
+        "contentType": "image/jpeg",
+        "byteLength": 73341
+      },
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/lor2p87e",
+      "id": "1",
+      "bbox": [
+        74,
+        116,
+        44,
+        36
+      ],
+      "geometry": "rect",
+      "text": "11",
+      "textPreview": "11",
+      "resolvedFontSize": 20,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 20,
+        "typeface": "Bahnschrift",
+        "color": "#F26B43",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "wrap": "square",
+        "autoFit": "shrinkText",
+        "autoFitScale": 1,
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "11"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "11",
+          "resolvedTextStyle": {
+            "fontSize": 20,
+            "typeface": "Bahnschrift",
+            "color": "#F26B43",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "11",
+              "fontSize": 20,
+              "typeface": "Bahnschrift",
+              "color": "#F26B43",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/y1gjeton",
+      "id": "2",
+      "bbox": [
+        136,
+        108,
+        1054,
+        58
+      ],
+      "geometry": "rect",
+      "text": "Principal delivery risks and controls",
+      "textPreview": "Principal delivery risks and controls",
+      "resolvedFontSize": 41.33,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 41.33,
+        "typeface": "Bahnschrift",
+        "color": "#0B1F4D",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "wrap": "square",
+        "autoFit": "none",
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Principal delivery risks and controls"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Principal delivery risks and controls",
+          "resolvedTextStyle": {
+            "fontSize": 41.33,
+            "typeface": "Bahnschrift",
+            "color": "#0B1F4D",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Principal delivery risks and controls",
+              "fontSize": 41.33,
+              "typeface": "Bahnschrift",
+              "color": "#0B1F4D",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/z2pknyp8",
+      "id": "3",
+      "bbox": [
+        136,
+        158,
+        1040,
+        34
+      ],
+      "geometry": "rect",
+      "text": "The main risks can be reduced before production migration begins",
+      "textPreview": "The main risks can be reduced before production migration begins",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 18.67,
+        "typeface": "Segoe UI",
+        "color": "#5D6675",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "wrap": "square",
+        "autoFit": "none",
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "The main risks can be reduced before production migration begins"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "The main risks can be reduced before production migration begins",
+          "resolvedTextStyle": {
+            "fontSize": 18.67,
+            "typeface": "Segoe UI",
+            "color": "#5D6675",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "The main risks can be reduced before production migration begins",
+              "fontSize": 18.67,
+              "typeface": "Segoe UI",
+              "color": "#5D6675",
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "table",
+      "scope": "slide",
+      "aid": "tb/5obqdovm",
+      "id": "4",
+      "bbox": [
+        70,
+        218,
+        1140,
+        418
+      ],
+      "text": "Risk | Potential impact | Primary control\nUnresolved workflow policy | Schema rework and inconsistent approvals | Design authority workshop with signed acceptance rules\nUnknown legacy data variants | Migration errors or incomplete history | Sanitized snapshot profiling, quarantine and reconciliation\nAuthorization implemented only in UI | Approval bypass or cross-company exposure | Server-side policy checks and negative security tests\nMutable configuration changes history | Past permits become difficult to explain | Versioned templates and explicit reviewer-change events\nReporting logic diverges | Dashboards disagree and trust falls | Canonical date/status definitions and shared read models\nCutover without rollback evidence | Extended operational disruption | Rehearsed cutover, rollback window and post-switch reconciliation",
+      "textPreview": "Risk | Potential impact | Primary control | Unresolved workflow policy | Schema rework and inconsistent approvals | Design authority work...",
+      "rows": 7,
+      "cols": 3,
+      "cells": [
+        {
+          "index": 1,
+          "row": 1,
+          "column": 1,
+          "bbox": [
+            70,
+            218,
+            280,
+            59.71
+          ],
+          "text": "Risk",
+          "textPreview": "Risk",
+          "fillColor": "#0B1F4D",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Risk",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Risk"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "row": 1,
+          "column": 2,
+          "bbox": [
+            350,
+            218,
+            350,
+            59.71
+          ],
+          "text": "Potential impact",
+          "textPreview": "Potential impact",
+          "fillColor": "#0B1F4D",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Potential impact",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Potential impact"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "row": 1,
+          "column": 3,
+          "bbox": [
+            700,
+            218,
+            510,
+            59.71
+          ],
+          "text": "Primary control",
+          "textPreview": "Primary control",
+          "fillColor": "#0B1F4D",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Primary control",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Primary control"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 4,
+          "row": 2,
+          "column": 1,
+          "bbox": [
+            70,
+            277.71,
+            280,
+            59.71
+          ],
+          "text": "Unresolved workflow policy",
+          "textPreview": "Unresolved workflow policy",
+          "fillColor": "#FFFFFF",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Unresolved workflow policy",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Unresolved workflow policy"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 5,
+          "row": 2,
+          "column": 2,
+          "bbox": [
+            350,
+            277.71,
+            350,
+            59.71
+          ],
+          "text": "Schema rework and inconsistent approvals",
+          "textPreview": "Schema rework and inconsistent approvals",
+          "fillColor": "#FFFFFF",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Schema rework and inconsistent approvals",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Schema rework and inconsistent approvals"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 6,
+          "row": 2,
+          "column": 3,
+          "bbox": [
+            700,
+            277.71,
+            510,
+            59.71
+          ],
+          "text": "Design authority workshop with signed acceptance rules",
+          "textPreview": "Design authority workshop with signed acceptance rules",
+          "fillColor": "#FFFFFF",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Design authority workshop with signed acceptance rules",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Design authority workshop with signed acceptance rules"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 7,
+          "row": 3,
+          "column": 1,
+          "bbox": [
+            70,
+            337.43,
+            280,
+            59.71
+          ],
+          "text": "Unknown legacy data variants",
+          "textPreview": "Unknown legacy data variants",
+          "fillColor": "#F5F8FB",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Unknown legacy data variants",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Unknown legacy data variants"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 8,
+          "row": 3,
+          "column": 2,
+          "bbox": [
+            350,
+            337.43,
+            350,
+            59.71
+          ],
+          "text": "Migration errors or incomplete history",
+          "textPreview": "Migration errors or incomplete history",
+          "fillColor": "#F5F8FB",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Migration errors or incomplete history",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Migration errors or incomplete history"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 9,
+          "row": 3,
+          "column": 3,
+          "bbox": [
+            700,
+            337.43,
+            510,
+            59.71
+          ],
+          "text": "Sanitized snapshot profiling, quarantine and reconciliation",
+          "textPreview": "Sanitized snapshot profiling, quarantine and reconciliation",
+          "fillColor": "#F5F8FB",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Sanitized snapshot profiling, quarantine and reconciliation",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Sanitized snapshot profiling, quarantine and reconciliation"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 10,
+          "row": 4,
+          "column": 1,
+          "bbox": [
+            70,
+            397.14,
+            280,
+            59.71
+          ],
+          "text": "Authorization implemented only in UI",
+          "textPreview": "Authorization implemented only in UI",
+          "fillColor": "#FFFFFF",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Authorization implemented only in UI",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Authorization implemented only in UI"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 11,
+          "row": 4,
+          "column": 2,
+          "bbox": [
+            350,
+            397.14,
+            350,
+            59.71
+          ],
+          "text": "Approval bypass or cross-company exposure",
+          "textPreview": "Approval bypass or cross-company exposure",
+          "fillColor": "#FFFFFF",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Approval bypass or cross-company exposure",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Approval bypass or cross-company exposure"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 12,
+          "row": 4,
+          "column": 3,
+          "bbox": [
+            700,
+            397.14,
+            510,
+            59.71
+          ],
+          "text": "Server-side policy checks and negative security tests",
+          "textPreview": "Server-side policy checks and negative security tests",
+          "fillColor": "#FFFFFF",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Server-side policy checks and negative security tests",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Server-side policy checks and negative security tests"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 13,
+          "row": 5,
+          "column": 1,
+          "bbox": [
+            70,
+            456.86,
+            280,
+            59.71
+          ],
+          "text": "Mutable configuration changes history",
+          "textPreview": "Mutable configuration changes history",
+          "fillColor": "#F5F8FB",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Mutable configuration changes history",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Mutable configuration changes history"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 14,
+          "row": 5,
+          "column": 2,
+          "bbox": [
+            350,
+            456.86,
+            350,
+            59.71
+          ],
+          "text": "Past permits become difficult to explain",
+          "textPreview": "Past permits become difficult to explain",
+          "fillColor": "#F5F8FB",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Past permits become difficult to explain",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Past permits become difficult to explain"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 15,
+          "row": 5,
+          "column": 3,
+          "bbox": [
+            700,
+            456.86,
+            510,
+            59.71
+          ],
+          "text": "Versioned templates and explicit reviewer-change events",
+          "textPreview": "Versioned templates and explicit reviewer-change events",
+          "fillColor": "#F5F8FB",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Versioned templates and explicit reviewer-change events",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Versioned templates and explicit reviewer-change events"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 16,
+          "row": 6,
+          "column": 1,
+          "bbox": [
+            70,
+            516.57,
+            280,
+            59.71
+          ],
+          "text": "Reporting logic diverges",
+          "textPreview": "Reporting logic diverges",
+          "fillColor": "#FFFFFF",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Reporting logic diverges",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Reporting logic diverges"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 17,
+          "row": 6,
+          "column": 2,
+          "bbox": [
+            350,
+            516.57,
+            350,
+            59.71
+          ],
+          "text": "Dashboards disagree and trust falls",
+          "textPreview": "Dashboards disagree and trust falls",
+          "fillColor": "#FFFFFF",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Dashboards disagree and trust falls",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Dashboards disagree and trust falls"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 18,
+          "row": 6,
+          "column": 3,
+          "bbox": [
+            700,
+            516.57,
+            510,
+            59.71
+          ],
+          "text": "Canonical date/status definitions and shared read models",
+          "textPreview": "Canonical date/status definitions and shared read models",
+          "fillColor": "#FFFFFF",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Canonical date/status definitions and shared read models",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Canonical date/status definitions and shared read models"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 19,
+          "row": 7,
+          "column": 1,
+          "bbox": [
+            70,
+            576.29,
+            280,
+            59.71
+          ],
+          "text": "Cutover without rollback evidence",
+          "textPreview": "Cutover without rollback evidence",
+          "fillColor": "#F5F8FB",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Cutover without rollback evidence",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Cutover without rollback evidence"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 20,
+          "row": 7,
+          "column": 2,
+          "bbox": [
+            350,
+            576.29,
+            350,
+            59.71
+          ],
+          "text": "Extended operational disruption",
+          "textPreview": "Extended operational disruption",
+          "fillColor": "#F5F8FB",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Extended operational disruption",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Extended operational disruption"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 21,
+          "row": 7,
+          "column": 3,
+          "bbox": [
+            700,
+            576.29,
+            510,
+            59.71
+          ],
+          "text": "Rehearsed cutover, rollback window and post-switch reconciliation",
+          "textPreview": "Rehearsed cutover, rollback window and post-switch reconciliation",
+          "fillColor": "#F5F8FB",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Rehearsed cutover, rollback window and post-switch reconciliation",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Rehearsed cutover, rollback window and post-switch reconciliation"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/x072l872",
+      "id": "5",
+      "bbox": [
+        80,
+        649,
+        1100,
+        30
+      ],
+      "geometry": "rect",
+      "text": "Risk ownership and thresholds should be assigned during implementation planning.",
+      "textPreview": "Risk ownership and thresholds should be assigned during implementation planning.",
+      "resolvedFontSize": 18.33,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 19.33,
+        "typeface": "Bahnschrift",
+        "color": "#0072BC",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "wrap": "square",
+        "autoFit": "shrinkText",
+        "autoFitScale": 0.95,
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Risk ownership and thresholds should be assigned during implementation planning."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Risk ownership and thresholds should be assigned during implementation planning.",
+          "resolvedTextStyle": {
+            "fontSize": 19.33,
+            "typeface": "Bahnschrift",
+            "color": "#0072BC",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Risk ownership and thresholds should be assigned during implementation planning.",
+              "fontSize": 19.33,
+              "typeface": "Bahnschrift",
+              "color": "#0072BC",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

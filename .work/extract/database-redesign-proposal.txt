@@ -1,0 +1,432 @@
+[Title] ePTW v2 database redesign proposal
+[Normal] Technical design and migration proposal
+[Normal] Prepared for implementation planning and production migration assessment
+[Heading 1] Contents
+[Normal] 1. Executive decision
+[Normal] 2. Current database and behavior
+[Normal] 3. Problems to remove
+[Normal] 4. Target domain model
+[Normal] 5. Tables and datatypes
+[Normal] 6. Status and workflow mapping
+[Normal] 7. Datatable and reporting design
+[Normal] 8. Current feature coverage
+[Normal] 9. Migration mapping
+[Normal] 10. Migration and cutover plan
+[Normal] 11. Implementation sequencing
+[Normal] 12. Decisions required before build
+[Normal] 13. Additional critical observation
+[Heading 1] 1. Executive decision
+[Normal] Use PostgreSQL as the system of record. Keep dynamic form definitions and non-canonical answers in jsonb, but move all identifiers, relationships, workflow state, approval order, operational dates, and commonly filtered values into typed relational columns.
+[Normal] This design replaces four overlapping permit stores (permits, drafts, embedded permit.children, and childpermits) with one permits table. It replaces the reviewer arrays with explicit ordered workflow steps and replaces string logs/PDF document copies with structured events and immutable revisions.
+[Normal] The proposed schema has 27 application tables and three migration-control tables. It preserves the existing features while making server-side datatable filtering, sorting, counting, and dashboard aggregation predictable and indexable.
+[Normal] This is a code-level assessment. Before production migration, run the profiling and reconciliation steps in section 10 against a recent sanitized production snapshot; repository inspection cannot establish live row counts, null rates, orphaned references, or actual historical variants.
+[Heading 1] 2. Current database and behavior
+[Normal] The application uses MongoDB through Mongoose. The active collections inferred from the models are:
+[Normal] admin.js is empty and is not an active collection. blockedwords is imported directly rather than from the model index, but it is active.
+[Heading 2] Current permit lifecycle
+[List Bullet] A Micron submitter starts at PendingApproval; an external contractor starts at Pending for contractor-PM handling.
+[List Bullet] Individual reviewers are processed in array order.
+[List Bullet] Reviewer groups follow individual reviewers in array order; one member approval satisfies a group.
+[List Bullet] The final reviewer changes the permit to Approved and approveAt is populated.
+[List Bullet] Rejection stores one rejectedBy and one reason; recall removes the last item from approvedBy.
+[List Bullet] Permits can move through pending closure/cancellation, completed, cancelled, and LSS-specific executed/completed states.
+[List Bullet] A scheduled 02:00 job attempts automatic completion after an end-date threshold.
+[List Bullet] Drafts can be edited, have child forms added, and be duplicated from an existing permit with signatures cleared.
+[List Bullet] Reviewer users and groups can be added or removed after submission.
+[Heading 2] Current query/report behavior that must remain
+[List Bullet] Role- and site-scoped permit lists: all, mine, pending closure/cancellation, awaiting my approval, final approval, approved by me, child permits, and drafts.
+[List Bullet] Filters for permit/parent/child code, created date, planned start/end date, status, site, discipline, creator/applicant, host/system owner, child template/title, and free text.
+[List Bullet] Parent and child template categories including general/tool-install and B1-B7/environmental/excavation/hazardous/traffic views.
+[List Bullet] LSS impairment listing and execute/complete behavior.
+[List Bullet] SIPP monthly reports.
+[List Bullet] Dashboard counts by status, date/month/year, site, contractor, discipline, building level, parent/child permit type, and several template-specific answer values.
+[List Bullet] User, site, group, discipline, template, map, blocked-term, announcement, and release-note administration.
+[List Bullet] Local login, SSO login, verification/reset flows, file upload, email notifications, PDF retrieval/history, permit duplication, and automatic closure.
+[Heading 1] 3. Problems to remove
+[Normal] 1. Four permit shapes: fixes must be repeated across parent, draft, child, and PDF-log models.
+[Normal] 2. Two child-permit stores: some children live inside permits.children; others live in childpermits, forcing every report to query and merge both.
+[Normal] 3. Untyped operational data: dates are a mix of Mongo dates, locale strings, and YYYY-MM-DD strings under template-specific keys such as D03startDate and C11StartDate.
+[Normal] 4. Implicit approval state: selectedUser, selectedMTGroupUsers, selectedMTGroup, and approvedBy overlap. Group membership changes can alter the meaning of an in-flight permit.
+[Normal] 5. Unstructured history: human-readable log strings are not reliable audit facts and cannot be filtered safely.
+[Normal] 6. Mutable templates: permits point to a template that can be edited or deleted; there is no version pinned to a submission.
+[Normal] 7. Non-atomic numbering: the counter is read, incremented in application code, and written back. Child codes scan the latest document. Both race under concurrent requests.
+[Normal] 8. Poor datatable access paths: query code contains many branches for combinations of filters, regexes site codes inside permit codes, and repeatedly populates large graphs.
+[Normal] 9. Hard-coded business identifiers: dashboards depend on Mongo ObjectIds, exact titles, and form answer keys.
+[Normal] 10. Weak integrity: most references and codes have no database uniqueness or deletion policy; malformed and orphaned documents are possible.
+[Normal] 11. Status drift: model and GraphQL enums differ (DraftPermit), and the scheduled job uses test-only values (PendingClosure-test, CompletedTest).
+[Heading 1] 4. Target domain model
+[Normal] organizations --< users >--< user_sites >-- sites --< site_maps
+                       |             |
+                       |             +--< review_groups --< review_group_members
+                       |
+form_templates --< form_template_versions --< permits >-- disciplines
+                                               |
+                                               +-- parent_permit_id --> permits
+                                               +--< permit_approval_steps
+                                               |       +--< permit_approval_step_members
+                                               |       +--< permit_approval_actions
+                                               +--< permit_events
+                                               +--< permit_revisions --< generated_documents
+                                               +--< permit_files >-- files
+[Normal] Key rules:
+[List Bullet] A draft is a permit with status DRAFT, not a separate entity.
+[List Bullet] A child is a permit with parent_permit_id, not an embedded object or separate collection.
+[List Bullet] Each permit pins an immutable template version.
+[List Bullet] Canonical operational fields are typed columns. Remaining dynamic answers stay in answers jsonb.
+[List Bullet] Approval eligibility and order are snapshotted at submission. Later group membership changes do not rewrite an in-flight workflow.
+[List Bullet] Events are append-only. A status update, approval action, reviewer edit, automatic completion, and revision creation occur in one database transaction.
+[List Bullet] All timestamps are timestamptz in UTC. Each site has an IANA timezone for interpreting date/time-only form input.
+[Heading 1] 5. Tables and datatypes
+[Normal] The executable reference DDL is in docs/postgresql-schema.sql. The list below describes why each table exists.
+[Heading 2] Identity and access
+[Heading 3] organizations
+[Normal] This replaces user company strings and repeated submission.companyName for filtering. The original submitted company text remains in the permit snapshot.
+[Heading 3] users
+[Heading 3] user_sites
+[Normal] This replaces both user.site and user.sites.
+[Heading 3] user_action_tokens
+[Normal] id uuid PK, user_id uuid, purpose text (VERIFY_EMAIL or RESET_PASSWORD), token_hash char(64) UNIQUE, expires_at timestamptz, consumed_at timestamptz, and created_at timestamptz. Store only a hash of the emailed token. This keeps verification and password-reset links one-time, expiring, and revocable while preserving the existing flows.
+[Heading 3] sites
+[Normal] Site groupings such as F10NX should be API filter presets, not encoded into permit codes or duplicated database rows.
+[Heading 3] review_groups
+[Heading 3] review_group_members
+[Normal] This is the single source of group membership; remove users.group and group member arrays.
+[Heading 2] Master and configuration data
+[Heading 3] disciplines
+[Normal] id uuid PK, code citext UNIQUE NOT NULL, description text, is_active boolean, and created_at/updated_at timestamptz. Remove date_created and date_updated strings.
+[Heading 3] form_templates
+[Normal] id uuid PK, immutable code citext UNIQUE, title text, permit_kind permit_kind, child_category text, permit_color varchar(32), show_in_create boolean, is_active boolean, audit user IDs, and timestamps. Stable code replaces title/ObjectId dependencies in dashboards.
+[Heading 3] form_template_versions
+[Normal] Only one published version per template is allowed. Published rows are immutable. field_map defines mappings such as a template-specific start-date key to planned_start_at, avoiding hard-coded switch statements.
+[Heading 3] system_settings
+[Normal] key citext PK, value jsonb, description text, updated_by uuid, updated_at timestamptz. Appropriate values include automatic-close policy, notification flags, and the current permit-creation gate (stale_after_days, max_open_stale_permits, timer_count). Secrets do not belong here; keep them in a secrets manager.
+[Heading 3] permit_number_sequences
+[Normal] Composite PK is (site_id, period_start, permit_kind). Allocate with INSERT ... ON CONFLICT ... DO UPDATE SET last_value = ... RETURNING inside the permit transaction.
+[Heading 2] Permit aggregate
+[Heading 3] permits
+[Normal] Canonical columns are the source of truth for common fields and are excluded from answers in v2 submissions. A compatibility serializer can merge them back into the old GraphQL response during transition. This avoids maintaining two writable copies.
+[Heading 3] permit_approval_steps
+[Normal] Individual steps are created first, then group steps. One active step gives constant-time “my next approval” queries.
+[Heading 3] permit_approval_step_members
+[Normal] step_id uuid, user_id uuid, is_eligible boolean, snapshotted_at timestamptz, composite PK. This freezes the eligible members of a group or role step at submission/reviewer-edit time.
+[Heading 3] permit_approval_actions
+[Normal] id uuid PK, step_id uuid, permit_id uuid, actor_user_id uuid, action approval_action, reason text, acted_at timestamptz, metadata jsonb. It preserves every approve/reject/recall action rather than one approvedBy array and one rejectedBy value.
+[Heading 3] permit_events
+[Normal] id uuid PK, permit_id uuid, event_type permit_event_type, actor_user_id uuid nullable, from_status permit_status, to_status permit_status, reason text, message text, metadata jsonb, occurred_at timestamptz, created_at timestamptz. Append-only audit history replaces logs: [String].
+[Heading 3] permit_revisions
+[Normal] id uuid PK, permit_id uuid, revision_no integer, change_type text, template_version_id uuid, snapshot jsonb, created_by uuid, created_at timestamptz, source_hash text; unique (permit_id, revision_no). This stores immutable snapshots only when a revision is needed and replaces duplicated logpdf permit-shaped rows.
+[Heading 2] Files and generated output
+[Heading 3] files
+[Normal] id uuid PK, storage_provider text, bucket text, object_key text, original_name text, content_type text, size_bytes bigint, sha256 char(64), uploaded_by uuid, created_at timestamptz, deleted_at timestamptz; unique (bucket, object_key).
+[Heading 3] permit_files
+[Normal] permit_id uuid, file_id uuid, field_name text, revision_id uuid nullable, created_at timestamptz; composite PK (permit_id, file_id, field_name). This associates form uploads/signatures with permits without storing URLs as uncontrolled answer values.
+[Heading 3] generated_documents
+[Normal] id uuid PK, permit_id uuid, revision_id uuid, file_id uuid, document_type text, display_name text, generated_by uuid, generated_at timestamptz; supports current PDF history/retrieval with exact permit and revision keys.
+[Heading 2] UI/reference content and delivery
+[Heading 3] site_maps
+[Normal] id uuid PK, site_id uuid, name text, file_id uuid, is_active boolean, created_at/updated_at timestamptz. This replaces map.site strings and mapImage URLs.
+[Heading 3] announcements
+[Normal] id uuid PK, title text, message text, kind text, color varchar(32), starts_at timestamptz, ends_at timestamptz, is_active boolean, created_by uuid, and timestamps.
+[Heading 3] release_notes
+[Normal] id uuid PK, version text UNIQUE, deployed_at timestamptz, title text, created_by uuid, created_at timestamptz.
+[Heading 3] release_note_items
+[Normal] id uuid PK, release_note_id uuid, sequence_no smallint, message text; unique (release_note_id, sequence_no). This preserves the current changelog list without an array column.
+[Heading 3] blocked_terms
+[Normal] id uuid PK, term citext UNIQUE, is_active boolean, created_by uuid, and timestamps.
+[Heading 3] notification_outbox
+[Normal] id uuid PK, optional permit_id/event_id, channel notification_channel, template_key text, recipient jsonb, payload jsonb, status notification_status, attempt_count integer, available_at/sent_at/created_at timestamptz, last_error text. Email becomes transactionally reliable and retryable instead of being coupled to the request.
+[Heading 2] Migration control
+[Heading 3] migration_runs
+[Normal] id uuid PK, source_name text, source_snapshot_at timestamptz, started_at/finished_at timestamptz, status text, statistics jsonb, code_version text.
+[Heading 3] legacy_id_map
+[Normal] source_collection text, legacy_id text, target_table text, target_id uuid, migration_run_id uuid, source_hash text, migrated_at timestamptz; PK (source_collection, legacy_id, target_table). This makes ETL idempotent and supports traceability.
+[Heading 3] migration_errors
+[Normal] id bigserial PK, migration_run_id uuid, source_collection text, legacy_id text, severity text, error_code text, message text, source_excerpt jsonb, created_at timestamptz.
+[Heading 1] 6. Status and workflow mapping
+[Normal] Allowed transitions should be enforced in one service and tested as a state machine. The database event/status update must be transactional. Do not let generic API callers assign arbitrary statuses.
+[Normal] Recommended main transitions:
+[Normal] DRAFT -> PENDING_CONTRACTOR_APPROVAL -> PENDING_REVIEW -> APPROVED
+   \-------------------------------> PENDING_REVIEW -> REJECTED -> PENDING_REVIEW
+APPROVED -> PENDING_CLOSURE -> COMPLETED
+APPROVED -> PENDING_CANCELLATION -> CANCELLED
+APPROVED -> PENDING_REVIEW                 (recall, with a recorded action)
+APPROVED -> EXECUTED -> COMPLETED           (LSS where applicable)
+[Heading 1] 7. Datatable and reporting design
+[Normal] Use a single filter object and generate conjunctive SQL predicates. Avoid a resolver branch for every filter combination.
+[Normal] Recommended list API inputs:
+[List Bullet] scope: all accessible, submitted by me, awaiting my action, approved by me, draft, pending closure/cancellation.
+[List Bullet] kind and optional child category/template code.
+[List Bullet] arrays for site, status, discipline, template, organization.
+[List Bullet] created_from/to, planned_start_from/to, planned_end_from/to, approved_from/to.
+[List Bullet] search for permit number, work description, requester, host, contractor, and parent number.
+[List Bullet] whitelisted sort plus cursor (sort_value, id); retain offset only for short compatibility windows.
+[Normal] Core indexes are included in the DDL. Important access paths are site/status/date, parent-child, submitter/status, discipline/date, template/date, due automatic closures, active approval steps, and trigram search. Use COUNT(*) OVER() only for moderate result sets; for large tables return has_next_page and obtain exact totals separately/cached.
+[Normal] Create these database views/read models:
+[List Bullet] permit_list_v: joins only small display columns (site, template, discipline, submitter, host, contractor, active approval step).
+[List Bullet] lss_impairment_v: child rows filtered by stable template code/category, removing the current two-source merge.
+[List Bullet] dashboard_daily_mv: daily counts by date basis (created, planned start, planned end, or approved), site, organization, discipline, template, permit kind, child category, and status.
+[List Bullet] Optional future read model dashboard_answer_fact: extracted facts for dashboard dimensions that remain truly dynamic (for example hazardous flag or SIPP work type). It is not one of the baseline tables. Add it only if measurements show JSONB expression indexes are insufficient; populate only fields marked reportable in template field_map and do not create an unbounded EAV table for every answer.
+[Normal] Initially refresh the materialized summary concurrently on a short schedule. If production volume makes a full refresh too costly, replace it with an event-maintained summary table updated idempotently from permit events. The source of truth remains the normalized operational tables.
+[Heading 1] 8. Current feature coverage
+[Heading 1] 9. Migration mapping
+[Heading 1] 10. Migration and cutover plan
+[Heading 2] Phase 0: inventory and freeze semantics
+[Normal] 1. Take a production snapshot and run read-only profiling.
+[Normal] 2. Count every collection; count statuses and template IDs; find null/invalid dates, duplicate permit codes/emails/site/discipline codes, orphan ObjectIds, inconsistent group membership, and documents over expected size.
+[Normal] 3. Inventory every submission key by template and data type. Confirm the canonical mapping for start/end, description, company, building, level, LSS, SIPP, and dashboard-specific dimensions.
+[Normal] 4. Get business decisions for test statuses, duplicate child detection, group membership discrepancies, retention, and whether sequence scope is global or site/month/kind. The proposal defaults to site/month/kind.
+[Heading 2] Phase 1: build and rehearse
+[Normal] 1. Deploy schema and migrations to an empty PostgreSQL database.
+[Normal] 2. Use deterministic UUIDv5 values from source_collection + Mongo ObjectId, while also populating legacy_id_map.
+[Normal] 3. Load reference data, organizations/users/sites, groups, templates, then permits and their dependent records.
+[Normal] 4. Make each ETL stage restartable by comparing source hashes. Never update a target row silently when its source hash changed; record the difference.
+[Normal] 5. Quarantine invalid records in migration_errors; do not drop them.
+[Normal] 6. Rehearse until all critical reconciliation gates pass.
+[Heading 2] Phase 2: permit details
+[Normal] 1. Extract canonical dates using each template version's field map. Interpret date/time-only strings using the permit site's timezone, then store UTC.
+[Normal] 2. Remove extracted canonical keys from v2 answers; keep the unmodified legacy submission inside the first migration revision for evidence.
+[Normal] 3. Migrate separate childpermits and embedded children. Deduplicate only on strong evidence: same legacy child ID, or same non-empty child code within a parent. Treat (parent, template, answer hash) as a review candidate, not an automatic merge.
+[Normal] 4. For embedded child forms without lifecycle fields, inherit site, owner, discipline, requester, and status according to documented legacy behavior and tag metadata.migration_inherited = true in the migration event.
+[Normal] 5. Convert signature-like answer fields to file relationships where resolvable; keep unresolved legacy values in the migration revision.
+[Heading 2] Phase 3: approval reconstruction
+[Normal] 1. Direct reviewer order is the legacy selectedUser order after removing IDs listed in selectedMTGroupUsers.
+[Normal] 2. Append legacy selectedMTGroup in order as quorum-one group steps.
+[Normal] 3. Snapshot current group members. Historical membership cannot be recovered from the current schema; mark reconstructed snapshots in metadata.
+[Normal] 4. Match each approvedBy user to its direct step or the earliest group step for which the user is eligible. Ambiguous matches become migration warnings and retain the raw arrays in the initial revision.
+[Normal] 5. Create a synthetic legacy approval action/event for mapped approvals and rejection. Do not fabricate exact action timestamps when logs cannot prove them.
+[Heading 2] Phase 4: live synchronization and cutover
+[Normal] Preferred approach is a short controlled write freeze because workflow order and embedded arrays are difficult to dual-write safely.
+[Normal] 1. Perform a full rehearsal from a recent snapshot and measure runtime.
+[Normal] 2. Deploy v2 in shadow-read mode and compare representative list/detail/dashboard responses.
+[Normal] 3. Announce maintenance; stop mutations and the automatic-close cron; record a source high-water timestamp.
+[Normal] 4. Run final incremental ETL, then reconciliation.
+[Normal] 5. Switch API reads/writes and background workers to PostgreSQL.
+[Normal] 6. Keep MongoDB read-only for the agreed rollback/audit window. Do not immediately delete it.
+[Normal] 7. Roll back by stopping v2 writes and returning traffic to the frozen Mongo deployment only if the cutover gate fails; after real v2 writes begin, rollback requires a reverse-change log and should be treated as a separate controlled operation.
+[Normal] For a zero-downtime requirement, introduce an application outbox/change log in v1 first and dual-write through one compatibility service. Raw Mongo change streams alone are insufficient to reconstruct the business transaction boundaries in the current multi-save mutations.
+[Heading 2] Reconciliation gates
+[List Bullet] Source documents = migrated targets + explicitly quarantined documents, by collection and status.
+[List Bullet] 100% of non-draft legacy permit codes preserved and unique.
+[List Bullet] 100% of target foreign keys valid; zero unaccounted orphan references.
+[List Bullet] Parent/child counts match after documented deduplication.
+[List Bullet] Counts by status/site/template/month match, with approved exception report.
+[List Bullet] Approval selected/approved/rejected users accounted for per permit.
+[List Bullet] Every legacy log string exists in an event or initial revision.
+[List Bullet] Every PDF log is linked or explicitly quarantined.
+[List Bullet] Sampled permit detail/PDF output is byte- or field-equivalent where expected.
+[List Bullet] Dashboard totals and datatable filter results match for agreed sample periods.
+[List Bullet] Password hashes authenticate in a controlled test; SSO subject mappings are verified.
+[Heading 1] 11. Implementation sequencing
+[Normal] 1. Schema, migrations, fixtures, and repository layer.
+[Normal] 2. Template versioning and canonical field-map tooling.
+[Normal] 3. Unified permit aggregate and numbering transaction.
+[Normal] 4. Approval state machine, audit events, and notification outbox.
+[Normal] 5. Datatable query API and compatibility response adapter.
+[Normal] 6. Child/LSS/SIPP operations.
+[Normal] 7. PDF/revisions/files.
+[Normal] 8. Dashboard read models.
+[Normal] 9. ETL, reconciliation suite, shadow comparisons, and cutover.
+[Normal] Do not migrate the existing resolver logic line-for-line. Put lifecycle transitions and approval progression in domain services with database transactions, then expose them through the new API.
+[Heading 1] 12. Decisions required before build
+[List Bullet] Confirm PostgreSQL as the target and the required supported version.
+[List Bullet] Confirm whether permit numbering is global monthly, per site monthly, or per site/type monthly. Existing parent and child behavior is inconsistent; the DDL uses per site/month/kind.
+[List Bullet] Confirm official template codes/categories and retire all hard-coded Mongo ObjectIds/titles.
+[List Bullet] Approve mappings for every operational/reportable form field.
+[List Bullet] Decide treatment of test statuses and invalid historical documents.
+[List Bullet] Define record/PDF/signature retention and privacy rules.
+[List Bullet] Confirm whether an approval workflow is frozen at submission (recommended) or dynamically follows later group membership changes.
+[List Bullet] Define datatable default sort, maximum page size, export limits, and exact-count expectations.
+[Heading 1] 13. Additional critical observation
+[Normal] The repository README contains credential-like database and cloud examples. They should be treated as compromised: remove them from Git history where practical, rotate the values, and move all secrets to the deployment secret manager. This is separate from the schema migration but should be resolved before building v2.
+
+[TABLE 1]
+Status	proposed baseline for implementation
+Target database	PostgreSQL 16+
+Source reviewed	Mongoose models, GraphQL queries/mutations, dashboard helpers, approval helpers, PDF history, and scheduled permit completion
+
+[TABLE 2]
+Current collection	Purpose	Main problems
+users	Accounts, role, company, site access	Company is free text; both site and sites; one group conflicts with group-owned membership
+sites	Site master	Site code is not required/unique
+templates	Dynamic form template and nested fields	No immutable versions; deployed edits can change the interpretation of old permits
+permits	Parent permits plus embedded child forms	Large documents; untyped submission; duplicate child representation
+drafts	Draft parent permits	Nearly duplicates permits
+childpermits	Independently submitted child permits	Nearly duplicates permits; site can be absent and inferred from parent
+mtgroups	Reviewer groups and member arrays	Membership duplicated in users and copied into every permit
+disciplines	Discipline master	Duplicate string dates plus Mongoose timestamps; code not unique
+permitnumbers	Global counter	String counter and read-then-write allocation can produce duplicate codes under concurrency
+permitexpireds	Auto-close settings/counters	Singleton identified by a hard-coded ObjectId; mixes configuration and runtime counters
+logpdfs	Full permit snapshots keyed by PDF filename	Duplicates most permit data; weak lookup key; not a true revision model
+maps	Map name, site string, image URL	Site is not a foreign key; no timestamps
+annoucements	Active UI announcements	Misspelled name; deployment date and type are untyped strings
+changelogs	Release date and string entries	Not auditable or consistently typed
+blockedwords	Leadership-name validation terms	Odd _word name; no uniqueness or normalization
+
+[TABLE 3]
+Column	Type	Rules
+id	uuid	PK
+name	text	required
+normalized_name	text	required, unique; trimmed/lowercase migration key
+kind	organization_kind	MICRON, CONTRACTOR, OTHER
+is_active	boolean	default true
+created_at, updated_at	timestamptz	required
+
+[TABLE 4]
+Column	Type	Rules
+id	uuid	PK
+organization_id	uuid	FK organizations, nullable for pre-migration exceptions
+email	citext	required, unique
+full_name, phone, image_url	text	nullable
+password_hash	text	nullable for SSO-only users
+role	user_role	required
+status	user_status	required
+email_verified_at	timestamptz	nullable
+sso_subject	text	nullable, unique when present
+created_at, updated_at, deleted_at	timestamptz	soft deletion preserves audit references
+
+[TABLE 5]
+Column	Type	Rules
+user_id, site_id	uuid	composite PK; FKs
+is_default	boolean	one default site per user via partial unique index
+created_at	timestamptz	required
+
+[TABLE 6]
+Column	Type	Rules
+id	uuid	PK
+code	citext	required, unique
+name	text	required
+address	text	nullable
+timezone	text	required, default Asia/Singapore
+is_active	boolean	default true
+created_at, updated_at	timestamptz	required
+
+[TABLE 7]
+Column	Type	Rules
+id, site_id, created_by	uuid	PK/FKs
+name	citext	unique per site
+can_close_permit, is_active	boolean	required
+created_at, updated_at	timestamptz	required
+
+[TABLE 8]
+Column	Type	Rules
+group_id, user_id	uuid	composite PK; FKs
+joined_at, left_at	timestamptz	temporal membership; left_at null means active
+
+[TABLE 9]
+Column	Type	Rules
+id, template_id	uuid	PK/FK
+version_no	integer	unique per template
+status	template_version_status	draft/published/retired
+schema_json	jsonb	complete ordered sections, fields, options, layout, validation, tooltips
+field_map	jsonb	maps legacy/dynamic names to canonical meanings
+checksum	text	detects accidental mutation
+published_at, retired_at, created_at	timestamptz	lifecycle
+created_by	uuid	FK user
+
+[TABLE 10]
+Column	Type	Rules
+site_id	uuid	FK
+period_start	date	monthly boundary
+permit_kind	permit_kind	parent/child
+last_value	bigint	updated atomically
+updated_at	timestamptz	required
+
+[TABLE 11]
+Column	Type	Rules/use
+id	uuid	PK
+permit_number	text	unique when present; null while draft
+kind	permit_kind	parent or child
+parent_permit_id	uuid	self-FK; required for child, null for parent
+template_version_id	uuid	immutable form version FK
+site_id	uuid	FK, required
+contractor_organization_id	uuid	FK; canonical contractor
+submitted_by, host_owner_id	uuid	user FKs
+discipline_id	uuid	FK
+status	permit_status	required lifecycle state
+status_reason	text	current rejection/cancellation reason only
+answers	jsonb	flexible non-canonical form answers
+work_description	text	indexed/searchable canonical answer
+requester_name	text	submitted snapshot
+contractor_name_snapshot	text	historical display value
+location_text, building, level	text	searchable canonical location values
+planned_start_at, planned_end_at	timestamptz	typed permit window
+submitted_at, approved_at, executed_at, closed_at, cancelled_at	timestamptz	lifecycle facts
+auto_close_due_at	timestamptz	computed when entering pending closure
+created_at, updated_at, deleted_at	timestamptz	soft-delete/audit
+lock_version	integer	optimistic concurrency
+
+[TABLE 12]
+Column	Type	Rules/use
+id, permit_id	uuid	PK/FK
+sequence_no	smallint	unique within permit
+target_type	approval_target_type	user, group, or organization role
+target_user_id, target_group_id	uuid	exactly one where applicable
+target_role	user_role	supports contractor-PM gate
+quorum	smallint	default 1
+status	approval_step_status	waiting/active/approved/rejected/skipped/cancelled
+activated_at, completed_at	timestamptz	nullable
+created_at	timestamptz	required
+
+[TABLE 13]
+Legacy value	V2 value	Notes
+DraftPermit	DRAFT	Same permits table; no number required
+Pending	PENDING_CONTRACTOR_APPROVAL	External-company submission/PM gate
+PendingApproval	PENDING_REVIEW	Ordered user/group steps
+Approved	APPROVED	Set approved_at
+Rejected	REJECTED	Preserve reason and actor action/event
+PendingClosure	PENDING_CLOSURE	Set automatic-close due time from policy
+PendingCancel	PENDING_CANCELLATION	Explicit spelling
+Cancelled	CANCELLED	Set cancelled_at
+Executed	EXECUTED	LSS execution state
+Completed	COMPLETED	Set closed_at
+CompletedTest	quarantine or COMPLETED	Convert only after business confirmation
+PendingClosure-test	quarantine or PENDING_CLOSURE	Convert only after business confirmation
+
+[TABLE 14]
+Current feature	V2 implementation
+Parent, child, and draft permits	One permits table using status, kind, and parent_permit_id
+Embedded and independent child forms	One child row per form submission
+Dynamic template builder	Template master plus immutable JSONB versions
+Template create/edit/activate/show-in-create	Draft a version, publish atomically, retire old version
+Individual sequential review	Ordered user approval steps
+Sequential MT-group review, any member approves	Ordered group step with snapshotted eligible members and quorum 1
+Contractor-PM approval	Organization-role step
+Add/remove reviewers	Version workflow steps; append events; never erase completed actions
+Approval, rejection, recall, closure, cancellation	State machine, approval actions, and permit events
+Host/system owner and discipline	Typed foreign keys
+Permit duplication	Copy to DRAFT, clear signature/file associations by field metadata
+PDF history	Revision plus generated-document/file relationship
+Uploaded files and e-signatures	File metadata plus permit-field association
+Auto-completion	Indexed auto_close_due_at worker with idempotent transaction/locking
+Unclosed-permit count and creation gate	Typed planned_end_at query plus versioned policy in system_settings
+Email notifications	Transactional outbox and retry worker
+Role/site visibility	user_sites plus role authorization; optionally PostgreSQL row-level security
+All datatable filters	Typed columns, full-text/trigram search, composable predicates, cursor pagination
+Dashboards and monthly reports	Daily materialized view and selected reportable answer facts
+LSS impairment and SIPP reports	Stable template codes/category, typed dates, child relationship
+Maps	Site FK and file FK
+Announcements, release notes, blocked terms	Dedicated typed tables
+Permit numbering	Atomic scoped monthly sequence
+Soft retention/audit	Soft-delete identity/master rows; append-only permit evidence
+
+[TABLE 15]
+Mongo source	PostgreSQL target	Transformation
+sites	sites	Normalize/validate codes; assign timezone
+distinct user/company/submission company strings	organizations	trim, collapse whitespace, case-fold; map Micron explicitly
+users	users, user_sites	map company; merge site into sites; preserve password hash; generate UUID
+mtgroups + users.group	review_groups, review_group_members	group array is authoritative; use user group only to repair/flag discrepancies
+disciplines	disciplines	normalize code; discard redundant string dates after preservation in staging
+templates	form_templates, form_template_versions	derive stable code; copy complete nested structure into version 1 JSONB; create field map
+drafts	permits	status DRAFT; migrate children as child draft rows
+permits	permits	extract canonical fields/dates; retain remaining answers JSONB
+permits.children	child rows in permits	parent FK; inherit site/owner/discipline where absent; retain own form/submission/code
+childpermits	child rows in permits	parent FK; derive site from parent if absent
+reviewer arrays	approval steps/members/actions	direct users are selectedUser - selectedMTGroupUsers; then groups; map approvedBy
+logs arrays	permit_events	preserve exact text; parse actor/type/time best-effort and flag uncertainty
+logpdfs	permit_revisions, generated_documents	correlate primarily by permit code and timestamp, not filename regex alone
+permitnumbers	permit_number_sequences	seed each scope from maximum parsed existing number
+permitexpireds	system_settings	migrate policy only; do not migrate transient counts as configuration
+maps	site_maps, files	resolve site string to site; treat unresolved values as migration errors
+annoucements	announcements	parse deployment/start date; preserve raw value on parse failure
+changelogs	release_notes, release_note_items	one ordered child row per log string
+blockedwords	blocked_terms	rename, trim, case-insensitive de-duplicate

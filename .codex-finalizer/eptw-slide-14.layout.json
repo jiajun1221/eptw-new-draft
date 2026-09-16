@@ -1,0 +1,756 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/6hzzrk",
+    "id": "6hzzrk",
+    "slide": 14,
+    "layoutId": "/ppt/slideLayouts/slideLayout5.xml",
+    "layoutName": "Blank Page",
+    "masterLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "OneSystems Colour",
+    "colors": {
+      "accent1": "#FF8C00",
+      "accent2": "#0066CC",
+      "accent3": "#0000A5",
+      "accent4": "#C0C0C0",
+      "accent5": "#0066CC",
+      "accent6": "#333333",
+      "dk1": "#003366",
+      "lt1": "#F5F5F5",
+      "dk2": "#333333",
+      "lt2": "#9FC9EB",
+      "hlink": "#FF8C00",
+      "folHlink": "#0066CC"
+    },
+    "fontScheme": {
+      "name": "OST Font",
+      "majorFont": {
+        "latinTypeface": "Bahnschrift"
+      },
+      "minorFont": {
+        "latinTypeface": "Segoe UI"
+      }
+    },
+    "typefaces": [
+      "Bahnschrift",
+      "Segoe UI"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "/ppt/slideLayouts/slideLayout5.xml",
+      "name": "Blank Page",
+      "parentLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+      "backgroundImage": {
+        "assetId": "/ppt/media/image3.jpg",
+        "contentType": "image/jpeg",
+        "byteLength": 45542
+      },
+      "elements": [
+        {
+          "order": 1,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout5.xml/5",
+          "id": "5",
+          "name": "Rectangle 4",
+          "bbox": [
+            0,
+            0,
+            1280,
+            720
+          ],
+          "geometry": "rect",
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "verticalAlignment": "middle"
+          },
+          "fillColor": "#FFFFFF",
+          "lineWidth": 0
+        }
+      ]
+    },
+    {
+      "scope": "master",
+      "id": "/ppt/slideMasters/slideMaster1.xml",
+      "type": "master",
+      "backgroundImage": {
+        "assetId": "/ppt/media/image1.jpg",
+        "contentType": "image/jpeg",
+        "byteLength": 73341
+      },
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/hgjupwvm",
+      "id": "1",
+      "bbox": [
+        74,
+        116,
+        44,
+        36
+      ],
+      "geometry": "rect",
+      "text": "A1",
+      "textPreview": "A1",
+      "resolvedFontSize": 20,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 20,
+        "typeface": "Bahnschrift",
+        "color": "#F26B43",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "wrap": "square",
+        "autoFit": "shrinkText",
+        "autoFitScale": 1,
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "A1"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "A1",
+          "resolvedTextStyle": {
+            "fontSize": 20,
+            "typeface": "Bahnschrift",
+            "color": "#F26B43",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "A1",
+              "fontSize": 20,
+              "typeface": "Bahnschrift",
+              "color": "#F26B43",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/utsvuhwb",
+      "id": "2",
+      "bbox": [
+        136,
+        108,
+        1054,
+        58
+      ],
+      "geometry": "rect",
+      "text": "Appendix: frontend prototype coverage",
+      "textPreview": "Appendix: frontend prototype coverage",
+      "resolvedFontSize": 41.33,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 41.33,
+        "typeface": "Bahnschrift",
+        "color": "#0B1F4D",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "wrap": "square",
+        "autoFit": "none",
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Appendix: frontend prototype coverage"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Appendix: frontend prototype coverage",
+          "resolvedTextStyle": {
+            "fontSize": 41.33,
+            "typeface": "Bahnschrift",
+            "color": "#0B1F4D",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Appendix: frontend prototype coverage",
+              "fontSize": 41.33,
+              "typeface": "Bahnschrift",
+              "color": "#0B1F4D",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/fe1cnmxw",
+      "id": "3",
+      "bbox": [
+        136,
+        158,
+        1040,
+        34
+      ],
+      "geometry": "rect",
+      "text": "The codebase demonstrates workflow intent but remains a browser-based functional draft",
+      "textPreview": "The codebase demonstrates workflow intent but remains a browser-based functional draft",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 18.67,
+        "typeface": "Segoe UI",
+        "color": "#5D6675",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "wrap": "square",
+        "autoFit": "none",
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "The codebase demonstrates workflow intent but remains a browser-based functional draft"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "The codebase demonstrates workflow intent but remains a browser-based functional draft",
+          "resolvedTextStyle": {
+            "fontSize": 18.67,
+            "typeface": "Segoe UI",
+            "color": "#5D6675",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "The codebase demonstrates workflow intent but remains a browser-based functional draft",
+              "fontSize": 18.67,
+              "typeface": "Segoe UI",
+              "color": "#5D6675",
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "table",
+      "scope": "slide",
+      "aid": "tb/9cfqp432",
+      "id": "4",
+      "bbox": [
+        70,
+        210,
+        1140,
+        390
+      ],
+      "text": "Demonstrated now | Production capability still required\nRole-aware navigation and permit queues | Real identity provider integration, sessions and server authorization\nTemplate-driven permit creation and validation | Published template versioning, reserved-field enforcement and file services\nSequential review decisions and separation of duties | Confirmed role chain, delegation policy, concurrency and transactional workflow\nLinked Hot Work child permit and parent controls | Full B1-B5/LSS rules, merge semantics and decision on approval gating\nActivation, suspension, closure, expiry and revisions | Confirmed status model, notifications, scheduled jobs and immutable history\nAdmin, search, audit and PDF action views | Persistent master data, server-side search, dashboards, documents, audit and permission checks",
+      "textPreview": "Demonstrated now | Production capability still required | Role-aware navigation and permit queues | Real identity provider integration, s...",
+      "rows": 7,
+      "cols": 2,
+      "cells": [
+        {
+          "index": 1,
+          "row": 1,
+          "column": 1,
+          "bbox": [
+            70,
+            210,
+            530,
+            55.71
+          ],
+          "text": "Demonstrated now",
+          "textPreview": "Demonstrated now",
+          "fillColor": "#0B1F4D",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Demonstrated now",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Demonstrated now"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "row": 1,
+          "column": 2,
+          "bbox": [
+            600,
+            210,
+            610,
+            55.71
+          ],
+          "text": "Production capability still required",
+          "textPreview": "Production capability still required",
+          "fillColor": "#0B1F4D",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Production capability still required",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Production capability still required"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "row": 2,
+          "column": 1,
+          "bbox": [
+            70,
+            265.71,
+            530,
+            55.71
+          ],
+          "text": "Role-aware navigation and permit queues",
+          "textPreview": "Role-aware navigation and permit queues",
+          "fillColor": "#FFFFFF",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Role-aware navigation and permit queues",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Role-aware navigation and permit queues"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 4,
+          "row": 2,
+          "column": 2,
+          "bbox": [
+            600,
+            265.71,
+            610,
+            55.71
+          ],
+          "text": "Real identity provider integration, sessions and server authorization",
+          "textPreview": "Real identity provider integration, sessions and server authorization",
+          "fillColor": "#FFFFFF",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Real identity provider integration, sessions and server authorization",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Real identity provider integration, sessions and server authorization"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 5,
+          "row": 3,
+          "column": 1,
+          "bbox": [
+            70,
+            321.43,
+            530,
+            55.71
+          ],
+          "text": "Template-driven permit creation and validation",
+          "textPreview": "Template-driven permit creation and validation",
+          "fillColor": "#F5F8FB",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Template-driven permit creation and validation",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Template-driven permit creation and validation"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 6,
+          "row": 3,
+          "column": 2,
+          "bbox": [
+            600,
+            321.43,
+            610,
+            55.71
+          ],
+          "text": "Published template versioning, reserved-field enforcement and file services",
+          "textPreview": "Published template versioning, reserved-field enforcement and file services",
+          "fillColor": "#F5F8FB",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Published template versioning, reserved-field enforcement and file services",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Published template versioning, reserved-field enforcement and file services"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 7,
+          "row": 4,
+          "column": 1,
+          "bbox": [
+            70,
+            377.14,
+            530,
+            55.71
+          ],
+          "text": "Sequential review decisions and separation of duties",
+          "textPreview": "Sequential review decisions and separation of duties",
+          "fillColor": "#FFFFFF",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Sequential review decisions and separation of duties",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Sequential review decisions and separation of duties"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 8,
+          "row": 4,
+          "column": 2,
+          "bbox": [
+            600,
+            377.14,
+            610,
+            55.71
+          ],
+          "text": "Confirmed role chain, delegation policy, concurrency and transactional workflow",
+          "textPreview": "Confirmed role chain, delegation policy, concurrency and transactional workflow",
+          "fillColor": "#FFFFFF",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Confirmed role chain, delegation policy, concurrency and transactional workflow",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Confirmed role chain, delegation policy, concurrency and transactional workflow"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 9,
+          "row": 5,
+          "column": 1,
+          "bbox": [
+            70,
+            432.86,
+            530,
+            55.71
+          ],
+          "text": "Linked Hot Work child permit and parent controls",
+          "textPreview": "Linked Hot Work child permit and parent controls",
+          "fillColor": "#F5F8FB",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Linked Hot Work child permit and parent controls",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Linked Hot Work child permit and parent controls"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 10,
+          "row": 5,
+          "column": 2,
+          "bbox": [
+            600,
+            432.86,
+            610,
+            55.71
+          ],
+          "text": "Full B1-B5/LSS rules, merge semantics and decision on approval gating",
+          "textPreview": "Full B1-B5/LSS rules, merge semantics and decision on approval gating",
+          "fillColor": "#F5F8FB",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Full B1-B5/LSS rules, merge semantics and decision on approval gating",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Full B1-B5/LSS rules, merge semantics and decision on approval gating"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 11,
+          "row": 6,
+          "column": 1,
+          "bbox": [
+            70,
+            488.57,
+            530,
+            55.71
+          ],
+          "text": "Activation, suspension, closure, expiry and revisions",
+          "textPreview": "Activation, suspension, closure, expiry and revisions",
+          "fillColor": "#FFFFFF",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Activation, suspension, closure, expiry and revisions",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Activation, suspension, closure, expiry and revisions"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 12,
+          "row": 6,
+          "column": 2,
+          "bbox": [
+            600,
+            488.57,
+            610,
+            55.71
+          ],
+          "text": "Confirmed status model, notifications, scheduled jobs and immutable history",
+          "textPreview": "Confirmed status model, notifications, scheduled jobs and immutable history",
+          "fillColor": "#FFFFFF",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Confirmed status model, notifications, scheduled jobs and immutable history",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Confirmed status model, notifications, scheduled jobs and immutable history"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 13,
+          "row": 7,
+          "column": 1,
+          "bbox": [
+            70,
+            544.29,
+            530,
+            55.71
+          ],
+          "text": "Admin, search, audit and PDF action views",
+          "textPreview": "Admin, search, audit and PDF action views",
+          "fillColor": "#F5F8FB",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Admin, search, audit and PDF action views",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Admin, search, audit and PDF action views"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 14,
+          "row": 7,
+          "column": 2,
+          "bbox": [
+            600,
+            544.29,
+            610,
+            55.71
+          ],
+          "text": "Persistent master data, server-side search, dashboards, documents, audit and permission checks",
+          "textPreview": "Persistent master data, server-side search, dashboards, documents, audit and permission checks",
+          "fillColor": "#F5F8FB",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Persistent master data, server-side search, dashboards, documents, audit and permission checks",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Persistent master data, server-side search, dashboards, documents, audit and permission checks"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/tsjulcfq",
+      "id": "5",
+      "bbox": [
+        80,
+        650,
+        1100,
+        26
+      ],
+      "geometry": "rect",
+      "text": "Verification: React production build succeeded; 3 test files and 20 tests passed.",
+      "textPreview": "Verification: React production build succeeded; 3 test files and 20 tests passed.",
+      "resolvedFontSize": 15,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 18.67,
+        "typeface": "Bahnschrift",
+        "color": "#2E7D5A",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "wrap": "square",
+        "autoFit": "shrinkText",
+        "autoFitScale": 0.8,
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Verification: React production build succeeded; 3 test files and 20 tests passed."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Verification: React production build succeeded; 3 test files and 20 tests passed.",
+          "resolvedTextStyle": {
+            "fontSize": 18.67,
+            "typeface": "Bahnschrift",
+            "color": "#2E7D5A",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Verification: React production build succeeded; 3 test files and 20 tests passed.",
+              "fontSize": 18.67,
+              "typeface": "Bahnschrift",
+              "color": "#2E7D5A",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

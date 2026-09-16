@@ -1,0 +1,65 @@
+[
+  {
+    "id": "/ppt/slideMasters/slideMaster1.xml",
+    "name": "",
+    "placeholders": []
+  },
+  {
+    "id": "/ppt/slideLayouts/slideLayout1.xml",
+    "name": "Cover",
+    "placeholders": [
+      {
+        "name": "body",
+        "type": "body",
+        "text": "PRESENTATION TITLE"
+      }
+    ]
+  },
+  {
+    "id": "/ppt/slideLayouts/slideLayout2.xml",
+    "name": "Company Name",
+    "placeholders": [
+      {
+        "name": "body",
+        "type": "body",
+        "text": "PRESENTATION TITLE"
+      },
+      {
+        "name": "body",
+        "type": "body",
+        "text": "Company Name"
+      }
+    ]
+  },
+  {
+    "id": "/ppt/slideLayouts/slideLayout3.xml",
+    "name": "1_BACKGROUND",
+    "placeholders": [
+      {
+        "name": "title",
+        "type": "title",
+        "text": "Click to edit Master title style"
+      },
+      {
+        "name": "content placeholder 3",
+        "text": "BODY TEXT"
+      }
+    ]
+  },
+  {
+    "id": "/ppt/slideLayouts/slideLayout4.xml",
+    "name": "Contact Us",
+    "placeholders": [
+      {
+        "name": "title",
+        "type": "title",
+        "text": "CONTACT US"
+      }
+    ]
+  },
+  {
+    "id": "/ppt/slideLayouts/slideLayout5.xml",
+    "name": "Blank Page",
+    "placeholders": []
+  }
+]

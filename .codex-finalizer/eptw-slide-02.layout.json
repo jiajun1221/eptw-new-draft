@@ -1,0 +1,1012 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/1h8sov",
+    "id": "1h8sov",
+    "slide": 2,
+    "layoutId": "/ppt/slideLayouts/slideLayout5.xml",
+    "layoutName": "Blank Page",
+    "masterLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "OneSystems Colour",
+    "colors": {
+      "accent1": "#FF8C00",
+      "accent2": "#0066CC",
+      "accent3": "#0000A5",
+      "accent4": "#C0C0C0",
+      "accent5": "#0066CC",
+      "accent6": "#333333",
+      "dk1": "#003366",
+      "lt1": "#F5F5F5",
+      "dk2": "#333333",
+      "lt2": "#9FC9EB",
+      "hlink": "#FF8C00",
+      "folHlink": "#0066CC"
+    },
+    "fontScheme": {
+      "name": "OST Font",
+      "majorFont": {
+        "latinTypeface": "Bahnschrift"
+      },
+      "minorFont": {
+        "latinTypeface": "Segoe UI"
+      }
+    },
+    "typefaces": [
+      "Bahnschrift",
+      "Segoe UI"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "/ppt/slideLayouts/slideLayout5.xml",
+      "name": "Blank Page",
+      "parentLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+      "backgroundImage": {
+        "assetId": "/ppt/media/image3.jpg",
+        "contentType": "image/jpeg",
+        "byteLength": 45542
+      },
+      "elements": [
+        {
+          "order": 1,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout5.xml/5",
+          "id": "5",
+          "name": "Rectangle 4",
+          "bbox": [
+            0,
+            0,
+            1280,
+            720
+          ],
+          "geometry": "rect",
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "verticalAlignment": "middle"
+          },
+          "fillColor": "#FFFFFF",
+          "lineWidth": 0
+        }
+      ]
+    },
+    {
+      "scope": "master",
+      "id": "/ppt/slideMasters/slideMaster1.xml",
+      "type": "master",
+      "backgroundImage": {
+        "assetId": "/ppt/media/image1.jpg",
+        "contentType": "image/jpeg",
+        "byteLength": 73341
+      },
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/p8fe1gju",
+      "id": "1",
+      "bbox": [
+        74,
+        116,
+        44,
+        36
+      ],
+      "geometry": "rect",
+      "text": "01",
+      "textPreview": "01",
+      "resolvedFontSize": 20,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 20,
+        "typeface": "Bahnschrift",
+        "color": "#F26B43",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "wrap": "square",
+        "autoFit": "shrinkText",
+        "autoFitScale": 1,
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "01"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "01",
+          "resolvedTextStyle": {
+            "fontSize": 20,
+            "typeface": "Bahnschrift",
+            "color": "#F26B43",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "01",
+              "fontSize": 20,
+              "typeface": "Bahnschrift",
+              "color": "#F26B43",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/25of6103",
+      "id": "2",
+      "bbox": [
+        136,
+        108,
+        1054,
+        58
+      ],
+      "geometry": "rect",
+      "text": "Executive proposal",
+      "textPreview": "Executive proposal",
+      "resolvedFontSize": 41.33,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 41.33,
+        "typeface": "Bahnschrift",
+        "color": "#0B1F4D",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "wrap": "square",
+        "autoFit": "none",
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Executive proposal"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Executive proposal",
+          "resolvedTextStyle": {
+            "fontSize": 41.33,
+            "typeface": "Bahnschrift",
+            "color": "#0B1F4D",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Executive proposal",
+              "fontSize": 41.33,
+              "typeface": "Bahnschrift",
+              "color": "#0B1F4D",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/n6xwz61o",
+      "id": "3",
+      "bbox": [
+        136,
+        158,
+        1040,
+        34
+      ],
+      "geometry": "rect",
+      "text": "Approval requested for the rebuild direction, with policy decisions closed before schema freeze",
+      "textPreview": "Approval requested for the rebuild direction, with policy decisions closed before schema freeze",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 18.67,
+        "typeface": "Segoe UI",
+        "color": "#5D6675",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "wrap": "square",
+        "autoFit": "none",
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Approval requested for the rebuild direction, with policy decisions closed before schema freeze"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Approval requested for the rebuild direction, with policy decisions closed before schema freeze",
+          "resolvedTextStyle": {
+            "fontSize": 18.67,
+            "typeface": "Segoe UI",
+            "color": "#5D6675",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Approval requested for the rebuild direction, with policy decisions closed before schema freeze",
+              "fontSize": 18.67,
+              "typeface": "Segoe UI",
+              "color": "#5D6675",
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/03mx4bid",
+      "id": "4",
+      "bbox": [
+        80,
+        215,
+        220,
+        30
+      ],
+      "geometry": "rect",
+      "text": "RECOMMENDATION",
+      "textPreview": "RECOMMENDATION",
+      "resolvedFontSize": 17.33,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 17.33,
+        "typeface": "Bahnschrift",
+        "color": "#F26B43",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "wrap": "square",
+        "autoFit": "shrinkText",
+        "autoFitScale": 1,
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "RECOMMENDATION"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "RECOMMENDATION",
+          "resolvedTextStyle": {
+            "fontSize": 17.33,
+            "typeface": "Bahnschrift",
+            "color": "#F26B43",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "RECOMMENDATION",
+              "fontSize": 17.33,
+              "typeface": "Bahnschrift",
+              "color": "#F26B43",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/14fexwji",
+      "id": "5",
+      "bbox": [
+        80,
+        246,
+        1100,
+        94
+      ],
+      "geometry": "rect",
+      "text": "Rebuild ePTW around one controlled permit domain, a server-enforced workflow and a PostgreSQL system of record.",
+      "textPreview": "Rebuild ePTW around one controlled permit domain, a server-enforced workflow and a PostgreSQL system of record.",
+      "resolvedFontSize": 35.83,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 37.33,
+        "typeface": "Bahnschrift",
+        "color": "#0B1F4D",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "wrap": "square",
+        "autoFit": "shrinkText",
+        "autoFitScale": 0.96,
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Rebuild ePTW around one controlled permit domain, a"
+          },
+          {
+            "index": 2,
+            "text": "server-enforced workflow and a PostgreSQL system of record."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Rebuild ePTW around one controlled permit domain, a server-enforced workflow and a PostgreSQL system of record.",
+          "resolvedTextStyle": {
+            "fontSize": 37.33,
+            "typeface": "Bahnschrift",
+            "color": "#0B1F4D",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Rebuild ePTW around one controlled permit domain, a server-enforced workflow and a PostgreSQL system of record.",
+              "fontSize": 37.33,
+              "typeface": "Bahnschrift",
+              "color": "#0B1F4D",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/e14v2107",
+      "id": "6",
+      "bbox": [
+        80,
+        432,
+        46,
+        0
+      ],
+      "geometry": "line",
+      "lineColor": "#0072BC",
+      "lineWidth": 4
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/f2dwv61s",
+      "id": "7",
+      "bbox": [
+        80,
+        388,
+        330,
+        42
+      ],
+      "geometry": "rect",
+      "text": "Business outcome",
+      "textPreview": "Business outcome",
+      "resolvedFontSize": 28,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 28,
+        "typeface": "Bahnschrift",
+        "color": "#0B1F4D",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "wrap": "square",
+        "autoFit": "shrinkText",
+        "autoFitScale": 1,
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Business outcome"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Business outcome",
+          "resolvedTextStyle": {
+            "fontSize": 28,
+            "typeface": "Bahnschrift",
+            "color": "#0B1F4D",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Business outcome",
+              "fontSize": 28,
+              "typeface": "Bahnschrift",
+              "color": "#0B1F4D",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/sfmd0ri1",
+      "id": "8",
+      "bbox": [
+        80,
+        442,
+        330,
+        112
+      ],
+      "geometry": "rect",
+      "text": "A consistent permit journey with clearer responsibilities, stronger access control and reliable audit history.",
+      "textPreview": "A consistent permit journey with clearer responsibilities, stronger access control and reliable audit history.",
+      "resolvedFontSize": 21.67,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 22.67,
+        "typeface": "Segoe UI",
+        "color": "#172033",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "wrap": "square",
+        "autoFit": "shrinkText",
+        "autoFitScale": 0.96,
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 4,
+        "lines": [
+          {
+            "index": 1,
+            "text": "A consistent permit journey with"
+          },
+          {
+            "index": 2,
+            "text": "clearer responsibilities, stronger"
+          },
+          {
+            "index": 3,
+            "text": "access control and reliable audit"
+          },
+          {
+            "index": 4,
+            "text": "history."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "A consistent permit journey with clearer responsibilities, stronger access control and reliable audit history.",
+          "resolvedTextStyle": {
+            "fontSize": 22.67,
+            "typeface": "Segoe UI",
+            "color": "#172033",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "A consistent permit journey with clearer responsibilities, stronger access control and reliable audit history.",
+              "fontSize": 22.67,
+              "typeface": "Segoe UI",
+              "color": "#172033",
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/dgvetwjm",
+      "id": "9",
+      "bbox": [
+        472,
+        432,
+        46,
+        0
+      ],
+      "geometry": "line",
+      "lineColor": "#00B0F0",
+      "lineWidth": 4
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/pw3uh4ju",
+      "id": "10",
+      "bbox": [
+        472,
+        388,
+        330,
+        42
+      ],
+      "geometry": "rect",
+      "text": "Technical direction",
+      "textPreview": "Technical direction",
+      "resolvedFontSize": 28,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 28,
+        "typeface": "Bahnschrift",
+        "color": "#0B1F4D",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "wrap": "square",
+        "autoFit": "shrinkText",
+        "autoFitScale": 1,
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Technical direction"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Technical direction",
+          "resolvedTextStyle": {
+            "fontSize": 28,
+            "typeface": "Bahnschrift",
+            "color": "#0B1F4D",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Technical direction",
+              "fontSize": 28,
+              "typeface": "Bahnschrift",
+              "color": "#0B1F4D",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ovudozi9",
+      "id": "11",
+      "bbox": [
+        472,
+        442,
+        330,
+        126
+      ],
+      "geometry": "rect",
+      "text": "React web application, dedicated API and workflow service, PostgreSQL, protected file storage and a transactional notification outbox.",
+      "textPreview": "React web application, dedicated API and workflow service, PostgreSQL, protected file storage and a transactional notification outbox.",
+      "resolvedFontSize": 19.77,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 22.67,
+        "typeface": "Segoe UI",
+        "color": "#172033",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "wrap": "square",
+        "autoFit": "shrinkText",
+        "autoFitScale": 0.87,
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 4,
+        "lines": [
+          {
+            "index": 1,
+            "text": "React web application, dedicated API"
+          },
+          {
+            "index": 2,
+            "text": "and workflow service, PostgreSQL,"
+          },
+          {
+            "index": 3,
+            "text": "protected file storage and a"
+          },
+          {
+            "index": 4,
+            "text": "transactional notification outbox."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "React web application, dedicated API and workflow service, PostgreSQL, protected file storage and a transactional notification outbox.",
+          "resolvedTextStyle": {
+            "fontSize": 22.67,
+            "typeface": "Segoe UI",
+            "color": "#172033",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "React web application, dedicated API and workflow service, PostgreSQL, protected file storage and a transactional notification outbox.",
+              "fontSize": 22.67,
+              "typeface": "Segoe UI",
+              "color": "#172033",
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/3ulcfu1o",
+      "id": "12",
+      "bbox": [
+        864,
+        432,
+        46,
+        0
+      ],
+      "geometry": "line",
+      "lineColor": "#F26B43",
+      "lineWidth": 4
+    },
+    {
+      "order": 13,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/2tsvmp03",
+      "id": "13",
+      "bbox": [
+        864,
+        388,
+        330,
+        42
+      ],
+      "geometry": "rect",
+      "text": "Delivery approach",
+      "textPreview": "Delivery approach",
+      "resolvedFontSize": 28,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 28,
+        "typeface": "Bahnschrift",
+        "color": "#0B1F4D",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "wrap": "square",
+        "autoFit": "shrinkText",
+        "autoFitScale": 1,
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Delivery approach"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Delivery approach",
+          "resolvedTextStyle": {
+            "fontSize": 28,
+            "typeface": "Bahnschrift",
+            "color": "#0B1F4D",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Delivery approach",
+              "fontSize": 28,
+              "typeface": "Bahnschrift",
+              "color": "#0B1F4D",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 14,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/1sjudkji",
+      "id": "14",
+      "bbox": [
+        864,
+        442,
+        330,
+        126
+      ],
+      "geometry": "rect",
+      "text": "Freeze policy decisions, profile production data, build in increments, rehearse migration and cut over only after reconciliation gates pass.",
+      "textPreview": "Freeze policy decisions, profile production data, build in increments, rehearse migration and cut over only after reconciliation gates pass.",
+      "resolvedFontSize": 19.83,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 22.67,
+        "typeface": "Segoe UI",
+        "color": "#172033",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "wrap": "square",
+        "autoFit": "shrinkText",
+        "autoFitScale": 0.87,
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 4,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Freeze policy decisions, profile"
+          },
+          {
+            "index": 2,
+            "text": "production data, build in increments,"
+          },
+          {
+            "index": 3,
+            "text": "rehearse migration and cut over"
+          },
+          {
+            "index": 4,
+            "text": "only after reconciliation gates pass."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Freeze policy decisions, profile production data, build in increments, rehearse migration and cut over only after reconciliation gates pass.",
+          "resolvedTextStyle": {
+            "fontSize": 22.67,
+            "typeface": "Segoe UI",
+            "color": "#172033",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Freeze policy decisions, profile production data, build in increments, rehearse migration and cut over only after reconciliation gates pass.",
+              "fontSize": 22.67,
+              "typeface": "Segoe UI",
+              "color": "#172033",
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 15,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/gradkfid",
+      "id": "15",
+      "bbox": [
+        80,
+        616,
+        1100,
+        42
+      ],
+      "geometry": "rect",
+      "text": "Immediate ask: authorize requirements closure and read-only production data profiling.",
+      "textPreview": "Immediate ask: authorize requirements closure and read-only production data profiling.",
+      "resolvedFontSize": 22.67,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 22.67,
+        "typeface": "Bahnschrift",
+        "color": "#0072BC",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "wrap": "square",
+        "autoFit": "shrinkText",
+        "autoFitScale": 1,
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Immediate ask: authorize requirements closure and read-only production data profiling."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Immediate ask: authorize requirements closure and read-only production data profiling.",
+          "resolvedTextStyle": {
+            "fontSize": 22.67,
+            "typeface": "Bahnschrift",
+            "color": "#0072BC",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Immediate ask: authorize requirements closure and read-only production data profiling.",
+              "fontSize": 22.67,
+              "typeface": "Bahnschrift",
+              "color": "#0072BC",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

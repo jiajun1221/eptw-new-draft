@@ -1,0 +1,121 @@
+/* Balanced application type scale. */
+body {
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.page-header h1 {
+  font-size: 21px;
+  line-height: 1.2;
+}
+
+.page-header p {
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.eyebrow { font-size: 10px; }
+.button { font-size: 12px; padding: 8px 11px; }
+.primary-nav a,
+.bottom-nav a,
+.bottom-nav button { font-size: 12px; line-height: 1.3; }
+.primary-nav p { font-size: 9px; }
+.filters input,
+.filters select { font-size: 12px; }
+.result-count { font-size: 11px; }
+
+.permit-table th {
+  font-size: 9.5px;
+  line-height: 1.3;
+}
+
+.permit-table th small { font-size: 9.5px; }
+
+.permit-table td {
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.permit-table td small {
+  font-size: 9.5px;
+  line-height: 1.35;
+}
+
+.permit-table td strong,
+.permit-number {
+  font-size: 11px;
+  line-height: 1.35;
+}
+
+.permit-table .status-pill {
+  font-size: 9.5px !important;
+  line-height: 1.25;
+}
+
+.row-menu-panel a,
+.row-menu-panel button { font-size: 11px; }
+.card-heading h2,
+.section-title h2 { font-size: 14px; }
+.card-heading p { font-size: 11px; }
+
+/* Compact desktop density and a protected in-table action gutter. */
+.page { padding: 22px; }
+.page-header { margin-bottom: 18px; }
+.filters { padding: 12px; }
+.filters input,
+.filters select { padding-top: 8px; padding-bottom: 8px; }
+.permit-table-wrap { padding-right: 10px; }
+.permit-table th { padding: 10px 6px; }
+.permit-table td { padding: 11px 6px; }
+.permit-table th:first-child,
+.permit-table td:first-child { padding-left: 12px; }
+.permit-table th:nth-child(1) { width: 18%; }
+.permit-table th:nth-child(2) { width: 17%; }
+.permit-table th:nth-child(3) { width: 8%; }
+.permit-table th:nth-child(4) { width: 14%; }
+.permit-table th:nth-child(5) { width: 8%; }
+.permit-table th:nth-child(6) { width: 10%; }
+.permit-table th:nth-child(7) { width: 10%; }
+.permit-table th:nth-child(8) { width: 11%; }
+.permit-table th:nth-child(9) { width: 4%; }
+.permit-table th:last-child,
+.permit-table td:last-child { padding-left: 2px; padding-right: 8px; }
+.permit-table td:last-child .row-menu { margin: 0 auto; }
+.permit-table th:nth-child(8),
+.permit-table td:nth-child(8) { text-align: center; }
+.permit-table td:nth-child(8) .status-pill { margin-inline: auto; }
+.permit-table .approval-status {
+  display: inline-flex !important;
+  justify-content: center;
+  min-width: 78px;
+  padding: 5px 7px;
+  text-align: center;
+}
+.approval-status .status-copy,
+.approval-status .status-copy strong,
+.approval-status .status-copy small { display: block; }
+.approval-status .status-copy strong {
+  color: inherit;
+  font-size: 10px;
+  line-height: 1.15;
+}
+.approval-status .status-copy small {
+  margin-top: 2px;
+  color: inherit;
+  font-size: 8.5px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+.row-menu,
+.row-menu summary { width: 28px; }
+.row-menu summary { height: 28px; }
+
+@media (max-width: 1250px) {
+  .permit-table-wrap { display: none; }
+  .permit-mobile-list { display: grid; }
+}
+
+@media (max-width: 800px) {
+  .page-header h1 { font-size: 20px; }
+  .page-header p { font-size: 12px; }
+}

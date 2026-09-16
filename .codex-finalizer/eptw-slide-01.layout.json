@@ -1,0 +1,501 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/fdkw4u",
+    "id": "fdkw4u",
+    "slide": 1,
+    "layoutId": "/ppt/slideLayouts/slideLayout1.xml",
+    "layoutName": "Cover",
+    "masterLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "OneSystems Colour",
+    "colors": {
+      "accent1": "#FF8C00",
+      "accent2": "#0066CC",
+      "accent3": "#0000A5",
+      "accent4": "#C0C0C0",
+      "accent5": "#0066CC",
+      "accent6": "#333333",
+      "dk1": "#003366",
+      "lt1": "#F5F5F5",
+      "dk2": "#333333",
+      "lt2": "#9FC9EB",
+      "hlink": "#FF8C00",
+      "folHlink": "#0066CC"
+    },
+    "fontScheme": {
+      "name": "OST Font",
+      "majorFont": {
+        "latinTypeface": "Bahnschrift"
+      },
+      "minorFont": {
+        "latinTypeface": "Segoe UI"
+      }
+    },
+    "typefaces": [
+      "Bahnschrift",
+      "Segoe UI"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "/ppt/slideLayouts/slideLayout1.xml",
+      "name": "Cover",
+      "parentLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+      "backgroundImage": {
+        "assetId": "/ppt/media/image1.jpg",
+        "contentType": "image/jpeg",
+        "byteLength": 73341
+      },
+      "elements": [
+        {
+          "order": 1,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout1.xml/6",
+          "id": "6",
+          "name": "TextBox 5",
+          "bbox": [
+            1052.74,
+            673.34,
+            200.81,
+            22.62
+          ],
+          "geometry": "rect",
+          "text": "Ownership. Sustainability. Trustworthy",
+          "textPreview": "Ownership. Sustainability. Trustworthy",
+          "resolvedTextStyle": {
+            "wrap": "none",
+            "autoFit": "resizeShapeToFitText"
+          },
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Ownership. Sustainability. Trustworthy",
+              "resolvedTextStyle": {
+                "alignment": "right"
+              },
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Ownership. Sustainability. Trustworthy",
+                  "fontSize": 10.67,
+                  "typeface": "Segoe UI",
+                  "color": "bg1"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "order": 2,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout1.xml/5",
+          "id": "5",
+          "name": "TextBox 4",
+          "bbox": [
+            90.22,
+            169.57,
+            761.57,
+            171.26
+          ],
+          "geometry": "rect",
+          "text": "ONESYSTEMS \nTECHNOLOGIES PTE LTD​",
+          "textPreview": "ONESYSTEMS  | TECHNOLOGIES PTE LTD​",
+          "resolvedTextStyle": {
+            "wrap": "square",
+            "autoFit": "resizeShapeToFitText"
+          },
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "ONESYSTEMS ",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "ONESYSTEMS",
+                  "fontSize": 84,
+                  "typeface": "Bahnschrift",
+                  "color": "bg1",
+                  "bold": true
+                },
+                {
+                  "index": 2,
+                  "text": " ",
+                  "fontSize": 85.33,
+                  "typeface": "Bahnschrift",
+                  "color": "bg1",
+                  "bold": true
+                }
+              ]
+            },
+            {
+              "index": 2,
+              "text": "TECHNOLOGIES PTE LTD​",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "TECHNOLOGIES PTE LTD​",
+                  "fontSize": 48,
+                  "typeface": "Bahnschrift",
+                  "color": "bg1",
+                  "bold": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "order": 3,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout1.xml/12",
+          "id": "12",
+          "name": "Text Placeholder 11",
+          "bbox": [
+            90.22,
+            360,
+            643.18,
+            96
+          ],
+          "geometry": "rect",
+          "text": "PRESENTATION TITLE",
+          "textPreview": "PRESENTATION TITLE",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "PRESENTATION TITLE",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "PRESENTATION TITLE"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "order": 4,
+          "kind": "image",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout1.xml/13",
+          "id": "13",
+          "name": "Picture 3",
+          "bbox": [
+            57.84,
+            42.7,
+            194.06,
+            58.37
+          ],
+          "contentType": "image/png",
+          "asset": {
+            "assetId": "/ppt/media/image2.png",
+            "contentType": "image/png",
+            "byteLength": 37083
+          },
+          "fillImage": {
+            "assetId": "/ppt/media/image2.png",
+            "contentType": "image/png",
+            "byteLength": 37083
+          }
+        },
+        {
+          "order": 5,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout1.xml/2",
+          "id": "2",
+          "name": "TextBox 1",
+          "bbox": [
+            1052.74,
+            673.34,
+            200.81,
+            22.62
+          ],
+          "geometry": "rect",
+          "text": "Ownership. Sustainability. Trustworthy",
+          "textPreview": "Ownership. Sustainability. Trustworthy",
+          "resolvedTextStyle": {
+            "wrap": "none",
+            "autoFit": "resizeShapeToFitText"
+          },
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Ownership. Sustainability. Trustworthy",
+              "resolvedTextStyle": {
+                "alignment": "right"
+              },
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Ownership. Sustainability. Trustworthy",
+                  "fontSize": 10.67,
+                  "typeface": "Segoe UI",
+                  "color": "bg1"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "scope": "master",
+      "id": "/ppt/slideMasters/slideMaster1.xml",
+      "type": "master",
+      "backgroundImage": {
+        "assetId": "/ppt/media/image1.jpg",
+        "contentType": "image/jpeg",
+        "byteLength": 73341
+      },
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/fydcfid8",
+      "id": "1",
+      "bbox": [
+        88,
+        310,
+        620,
+        54
+      ],
+      "geometry": "rect",
+      "text": "ePTW SYSTEM REBUILD",
+      "textPreview": "ePTW SYSTEM REBUILD",
+      "resolvedFontSize": 38.33,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 38.67,
+        "typeface": "Bahnschrift",
+        "color": "#FFFFFF",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "wrap": "square",
+        "autoFit": "shrinkText",
+        "autoFitScale": 0.99,
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "ePTW SYSTEM REBUILD"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "ePTW SYSTEM REBUILD",
+          "resolvedTextStyle": {
+            "fontSize": 38.67,
+            "typeface": "Bahnschrift",
+            "color": "#FFFFFF",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "ePTW SYSTEM REBUILD",
+              "fontSize": 38.67,
+              "typeface": "Bahnschrift",
+              "color": "#FFFFFF",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/0zmt8net",
+      "id": "2",
+      "bbox": [
+        88,
+        372,
+        610,
+        76
+      ],
+      "geometry": "rect",
+      "text": "Proposal for a controlled, secure and maintainable Permit-to-Work platform",
+      "textPreview": "Proposal for a controlled, secure and maintainable Permit-to-Work platform",
+      "resolvedFontSize": 25.33,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 25.33,
+        "typeface": "Segoe UI",
+        "color": "#FFFFFF",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "wrap": "square",
+        "autoFit": "shrinkText",
+        "autoFitScale": 1,
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Proposal for a controlled, secure and maintainable"
+          },
+          {
+            "index": 2,
+            "text": "Permit-to-Work platform"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Proposal for a controlled, secure and maintainable Permit-to-Work platform",
+          "resolvedTextStyle": {
+            "fontSize": 25.33,
+            "typeface": "Segoe UI",
+            "color": "#FFFFFF",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Proposal for a controlled, secure and maintainable Permit-to-Work platform",
+              "fontSize": 25.33,
+              "typeface": "Segoe UI",
+              "color": "#FFFFFF",
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/10vuhsve",
+      "id": "3",
+      "bbox": [
+        88,
+        500,
+        560,
+        66
+      ],
+      "geometry": "rect",
+      "text": "Prepared for solution alignment and implementation planning\nSeptember 2026",
+      "textPreview": "Prepared for solution alignment and implementation planning | September 2026",
+      "resolvedFontSize": 18,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 18,
+        "typeface": "Segoe UI",
+        "color": "#DCEEFF",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "wrap": "square",
+        "autoFit": "shrinkText",
+        "autoFitScale": 1,
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Prepared for solution alignment and implementation planning"
+          },
+          {
+            "index": 2,
+            "text": "September 2026"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Prepared for solution alignment and implementation planning",
+          "resolvedTextStyle": {
+            "fontSize": 18,
+            "typeface": "Segoe UI",
+            "color": "#DCEEFF",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Prepared for solution alignment and implementation planning",
+              "fontSize": 18,
+              "typeface": "Segoe UI",
+              "color": "#DCEEFF",
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "September 2026",
+          "resolvedTextStyle": {
+            "fontSize": 18,
+            "typeface": "Segoe UI",
+            "color": "#DCEEFF",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "September 2026",
+              "fontSize": 18,
+              "typeface": "Segoe UI",
+              "color": "#DCEEFF",
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

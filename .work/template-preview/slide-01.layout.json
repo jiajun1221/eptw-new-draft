@@ -1,0 +1,305 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/y90nupkv",
+    "id": "y90nupkv",
+    "slide": 1,
+    "layoutId": "/ppt/slideLayouts/slideLayout1.xml",
+    "layoutName": "Cover",
+    "masterLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "OneSystems Colour",
+    "colors": {
+      "accent1": "#FF8C00",
+      "accent2": "#0066CC",
+      "accent3": "#0000A5",
+      "accent4": "#C0C0C0",
+      "accent5": "#0066CC",
+      "accent6": "#333333",
+      "dk1": "#003366",
+      "lt1": "#F5F5F5",
+      "dk2": "#333333",
+      "lt2": "#9FC9EB",
+      "hlink": "#FF8C00",
+      "folHlink": "#0066CC"
+    },
+    "fontScheme": {
+      "name": "OST Font",
+      "majorFont": {
+        "latinTypeface": "Bahnschrift"
+      },
+      "minorFont": {
+        "latinTypeface": "Segoe UI"
+      }
+    },
+    "typefaces": [
+      "Bahnschrift",
+      "Segoe UI"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "/ppt/slideLayouts/slideLayout1.xml",
+      "name": "Cover",
+      "parentLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+      "backgroundImage": {
+        "assetId": "/ppt/media/image1.jpg",
+        "contentType": "image/jpeg",
+        "byteLength": 73341
+      },
+      "elements": [
+        {
+          "order": 1,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout1.xml/6",
+          "id": "6",
+          "name": "TextBox 5",
+          "bbox": [
+            1052.74,
+            673.34,
+            200.81,
+            22.62
+          ],
+          "geometry": "rect",
+          "text": "Ownership. Sustainability. Trustworthy",
+          "textPreview": "Ownership. Sustainability. Trustworthy",
+          "resolvedTextStyle": {
+            "wrap": "none",
+            "autoFit": "resizeShapeToFitText"
+          },
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Ownership. Sustainability. Trustworthy",
+              "resolvedTextStyle": {
+                "alignment": "right"
+              },
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Ownership. Sustainability. Trustworthy",
+                  "fontSize": 10.67,
+                  "typeface": "Segoe UI",
+                  "color": "bg1"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "order": 2,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout1.xml/5",
+          "id": "5",
+          "name": "TextBox 4",
+          "bbox": [
+            90.22,
+            169.57,
+            761.57,
+            171.26
+          ],
+          "geometry": "rect",
+          "text": "ONESYSTEMS \nTECHNOLOGIES PTE LTD​",
+          "textPreview": "ONESYSTEMS  | TECHNOLOGIES PTE LTD​",
+          "resolvedTextStyle": {
+            "wrap": "square",
+            "autoFit": "resizeShapeToFitText"
+          },
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "ONESYSTEMS ",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "ONESYSTEMS",
+                  "fontSize": 84,
+                  "typeface": "Bahnschrift",
+                  "color": "bg1",
+                  "bold": true
+                },
+                {
+                  "index": 2,
+                  "text": " ",
+                  "fontSize": 85.33,
+                  "typeface": "Bahnschrift",
+                  "color": "bg1",
+                  "bold": true
+                }
+              ]
+            },
+            {
+              "index": 2,
+              "text": "TECHNOLOGIES PTE LTD​",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "TECHNOLOGIES PTE LTD​",
+                  "fontSize": 48,
+                  "typeface": "Bahnschrift",
+                  "color": "bg1",
+                  "bold": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "order": 3,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout1.xml/12",
+          "id": "12",
+          "name": "Text Placeholder 11",
+          "bbox": [
+            90.22,
+            360,
+            643.18,
+            96
+          ],
+          "geometry": "rect",
+          "text": "PRESENTATION TITLE",
+          "textPreview": "PRESENTATION TITLE",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "PRESENTATION TITLE",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "PRESENTATION TITLE"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "order": 4,
+          "kind": "image",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout1.xml/13",
+          "id": "13",
+          "name": "Picture 3",
+          "bbox": [
+            57.84,
+            42.7,
+            194.06,
+            58.37
+          ],
+          "contentType": "image/png",
+          "asset": {
+            "assetId": "/ppt/media/image2.png",
+            "contentType": "image/png",
+            "byteLength": 37083
+          },
+          "fillImage": {
+            "assetId": "/ppt/media/image2.png",
+            "contentType": "image/png",
+            "byteLength": 37083
+          }
+        },
+        {
+          "order": 5,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout1.xml/2",
+          "id": "2",
+          "name": "TextBox 1",
+          "bbox": [
+            1052.74,
+            673.34,
+            200.81,
+            22.62
+          ],
+          "geometry": "rect",
+          "text": "Ownership. Sustainability. Trustworthy",
+          "textPreview": "Ownership. Sustainability. Trustworthy",
+          "resolvedTextStyle": {
+            "wrap": "none",
+            "autoFit": "resizeShapeToFitText"
+          },
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Ownership. Sustainability. Trustworthy",
+              "resolvedTextStyle": {
+                "alignment": "right"
+              },
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Ownership. Sustainability. Trustworthy",
+                  "fontSize": 10.67,
+                  "typeface": "Segoe UI",
+                  "color": "bg1"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "scope": "master",
+      "id": "/ppt/slideMasters/slideMaster1.xml",
+      "type": "master",
+      "backgroundImage": {
+        "assetId": "/ppt/media/image1.jpg",
+        "contentType": "image/jpeg",
+        "byteLength": 73341
+      },
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/547294r6",
+      "id": "2",
+      "name": "Text Placeholder 1",
+      "bbox": [
+        86.83,
+        346.73,
+        643.18,
+        96
+      ],
+      "resolvedFontSize": 42.67,
+      "resolvedTextStyle": {
+        "fontSize": 42.67,
+        "typeface": "Bahnschrift",
+        "color": "accent4",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      }
+    }
+  ],
+  "composeRuns": []
+}

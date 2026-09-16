@@ -1,0 +1,2021 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/hwbqtkby",
+    "id": "hwbqtkby",
+    "slide": 2,
+    "layoutId": "/ppt/slideLayouts/slideLayout1.xml",
+    "layoutName": "Cover",
+    "masterLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "OneSystems Colour",
+    "colors": {
+      "accent1": "#FF8C00",
+      "accent2": "#0066CC",
+      "accent3": "#0000A5",
+      "accent4": "#C0C0C0",
+      "accent5": "#0066CC",
+      "accent6": "#333333",
+      "dk1": "#003366",
+      "lt1": "#F5F5F5",
+      "dk2": "#333333",
+      "lt2": "#9FC9EB",
+      "hlink": "#FF8C00",
+      "folHlink": "#0066CC"
+    },
+    "fontScheme": {
+      "name": "OST Font",
+      "majorFont": {
+        "latinTypeface": "Bahnschrift"
+      },
+      "minorFont": {
+        "latinTypeface": "Segoe UI"
+      }
+    },
+    "typefaces": [
+      "Bahnschrift",
+      "Segoe UI"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "/ppt/slideLayouts/slideLayout1.xml",
+      "name": "Cover",
+      "parentLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+      "backgroundImage": {
+        "assetId": "/ppt/media/image1.jpg",
+        "contentType": "image/jpeg",
+        "byteLength": 73341
+      },
+      "elements": [
+        {
+          "order": 1,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout1.xml/6",
+          "id": "6",
+          "name": "TextBox 5",
+          "bbox": [
+            1052.74,
+            673.34,
+            200.81,
+            22.62
+          ],
+          "geometry": "rect",
+          "text": "Ownership. Sustainability. Trustworthy",
+          "textPreview": "Ownership. Sustainability. Trustworthy",
+          "resolvedTextStyle": {
+            "wrap": "none",
+            "autoFit": "resizeShapeToFitText"
+          },
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Ownership. Sustainability. Trustworthy",
+              "resolvedTextStyle": {
+                "alignment": "right"
+              },
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Ownership. Sustainability. Trustworthy",
+                  "fontSize": 10.67,
+                  "typeface": "Segoe UI",
+                  "color": "bg1"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "order": 2,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout1.xml/5",
+          "id": "5",
+          "name": "TextBox 4",
+          "bbox": [
+            90.22,
+            169.57,
+            761.57,
+            171.26
+          ],
+          "geometry": "rect",
+          "text": "ONESYSTEMS \nTECHNOLOGIES PTE LTD​",
+          "textPreview": "ONESYSTEMS  | TECHNOLOGIES PTE LTD​",
+          "resolvedTextStyle": {
+            "wrap": "square",
+            "autoFit": "resizeShapeToFitText"
+          },
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "ONESYSTEMS ",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "ONESYSTEMS",
+                  "fontSize": 84,
+                  "typeface": "Bahnschrift",
+                  "color": "bg1",
+                  "bold": true
+                },
+                {
+                  "index": 2,
+                  "text": " ",
+                  "fontSize": 85.33,
+                  "typeface": "Bahnschrift",
+                  "color": "bg1",
+                  "bold": true
+                }
+              ]
+            },
+            {
+              "index": 2,
+              "text": "TECHNOLOGIES PTE LTD​",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "TECHNOLOGIES PTE LTD​",
+                  "fontSize": 48,
+                  "typeface": "Bahnschrift",
+                  "color": "bg1",
+                  "bold": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "order": 3,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout1.xml/12",
+          "id": "12",
+          "name": "Text Placeholder 11",
+          "bbox": [
+            90.22,
+            360,
+            643.18,
+            96
+          ],
+          "geometry": "rect",
+          "text": "PRESENTATION TITLE",
+          "textPreview": "PRESENTATION TITLE",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "PRESENTATION TITLE",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "PRESENTATION TITLE"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "order": 4,
+          "kind": "image",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout1.xml/13",
+          "id": "13",
+          "name": "Picture 3",
+          "bbox": [
+            57.84,
+            42.7,
+            194.06,
+            58.37
+          ],
+          "contentType": "image/png",
+          "asset": {
+            "assetId": "/ppt/media/image2.png",
+            "contentType": "image/png",
+            "byteLength": 37083
+          },
+          "fillImage": {
+            "assetId": "/ppt/media/image2.png",
+            "contentType": "image/png",
+            "byteLength": 37083
+          }
+        },
+        {
+          "order": 5,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout1.xml/2",
+          "id": "2",
+          "name": "TextBox 1",
+          "bbox": [
+            1052.74,
+            673.34,
+            200.81,
+            22.62
+          ],
+          "geometry": "rect",
+          "text": "Ownership. Sustainability. Trustworthy",
+          "textPreview": "Ownership. Sustainability. Trustworthy",
+          "resolvedTextStyle": {
+            "wrap": "none",
+            "autoFit": "resizeShapeToFitText"
+          },
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Ownership. Sustainability. Trustworthy",
+              "resolvedTextStyle": {
+                "alignment": "right"
+              },
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Ownership. Sustainability. Trustworthy",
+                  "fontSize": 10.67,
+                  "typeface": "Segoe UI",
+                  "color": "bg1"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "scope": "master",
+      "id": "/ppt/slideMasters/slideMaster1.xml",
+      "type": "master",
+      "backgroundImage": {
+        "assetId": "/ppt/media/image1.jpg",
+        "contentType": "image/jpeg",
+        "byteLength": 73341
+      },
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/9072xkry",
+      "id": "2",
+      "name": "Rectangle: Rounded Corners 1",
+      "bbox": [
+        57.6,
+        137.99,
+        1164.2,
+        524.41
+      ],
+      "geometry": "roundRect",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Segoe UI",
+        "color": "lt1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": "bg1",
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ozy1ofad",
+      "id": "3",
+      "name": "Freeform: Shape 1",
+      "bbox": [
+        643.6,
+        0,
+        582.4,
+        662.4
+      ],
+      "geometry": "custom",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Segoe UI",
+        "color": "lt1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "wrap": "square",
+        "autoFit": "none",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": "tx2",
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/w3i1sfa9",
+      "id": "7",
+      "name": "TextBox 6",
+      "bbox": [
+        115.2,
+        201.67,
+        56.53,
+        35.54
+      ],
+      "geometry": "rect",
+      "text": "01.",
+      "textPreview": "01.",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Segoe UI",
+        "color": "tx1",
+        "alignment": "left",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "01."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "01.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "01.",
+              "fontSize": 29.33,
+              "typeface": "Bahnschrift",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/r65knqtk",
+      "id": "8",
+      "name": "TextBox 7",
+      "bbox": [
+        171.73,
+        204.19,
+        464.67,
+        29.08
+      ],
+      "geometry": "rect",
+      "text": "CONTENT 1",
+      "textPreview": "CONTENT 1",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Segoe UI",
+        "color": "tx1",
+        "alignment": "left",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "CONTENT 1"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "CONTENT 1",
+          "runs": [
+            {
+              "index": 1,
+              "text": "CONTENT 1",
+              "typeface": "Bahnschrift",
+              "color": "tx2",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/q5wjelsz",
+      "id": "9",
+      "name": "TextBox 8",
+      "bbox": [
+        115.2,
+        267.51,
+        56.53,
+        35.54
+      ],
+      "geometry": "rect",
+      "text": "02.",
+      "textPreview": "02.",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Segoe UI",
+        "color": "tx1",
+        "alignment": "left",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "02."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "02.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "02.",
+              "fontSize": 29.33,
+              "typeface": "Bahnschrift",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/65kfmpor",
+      "id": "23",
+      "name": "TextBox 22",
+      "bbox": [
+        115.2,
+        333.34,
+        56.53,
+        35.54
+      ],
+      "geometry": "rect",
+      "text": "03.",
+      "textPreview": "03.",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Segoe UI",
+        "color": "tx1",
+        "alignment": "left",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "03."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "03.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "03.",
+              "fontSize": 29.33,
+              "typeface": "Bahnschrift",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/hcvy14ne",
+      "id": "24",
+      "name": "TextBox 23",
+      "bbox": [
+        115.2,
+        399.18,
+        56.53,
+        35.54
+      ],
+      "geometry": "rect",
+      "text": "04.",
+      "textPreview": "04.",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Segoe UI",
+        "color": "tx1",
+        "alignment": "left",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "04."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "04.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "04.",
+              "fontSize": 29.33,
+              "typeface": "Bahnschrift",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/gbmxszmt",
+      "id": "25",
+      "name": "TextBox 24",
+      "bbox": [
+        115.26,
+        465.01,
+        56.53,
+        35.54
+      ],
+      "geometry": "rect",
+      "text": "05.",
+      "textPreview": "05.",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Segoe UI",
+        "color": "tx1",
+        "alignment": "left",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "05."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "05.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "05.",
+              "fontSize": 29.33,
+              "typeface": "Bahnschrift",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/fadgzu58",
+      "id": "26",
+      "name": "TextBox 25",
+      "bbox": [
+        748.23,
+        39.38,
+        492.23,
+        64.62
+      ],
+      "geometry": "rect",
+      "text": "CONTENT PAGE",
+      "textPreview": "CONTENT PAGE",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Segoe UI",
+        "color": "tx1",
+        "alignment": "left",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "CONTENT PAGE"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "CONTENT PAGE",
+          "runs": [
+            {
+              "index": 1,
+              "text": "CONTENT",
+              "fontSize": 53.33,
+              "typeface": "Bahnschrift",
+              "color": "bg1",
+              "bold": true
+            },
+            {
+              "index": 2,
+              "text": " PAGE",
+              "fontSize": 53.33,
+              "typeface": "Bahnschrift",
+              "color": "bg2",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/u94fqp4n",
+      "id": "27",
+      "name": "TextBox 26",
+      "bbox": [
+        171.34,
+        269.63,
+        464.67,
+        29.08
+      ],
+      "geometry": "rect",
+      "text": "CONTENT 2",
+      "textPreview": "CONTENT 2",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Segoe UI",
+        "color": "tx1",
+        "alignment": "left",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "CONTENT 2"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "CONTENT 2",
+          "runs": [
+            {
+              "index": 1,
+              "text": "CONTENT 2",
+              "typeface": "Bahnschrift",
+              "color": "tx2",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/p0vy54na",
+      "id": "28",
+      "name": "TextBox 27",
+      "bbox": [
+        171.34,
+        335.08,
+        464.67,
+        29.08
+      ],
+      "geometry": "rect",
+      "text": "CONTENT 3",
+      "textPreview": "CONTENT 3",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Segoe UI",
+        "color": "tx1",
+        "alignment": "left",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "CONTENT 3"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "CONTENT 3",
+          "runs": [
+            {
+              "index": 1,
+              "text": "CONTENT 3",
+              "typeface": "Bahnschrift",
+              "color": "tx2",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/4zmxwzmp",
+      "id": "29",
+      "name": "TextBox 28",
+      "bbox": [
+        171.34,
+        400.52,
+        464.67,
+        29.08
+      ],
+      "geometry": "rect",
+      "text": "CONTENT 4",
+      "textPreview": "CONTENT 4",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Segoe UI",
+        "color": "tx1",
+        "alignment": "left",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "CONTENT 4"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "CONTENT 4",
+          "runs": [
+            {
+              "index": 1,
+              "text": "CONTENT 4",
+              "typeface": "Bahnschrift",
+              "color": "tx2",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 13,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/mlgvq147",
+      "id": "30",
+      "name": "TextBox 29",
+      "bbox": [
+        170.22,
+        465.97,
+        464.67,
+        29.08
+      ],
+      "geometry": "rect",
+      "text": "CONTENT 5",
+      "textPreview": "CONTENT 5",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Segoe UI",
+        "color": "tx1",
+        "alignment": "left",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "CONTENT 5"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "CONTENT 5",
+          "runs": [
+            {
+              "index": 1,
+              "text": "CONTENT 5",
+              "typeface": "Bahnschrift",
+              "color": "tx2",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 14,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/je9crql0",
+      "id": "39",
+      "name": "TextBox 38",
+      "bbox": [
+        170.22,
+        531.42,
+        464.67,
+        29.08
+      ],
+      "geometry": "rect",
+      "text": "CONTENT 6",
+      "textPreview": "CONTENT 6",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Segoe UI",
+        "color": "tx1",
+        "alignment": "left",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "CONTENT 6"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "CONTENT 6",
+          "runs": [
+            {
+              "index": 1,
+              "text": "CONTENT 6",
+              "typeface": "Bahnschrift",
+              "color": "tx2",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 15,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ru5cbqd4",
+      "id": "40",
+      "name": "TextBox 39",
+      "bbox": [
+        170.22,
+        596.86,
+        464.67,
+        29.08
+      ],
+      "geometry": "rect",
+      "text": "CONTENT 7",
+      "textPreview": "CONTENT 7",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Segoe UI",
+        "color": "tx1",
+        "alignment": "left",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "CONTENT 7"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "CONTENT 7",
+          "runs": [
+            {
+              "index": 1,
+              "text": "CONTENT 7",
+              "typeface": "Bahnschrift",
+              "color": "tx2",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 16,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/69wbilcj",
+      "id": "41",
+      "name": "TextBox 40",
+      "bbox": [
+        115.26,
+        530.84,
+        56.53,
+        35.54
+      ],
+      "geometry": "rect",
+      "text": "06",
+      "textPreview": "06",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Segoe UI",
+        "color": "tx1",
+        "alignment": "left",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "06"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "06",
+          "runs": [
+            {
+              "index": 1,
+              "text": "06",
+              "fontSize": 29.33,
+              "typeface": "Bahnschrift",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 17,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/tw7ud0va",
+      "id": "42",
+      "name": "TextBox 41",
+      "bbox": [
+        115.26,
+        596.68,
+        56.53,
+        35.54
+      ],
+      "geometry": "rect",
+      "text": "07.",
+      "textPreview": "07.",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Segoe UI",
+        "color": "tx1",
+        "alignment": "left",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "07."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "07.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "07.",
+              "fontSize": 29.33,
+              "typeface": "Bahnschrift",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 18,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/exgvmlcv",
+      "id": "45",
+      "name": "TextBox 44",
+      "bbox": [
+        674.19,
+        201.67,
+        56.53,
+        35.54
+      ],
+      "geometry": "rect",
+      "text": "01.",
+      "textPreview": "01.",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Segoe UI",
+        "color": "tx1",
+        "alignment": "left",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "01."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "01.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "01.",
+              "fontSize": 29.33,
+              "typeface": "Bahnschrift",
+              "color": "accent1",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 19,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/107uh0v6",
+      "id": "46",
+      "name": "TextBox 45",
+      "bbox": [
+        730.72,
+        204.19,
+        464.67,
+        29.08
+      ],
+      "geometry": "rect",
+      "text": "CONTENT 1",
+      "textPreview": "CONTENT 1",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Segoe UI",
+        "color": "tx1",
+        "alignment": "left",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "CONTENT 1"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "CONTENT 1",
+          "runs": [
+            {
+              "index": 1,
+              "text": "CONTENT 1",
+              "typeface": "Bahnschrift",
+              "color": "bg1",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 20,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/gzydovul",
+      "id": "47",
+      "name": "TextBox 46",
+      "bbox": [
+        674.19,
+        267.51,
+        56.53,
+        35.54
+      ],
+      "geometry": "rect",
+      "text": "02.",
+      "textPreview": "02.",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Segoe UI",
+        "color": "tx1",
+        "alignment": "left",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "02."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "02.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "02.",
+              "fontSize": 29.33,
+              "typeface": "Bahnschrift",
+              "color": "accent1",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 21,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/v2lc36dw",
+      "id": "48",
+      "name": "TextBox 47",
+      "bbox": [
+        674.19,
+        333.34,
+        56.53,
+        35.54
+      ],
+      "geometry": "rect",
+      "text": "03.",
+      "textPreview": "03.",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Segoe UI",
+        "color": "tx1",
+        "alignment": "left",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "03."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "03.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "03.",
+              "fontSize": 29.33,
+              "typeface": "Bahnschrift",
+              "color": "accent1",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 22,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/a1cba1wb",
+      "id": "49",
+      "name": "TextBox 48",
+      "bbox": [
+        674.19,
+        399.18,
+        56.53,
+        35.54
+      ],
+      "geometry": "rect",
+      "text": "04.",
+      "textPreview": "04.",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Segoe UI",
+        "color": "tx1",
+        "alignment": "left",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "04."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "04.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "04.",
+              "fontSize": 29.33,
+              "typeface": "Bahnschrift",
+              "color": "accent1",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 23,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/0vq1o36x",
+      "id": "50",
+      "name": "TextBox 49",
+      "bbox": [
+        674.25,
+        465.01,
+        56.53,
+        35.54
+      ],
+      "geometry": "rect",
+      "text": "05.",
+      "textPreview": "05.",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Segoe UI",
+        "color": "tx1",
+        "alignment": "left",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "05."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "05.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "05.",
+              "fontSize": 29.33,
+              "typeface": "Bahnschrift",
+              "color": "accent1",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 24,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/1wzix87i",
+      "id": "51",
+      "name": "TextBox 50",
+      "bbox": [
+        730.33,
+        269.63,
+        464.67,
+        29.08
+      ],
+      "geometry": "rect",
+      "text": "CONTENT 2",
+      "textPreview": "CONTENT 2",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Segoe UI",
+        "color": "tx1",
+        "alignment": "left",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "CONTENT 2"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "CONTENT 2",
+          "runs": [
+            {
+              "index": 1,
+              "text": "CONTENT 2",
+              "typeface": "Bahnschrift",
+              "color": "bg1",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 25,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/et8zmto7",
+      "id": "52",
+      "name": "TextBox 51",
+      "bbox": [
+        730.33,
+        335.08,
+        464.67,
+        29.08
+      ],
+      "geometry": "rect",
+      "text": "CONTENT 3",
+      "textPreview": "CONTENT 3",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Segoe UI",
+        "color": "tx1",
+        "alignment": "left",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "CONTENT 3"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "CONTENT 3",
+          "runs": [
+            {
+              "index": 1,
+              "text": "CONTENT 3",
+              "typeface": "Bahnschrift",
+              "color": "bg1",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 26,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/zuh0vypc",
+      "id": "53",
+      "name": "TextBox 52",
+      "bbox": [
+        730.33,
+        400.52,
+        464.67,
+        29.08
+      ],
+      "geometry": "rect",
+      "text": "CONTENT 4",
+      "textPreview": "CONTENT 4",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Segoe UI",
+        "color": "tx1",
+        "alignment": "left",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "CONTENT 4"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "CONTENT 4",
+          "runs": [
+            {
+              "index": 1,
+              "text": "CONTENT 4",
+              "typeface": "Bahnschrift",
+              "color": "bg1",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 27,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/c76hk361",
+      "id": "54",
+      "name": "TextBox 53",
+      "bbox": [
+        729.2,
+        465.97,
+        464.67,
+        29.08
+      ],
+      "geometry": "rect",
+      "text": "CONTENT 5",
+      "textPreview": "CONTENT 5",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Segoe UI",
+        "color": "tx1",
+        "alignment": "left",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "CONTENT 5"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "CONTENT 5",
+          "runs": [
+            {
+              "index": 1,
+              "text": "CONTENT 5",
+              "typeface": "Bahnschrift",
+              "color": "bg1",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 28,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/d8zit87m",
+      "id": "55",
+      "name": "TextBox 54",
+      "bbox": [
+        729.2,
+        531.42,
+        464.67,
+        29.08
+      ],
+      "geometry": "rect",
+      "text": "CONTENT 6",
+      "textPreview": "CONTENT 6",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Segoe UI",
+        "color": "tx1",
+        "alignment": "left",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "CONTENT 6"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "CONTENT 6",
+          "runs": [
+            {
+              "index": 1,
+              "text": "CONTENT 6",
+              "typeface": "Bahnschrift",
+              "color": "bg1",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 29,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/q5ozitov",
+      "id": "56",
+      "name": "TextBox 55",
+      "bbox": [
+        729.2,
+        596.86,
+        464.67,
+        29.08
+      ],
+      "geometry": "rect",
+      "text": "CONTENT 7",
+      "textPreview": "CONTENT 7",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Segoe UI",
+        "color": "tx1",
+        "alignment": "left",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "CONTENT 7"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "CONTENT 7",
+          "runs": [
+            {
+              "index": 1,
+              "text": "CONTENT 7",
+              "typeface": "Bahnschrift",
+              "color": "bg1",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 30,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/r6x0rypg",
+      "id": "57",
+      "name": "TextBox 56",
+      "bbox": [
+        674.25,
+        530.84,
+        56.53,
+        35.54
+      ],
+      "geometry": "rect",
+      "text": "06",
+      "textPreview": "06",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Segoe UI",
+        "color": "tx1",
+        "alignment": "left",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "06"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "06",
+          "runs": [
+            {
+              "index": 1,
+              "text": "06",
+              "fontSize": 29.33,
+              "typeface": "Bahnschrift",
+              "color": "accent1",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 31,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/w3a1wn65",
+      "id": "58",
+      "name": "TextBox 57",
+      "bbox": [
+        674.25,
+        596.68,
+        56.53,
+        35.54
+      ],
+      "geometry": "rect",
+      "text": "07.",
+      "textPreview": "07.",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Segoe UI",
+        "color": "tx1",
+        "alignment": "left",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "07."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "07.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "07.",
+              "fontSize": 29.33,
+              "typeface": "Bahnschrift",
+              "color": "accent1",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    }
+  ],
+  "composeRuns": []
+}

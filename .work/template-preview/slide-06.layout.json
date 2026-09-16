@@ -1,0 +1,2272 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/x8f69ofe",
+    "id": "x8f69ofe",
+    "slide": 6,
+    "layoutId": "/ppt/slideLayouts/slideLayout3.xml",
+    "layoutName": "1_BACKGROUND",
+    "masterLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "OneSystems Colour",
+    "colors": {
+      "accent1": "#FF8C00",
+      "accent2": "#0066CC",
+      "accent3": "#0000A5",
+      "accent4": "#C0C0C0",
+      "accent5": "#0066CC",
+      "accent6": "#333333",
+      "dk1": "#003366",
+      "lt1": "#F5F5F5",
+      "dk2": "#333333",
+      "lt2": "#9FC9EB",
+      "hlink": "#FF8C00",
+      "folHlink": "#0066CC"
+    },
+    "fontScheme": {
+      "name": "OST Font",
+      "majorFont": {
+        "latinTypeface": "Bahnschrift"
+      },
+      "minorFont": {
+        "latinTypeface": "Segoe UI"
+      }
+    },
+    "typefaces": [
+      "Bahnschrift",
+      "Segoe UI"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "/ppt/slideLayouts/slideLayout3.xml",
+      "name": "1_BACKGROUND",
+      "parentLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+      "backgroundImage": {
+        "assetId": "/ppt/media/image3.jpg",
+        "contentType": "image/jpeg",
+        "byteLength": 45542
+      },
+      "elements": [
+        {
+          "order": 1,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout3.xml/9",
+          "id": "9",
+          "name": "Title 8",
+          "bbox": [
+            40.89,
+            28.62,
+            912.5,
+            57.67
+          ],
+          "geometry": "rect",
+          "text": "Click to edit Master title style",
+          "textPreview": "Click to edit Master title style",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Click to edit Master title style",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Click to edit Master title style"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "order": 2,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout3.xml/10",
+          "id": "10",
+          "name": "Content Placeholder 3",
+          "bbox": [
+            137.42,
+            199.43,
+            1005.17,
+            408
+          ],
+          "geometry": "rect",
+          "text": "BODY TEXT",
+          "textPreview": "BODY TEXT",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "BODY TEXT",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "BODY TEXT"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "order": 3,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout3.xml/11",
+          "id": "11",
+          "name": "TextBox 10",
+          "bbox": [
+            1033.99,
+            680.3,
+            200.81,
+            22.62
+          ],
+          "geometry": "rect",
+          "text": "Ownership. Sustainability. Trustworthy",
+          "textPreview": "Ownership. Sustainability. Trustworthy",
+          "resolvedTextStyle": {
+            "wrap": "none",
+            "autoFit": "resizeShapeToFitText"
+          },
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Ownership. Sustainability. Trustworthy",
+              "lineSpacingPercent": 100000,
+              "resolvedTextStyle": {
+                "alignment": "right"
+              },
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Ownership. Sustainability. Trustworthy",
+                  "fontSize": 10.67,
+                  "typeface": "Segoe UI",
+                  "color": "tx2"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "order": 4,
+          "kind": "image",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout3.xml/12",
+          "id": "12",
+          "name": "Picture 2",
+          "bbox": [
+            1050.71,
+            31.25,
+            175.09,
+            51.4
+          ],
+          "contentType": "image/png",
+          "asset": {
+            "assetId": "/ppt/media/image2.png",
+            "contentType": "image/png",
+            "byteLength": 37083
+          },
+          "fillImage": {
+            "assetId": "/ppt/media/image2.png",
+            "contentType": "image/png",
+            "byteLength": 37083
+          }
+        },
+        {
+          "order": 5,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout3.xml/2",
+          "id": "2",
+          "name": "TextBox 1",
+          "bbox": [
+            1033.99,
+            680.3,
+            200.81,
+            22.62
+          ],
+          "geometry": "rect",
+          "text": "Ownership. Sustainability. Trustworthy",
+          "textPreview": "Ownership. Sustainability. Trustworthy",
+          "resolvedTextStyle": {
+            "wrap": "none",
+            "autoFit": "resizeShapeToFitText"
+          },
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Ownership. Sustainability. Trustworthy",
+              "lineSpacingPercent": 100000,
+              "resolvedTextStyle": {
+                "alignment": "right"
+              },
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Ownership. Sustainability. Trustworthy",
+                  "fontSize": 10.67,
+                  "typeface": "Segoe UI",
+                  "color": "tx2"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "order": 6,
+          "kind": "image",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout3.xml/13",
+          "id": "13",
+          "name": "Picture 3",
+          "bbox": [
+            1050.71,
+            31.25,
+            175.09,
+            51.4
+          ],
+          "contentType": "image/png",
+          "asset": {
+            "assetId": "/ppt/media/image2.png",
+            "contentType": "image/png",
+            "byteLength": 37083
+          },
+          "fillImage": {
+            "assetId": "/ppt/media/image2.png",
+            "contentType": "image/png",
+            "byteLength": 37083
+          }
+        }
+      ]
+    },
+    {
+      "scope": "master",
+      "id": "/ppt/slideMasters/slideMaster1.xml",
+      "type": "master",
+      "backgroundImage": {
+        "assetId": "/ppt/media/image1.jpg",
+        "contentType": "image/jpeg",
+        "byteLength": 73341
+      },
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/yhg7epsj",
+      "id": "2",
+      "name": "Title 1",
+      "bbox": [
+        40.89,
+        28.62,
+        912.5,
+        57.67
+      ],
+      "resolvedFontSize": 42.67,
+      "resolvedTextStyle": {
+        "fontSize": 42.67,
+        "typeface": "Bahnschrift",
+        "color": "bg1",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      }
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/1k3mhozu",
+      "id": "29",
+      "name": "Content Placeholder 2",
+      "bbox": [
+        74.5,
+        372.23,
+        608.17,
+        213.68
+      ],
+      "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat ",
+      "textPreview": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad mi...",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Segoe UI",
+        "color": {
+          "type": "theme",
+          "value": "bg1",
+          "transform": {
+            "darken": 0.9
+          }
+        },
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 7,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
+          },
+          {
+            "index": 2,
+            "text": "incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis"
+          },
+          {
+            "index": 3,
+            "text": "nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+          },
+          {
+            "index": 4,
+            "text": ""
+          },
+          {
+            "index": 5,
+            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
+          },
+          {
+            "index": 6,
+            "text": "incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis"
+          },
+          {
+            "index": 7,
+            "text": "nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+          "lineSpacingPercent": 150000,
+          "runs": [
+            {
+              "index": 1,
+              "text": "Lorem ipsum ",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 2,
+              "text": "dolor",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 3,
+              "text": " sit ",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 4,
+              "text": "amet",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 5,
+              "text": ", ",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 6,
+              "text": "consectetur",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 7,
+              "text": " ",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 8,
+              "text": "adipiscing",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 9,
+              "text": " ",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 10,
+              "text": "elit",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 11,
+              "text": ", ",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 12,
+              "text": "sed",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 13,
+              "text": " do ",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 14,
+              "text": "eiusmod",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 15,
+              "text": " ",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 16,
+              "text": "tempor",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 17,
+              "text": " ",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 18,
+              "text": "incididunt",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 19,
+              "text": " ",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 20,
+              "text": "ut",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 21,
+              "text": " labore et dolore magna ",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 22,
+              "text": "aliqua",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 23,
+              "text": ". Ut ",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 24,
+              "text": "enim",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 25,
+              "text": " ad minim ",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 26,
+              "text": "veniam",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 27,
+              "text": ", ",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 28,
+              "text": "quis",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 29,
+              "text": " ",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 30,
+              "text": "nostrud",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 31,
+              "text": " exercitation ",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 32,
+              "text": "ullamco",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 33,
+              "text": " ",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 34,
+              "text": "laboris",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 35,
+              "text": " nisi ",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 36,
+              "text": "ut",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 37,
+              "text": " ",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 38,
+              "text": "aliquip",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 39,
+              "text": " ex ",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 40,
+              "text": "ea",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 41,
+              "text": " ",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 42,
+              "text": "commodo",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 43,
+              "text": " ",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 44,
+              "text": "consequat",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 45,
+              "text": ".",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0,
+          "indent": 0
+        },
+        {
+          "index": 2,
+          "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat ",
+          "lineSpacingPercent": 150000,
+          "runs": [
+            {
+              "index": 1,
+              "text": "Lorem ipsum ",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 2,
+              "text": "dolor",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 3,
+              "text": " sit ",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 4,
+              "text": "amet",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 5,
+              "text": ", ",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 6,
+              "text": "consectetur",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 7,
+              "text": " ",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 8,
+              "text": "adipiscing",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 9,
+              "text": " ",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 10,
+              "text": "elit",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 11,
+              "text": ", ",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 12,
+              "text": "sed",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 13,
+              "text": " do ",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 14,
+              "text": "eiusmod",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 15,
+              "text": " ",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 16,
+              "text": "tempor",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 17,
+              "text": " ",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 18,
+              "text": "incididunt",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 19,
+              "text": " ",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 20,
+              "text": "ut",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 21,
+              "text": " labore et dolore magna ",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 22,
+              "text": "aliqua",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 23,
+              "text": ". Ut ",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 24,
+              "text": "enim",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 25,
+              "text": " ad minim ",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 26,
+              "text": "veniam",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 27,
+              "text": ", ",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 28,
+              "text": "quis",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 29,
+              "text": " ",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 30,
+              "text": "nostrud",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 31,
+              "text": " exercitation ",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 32,
+              "text": "ullamco",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 33,
+              "text": " ",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 34,
+              "text": "laboris",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 35,
+              "text": " nisi ",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 36,
+              "text": "ut",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 37,
+              "text": " ",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 38,
+              "text": "aliquip",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 39,
+              "text": " ex ",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 40,
+              "text": "ea",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 41,
+              "text": " ",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 42,
+              "text": "commodo",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 43,
+              "text": " ",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 44,
+              "text": "consequat",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 45,
+              "text": " ",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0,
+          "indent": 0
+        }
+      ]
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/jet8nm1c",
+      "id": "30",
+      "name": "TextBox 29",
+      "bbox": [
+        79.87,
+        213.68,
+        302.6,
+        116.33
+      ],
+      "geometry": "rect",
+      "text": "Lorem Ipsum \nDolor Sit ",
+      "textPreview": "Lorem Ipsum  | Dolor Sit",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Segoe UI",
+        "color": "tx1",
+        "alignment": "left",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Lorem Ipsum"
+          },
+          {
+            "index": 2,
+            "text": "Dolor Sit"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Lorem Ipsum ",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Lorem Ipsum ",
+              "fontSize": 48,
+              "typeface": "Bahnschrift",
+              "color": {
+                "type": "theme",
+                "value": "bg1",
+                "transform": {
+                  "darken": 0.9
+                }
+              },
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "Dolor Sit ",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Dolor Sit ",
+              "fontSize": 48,
+              "typeface": "Bahnschrift",
+              "color": {
+                "type": "theme",
+                "value": "bg1",
+                "transform": {
+                  "darken": 0.9
+                }
+              },
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/idk7ehkr",
+      "id": "31",
+      "name": "Straight Connector 30",
+      "bbox": [
+        85.25,
+        185.86,
+        44.54,
+        0
+      ],
+      "geometry": "line",
+      "lineColor": {
+        "type": "theme",
+        "value": "bg1",
+        "transform": {
+          "darken": 0.9
+        }
+      },
+      "lineWidth": 4
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/87ipkzal",
+      "id": "4",
+      "name": "Rectangle 3",
+      "bbox": [
+        723.57,
+        185.87,
+        413.08,
+        79.02
+      ],
+      "rotation": 0,
+      "geometry": "rect",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Segoe UI",
+        "color": "lt1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": {
+        "type": "theme",
+        "value": "bg2",
+        "transform": {
+          "lighten": 0.8
+        }
+      },
+      "lineWidth": 0
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/98rqt4r6",
+      "id": "5",
+      "name": "Oval 4",
+      "bbox": [
+        1094.37,
+        185.86,
+        84.74,
+        79.04
+      ],
+      "rotation": 0,
+      "geometry": "ellipse",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Segoe UI",
+        "color": "lt1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": {
+        "type": "theme",
+        "value": "bg2",
+        "transform": {
+          "lighten": 0.8
+        }
+      },
+      "lineWidth": 0
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ml07i9sv",
+      "id": "6",
+      "name": "Oval 5",
+      "bbox": [
+        1103.95,
+        193.68,
+        67.75,
+        63.2
+      ],
+      "rotation": 0,
+      "geometry": "ellipse",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Segoe UI",
+        "color": "lt1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": "bg1",
+      "lineWidth": 0
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/pc76hkr2",
+      "id": "9",
+      "name": "Rectangle 8",
+      "bbox": [
+        723.57,
+        268.61,
+        413.08,
+        79.02
+      ],
+      "rotation": 0,
+      "geometry": "rect",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Segoe UI",
+        "color": "lt1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": {
+        "type": "theme",
+        "value": "bg2",
+        "transform": {
+          "lighten": 0.6
+        }
+      },
+      "lineWidth": 0
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/h4bupgn6",
+      "id": "10",
+      "name": "Oval 9",
+      "bbox": [
+        1094.37,
+        268.59,
+        84.74,
+        79.04
+      ],
+      "rotation": 0,
+      "geometry": "ellipse",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Segoe UI",
+        "color": "lt1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": {
+        "type": "theme",
+        "value": "bg2",
+        "transform": {
+          "lighten": 0.6
+        }
+      },
+      "lineWidth": 0
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/w32twb6l",
+      "id": "11",
+      "name": "Oval 10",
+      "bbox": [
+        1103.95,
+        276.42,
+        67.75,
+        63.2
+      ],
+      "rotation": 0,
+      "geometry": "ellipse",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Segoe UI",
+        "color": "lt1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": "bg1",
+      "lineWidth": 0
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/u1kbu1ov",
+      "id": "13",
+      "name": "Rectangle 12",
+      "bbox": [
+        723.57,
+        351.88,
+        413.08,
+        79.02
+      ],
+      "rotation": 0,
+      "geometry": "rect",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Segoe UI",
+        "color": "lt1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": {
+        "type": "theme",
+        "value": "bg2",
+        "transform": {
+          "lighten": 0.4
+        }
+      },
+      "lineWidth": 0
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/5svutgni",
+      "id": "14",
+      "name": "Oval 13",
+      "bbox": [
+        1094.37,
+        351.86,
+        84.74,
+        79.04
+      ],
+      "rotation": 0,
+      "geometry": "ellipse",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Segoe UI",
+        "color": "lt1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": {
+        "type": "theme",
+        "value": "bg2",
+        "transform": {
+          "lighten": 0.4
+        }
+      },
+      "lineWidth": 0
+    },
+    {
+      "order": 13,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/47mt0b6x",
+      "id": "15",
+      "name": "Oval 14",
+      "bbox": [
+        1103.95,
+        359.68,
+        67.75,
+        63.2
+      ],
+      "rotation": 0,
+      "geometry": "ellipse",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Segoe UI",
+        "color": "lt1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": "bg1",
+      "lineWidth": 0
+    },
+    {
+      "order": 14,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/i54bylor",
+      "id": "17",
+      "name": "Rectangle 16",
+      "bbox": [
+        723.57,
+        435.14,
+        413.08,
+        79.02
+      ],
+      "rotation": 0,
+      "geometry": "rect",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Segoe UI",
+        "color": "lt1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": {
+        "type": "theme",
+        "value": "bg2",
+        "transform": {
+          "darken": 0.25
+        }
+      },
+      "lineWidth": 0
+    },
+    {
+      "order": 15,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/twfux0ne",
+      "id": "18",
+      "name": "Oval 17",
+      "bbox": [
+        1094.37,
+        435.13,
+        84.74,
+        79.04
+      ],
+      "rotation": 0,
+      "geometry": "ellipse",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Segoe UI",
+        "color": "lt1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": {
+        "type": "theme",
+        "value": "bg2",
+        "transform": {
+          "darken": 0.25
+        }
+      },
+      "lineWidth": 0
+    },
+    {
+      "order": 16,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/svmt4v6t",
+      "id": "19",
+      "name": "Oval 18",
+      "bbox": [
+        1103.95,
+        442.95,
+        67.75,
+        63.2
+      ],
+      "rotation": 0,
+      "geometry": "ellipse",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Segoe UI",
+        "color": "lt1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": "bg1",
+      "lineWidth": 0
+    },
+    {
+      "order": 17,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/dcnm98zm",
+      "id": "21",
+      "name": "Rectangle 20",
+      "bbox": [
+        723.57,
+        518.41,
+        413.08,
+        79.02
+      ],
+      "rotation": 0,
+      "geometry": "rect",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Segoe UI",
+        "color": "lt1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": {
+        "type": "theme",
+        "value": "bg2",
+        "transform": {
+          "darken": 0.5
+        }
+      },
+      "lineWidth": 0
+    },
+    {
+      "order": 18,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/qpwnet0b",
+      "id": "22",
+      "name": "Oval 21",
+      "bbox": [
+        1094.37,
+        518.39,
+        84.74,
+        79.04
+      ],
+      "rotation": 0,
+      "geometry": "ellipse",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Segoe UI",
+        "color": "lt1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": {
+        "type": "theme",
+        "value": "bg2",
+        "transform": {
+          "darken": 0.5
+        }
+      },
+      "lineWidth": 0
+    },
+    {
+      "order": 19,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/bq547yhw",
+      "id": "23",
+      "name": "Oval 22",
+      "bbox": [
+        1103.95,
+        526.22,
+        67.75,
+        63.2
+      ],
+      "rotation": 0,
+      "geometry": "ellipse",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Segoe UI",
+        "color": "lt1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": "bg1",
+      "lineWidth": 0
+    },
+    {
+      "order": 20,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/50bqpcj2",
+      "id": "32",
+      "name": "Content Placeholder 2",
+      "bbox": [
+        749.81,
+        202.94,
+        261.95,
+        41.92
+      ],
+      "geometry": "rect",
+      "text": "Lorem ipsum dolor sit amet",
+      "textPreview": "Lorem ipsum dolor sit amet",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Segoe UI",
+        "color": {
+          "type": "theme",
+          "value": "bg1",
+          "transform": {
+            "darken": 0.9
+          }
+        },
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Lorem ipsum dolor sit amet"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Lorem ipsum dolor sit amet",
+          "lineSpacingPercent": 150000,
+          "runs": [
+            {
+              "index": 1,
+              "text": "Lorem ipsum ",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 2,
+              "text": "dolor",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 3,
+              "text": " sit ",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 4,
+              "text": "amet",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0,
+          "indent": 0
+        }
+      ]
+    },
+    {
+      "order": 21,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/4f2pgr2h",
+      "id": "33",
+      "name": "Content Placeholder 2",
+      "bbox": [
+        749.81,
+        283.83,
+        261.95,
+        41.92
+      ],
+      "geometry": "rect",
+      "text": "Lorem ipsum dolor sit amet",
+      "textPreview": "Lorem ipsum dolor sit amet",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Segoe UI",
+        "color": {
+          "type": "theme",
+          "value": "bg1",
+          "transform": {
+            "darken": 0.9
+          }
+        },
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Lorem ipsum dolor sit amet"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Lorem ipsum dolor sit amet",
+          "lineSpacingPercent": 150000,
+          "runs": [
+            {
+              "index": 1,
+              "text": "Lorem ipsum ",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 2,
+              "text": "dolor",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 3,
+              "text": " sit ",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 4,
+              "text": "amet",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0,
+          "indent": 0
+        }
+      ]
+    },
+    {
+      "order": 22,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/va98j210",
+      "id": "34",
+      "name": "Content Placeholder 2",
+      "bbox": [
+        749.81,
+        367.09,
+        261.95,
+        41.92
+      ],
+      "geometry": "rect",
+      "text": "Lorem ipsum dolor sit amet",
+      "textPreview": "Lorem ipsum dolor sit amet",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Segoe UI",
+        "color": {
+          "type": "theme",
+          "value": "bg1",
+          "transform": {
+            "darken": 0.9
+          }
+        },
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Lorem ipsum dolor sit amet"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Lorem ipsum dolor sit amet",
+          "lineSpacingPercent": 150000,
+          "runs": [
+            {
+              "index": 1,
+              "text": "Lorem ipsum ",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 2,
+              "text": "dolor",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 3,
+              "text": " sit ",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 4,
+              "text": "amet",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0,
+          "indent": 0
+        }
+      ]
+    },
+    {
+      "order": 23,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/u907axkf",
+      "id": "35",
+      "name": "Content Placeholder 2",
+      "bbox": [
+        749.81,
+        450.36,
+        261.95,
+        41.92
+      ],
+      "geometry": "rect",
+      "text": "Lorem ipsum dolor sit amet",
+      "textPreview": "Lorem ipsum dolor sit amet",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Segoe UI",
+        "color": {
+          "type": "theme",
+          "value": "bg1",
+          "transform": {
+            "darken": 0.9
+          }
+        },
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Lorem ipsum dolor sit amet"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Lorem ipsum dolor sit amet",
+          "lineSpacingPercent": 150000,
+          "runs": [
+            {
+              "index": 1,
+              "text": "Lorem ipsum ",
+              "fontSize": 16,
+              "typeface": "Segoe UI",
+              "color": "bg1"
+            },
+            {
+              "index": 2,
+              "text": "dolor",
+              "fontSize": 16,
+              "typeface": "Segoe UI",
+              "color": "bg1"
+            },
+            {
+              "index": 3,
+              "text": " sit ",
+              "fontSize": 16,
+              "typeface": "Segoe UI",
+              "color": "bg1"
+            },
+            {
+              "index": 4,
+              "text": "amet",
+              "fontSize": 16,
+              "typeface": "Segoe UI",
+              "color": "bg1"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0,
+          "indent": 0
+        }
+      ]
+    },
+    {
+      "order": 24,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/hcrqlcj6",
+      "id": "36",
+      "name": "Content Placeholder 2",
+      "bbox": [
+        749.81,
+        533.63,
+        261.95,
+        41.92
+      ],
+      "geometry": "rect",
+      "text": "Lorem ipsum dolor sit amet",
+      "textPreview": "Lorem ipsum dolor sit amet",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Segoe UI",
+        "color": {
+          "type": "theme",
+          "value": "bg1",
+          "transform": {
+            "darken": 0.9
+          }
+        },
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Lorem ipsum dolor sit amet"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Lorem ipsum dolor sit amet",
+          "lineSpacingPercent": 150000,
+          "runs": [
+            {
+              "index": 1,
+              "text": "Lorem ipsum ",
+              "fontSize": 16,
+              "typeface": "Segoe UI",
+              "color": "bg1"
+            },
+            {
+              "index": 2,
+              "text": "dolor",
+              "fontSize": 16,
+              "typeface": "Segoe UI",
+              "color": "bg1"
+            },
+            {
+              "index": 3,
+              "text": " sit ",
+              "fontSize": 16,
+              "typeface": "Segoe UI",
+              "color": "bg1"
+            },
+            {
+              "index": 4,
+              "text": "amet",
+              "fontSize": 16,
+              "typeface": "Segoe UI",
+              "color": "bg1"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0,
+          "indent": 0
+        }
+      ]
+    },
+    {
+      "order": 25,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/ji9of2ps",
+      "id": "37",
+      "name": "Graphic 42",
+      "bbox": [
+        1121.52,
+        213.81,
+        33.74,
+        31.47
+      ],
+      "contentType": "image/svg+xml",
+      "asset": {
+        "assetId": "/ppt/media/image10.svg",
+        "contentType": "image/svg+xml",
+        "byteLength": 5908
+      },
+      "fillImage": {
+        "assetId": "/ppt/media/image10.svg",
+        "contentType": "image/svg+xml",
+        "byteLength": 5908
+      }
+    },
+    {
+      "order": 26,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/4fm5krqh",
+      "id": "38",
+      "name": "Graphic 44",
+      "bbox": [
+        1120.4,
+        289.76,
+        37.11,
+        34.62
+      ],
+      "contentType": "image/svg+xml",
+      "asset": {
+        "assetId": "/ppt/media/image11.svg",
+        "contentType": "image/svg+xml",
+        "byteLength": 5223
+      },
+      "fillImage": {
+        "assetId": "/ppt/media/image11.svg",
+        "contentType": "image/svg+xml",
+        "byteLength": 5223
+      }
+    },
+    {
+      "order": 27,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/pgv6tw72",
+      "id": "39",
+      "name": "Graphic 46",
+      "bbox": [
+        1119.5,
+        376.2,
+        34.41,
+        32.1
+      ],
+      "contentType": "image/svg+xml",
+      "asset": {
+        "assetId": "/ppt/media/image12.svg",
+        "contentType": "image/svg+xml",
+        "byteLength": 7965
+      },
+      "fillImage": {
+        "assetId": "/ppt/media/image12.svg",
+        "contentType": "image/svg+xml",
+        "byteLength": 7965
+      }
+    },
+    {
+      "order": 28,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/10n2lone",
+      "id": "40",
+      "name": "Graphic 48",
+      "bbox": [
+        1122.42,
+        456.97,
+        34.19,
+        31.89
+      ],
+      "horizontalFlip": true,
+      "contentType": "image/svg+xml",
+      "asset": {
+        "assetId": "/ppt/media/image13.svg",
+        "contentType": "image/svg+xml",
+        "byteLength": 5837
+      },
+      "fillImage": {
+        "assetId": "/ppt/media/image13.svg",
+        "contentType": "image/svg+xml",
+        "byteLength": 5837
+      }
+    },
+    {
+      "order": 29,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/0zelcj6t",
+      "id": "41",
+      "name": "Graphic 52",
+      "bbox": [
+        1125.12,
+        548.65,
+        29.24,
+        27.27
+      ],
+      "contentType": "image/svg+xml",
+      "asset": {
+        "assetId": "/ppt/media/image14.svg",
+        "contentType": "image/svg+xml",
+        "byteLength": 8492
+      },
+      "fillImage": {
+        "assetId": "/ppt/media/image14.svg",
+        "contentType": "image/svg+xml",
+        "byteLength": 8492
+      }
+    }
+  ],
+  "composeRuns": []
+}

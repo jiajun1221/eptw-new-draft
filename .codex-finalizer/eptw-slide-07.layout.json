@@ -1,0 +1,860 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/5d3w3v",
+    "id": "5d3w3v",
+    "slide": 7,
+    "layoutId": "/ppt/slideLayouts/slideLayout5.xml",
+    "layoutName": "Blank Page",
+    "masterLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "OneSystems Colour",
+    "colors": {
+      "accent1": "#FF8C00",
+      "accent2": "#0066CC",
+      "accent3": "#0000A5",
+      "accent4": "#C0C0C0",
+      "accent5": "#0066CC",
+      "accent6": "#333333",
+      "dk1": "#003366",
+      "lt1": "#F5F5F5",
+      "dk2": "#333333",
+      "lt2": "#9FC9EB",
+      "hlink": "#FF8C00",
+      "folHlink": "#0066CC"
+    },
+    "fontScheme": {
+      "name": "OST Font",
+      "majorFont": {
+        "latinTypeface": "Bahnschrift"
+      },
+      "minorFont": {
+        "latinTypeface": "Segoe UI"
+      }
+    },
+    "typefaces": [
+      "Bahnschrift",
+      "Segoe UI"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "/ppt/slideLayouts/slideLayout5.xml",
+      "name": "Blank Page",
+      "parentLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+      "backgroundImage": {
+        "assetId": "/ppt/media/image3.jpg",
+        "contentType": "image/jpeg",
+        "byteLength": 45542
+      },
+      "elements": [
+        {
+          "order": 1,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout5.xml/5",
+          "id": "5",
+          "name": "Rectangle 4",
+          "bbox": [
+            0,
+            0,
+            1280,
+            720
+          ],
+          "geometry": "rect",
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "verticalAlignment": "middle"
+          },
+          "fillColor": "#FFFFFF",
+          "lineWidth": 0
+        }
+      ]
+    },
+    {
+      "scope": "master",
+      "id": "/ppt/slideMasters/slideMaster1.xml",
+      "type": "master",
+      "backgroundImage": {
+        "assetId": "/ppt/media/image1.jpg",
+        "contentType": "image/jpeg",
+        "byteLength": 73341
+      },
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/0by1gzyp",
+      "id": "1",
+      "bbox": [
+        74,
+        116,
+        44,
+        36
+      ],
+      "geometry": "rect",
+      "text": "06",
+      "textPreview": "06",
+      "resolvedFontSize": 20,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 20,
+        "typeface": "Bahnschrift",
+        "color": "#F26B43",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "wrap": "square",
+        "autoFit": "shrinkText",
+        "autoFitScale": 1,
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "06"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "06",
+          "resolvedTextStyle": {
+            "fontSize": 20,
+            "typeface": "Bahnschrift",
+            "color": "#F26B43",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "06",
+              "fontSize": 20,
+              "typeface": "Bahnschrift",
+              "color": "#F26B43",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/zap0nux4",
+      "id": "2",
+      "bbox": [
+        136,
+        108,
+        1054,
+        58
+      ],
+      "geometry": "rect",
+      "text": "Database redesign",
+      "textPreview": "Database redesign",
+      "resolvedFontSize": 41.33,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 41.33,
+        "typeface": "Bahnschrift",
+        "color": "#0B1F4D",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "wrap": "square",
+        "autoFit": "none",
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Database redesign"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Database redesign",
+          "resolvedTextStyle": {
+            "fontSize": 41.33,
+            "typeface": "Bahnschrift",
+            "color": "#0B1F4D",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Database redesign",
+              "fontSize": 41.33,
+              "typeface": "Bahnschrift",
+              "color": "#0B1F4D",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/y9wze9gj",
+      "id": "3",
+      "bbox": [
+        136,
+        158,
+        1040,
+        34
+      ],
+      "geometry": "rect",
+      "text": "The target model reduces duplication and makes workflow and reporting queryable",
+      "textPreview": "The target model reduces duplication and makes workflow and reporting queryable",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 18.67,
+        "typeface": "Segoe UI",
+        "color": "#5D6675",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "wrap": "square",
+        "autoFit": "none",
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "The target model reduces duplication and makes workflow and reporting queryable"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "The target model reduces duplication and makes workflow and reporting queryable",
+          "resolvedTextStyle": {
+            "fontSize": 18.67,
+            "typeface": "Segoe UI",
+            "color": "#5D6675",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "The target model reduces duplication and makes workflow and reporting queryable",
+              "fontSize": 18.67,
+              "typeface": "Segoe UI",
+              "color": "#5D6675",
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "table",
+      "scope": "slide",
+      "aid": "tb/0bex4jyh",
+      "id": "4",
+      "bbox": [
+        80,
+        218,
+        1120,
+        378
+      ],
+      "text": "Concern | Current design | Target design\nPermit storage | permits, drafts, embedded children and childpermits | One permits table; draft is a status and child is a self-reference\nWorkflow | Reviewer arrays and overlapping state fields | Ordered approval steps, eligible members and immutable action records\nOperational fields | Mixed dates, strings and template-specific keys | Typed canonical columns; JSONB only for dynamic answers\nHistory | Human-readable strings and permit-shaped PDF copies | Append-only events, immutable revisions and generated document links\nTemplates and numbering | Mutable template references and application-side counters | Pinned template versions and transactional sequences",
+      "textPreview": "Concern | Current design | Target design | Permit storage | permits, drafts, embedded children and childpermits | One permits table; draf...",
+      "rows": 6,
+      "cols": 3,
+      "cells": [
+        {
+          "index": 1,
+          "row": 1,
+          "column": 1,
+          "bbox": [
+            80,
+            218,
+            210,
+            63
+          ],
+          "text": "Concern",
+          "textPreview": "Concern",
+          "fillColor": "#0B1F4D",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Concern",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Concern"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "row": 1,
+          "column": 2,
+          "bbox": [
+            290,
+            218,
+            410,
+            63
+          ],
+          "text": "Current design",
+          "textPreview": "Current design",
+          "fillColor": "#0B1F4D",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Current design",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Current design"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "row": 1,
+          "column": 3,
+          "bbox": [
+            700,
+            218,
+            500,
+            63
+          ],
+          "text": "Target design",
+          "textPreview": "Target design",
+          "fillColor": "#0B1F4D",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Target design",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Target design"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 4,
+          "row": 2,
+          "column": 1,
+          "bbox": [
+            80,
+            281,
+            210,
+            63
+          ],
+          "text": "Permit storage",
+          "textPreview": "Permit storage",
+          "fillColor": "#FFFFFF",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Permit storage",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Permit storage"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 5,
+          "row": 2,
+          "column": 2,
+          "bbox": [
+            290,
+            281,
+            410,
+            63
+          ],
+          "text": "permits, drafts, embedded children and childpermits",
+          "textPreview": "permits, drafts, embedded children and childpermits",
+          "fillColor": "#FFFFFF",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "permits, drafts, embedded children and childpermits",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "permits, drafts, embedded children and childpermits"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 6,
+          "row": 2,
+          "column": 3,
+          "bbox": [
+            700,
+            281,
+            500,
+            63
+          ],
+          "text": "One permits table; draft is a status and child is a self-reference",
+          "textPreview": "One permits table; draft is a status and child is a self-reference",
+          "fillColor": "#FFFFFF",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "One permits table; draft is a status and child is a self-reference",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "One permits table; draft is a status and child is a self-reference"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 7,
+          "row": 3,
+          "column": 1,
+          "bbox": [
+            80,
+            344,
+            210,
+            63
+          ],
+          "text": "Workflow",
+          "textPreview": "Workflow",
+          "fillColor": "#F5F8FB",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Workflow",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Workflow"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 8,
+          "row": 3,
+          "column": 2,
+          "bbox": [
+            290,
+            344,
+            410,
+            63
+          ],
+          "text": "Reviewer arrays and overlapping state fields",
+          "textPreview": "Reviewer arrays and overlapping state fields",
+          "fillColor": "#F5F8FB",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Reviewer arrays and overlapping state fields",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Reviewer arrays and overlapping state fields"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 9,
+          "row": 3,
+          "column": 3,
+          "bbox": [
+            700,
+            344,
+            500,
+            63
+          ],
+          "text": "Ordered approval steps, eligible members and immutable action records",
+          "textPreview": "Ordered approval steps, eligible members and immutable action records",
+          "fillColor": "#F5F8FB",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Ordered approval steps, eligible members and immutable action records",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Ordered approval steps, eligible members and immutable action records"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 10,
+          "row": 4,
+          "column": 1,
+          "bbox": [
+            80,
+            407,
+            210,
+            63
+          ],
+          "text": "Operational fields",
+          "textPreview": "Operational fields",
+          "fillColor": "#FFFFFF",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Operational fields",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Operational fields"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 11,
+          "row": 4,
+          "column": 2,
+          "bbox": [
+            290,
+            407,
+            410,
+            63
+          ],
+          "text": "Mixed dates, strings and template-specific keys",
+          "textPreview": "Mixed dates, strings and template-specific keys",
+          "fillColor": "#FFFFFF",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Mixed dates, strings and template-specific keys",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Mixed dates, strings and template-specific keys"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 12,
+          "row": 4,
+          "column": 3,
+          "bbox": [
+            700,
+            407,
+            500,
+            63
+          ],
+          "text": "Typed canonical columns; JSONB only for dynamic answers",
+          "textPreview": "Typed canonical columns; JSONB only for dynamic answers",
+          "fillColor": "#FFFFFF",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Typed canonical columns; JSONB only for dynamic answers",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Typed canonical columns; JSONB only for dynamic answers"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 13,
+          "row": 5,
+          "column": 1,
+          "bbox": [
+            80,
+            470,
+            210,
+            63
+          ],
+          "text": "History",
+          "textPreview": "History",
+          "fillColor": "#F5F8FB",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "History",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "History"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 14,
+          "row": 5,
+          "column": 2,
+          "bbox": [
+            290,
+            470,
+            410,
+            63
+          ],
+          "text": "Human-readable strings and permit-shaped PDF copies",
+          "textPreview": "Human-readable strings and permit-shaped PDF copies",
+          "fillColor": "#F5F8FB",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Human-readable strings and permit-shaped PDF copies",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Human-readable strings and permit-shaped PDF copies"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 15,
+          "row": 5,
+          "column": 3,
+          "bbox": [
+            700,
+            470,
+            500,
+            63
+          ],
+          "text": "Append-only events, immutable revisions and generated document links",
+          "textPreview": "Append-only events, immutable revisions and generated document links",
+          "fillColor": "#F5F8FB",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Append-only events, immutable revisions and generated document links",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Append-only events, immutable revisions and generated document links"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 16,
+          "row": 6,
+          "column": 1,
+          "bbox": [
+            80,
+            533,
+            210,
+            63
+          ],
+          "text": "Templates and numbering",
+          "textPreview": "Templates and numbering",
+          "fillColor": "#FFFFFF",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Templates and numbering",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Templates and numbering"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 17,
+          "row": 6,
+          "column": 2,
+          "bbox": [
+            290,
+            533,
+            410,
+            63
+          ],
+          "text": "Mutable template references and application-side counters",
+          "textPreview": "Mutable template references and application-side counters",
+          "fillColor": "#FFFFFF",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Mutable template references and application-side counters",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Mutable template references and application-side counters"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 18,
+          "row": 6,
+          "column": 3,
+          "bbox": [
+            700,
+            533,
+            500,
+            63
+          ],
+          "text": "Pinned template versions and transactional sequences",
+          "textPreview": "Pinned template versions and transactional sequences",
+          "fillColor": "#FFFFFF",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Pinned template versions and transactional sequences",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Pinned template versions and transactional sequences"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/c7ehczyd",
+      "id": "5",
+      "bbox": [
+        80,
+        620,
+        1120,
+        42
+      ],
+      "geometry": "rect",
+      "text": "Result: predictable filtering, reliable audit reconstruction and a migration path that preserves legacy evidence.",
+      "textPreview": "Result: predictable filtering, reliable audit reconstruction and a migration path that preserves legacy evidence.",
+      "resolvedFontSize": 21.33,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 21.33,
+        "typeface": "Bahnschrift",
+        "color": "#0072BC",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "wrap": "square",
+        "autoFit": "shrinkText",
+        "autoFitScale": 1,
+        "insets": {
+          "top": 4,
+          "right": 4,
+          "bottom": 4,
+          "left": 4
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Result: predictable filtering, reliable audit reconstruction and a migration path that preserves legacy evidence."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Result: predictable filtering, reliable audit reconstruction and a migration path that preserves legacy evidence.",
+          "resolvedTextStyle": {
+            "fontSize": 21.33,
+            "typeface": "Bahnschrift",
+            "color": "#0072BC",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Result: predictable filtering, reliable audit reconstruction and a migration path that preserves legacy evidence.",
+              "fontSize": 21.33,
+              "typeface": "Bahnschrift",
+              "color": "#0072BC",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

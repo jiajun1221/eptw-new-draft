@@ -1,0 +1,2070 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/gnmp4jqx",
+    "id": "gnmp4jqx",
+    "slide": 7,
+    "layoutId": "/ppt/slideLayouts/slideLayout3.xml",
+    "layoutName": "1_BACKGROUND",
+    "masterLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "OneSystems Colour",
+    "colors": {
+      "accent1": "#FF8C00",
+      "accent2": "#0066CC",
+      "accent3": "#0000A5",
+      "accent4": "#C0C0C0",
+      "accent5": "#0066CC",
+      "accent6": "#333333",
+      "dk1": "#003366",
+      "lt1": "#F5F5F5",
+      "dk2": "#333333",
+      "lt2": "#9FC9EB",
+      "hlink": "#FF8C00",
+      "folHlink": "#0066CC"
+    },
+    "fontScheme": {
+      "name": "OST Font",
+      "majorFont": {
+        "latinTypeface": "Bahnschrift"
+      },
+      "minorFont": {
+        "latinTypeface": "Segoe UI"
+      }
+    },
+    "typefaces": [
+      "Bahnschrift",
+      "Segoe UI"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "/ppt/slideLayouts/slideLayout3.xml",
+      "name": "1_BACKGROUND",
+      "parentLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+      "backgroundImage": {
+        "assetId": "/ppt/media/image3.jpg",
+        "contentType": "image/jpeg",
+        "byteLength": 45542
+      },
+      "elements": [
+        {
+          "order": 1,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout3.xml/9",
+          "id": "9",
+          "name": "Title 8",
+          "bbox": [
+            40.89,
+            28.62,
+            912.5,
+            57.67
+          ],
+          "geometry": "rect",
+          "text": "Click to edit Master title style",
+          "textPreview": "Click to edit Master title style",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Click to edit Master title style",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Click to edit Master title style"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "order": 2,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout3.xml/10",
+          "id": "10",
+          "name": "Content Placeholder 3",
+          "bbox": [
+            137.42,
+            199.43,
+            1005.17,
+            408
+          ],
+          "geometry": "rect",
+          "text": "BODY TEXT",
+          "textPreview": "BODY TEXT",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "BODY TEXT",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "BODY TEXT"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "order": 3,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout3.xml/11",
+          "id": "11",
+          "name": "TextBox 10",
+          "bbox": [
+            1033.99,
+            680.3,
+            200.81,
+            22.62
+          ],
+          "geometry": "rect",
+          "text": "Ownership. Sustainability. Trustworthy",
+          "textPreview": "Ownership. Sustainability. Trustworthy",
+          "resolvedTextStyle": {
+            "wrap": "none",
+            "autoFit": "resizeShapeToFitText"
+          },
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Ownership. Sustainability. Trustworthy",
+              "lineSpacingPercent": 100000,
+              "resolvedTextStyle": {
+                "alignment": "right"
+              },
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Ownership. Sustainability. Trustworthy",
+                  "fontSize": 10.67,
+                  "typeface": "Segoe UI",
+                  "color": "tx2"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "order": 4,
+          "kind": "image",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout3.xml/12",
+          "id": "12",
+          "name": "Picture 2",
+          "bbox": [
+            1050.71,
+            31.25,
+            175.09,
+            51.4
+          ],
+          "contentType": "image/png",
+          "asset": {
+            "assetId": "/ppt/media/image2.png",
+            "contentType": "image/png",
+            "byteLength": 37083
+          },
+          "fillImage": {
+            "assetId": "/ppt/media/image2.png",
+            "contentType": "image/png",
+            "byteLength": 37083
+          }
+        },
+        {
+          "order": 5,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout3.xml/2",
+          "id": "2",
+          "name": "TextBox 1",
+          "bbox": [
+            1033.99,
+            680.3,
+            200.81,
+            22.62
+          ],
+          "geometry": "rect",
+          "text": "Ownership. Sustainability. Trustworthy",
+          "textPreview": "Ownership. Sustainability. Trustworthy",
+          "resolvedTextStyle": {
+            "wrap": "none",
+            "autoFit": "resizeShapeToFitText"
+          },
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Ownership. Sustainability. Trustworthy",
+              "lineSpacingPercent": 100000,
+              "resolvedTextStyle": {
+                "alignment": "right"
+              },
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Ownership. Sustainability. Trustworthy",
+                  "fontSize": 10.67,
+                  "typeface": "Segoe UI",
+                  "color": "tx2"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "order": 6,
+          "kind": "image",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout3.xml/13",
+          "id": "13",
+          "name": "Picture 3",
+          "bbox": [
+            1050.71,
+            31.25,
+            175.09,
+            51.4
+          ],
+          "contentType": "image/png",
+          "asset": {
+            "assetId": "/ppt/media/image2.png",
+            "contentType": "image/png",
+            "byteLength": 37083
+          },
+          "fillImage": {
+            "assetId": "/ppt/media/image2.png",
+            "contentType": "image/png",
+            "byteLength": 37083
+          }
+        }
+      ]
+    },
+    {
+      "scope": "master",
+      "id": "/ppt/slideMasters/slideMaster1.xml",
+      "type": "master",
+      "backgroundImage": {
+        "assetId": "/ppt/media/image1.jpg",
+        "contentType": "image/jpeg",
+        "byteLength": 73341
+      },
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/cb2tkvap",
+      "id": "2",
+      "name": "Title 1",
+      "bbox": [
+        40.89,
+        28.62,
+        912.5,
+        57.67
+      ],
+      "resolvedFontSize": 42.67,
+      "resolvedTextStyle": {
+        "fontSize": 42.67,
+        "typeface": "Bahnschrift",
+        "color": "bg1",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      }
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ydkbm5sv",
+      "id": "4",
+      "name": "Content Placeholder 2",
+      "bbox": [
+        74.5,
+        245.75,
+        873.31,
+        75.01
+      ],
+      "geometry": "rect",
+      "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      "textPreview": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad mi...",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Segoe UI",
+        "color": {
+          "type": "theme",
+          "value": "bg1",
+          "transform": {
+            "darken": 0.9
+          }
+        },
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna"
+          },
+          {
+            "index": 2,
+            "text": "aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+          "lineSpacingPercent": 150000,
+          "runs": [
+            {
+              "index": 1,
+              "text": "Lorem ipsum ",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 2,
+              "text": "dolor",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 3,
+              "text": " sit ",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 4,
+              "text": "amet",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 5,
+              "text": ", ",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 6,
+              "text": "consectetur",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 7,
+              "text": " ",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 8,
+              "text": "adipiscing",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 9,
+              "text": " ",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 10,
+              "text": "elit",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 11,
+              "text": ", ",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 12,
+              "text": "sed",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 13,
+              "text": " do ",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 14,
+              "text": "eiusmod",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 15,
+              "text": " ",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 16,
+              "text": "tempor",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 17,
+              "text": " ",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 18,
+              "text": "incididunt",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 19,
+              "text": " ",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 20,
+              "text": "ut",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 21,
+              "text": " labore et dolore magna ",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 22,
+              "text": "aliqua",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 23,
+              "text": ". Ut ",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 24,
+              "text": "enim",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 25,
+              "text": " ad minim ",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 26,
+              "text": "veniam",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 27,
+              "text": ", ",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 28,
+              "text": "quis",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 29,
+              "text": " ",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 30,
+              "text": "nostrud",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 31,
+              "text": " exercitation ",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 32,
+              "text": "ullamco",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 33,
+              "text": " ",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 34,
+              "text": "laboris",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 35,
+              "text": " nisi ",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 36,
+              "text": "ut",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 37,
+              "text": " ",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 38,
+              "text": "aliquip",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 39,
+              "text": " ex ",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 40,
+              "text": "ea",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 41,
+              "text": " ",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 42,
+              "text": "commodo",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 43,
+              "text": " ",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 44,
+              "text": "consequat",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 45,
+              "text": ".",
+              "fontSize": 16,
+              "typeface": "Segoe UI"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0,
+          "indent": 0
+        }
+      ]
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/zedcfa9g",
+      "id": "5",
+      "name": "TextBox 4",
+      "bbox": [
+        79.87,
+        183.96,
+        1065.27,
+        58.16
+      ],
+      "geometry": "rect",
+      "text": "Lorem ipsum dolor sit amet, consectetur",
+      "textPreview": "Lorem ipsum dolor sit amet, consectetur",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Segoe UI",
+        "color": "tx1",
+        "alignment": "left",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Lorem ipsum dolor sit amet, consectetur"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Lorem ipsum dolor sit amet, consectetur",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Lorem ipsum dolor sit ",
+              "fontSize": 48,
+              "typeface": "Bahnschrift",
+              "color": {
+                "type": "theme",
+                "value": "bg1",
+                "transform": {
+                  "darken": 0.9
+                }
+              },
+              "bold": true
+            },
+            {
+              "index": 2,
+              "text": "amet",
+              "fontSize": 48,
+              "typeface": "Bahnschrift",
+              "color": {
+                "type": "theme",
+                "value": "bg1",
+                "transform": {
+                  "darken": 0.9
+                }
+              },
+              "bold": true
+            },
+            {
+              "index": 3,
+              "text": ", ",
+              "fontSize": 48,
+              "typeface": "Bahnschrift",
+              "color": {
+                "type": "theme",
+                "value": "bg1",
+                "transform": {
+                  "darken": 0.9
+                }
+              },
+              "bold": true
+            },
+            {
+              "index": 4,
+              "text": "consectetur",
+              "fontSize": 48,
+              "typeface": "Bahnschrift",
+              "color": {
+                "type": "theme",
+                "value": "bg1",
+                "transform": {
+                  "darken": 0.9
+                }
+              },
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/l0vuh0rm",
+      "id": "7",
+      "name": "Rounded Rectangle 6",
+      "bbox": [
+        82.29,
+        373.33,
+        104.38,
+        90.67
+      ],
+      "geometry": "roundRect",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Segoe UI",
+        "color": "lt1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": {
+        "type": "theme",
+        "value": "bg2",
+        "transform": {
+          "darken": 0.5
+        }
+      },
+      "lineWidth": 0
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/eh0ba1sr",
+      "id": "8",
+      "name": "Content Placeholder 2",
+      "bbox": [
+        196.25,
+        392.58,
+        321.84,
+        61.51
+      ],
+      "geometry": "rect",
+      "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "textPreview": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Segoe UI",
+        "color": {
+          "type": "theme",
+          "value": "bg1",
+          "transform": {
+            "darken": 0.9
+          }
+        },
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing"
+          },
+          {
+            "index": 2,
+            "text": "elit, sed do eiusmod tempor incididunt ut labore et"
+          },
+          {
+            "index": 3,
+            "text": "dolore magna aliqua."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+          "lineSpacingPercent": 100000,
+          "runs": [
+            {
+              "index": 1,
+              "text": "Lorem ipsum ",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 2,
+              "text": "dolor",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 3,
+              "text": " sit ",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 4,
+              "text": "amet",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 5,
+              "text": ", ",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 6,
+              "text": "consectetur",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 7,
+              "text": " ",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 8,
+              "text": "adipiscing",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 9,
+              "text": " ",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 10,
+              "text": "elit",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 11,
+              "text": ", ",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 12,
+              "text": "sed",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 13,
+              "text": " do ",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 14,
+              "text": "eiusmod",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 15,
+              "text": " ",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 16,
+              "text": "tempor",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 17,
+              "text": " ",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 18,
+              "text": "incididunt",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 19,
+              "text": " ",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 20,
+              "text": "ut",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 21,
+              "text": " labore et dolore magna ",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 22,
+              "text": "aliqua",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 23,
+              "text": ".",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0,
+          "indent": 0
+        }
+      ]
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/fi9c369c",
+      "id": "9",
+      "name": "Content Placeholder 2",
+      "bbox": [
+        96.39,
+        391.06,
+        77.32,
+        61.51
+      ],
+      "geometry": "rect",
+      "text": "Content\nTitle Here",
+      "textPreview": "Content | Title Here",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Segoe UI",
+        "color": {
+          "type": "theme",
+          "value": "bg1",
+          "transform": {
+            "darken": 0.9
+          }
+        },
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Content"
+          },
+          {
+            "index": 2,
+            "text": "Title Here"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Content\nTitle Here",
+          "lineSpacingPercent": 150000,
+          "resolvedTextStyle": {
+            "alignment": "center"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Content",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI",
+              "color": "bg1"
+            },
+            {
+              "index": 2,
+              "text": "\n",
+              "alignment": "center"
+            },
+            {
+              "index": 3,
+              "text": "Title Here",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI",
+              "color": "bg1"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0,
+          "indent": 0
+        }
+      ]
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/baxkjqlk",
+      "id": "10",
+      "name": "Rounded Rectangle 9",
+      "bbox": [
+        82.29,
+        511.2,
+        104.38,
+        90.67
+      ],
+      "geometry": "roundRect",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Segoe UI",
+        "color": "lt1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": {
+        "type": "theme",
+        "value": "bg2",
+        "transform": {
+          "darken": 0.5
+        }
+      },
+      "lineWidth": 0
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/a9ojq5kz",
+      "id": "11",
+      "name": "Content Placeholder 2",
+      "bbox": [
+        196.25,
+        530.45,
+        321.84,
+        61.51
+      ],
+      "geometry": "rect",
+      "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "textPreview": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Segoe UI",
+        "color": {
+          "type": "theme",
+          "value": "bg1",
+          "transform": {
+            "darken": 0.9
+          }
+        },
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing"
+          },
+          {
+            "index": 2,
+            "text": "elit, sed do eiusmod tempor incididunt ut labore et"
+          },
+          {
+            "index": 3,
+            "text": "dolore magna aliqua."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+          "lineSpacingPercent": 100000,
+          "runs": [
+            {
+              "index": 1,
+              "text": "Lorem ipsum ",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 2,
+              "text": "dolor",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 3,
+              "text": " sit ",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 4,
+              "text": "amet",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 5,
+              "text": ", ",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 6,
+              "text": "consectetur",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 7,
+              "text": " ",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 8,
+              "text": "adipiscing",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 9,
+              "text": " ",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 10,
+              "text": "elit",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 11,
+              "text": ", ",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 12,
+              "text": "sed",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 13,
+              "text": " do ",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 14,
+              "text": "eiusmod",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 15,
+              "text": " ",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 16,
+              "text": "tempor",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 17,
+              "text": " ",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 18,
+              "text": "incididunt",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 19,
+              "text": " ",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 20,
+              "text": "ut",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 21,
+              "text": " labore et dolore magna ",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 22,
+              "text": "aliqua",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 23,
+              "text": ".",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0,
+          "indent": 0
+        }
+      ]
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/xcz2l03q",
+      "id": "12",
+      "name": "Content Placeholder 2",
+      "bbox": [
+        96.39,
+        528.93,
+        77.32,
+        61.51
+      ],
+      "geometry": "rect",
+      "text": "Content\nTitle Here",
+      "textPreview": "Content | Title Here",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Segoe UI",
+        "color": {
+          "type": "theme",
+          "value": "bg1",
+          "transform": {
+            "darken": 0.9
+          }
+        },
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Content"
+          },
+          {
+            "index": 2,
+            "text": "Title Here"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Content\nTitle Here",
+          "lineSpacingPercent": 150000,
+          "resolvedTextStyle": {
+            "alignment": "center"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Content",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI",
+              "color": "bg1"
+            },
+            {
+              "index": 2,
+              "text": "\n",
+              "alignment": "center"
+            },
+            {
+              "index": 3,
+              "text": "Title Here",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI",
+              "color": "bg1"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0,
+          "indent": 0
+        }
+      ]
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/cbq1sv25",
+      "id": "13",
+      "name": "Rounded Rectangle 12",
+      "bbox": [
+        700.48,
+        373.33,
+        104.38,
+        90.67
+      ],
+      "geometry": "roundRect",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Segoe UI",
+        "color": "lt1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": {
+        "type": "theme",
+        "value": "bg2",
+        "transform": {
+          "darken": 0.5
+        }
+      },
+      "lineWidth": 0
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/n6x0fqlo",
+      "id": "14",
+      "name": "Content Placeholder 2",
+      "bbox": [
+        814.45,
+        392.58,
+        321.84,
+        61.51
+      ],
+      "geometry": "rect",
+      "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "textPreview": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Segoe UI",
+        "color": {
+          "type": "theme",
+          "value": "bg1",
+          "transform": {
+            "darken": 0.9
+          }
+        },
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing"
+          },
+          {
+            "index": 2,
+            "text": "elit, sed do eiusmod tempor incididunt ut labore et"
+          },
+          {
+            "index": 3,
+            "text": "dolore magna aliqua."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+          "lineSpacingPercent": 100000,
+          "runs": [
+            {
+              "index": 1,
+              "text": "Lorem ipsum ",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 2,
+              "text": "dolor",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 3,
+              "text": " sit ",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 4,
+              "text": "amet",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 5,
+              "text": ", ",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 6,
+              "text": "consectetur",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 7,
+              "text": " ",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 8,
+              "text": "adipiscing",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 9,
+              "text": " ",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 10,
+              "text": "elit",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 11,
+              "text": ", ",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 12,
+              "text": "sed",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 13,
+              "text": " do ",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 14,
+              "text": "eiusmod",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 15,
+              "text": " ",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 16,
+              "text": "tempor",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 17,
+              "text": " ",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 18,
+              "text": "incididunt",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 19,
+              "text": " ",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 20,
+              "text": "ut",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 21,
+              "text": " labore et dolore magna ",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 22,
+              "text": "aliqua",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 23,
+              "text": ".",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0,
+          "indent": 0
+        }
+      ]
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/25ojml43",
+      "id": "15",
+      "name": "Content Placeholder 2",
+      "bbox": [
+        714.58,
+        391.06,
+        77.32,
+        61.51
+      ],
+      "geometry": "rect",
+      "text": "Content\nTitle Here",
+      "textPreview": "Content | Title Here",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Segoe UI",
+        "color": {
+          "type": "theme",
+          "value": "bg1",
+          "transform": {
+            "darken": 0.9
+          }
+        },
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Content"
+          },
+          {
+            "index": 2,
+            "text": "Title Here"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Content\nTitle Here",
+          "lineSpacingPercent": 150000,
+          "resolvedTextStyle": {
+            "alignment": "center"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Content",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI",
+              "color": "bg1"
+            },
+            {
+              "index": 2,
+              "text": "\n",
+              "alignment": "center"
+            },
+            {
+              "index": 3,
+              "text": "Title Here",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI",
+              "color": "bg1"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0,
+          "indent": 0
+        }
+      ]
+    },
+    {
+      "order": 13,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/p8fih03e",
+      "id": "16",
+      "name": "Rounded Rectangle 15",
+      "bbox": [
+        700.48,
+        511.2,
+        104.38,
+        90.67
+      ],
+      "geometry": "roundRect",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Segoe UI",
+        "color": "lt1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": {
+        "type": "theme",
+        "value": "bg2",
+        "transform": {
+          "darken": 0.5
+        }
+      },
+      "lineWidth": 0
+    },
+    {
+      "order": 14,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/o761ov2t",
+      "id": "17",
+      "name": "Content Placeholder 2",
+      "bbox": [
+        814.45,
+        530.45,
+        321.84,
+        61.51
+      ],
+      "geometry": "rect",
+      "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "textPreview": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Segoe UI",
+        "color": {
+          "type": "theme",
+          "value": "bg1",
+          "transform": {
+            "darken": 0.9
+          }
+        },
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing"
+          },
+          {
+            "index": 2,
+            "text": "elit, sed do eiusmod tempor incididunt ut labore et"
+          },
+          {
+            "index": 3,
+            "text": "dolore magna aliqua."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+          "lineSpacingPercent": 100000,
+          "runs": [
+            {
+              "index": 1,
+              "text": "Lorem ipsum ",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 2,
+              "text": "dolor",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 3,
+              "text": " sit ",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 4,
+              "text": "amet",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 5,
+              "text": ", ",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 6,
+              "text": "consectetur",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 7,
+              "text": " ",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 8,
+              "text": "adipiscing",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 9,
+              "text": " ",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 10,
+              "text": "elit",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 11,
+              "text": ", ",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 12,
+              "text": "sed",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 13,
+              "text": " do ",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 14,
+              "text": "eiusmod",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 15,
+              "text": " ",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 16,
+              "text": "tempor",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 17,
+              "text": " ",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 18,
+              "text": "incididunt",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 19,
+              "text": " ",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 20,
+              "text": "ut",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 21,
+              "text": " labore et dolore magna ",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 22,
+              "text": "aliqua",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            },
+            {
+              "index": 23,
+              "text": ".",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0,
+          "indent": 0
+        }
+      ]
+    },
+    {
+      "order": 15,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/f2d0b6lc",
+      "id": "18",
+      "name": "Content Placeholder 2",
+      "bbox": [
+        714.58,
+        528.93,
+        77.32,
+        61.51
+      ],
+      "geometry": "rect",
+      "text": "Content\nTitle Here",
+      "textPreview": "Content | Title Here",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Segoe UI",
+        "color": {
+          "type": "theme",
+          "value": "bg1",
+          "transform": {
+            "darken": 0.9
+          }
+        },
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Content"
+          },
+          {
+            "index": 2,
+            "text": "Title Here"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Content\nTitle Here",
+          "lineSpacingPercent": 150000,
+          "resolvedTextStyle": {
+            "alignment": "center"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Content",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI",
+              "color": "bg1"
+            },
+            {
+              "index": 2,
+              "text": "\n",
+              "alignment": "center"
+            },
+            {
+              "index": 3,
+              "text": "Title Here",
+              "fontSize": 13.33,
+              "typeface": "Segoe UI",
+              "color": "bg1"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0,
+          "indent": 0
+        }
+      ]
+    }
+  ],
+  "composeRuns": []
+}

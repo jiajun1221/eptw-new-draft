@@ -1,0 +1,277 @@
+{"kind":"deck","id":"pr/io3d1c","name":"Deck"}
+{"kind":"layout","layoutId":"/ppt/slideMasters/slideMaster1.xml","name":"","type":"master"}
+{"kind":"layout","layoutId":"/ppt/slideLayouts/slideLayout1.xml","name":"Cover","placeholders":[{"name":"body","type":"body","textPreview":"PRESENTATION TITLE"}]}
+{"kind":"layout","layoutId":"/ppt/slideLayouts/slideLayout2.xml","name":"Company Name","placeholders":[{"name":"body","type":"body","textPreview":"PRESENTATION TITLE"},{"name":"body","type":"body","textPreview":"Company Name"}]}
+{"kind":"layout","layoutId":"/ppt/slideLayouts/slideLayout3.xml","name":"1_BACKGROUND","placeholders":[{"name":"title","type":"title","textPreview":"Click to edit Master title style"},{"name":"content placeholder 3","textPreview":"BODY TEXT"}]}
+{"kind":"layout","layoutId":"/ppt/slideLayouts/slideLayout4.xml","name":"Contact Us","placeholders":[{"name":"title","type":"title","textPreview":"CONTACT US"}]}
+{"kind":"layout","layoutId":"/ppt/slideLayouts/slideLayout5.xml","name":"Blank Page"}
+{"kind":"slide","id":"sl/0y0l35","slide":1,"title":"ePTW SYSTEM REBUILD","textShapes":3}
+{"kind":"textbox","id":"sh/z6tofalw","slide":1,"text":"ePTW SYSTEM REBUILD","textPreview":"ePTW SYSTEM REBUILD","textChars":19,"textLines":1,"bbox":[88,310,620,54]}
+{"kind":"textbox","id":"sh/k72p8fmh","slide":1,"text":"Proposal for a controlled, secure and maintainable Permit-to-Work platform","textPreview":"Proposal for a controlled, secure and maintainable Permit-to-Work platform","textChars":74,"textLines":1,"bbox":[88,372,610,76]}
+{"kind":"textbox","id":"sh/lsb6hk3m","slide":1,"text":"Prepared for solution alignment and implementation planning\nSeptember 2026","textPreview":"Prepared for solution alignment and implementation planning | September 2026","textChars":74,"textLines":2,"bbox":[88,500,560,66]}
+{"kind":"notes","id":"nt/0y0l35","slide":1,"text":"Purpose: present the rebuild direction and obtain approval to proceed into requirements closure and production data profiling.\nSources:\n- OST PPT Template Apr 2026.potx"}
+{"kind":"slide","id":"sl/8yesq1","slide":2,"title":"01","textShapes":12}
+{"kind":"textbox","id":"sh/tonil8r6","slide":2,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[74,116,44,36]}
+{"kind":"textbox","id":"sh/6lwjqtsf","slide":2,"text":"Executive proposal","textPreview":"Executive proposal","textChars":18,"textLines":1,"bbox":[116,108,1084,58]}
+{"kind":"textbox","id":"sh/7m50jy90","slide":2,"text":"Approval requested for the rebuild direction, with policy decisions closed before schema freeze","textPreview":"Approval requested for the rebuild direction, with policy decisions closed before schema freeze","textChars":95,"textLines":1,"bbox":[116,158,1060,34]}
+{"kind":"textbox","id":"sh/gre1wnqh","slide":2,"text":"RECOMMENDATION","textPreview":"RECOMMENDATION","textChars":14,"textLines":1,"bbox":[80,215,220,30]}
+{"kind":"textbox","id":"sh/hc7ip8r2","slide":2,"text":"Rebuild ePTW around one controlled permit domain, a server-enforced workflow and a PostgreSQL system of record.","textPreview":"Rebuild ePTW around one controlled permit domain, a server-enforced workflow and a PostgreSQL system of record.","textChars":111,"textLines":1,"bbox":[80,246,1100,94]}
+{"kind":"shape","id":"sh/upwjud8r","slide":2,"bbox":[80,432,46,0]}
+{"kind":"textbox","id":"sh/fq50ni9w","slide":2,"text":"Business outcome","textPreview":"Business outcome","textChars":16,"textLines":1,"bbox":[80,388,330,42]}
+{"kind":"textbox","id":"sh/wvuhkjad","slide":2,"text":"A consistent permit journey with clearer responsibilities, stronger access control and reliable audit history.","textPreview":"A consistent permit journey with clearer responsibilities, stronger access control and reliable audit history.","textChars":110,"textLines":1,"bbox":[80,442,330,112]}
+{"kind":"shape","id":"sh/xw3idory","slide":2,"bbox":[472,432,46,0]}
+{"kind":"textbox","id":"sh/xofqtofe","slide":2,"text":"Technical direction","textPreview":"Technical direction","textChars":19,"textLines":1,"bbox":[472,388,330,42]}
+{"kind":"textbox","id":"sh/wn6p0jyt","slide":2,"text":"React web application, dedicated API and workflow service, PostgreSQL, protected file storage and a transactional notification outbox.","textPreview":"React web application, dedicated API and workflow service, PostgreSQL, protected file storage and a transactional notification outbox.","textChars":134,"textLines":1,"bbox":[472,442,330,126]}
+{"kind":"shape","id":"sh/vmd8rex8","slide":2,"bbox":[864,432,46,0]}
+{"kind":"textbox","id":"sh/al47y9gn","slide":2,"text":"Delivery approach","textPreview":"Delivery approach","textChars":17,"textLines":1,"bbox":[864,388,330,42]}
+{"kind":"textbox","id":"sh/5sfqxofa","slide":2,"text":"Freeze policy decisions, profile production data, build in increments, rehearse migration and cut over only after reconciliation gates pass.","textPreview":"Freeze policy decisions, profile production data, build in increments, rehearse migration and cut over only after reconciliation gates pass.","textChars":140,"textLines":1,"bbox":[864,442,330,126]}
+{"kind":"textbox","id":"sh/kr6943yp","slide":2,"text":"Immediate ask: authorize requirements closure and read-only production data profiling.","textPreview":"Immediate ask: authorize requirements closure and read-only production data profiling.","textChars":86,"textLines":1,"bbox":[80,616,1100,42]}
+{"kind":"notes","id":"nt/8yesq1","slide":2,"text":"The production migration recommendation remains conditional on profiling a recent sanitized production snapshot.\nSources:\n- database-redesign-proposal.docx, sections 1 and 10\n- ePTW-Requirements-Review.pdf, pages 5-7 and 93-95\n- README.md"}
+{"kind":"slide","id":"sl/u4dfr4","slide":3,"title":"02","textShapes":18}
+{"kind":"textbox","id":"sh/ds3mxgni","slide":3,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[74,116,44,36]}
+{"kind":"textbox","id":"sh/qpsnm1or","slide":3,"text":"Evidence base and authority order","textPreview":"Evidence base and authority order","textChars":33,"textLines":1,"bbox":[116,108,1084,58]}
+{"kind":"textbox","id":"sh/rql4v65c","slide":3,"text":"Three sources contribute different types of evidence","textPreview":"Three sources contribute different types of evidence","textChars":52,"textLines":1,"bbox":[116,158,1060,34]}
+{"kind":"textbox","id":"sh/0vu5sbmt","slide":3,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[80,216,58,42]}
+{"kind":"textbox","id":"sh/1w361gne","slide":3,"text":"Business requirements","textPreview":"Business requirements","textChars":21,"textLines":1,"bbox":[138,208,275,48]}
+{"kind":"textbox","id":"sh/etcnq143","slide":3,"text":"95-page confirmation deck","textPreview":"95-page confirmation deck","textChars":25,"textLines":1,"bbox":[138,252,275,42]}
+{"kind":"textbox","id":"sh/fuloz65o","slide":3,"text":"Defines roles, user journeys, visibility, templates, closure, notifications, reporting and 16 open questions.","textPreview":"Defines roles, user journeys, visibility, templates, closure, notifications, reporting and 16 open questions.","textChars":109,"textLines":1,"bbox":[80,322,320,136]}
+{"kind":"textbox","id":"sh/oze5wvm5","slide":3,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[462,216,58,42]}
+{"kind":"textbox","id":"sh/p0n650nq","slide":3,"text":"Backend redesign","textPreview":"Backend redesign","textChars":16,"textLines":1,"bbox":[520,208,275,48]}
+{"kind":"textbox","id":"sh/x0n6p0z2","slide":3,"text":"PostgreSQL proposal and mapping","textPreview":"PostgreSQL proposal and mapping","textChars":31,"textLines":1,"bbox":[520,252,275,42]}
+{"kind":"textbox","id":"sh/wze5wvih","slide":3,"text":"Defines the target domain model, 27 application tables, three migration-control tables and a phased cutover approach.","textPreview":"Defines the target domain model, 27 application tables, three migration-control tables and a phased cutover approach.","textChars":117,"textLines":1,"bbox":[462,322,320,136]}
+{"kind":"textbox","id":"sh/by5onqhw","slide":3,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[844,216,58,42]}
+{"kind":"textbox","id":"sh/axwnul0b","slide":3,"text":"Frontend prototype","textPreview":"Frontend prototype","textChars":18,"textLines":1,"bbox":[902,208,275,48]}
+{"kind":"textbox","id":"sh/l476t0zy","slide":3,"text":"React and TypeScript functional draft","textPreview":"React and TypeScript functional draft","textChars":37,"textLines":1,"bbox":[902,252,275,42]}
+{"kind":"textbox","id":"sh/k3yp0vid","slide":3,"text":"Demonstrates role-aware navigation, sequential approvals, linked Hot Work permits, revisions, lifecycle actions and audit views.","textPreview":"Demonstrates role-aware navigation, sequential approvals, linked Hot Work permits, revisions, lifecycle actions and audit views.","textChars":128,"textLines":1,"bbox":[844,322,320,136]}
+{"kind":"shape","id":"sh/j2porqh8","slide":3,"bbox":[80,501,1100,0]}
+{"kind":"textbox","id":"sh/y1gny50n","slide":3,"text":"Recommended authority","textPreview":"Recommended authority","textChars":21,"textLines":1,"bbox":[80,526,220,34]}
+{"kind":"textbox","id":"sh/1836hgzu","slide":3,"text":"Business requirements decide behaviour. The backend proposal decides implementation. The frontend prototype proves interaction patterns and controls, but does not define production architecture.","textPreview":"Business requirements decide behaviour. The backend proposal decides implementation. The frontend prototype proves interaction patterns a...","textChars":194,"textLines":1,"bbox":[300,515,880,86]}
+{"kind":"textbox","id":"sh/07u5obi9","slide":3,"text":"Prototype verification: production build succeeded and all 20 automated tests passed on 11 September 2026.","textPreview":"Prototype verification: production build succeeded and all 20 automated tests passed on 11 September 2026.","textChars":106,"textLines":1,"bbox":[300,607,880,34]}
+{"kind":"notes","id":"nt/u4dfr4","slide":3,"text":"Verification run: npm.cmd run build and npm.cmd test; 3 test files and 20 tests passed.\nSources:\n- ePTW-Requirements-Review.pdf\n- database-redesign-proposal.docx\n- old-vs-new-schema.docx\n- README.md\n- package.json\n- tests/app.test.tsx\n- tests/policy.test.ts\n- tests/repository.test.ts"}
+{"kind":"slide","id":"sl/ix91f1","slide":4,"title":"03","textShapes":19}
+{"kind":"textbox","id":"sh/kn6hwfad","slide":4,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[74,116,44,36]}
+{"kind":"textbox","id":"sh/jmxgnats","slide":4,"text":"Why the current platform needs a rebuild","textPreview":"Why the current platform needs a rebuild","textChars":40,"textLines":1,"bbox":[116,108,1084,58]}
+{"kind":"textbox","id":"sh/il4zu5s7","slide":4,"text":"The same defects affect safety control, data integrity and operating effort","textPreview":"The same defects affect safety control, data integrity and operating effort","textChars":75,"textLines":1,"bbox":[116,158,1060,34]}
+{"kind":"textbox","id":"sh/xkvyl0bm","slide":4,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[84,210,48,34]}
+{"kind":"textbox","id":"sh/wjmhsvah","slide":4,"text":"Four permit shapes","textPreview":"Four permit shapes","textChars":18,"textLines":1,"bbox":[145,207,270,40]}
+{"kind":"textbox","id":"sh/vidgjqtw","slide":4,"text":"Parent permits, drafts, embedded children and child permits require duplicated logic and merged reporting.","textPreview":"Parent permits, drafts, embedded children and child permits require duplicated logic and merged reporting.","textChars":106,"textLines":1,"bbox":[430,207,700,57]}
+{"kind":"shape","id":"sh/ah4zq5sb","slide":4,"bbox":[145,274,985,0]}
+{"kind":"textbox","id":"sh/9wvyh0bq","slide":4,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[84,293,48,34]}
+{"kind":"textbox","id":"sh/8vmhova5","slide":4,"text":"Approval state is implicit","textPreview":"Approval state is implicit","textChars":26,"textLines":1,"bbox":[145,290,270,40]}
+{"kind":"textbox","id":"sh/2tovet8b","slide":4,"text":"Reviewer arrays and mutable group membership can change the meaning of an in-flight permit.","textPreview":"Reviewer arrays and mutable group membership can change the meaning of an in-flight permit.","textChars":91,"textLines":1,"bbox":[430,290,700,57]}
+{"kind":"shape","id":"sh/3uxw7y9g","slide":4,"bbox":[145,357,985,0]}
+{"kind":"textbox","id":"sh/ov6dg3q1","slide":4,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[84,376,48,34]}
+{"kind":"textbox","id":"sh/pwfe98rm","slide":4,"text":"Operational data is untyped","textPreview":"Operational data is untyped","textChars":27,"textLines":1,"bbox":[145,373,270,40]}
+{"kind":"textbox","id":"sh/ep4va98z","slide":4,"text":"Dates and key fields appear in several formats and template-specific answer keys.","textPreview":"Dates and key fields appear in several formats and template-specific answer keys.","textChars":81,"textLines":1,"bbox":[430,373,700,57]}
+{"kind":"shape","id":"sh/fqdc3e9k","slide":4,"bbox":[145,440,985,0]}
+{"kind":"textbox","id":"sh/grmdcjq5","slide":4,"text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[84,459,48,34]}
+{"kind":"textbox","id":"sh/1svu5orq","slide":4,"text":"History is difficult to trust","textPreview":"History is difficult to trust","textChars":29,"textLines":1,"bbox":[145,456,270,40]}
+{"kind":"textbox","id":"sh/614v69s3","slide":4,"text":"String logs and permit-shaped document copies cannot support precise filtering or reconciliation.","textPreview":"String logs and permit-shaped document copies cannot support precise filtering or reconciliation.","textChars":97,"textLines":1,"bbox":[430,456,700,57]}
+{"kind":"shape","id":"sh/r2dcze9o","slide":4,"bbox":[145,523,985,0]}
+{"kind":"textbox","id":"sh/v69s7apg","slide":4,"text":"05","textPreview":"05","textChars":2,"textLines":1,"bbox":[84,542,48,34]}
+{"kind":"textbox","id":"sh/a50re58v","slide":4,"text":"Integrity depends on application code","textPreview":"Integrity depends on application code","textChars":37,"textLines":1,"bbox":[145,539,270,40]}
+{"kind":"textbox","id":"sh/x8ra9k76","slide":4,"text":"Numbering races, weak uniqueness and hard-coded identifiers create avoidable failure modes.","textPreview":"Numbering races, weak uniqueness and hard-coded identifiers create avoidable failure modes.","textChars":91,"textLines":1,"bbox":[430,539,700,57]}
+{"kind":"textbox","id":"sh/w7itgf6l","slide":4,"text":"Repository inspection cannot quantify live defects. Production profiling must establish row counts, duplicates, nulls, orphaned references and historical variants.","textPreview":"Repository inspection cannot quantify live defects. Production profiling must establish row counts, duplicates, nulls, orphaned reference...","textChars":163,"textLines":1,"bbox":[80,625,1100,45]}
+{"kind":"notes","id":"nt/ix91f1","slide":4,"text":"The issues shown are code-level findings. Live prevalence remains to be measured against a sanitized production snapshot.\nSources:\n- database-redesign-proposal.docx, sections 2-3\n- old-vs-new-schema.docx, sections 1-3\n- ePTW-Requirements-Review.pdf, pages 5-6"}
+{"kind":"slide","id":"sl/ptfkwn","slide":5,"title":"04","textShapes":27}
+{"kind":"textbox","id":"sh/cnutoj2l","slide":5,"text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[74,116,44,36]}
+{"kind":"textbox","id":"sh/bmlsve10","slide":5,"text":"Target user experience","textPreview":"Target user experience","textChars":22,"textLines":1,"bbox":[116,108,1084,58]}
+{"kind":"textbox","id":"sh/qlcbm9kf","slide":5,"text":"One traceable permit journey from creation to archive","textPreview":"One traceable permit journey from creation to archive","textChars":53,"textLines":1,"bbox":[116,158,1060,34]}
+{"kind":"shape","id":"sh/pk3at4ja","slide":5,"bbox":[70,245,170,168]}
+{"kind":"textbox","id":"sh/4jutkj2p","slide":5,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[84,260,42,28]}
+{"kind":"textbox","id":"sh/3ilsre14","slide":5,"text":"Create","textPreview":"Create","textChars":6,"textLines":1,"bbox":[84,298,140,38]}
+{"kind":"textbox","id":"sh/2hsbi9kj","slide":5,"text":"Template-driven form, reserved fields, files and linked child permits","textPreview":"Template-driven form, reserved fields, files and linked child permits","textChars":69,"textLines":1,"bbox":[84,341,142,60]}
+{"kind":"shape","id":"sh/hgjap4jy","slide":5,"bbox":[269,245,170,168]}
+{"kind":"textbox","id":"sh/gfatgz2d","slide":5,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[283,260,42,28]}
+{"kind":"textbox","id":"sh/qpc3al0v","slide":5,"text":"Submit","textPreview":"Submit","textChars":6,"textLines":1,"bbox":[283,298,140,38]}
+{"kind":"textbox","id":"sh/bql4jqhg","slide":5,"text":"Validation completes and the company-specific approval route is fixed","textPreview":"Validation completes and the company-specific approval route is fixed","textChars":69,"textLines":1,"bbox":[283,341,142,60]}
+{"kind":"shape","id":"sh/crulcbi1","slide":5,"bbox":[240,329,29,0]}
+{"kind":"shape","id":"sh/ds3mlgzm","slide":5,"bbox":[468,245,170,168]}
+{"kind":"textbox","id":"sh/2ls3610z","slide":5,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[482,260,42,28]}
+{"kind":"textbox","id":"sh/3mlkf6hk","slide":5,"text":"Review","textPreview":"Review","textChars":6,"textLines":1,"bbox":[482,298,140,38]}
+{"kind":"textbox","id":"sh/onul8bi5","slide":5,"text":"Only the current reviewer can act; reasons and signatures are recorded","textPreview":"Only the current reviewer can act; reasons and signatures are recorded","textChars":70,"textLines":1,"bbox":[482,341,142,60]}
+{"kind":"shape","id":"sh/po32hgzq","slide":5,"bbox":[439,329,29,0]}
+{"kind":"shape","id":"sh/exs32103","slide":5,"bbox":[667,245,170,168]}
+{"kind":"textbox","id":"sh/fy1kbmh8","slide":5,"text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[681,260,42,28]}
+{"kind":"textbox","id":"sh/j2x032x0","slide":5,"text":"Operate","textPreview":"Operate","textChars":7,"textLines":1,"bbox":[681,298,140,38]}
+{"kind":"textbox","id":"sh/i1ozaxgv","slide":5,"text":"Approved work, readings, controlled amendments and lifecycle actions","textPreview":"Approved work, readings, controlled amendments and lifecycle actions","textChars":68,"textLines":1,"bbox":[681,341,142,60]}
+{"kind":"shape","id":"sh/54zi5sf6","slide":5,"bbox":[638,329,29,0]}
+{"kind":"shape","id":"sh/k3q1cnyl","slide":5,"bbox":[866,245,170,168]}
+{"kind":"textbox","id":"sh/7qh072xc","slide":5,"text":"05","textPreview":"05","textChars":2,"textLines":1,"bbox":[880,260,42,28]}
+{"kind":"textbox","id":"sh/658jexgr","slide":5,"text":"Close","textPreview":"Close","textChars":5,"textLines":1,"bbox":[880,298,140,38]}
+{"kind":"textbox","id":"sh/tszi9cfi","slide":5,"text":"Signed request, authorised confirmation and independent child outcomes","textPreview":"Signed request, authorised confirmation and independent child outcomes","textChars":70,"textLines":1,"bbox":[880,341,142,60]}
+{"kind":"shape","id":"sh/srq1g7yx","slide":5,"bbox":[837,329,29,0]}
+{"kind":"shape","id":"sh/nud0vix8","slide":5,"bbox":[1065,245,170,168]}
+{"kind":"textbox","id":"sh/m94z2dgn","slide":5,"text":"06","textPreview":"06","textChars":2,"textLines":1,"bbox":[1079,260,42,28]}
+{"kind":"textbox","id":"sh/c3i5gfa9","slide":5,"text":"Report","textPreview":"Report","textChars":6,"textLines":1,"bbox":[1079,298,140,38]}
+{"kind":"textbox","id":"sh/d4r6pkru","slide":5,"text":"Search, PDF generation, dashboards and retained audit history","textPreview":"Search, PDF generation, dashboards and retained audit history","textChars":61,"textLines":1,"bbox":[1079,341,142,60]}
+{"kind":"shape","id":"sh/q10ne5s3","slide":5,"bbox":[1036,329,29,0]}
+{"kind":"textbox","id":"sh/r29ona9o","slide":5,"text":"Cross-cutting controls","textPreview":"Cross-cutting controls","textChars":22,"textLines":1,"bbox":[80,481,210,34]}
+{"kind":"textbox","id":"sh/4zi5cvax","slide":5,"text":"Server-side authorization","textPreview":"Server-side authorization","textChars":25,"textLines":1,"bbox":[80,526,250,38]}
+{"kind":"textbox","id":"sh/p0r6l0ri","slide":5,"text":"Versioned templates and revisions","textPreview":"Versioned templates and revisions","textChars":33,"textLines":1,"bbox":[360,526,300,38]}
+{"kind":"textbox","id":"sh/2xgna5sr","slide":5,"text":"Append-only events","textPreview":"Append-only events","textChars":18,"textLines":1,"bbox":[710,526,220,38]}
+{"kind":"textbox","id":"sh/3ypoja9c","slide":5,"text":"UTC storage with Singapore display time","textPreview":"UTC storage with Singapore display time","textChars":39,"textLines":1,"bbox":[940,526,270,54]}
+{"kind":"textbox","id":"sh/ov2pozah","slide":5,"text":"Administration covers users, companies, sites, maps, disciplines, reviewer groups, templates, announcements and report access.","textPreview":"Administration covers users, companies, sites, maps, disciplines, reviewer groups, templates, announcements and report access.","textChars":126,"textLines":1,"bbox":[80,603,1100,46]}
+{"kind":"notes","id":"nt/ptfkwn","slide":5,"text":"This slide consolidates the proposed end-to-end user journey. Specific workflow roles remain subject to the decisions on slide 9.\nSources:\n- ePTW-Requirements-Review.pdf, sections 5-22\n- database-redesign-proposal.docx, sections 6-8\n- src/App.tsx"}
+{"kind":"slide","id":"sl/y7loxe","slide":6,"title":"05","textShapes":15}
+{"kind":"textbox","id":"sh/g3y9gvmd","slide":6,"text":"05","textPreview":"05","textChars":2,"textLines":1,"bbox":[74,116,44,36]}
+{"kind":"textbox","id":"sh/v2ps7q5s","slide":6,"text":"Target application architecture","textPreview":"Target application architecture","textChars":31,"textLines":1,"bbox":[116,108,1084,58]}
+{"kind":"textbox","id":"sh/u1grelo7","slide":6,"text":"A dedicated service boundary moves security and workflow rules out of the browser","textPreview":"A dedicated service boundary moves security and workflow rules out of the browser","textChars":81,"textLines":1,"bbox":[116,158,1060,34]}
+{"kind":"shape","id":"sh/5srad0na","slide":6,"bbox":[80,268,250,184]}
+{"kind":"textbox","id":"sh/4ri9kvmp","slide":6,"text":"React web application","textPreview":"React web application","textChars":21,"textLines":1,"bbox":[103,292,204,42]}
+{"kind":"textbox","id":"sh/3q9sba54","slide":6,"text":"Role-aware navigation\nPermit forms and lists\nAdmin and reporting views","textPreview":"Role-aware navigation | Permit forms and lists | Admin and reporting views","textChars":70,"textLines":3,"bbox":[103,350,204,86]}
+{"kind":"shape","id":"sh/ip0ri54j","slide":6,"bbox":[445,232,365,256]}
+{"kind":"textbox","id":"sh/lwna1gnq","slide":6,"text":"API and workflow service","textPreview":"API and workflow service","textChars":24,"textLines":1,"bbox":[470,258,315,44]}
+{"kind":"textbox","id":"sh/kve98b65","slide":6,"text":"Authentication and authorization\nValidation and state transitions\nApproval sequencing and audit events\nSearch, document and report orchestration","textPreview":"Authentication and authorization | Validation and state transitions | Approval sequencing and audit events | Search, document and report ...","textChars":144,"textLines":4,"bbox":[478,325,300,125]}
+{"kind":"shape","id":"sh/ydwbi5wv","slide":6,"bbox":[930,192,260,120]}
+{"kind":"textbox","id":"sh/ze5sbadg","slide":6,"text":"PostgreSQL","textPreview":"PostgreSQL","textChars":10,"textLines":1,"bbox":[953,211,214,40]}
+{"kind":"textbox","id":"sh/kzetkve1","slide":6,"text":"System of record","textPreview":"System of record","textChars":16,"textLines":1,"bbox":[953,258,214,30]}
+{"kind":"shape","id":"sh/l07ad0v6","slide":6,"bbox":[930,350,260,94]}
+{"kind":"textbox","id":"sh/m1gbm5wr","slide":6,"text":"Protected file storage","textPreview":"Protected file storage","textChars":22,"textLines":1,"bbox":[948,369,224,34]}
+{"kind":"textbox","id":"sh/72psfadc","slide":6,"text":"Attachments and generated output","textPreview":"Attachments and generated output","textChars":32,"textLines":1,"bbox":[948,407,224,25]}
+{"kind":"shape","id":"sh/83ytofux","slide":6,"bbox":[930,482,260,94]}
+{"kind":"textbox","id":"sh/947ahkvi","slide":6,"text":"Email delivery worker","textPreview":"Email delivery worker","textChars":21,"textLines":1,"bbox":[948,501,224,34]}
+{"kind":"textbox","id":"sh/u5gbqpc3","slide":6,"text":"Transactional outbox and retries","textPreview":"Transactional outbox and retries","textChars":32,"textLines":1,"bbox":[948,539,224,25]}
+{"kind":"shape","id":"sh/v6psjudo","slide":6,"bbox":[330,360,115,0]}
+{"kind":"shape","id":"sh/ra9s7utg","slide":6,"bbox":[810,252,120,108]}
+{"kind":"shape","id":"sh/690repsb","slide":6,"bbox":[810,360,120,37]}
+{"kind":"shape","id":"sh/twra94bm","slide":6,"bbox":[810,360,120,169]}
+{"kind":"textbox","id":"sh/sbi9gza1","slide":6,"text":"Security boundary","textPreview":"Security boundary","textChars":17,"textLines":1,"bbox":[346,290,90,25]}
+{"kind":"textbox","id":"sh/j6ps3atk","slide":6,"text":"Read models and scheduled exports use the same canonical data and status rules as the operational API.","textPreview":"Read models and scheduled exports use the same canonical data and status rules as the operational API.","textChars":102,"textLines":1,"bbox":[445,553,365,65]}
+{"kind":"notes","id":"nt/y7loxe","slide":6,"text":"The current frontend stores seeded data in the browser and explicitly provides no real authentication, upload, notification or backend security.\nSources:\n- database-redesign-proposal.docx, sections 4, 5 and 7\n- ePTW-Requirements-Review.pdf, sections 15-21\n- README.md"}
+{"kind":"slide","id":"sl/l2xf4k","slide":7,"title":"06","textShapes":4}
+{"kind":"textbox","id":"sh/hs7elc3q","slide":7,"text":"06","textPreview":"06","textChars":2,"textLines":1,"bbox":[74,116,44,36]}
+{"kind":"textbox","id":"sh/u5gvah4z","slide":7,"text":"Database redesign","textPreview":"Database redesign","textChars":17,"textLines":1,"bbox":[116,108,1084,58]}
+{"kind":"textbox","id":"sh/v6pwjmlk","slide":7,"text":"The target model reduces duplication and makes workflow and reporting queryable","textPreview":"The target model reduces duplication and makes workflow and reporting queryable","textChars":79,"textLines":1,"bbox":[116,158,1060,34]}
+{"kind":"textbox","id":"sh/5wrepw3m","slide":7,"text":"Result: predictable filtering, reliable audit reconstruction and a migration path that preserves legacy evidence.","textPreview":"Result: predictable filtering, reliable audit reconstruction and a migration path that preserves legacy evidence.","textChars":113,"textLines":1,"bbox":[80,620,1120,42]}
+{"kind":"table","id":"tb/twvepojy","slide":7,"name":"","rows":6,"cols":3,"preview":"Concern | Current design | Target design","bbox":[80,218,1120,378]}
+{"kind":"notes","id":"nt/l2xf4k","slide":7,"text":"The proposal specifies 27 application tables and three migration-control tables.\nSources:\n- database-redesign-proposal.docx, sections 3-7\n- old-vs-new-schema.docx, sections 1-9"}
+{"kind":"slide","id":"sl/vvbk5i","slide":8,"title":"07","textShapes":22}
+{"kind":"textbox","id":"sh/hg76d0rm","slide":8,"text":"07","textPreview":"07","textChars":2,"textLines":1,"bbox":[74,116,44,36]}
+{"kind":"textbox","id":"sh/udwnilsb","slide":8,"text":"Workflow controls proven in the prototype","textPreview":"Workflow controls proven in the prototype","textChars":41,"textLines":1,"bbox":[116,108,1084,58]}
+{"kind":"textbox","id":"sh/ve5obq9w","slide":8,"text":"The production service should retain the control intent while adopting the confirmed business chain","textPreview":"The production service should retain the control intent while adopting the confirmed business chain","textChars":99,"textLines":1,"bbox":[116,158,1060,34]}
+{"kind":"textbox","id":"sh/8be5gba5","slide":8,"text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[85,225,42,42]}
+{"kind":"textbox","id":"sh/tcn69grq","slide":8,"text":"Complete permit","textPreview":"Complete permit","textChars":15,"textLines":1,"bbox":[139,224,286,30]}
+{"kind":"textbox","id":"sh/69wnelsz","slide":8,"text":"Required permit and safety fields must pass validation before submission.","textPreview":"Required permit and safety fields must pass validation before submission.","textChars":73,"textLines":1,"bbox":[139,255,286,70]}
+{"kind":"textbox","id":"sh/7a5o769k","slide":8,"text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[455,225,42,42]}
+{"kind":"textbox","id":"sh/k7e5cbat","slide":8,"text":"Enforce current stage","textPreview":"Enforce current stage","textChars":21,"textLines":1,"bbox":[509,224,286,30]}
+{"kind":"textbox","id":"sh/l8n65gre","slide":8,"text":"Only the assigned role can act. Separation of duties blocks self-approval.","textPreview":"Only the assigned role can act. Separation of duties blocks self-approval.","textChars":74,"textLines":1,"bbox":[509,255,286,70]}
+{"kind":"textbox","id":"sh/lonatkjq","slide":8,"text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[825,225,42,42]}
+{"kind":"textbox","id":"sh/0nutkfi5","slide":8,"text":"Record every decision","textPreview":"Record every decision","textChars":21,"textLines":1,"bbox":[879,224,286,30]}
+{"kind":"textbox","id":"sh/zmlsra1k","slide":8,"text":"Approvals, rejection reasons, status changes and revision events remain traceable.","textPreview":"Approvals, rejection reasons, status changes and revision events remain traceable.","textChars":82,"textLines":1,"bbox":[879,255,286,70]}
+{"kind":"textbox","id":"sh/ylcbi50f","slide":8,"text":"4","textPreview":"4","textChars":1,"textLines":1,"bbox":[85,410,42,42]}
+{"kind":"textbox","id":"sh/dk3ap0ju","slide":8,"text":"Control operational actions","textPreview":"Control operational actions","textChars":27,"textLines":1,"bbox":[139,409,286,30]}
+{"kind":"textbox","id":"sh/cjutgv29","slide":8,"text":"Activation, suspension, resumption, closure and expiry checks use one policy layer.","textPreview":"Activation, suspension, resumption, closure and expiry checks use one policy layer.","textChars":83,"textLines":1,"bbox":[139,440,286,70]}
+{"kind":"textbox","id":"sh/bilsnq1o","slide":8,"text":"5","textPreview":"5","textChars":1,"textLines":1,"bbox":[455,410,42,42]}
+{"kind":"textbox","id":"sh/qhcre5k3","slide":8,"text":"Preserve revisions","textPreview":"Preserve revisions","textChars":18,"textLines":1,"bbox":[509,409,286,30]}
+{"kind":"textbox","id":"sh/pg3al0ji","slide":8,"text":"A revised permit returns for approval and prior approved revisions become superseded.","textPreview":"A revised permit returns for approval and prior approved revisions become superseded.","textChars":85,"textLines":1,"bbox":[509,440,286,70]}
+{"kind":"textbox","id":"sh/ofa9cv2x","slide":8,"text":"6","textPreview":"6","textChars":1,"textLines":1,"bbox":[825,410,42,42]}
+{"kind":"textbox","id":"sh/gzet8vat","slide":8,"text":"Handle linked permits","textPreview":"Handle linked permits","textChars":21,"textLines":1,"bbox":[879,409,286,30]}
+{"kind":"textbox","id":"sh/h0na10re","slide":8,"text":"Hot Work selection creates a linked child permit; final parent gating remains a policy decision.","textPreview":"Hot Work selection creates a linked child permit; final parent gating remains a policy decision.","textChars":96,"textLines":1,"bbox":[879,440,286,70]}
+{"kind":"textbox","id":"sh/uxwb6ls3","slide":8,"text":"Current prototype chain: Individual Reviewer, MT Group, Permit Manager. Requirements propose a company-driven chain with Host, Host Manager, optional stages and OPS.","textPreview":"Current prototype chain: Individual Reviewer, MT Group, Permit Manager. Requirements propose a company-driven chain with Host, Host Manag...","textChars":165,"textLines":1,"bbox":[84,607,1095,48]}
+{"kind":"notes","id":"nt/vvbk5i","slide":8,"text":"The prototype is a control proof, not the final role model.\nSources:\n- src/policy.ts\n- src/repository.ts\n- src/types.ts\n- tests/policy.test.ts\n- tests/repository.test.ts\n- ePTW-Requirements-Review.pdf, sections 3, 8-10"}
+{"kind":"slide","id":"sl/sq7gyy","slide":9,"title":"08","textShapes":4}
+{"kind":"textbox","id":"sh/qdo32lor","slide":9,"text":"08","textPreview":"08","textChars":2,"textLines":1,"bbox":[74,116,44,36]}
+{"kind":"textbox","id":"sh/dgzmd0ni","slide":9,"text":"Policy decisions required before schema freeze","textPreview":"Policy decisions required before schema freeze","textChars":46,"textLines":1,"bbox":[116,108,1084,58]}
+{"kind":"textbox","id":"sh/cf6l4v6x","slide":9,"text":"The supplied sources differ on six behaviours that directly affect data structures and workflow code","textPreview":"The supplied sources differ on six behaviours that directly affect data structures and workflow code","textChars":100,"textLines":1,"bbox":[116,158,1060,34]}
+{"kind":"textbox","id":"sh/2po3ylov","slide":9,"text":"Recommendation: close these decisions in a short design authority workshop and record them as testable acceptance rules.","textPreview":"Recommendation: close these decisions in a short design authority workshop and record them as testable acceptance rules.","textChars":120,"textLines":1,"bbox":[70,649,1140,32]}
+{"kind":"table","id":"tb/y1ojytcn","slide":9,"name":"","rows":7,"cols":4,"preview":"Decision | Requirements review | Backend or prototype position | Recommended action","bbox":[55,211,1170,425]}
+{"kind":"notes","id":"nt/sq7gyy","slide":9,"text":"These are source conflicts or unresolved questions, not implementation defects in the prototype.\nSources:\n- ePTW-Requirements-Review.pdf, pages 21, 35, 37-42, 56, 59, 75-76 and 83\n- database-redesign-proposal.docx, sections 4-6 and 12\n- src/policy.ts\n- src/types.ts"}
+{"kind":"slide","id":"sl/l2q9ze","slide":10,"title":"09","textShapes":22}
+{"kind":"textbox","id":"sh/l4b690vq","slide":10,"text":"09","textPreview":"09","textChars":2,"textLines":1,"bbox":[74,116,44,36]}
+{"kind":"textbox","id":"sh/y10nylwz","slide":10,"text":"Migration and cutover approach","textPreview":"Migration and cutover approach","textChars":30,"textLines":1,"bbox":[116,108,1084,58]}
+{"kind":"textbox","id":"sh/j29o7qdk","slide":10,"text":"A restartable, evidence-preserving migration reduces operational and audit risk","textPreview":"A restartable, evidence-preserving migration reduces operational and audit risk","textChars":79,"textLines":1,"bbox":[116,158,1060,34]}
+{"kind":"shape","id":"sh/wzi5wbet","slide":10,"bbox":[65,242,210,225]}
+{"kind":"textbox","id":"sh/x0r65gve","slide":10,"text":"0","textPreview":"0","textChars":1,"textLines":1,"bbox":[80,258,36,30]}
+{"kind":"textbox","id":"sh/ad0nulw3","slide":10,"text":"Inventory and freeze","textPreview":"Inventory and freeze","textChars":20,"textLines":1,"bbox":[80,299,180,54]}
+{"kind":"textbox","id":"sh/by9o36d8","slide":10,"text":"Profile a sanitized production snapshot. Resolve status, key mapping, numbering, retention and duplicate rules.","textPreview":"Profile a sanitized production snapshot. Resolve status, key mapping, numbering, retention and duplicate rules.","textChars":111,"textLines":1,"bbox":[80,361,180,92]}
+{"kind":"shape","id":"sh/gv2p8fud","slide":10,"bbox":[306,242,210,225]}
+{"kind":"textbox","id":"sh/hwv6hkvy","slide":10,"text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[321,258,36,30]}
+{"kind":"textbox","id":"sh/hs7q10re","slide":10,"text":"Build and rehearse","textPreview":"Build and rehearse","textChars":18,"textLines":1,"bbox":[321,299,180,54]}
+{"kind":"textbox","id":"sh/wry9svqt","slide":10,"text":"Deploy an empty PostgreSQL schema. Load reference data, users, templates and permits with deterministic mappings.","textPreview":"Deploy an empty PostgreSQL schema. Load reference data, users, templates and permits with deterministic mappings.","textChars":113,"textLines":1,"bbox":[321,361,180,92]}
+{"kind":"shape","id":"sh/vqp8zq98","slide":10,"bbox":[275,354.5,31,0]}
+{"kind":"shape","id":"sh/apgrql8n","slide":10,"bbox":[547,242,210,225]}
+{"kind":"textbox","id":"sh/9o7qxgr2","slide":10,"text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[562,258,36,30]}
+{"kind":"textbox","id":"sh/8ne9obqx","slide":10,"text":"Reconstruct permit detail","textPreview":"Reconstruct permit detail","textChars":25,"textLines":1,"bbox":[562,299,180,54]}
+{"kind":"textbox","id":"sh/nm58v69c","slide":10,"text":"Extract canonical fields, migrate children and retain the unmodified legacy submission in the first revision.","textPreview":"Extract canonical fields, migrate children and retain the unmodified legacy submission in the first revision.","textChars":109,"textLines":1,"bbox":[562,361,180,92]}
+{"kind":"shape","id":"sh/m1wrm1sr","slide":10,"bbox":[516,354.5,31,0]}
+{"kind":"shape","id":"sh/tkra9krm","slide":10,"bbox":[788,242,210,225]}
+{"kind":"textbox","id":"sh/sji90fq1","slide":10,"text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[803,258,36,30]}
+{"kind":"textbox","id":"sh/c3qtwjyd","slide":10,"text":"Rebuild workflow history","textPreview":"Rebuild workflow history","textChars":24,"textLines":1,"bbox":[803,299,180,54]}
+{"kind":"textbox","id":"sh/d4zu5ozi","slide":10,"text":"Recreate approval steps and events conservatively. Flag ambiguity instead of inventing historical order.","textPreview":"Recreate approval steps and events conservatively. Flag ambiguity instead of inventing historical order.","textChars":104,"textLines":1,"bbox":[803,361,180,92]}
+{"kind":"shape","id":"sh/q18bu9g7","slide":10,"bbox":[757,354.5,31,0]}
+{"kind":"shape","id":"sh/r2hs3ehs","slide":10,"bbox":[1029,242,210,225]}
+{"kind":"textbox","id":"sh/4zqtszy1","slide":10,"text":"4","textPreview":"4","textChars":1,"textLines":1,"bbox":[1044,258,36,30]}
+{"kind":"textbox","id":"sh/p0za14zm","slide":10,"text":"Synchronize and cut over","textPreview":"Synchronize and cut over","textChars":24,"textLines":1,"bbox":[1044,299,180,54]}
+{"kind":"textbox","id":"sh/2xobq9gv","slide":10,"text":"Run change capture or a short freeze, reconcile, switch traffic and retain a rollback window.","textPreview":"Run change capture or a short freeze, reconcile, switch traffic and retain a rollback window.","textChars":93,"textLines":1,"bbox":[1044,361,180,92]}
+{"kind":"shape","id":"sh/3yxszehg","slide":10,"bbox":[998,354.5,31,0]}
+{"kind":"textbox","id":"sh/gv6tozy5","slide":10,"text":"Reconciliation gates","textPreview":"Reconciliation gates","textChars":20,"textLines":1,"bbox":[80,525,210,34]}
+{"kind":"shape","id":"sh/hwfax4zq","slide":10,"bbox":[80,578,7,7]}
+{"kind":"textbox","id":"sh/j6dc7u1c","slide":10,"text":"Every source record is migrated, explicitly excluded or quarantined with a reason.","textPreview":"Every source record is migrated, explicitly excluded or quarantined with a reason.","textChars":82,"textLines":1,"bbox":[98,570,482,52]}
+{"kind":"shape","id":"sh/i54bypkr","slide":10,"bbox":[650,578,7,7]}
+{"kind":"textbox","id":"sh/5sfu94ji","slide":10,"text":"Counts reconcile by status, site, template, parent-child relationship and approval outcome.","textPreview":"Counts reconcile by status, site, template, parent-child relationship and approval outcome.","textChars":91,"textLines":1,"bbox":[668,570,482,52]}
+{"kind":"textbox","id":"sh/krmt0zix","slide":10,"text":"Cutover proceeds only after critical reconciliation gates pass.","textPreview":"Cutover proceeds only after critical reconciliation gates pass.","textChars":63,"textLines":1,"bbox":[80,641,1100,30]}
+{"kind":"notes","id":"nt/l2q9ze","slide":10,"text":"No schedule duration is asserted because the sources do not contain production volumes or resource commitments.\nSources:\n- database-redesign-proposal.docx, section 10\n- old-vs-new-schema.docx, section 10"}
+{"kind":"slide","id":"sl/lcb4x9","slide":11,"title":"10","textShapes":19}
+{"kind":"textbox","id":"sh/m14nm5sr","slide":11,"text":"10","textPreview":"10","textChars":2,"textLines":1,"bbox":[74,116,44,36]}
+{"kind":"textbox","id":"sh/94v6xkr2","slide":11,"text":"Delivery sequencing","textPreview":"Delivery sequencing","textChars":19,"textLines":1,"bbox":[116,108,1084,58]}
+{"kind":"textbox","id":"sh/83mpofah","slide":11,"text":"The sequence protects domain decisions first and postpones irreversible migration work","textPreview":"The sequence protects domain decisions first and postpones irreversible migration work","textChars":86,"textLines":1,"bbox":[116,158,1060,34]}
+{"kind":"textbox","id":"sh/v6xozu98","slide":11,"text":"A","textPreview":"A","textChars":1,"textLines":1,"bbox":[83,216,54,52]}
+{"kind":"textbox","id":"sh/u5o7qpsn","slide":11,"text":"Domain alignment","textPreview":"Domain alignment","textChars":16,"textLines":1,"bbox":[166,214,280,40]}
+{"kind":"textbox","id":"sh/h8f61kre","slide":11,"text":"Close the six policy decisions, acceptance rules and role matrix.","textPreview":"Close the six policy decisions, acceptance rules and role matrix.","textChars":65,"textLines":1,"bbox":[460,214,690,54]}
+{"kind":"shape","id":"sh/w76pszat","slide":11,"bbox":[110,274,0,28]}
+{"kind":"textbox","id":"sh/jaxo3u94","slide":11,"text":"B","textPreview":"B","textChars":1,"textLines":1,"bbox":[83,302,54,52]}
+{"kind":"textbox","id":"sh/i9o7upsz","slide":11,"text":"Platform foundation","textPreview":"Platform foundation","textChars":19,"textLines":1,"bbox":[166,300,280,40]}
+{"kind":"textbox","id":"sh/4fe1cryp","slide":11,"text":"Authentication, authorization, schema, files, event logging and deployment pipeline.","textPreview":"Authentication, authorization, schema, files, event logging and deployment pipeline.","textChars":84,"textLines":1,"bbox":[460,300,690,54]}
+{"kind":"shape","id":"sh/5gn25wfa","slide":11,"bbox":[110,360,0,28]}
+{"kind":"textbox","id":"sh/itwja1gj","slide":11,"text":"C","textPreview":"C","textChars":1,"textLines":1,"bbox":[83,388,54,52]}
+{"kind":"textbox","id":"sh/je5k36x4","slide":11,"text":"Permit lifecycle","textPreview":"Permit lifecycle","textChars":16,"textLines":1,"bbox":[166,386,280,40]}
+{"kind":"textbox","id":"sh/sje1gbel","slide":11,"text":"Creation, child logic, approvals, operational actions, closure and revisions.","textPreview":"Creation, child logic, approvals, operational actions, closure and revisions.","textChars":77,"textLines":1,"bbox":[460,386,690,54]}
+{"kind":"shape","id":"sh/tk729gf6","slide":11,"bbox":[110,446,0,28]}
+{"kind":"textbox","id":"sh/6hwje1gf","slide":11,"text":"D","textPreview":"D","textChars":1,"textLines":1,"bbox":[83,474,54,52]}
+{"kind":"textbox","id":"sh/ri5k76x0","slide":11,"text":"Administration and reporting","textPreview":"Administration and reporting","textChars":28,"textLines":1,"bbox":[166,472,280,40]}
+{"kind":"textbox","id":"sh/gny1kbex","slide":11,"text":"Configuration screens, search, dashboards, PDF and scheduled exports.","textPreview":"Configuration screens, search, dashboards, PDF and scheduled exports.","textChars":69,"textLines":1,"bbox":[460,472,690,54]}
+{"kind":"shape","id":"sh/1o72dgf2","slide":11,"bbox":[110,532,0,28]}
+{"kind":"textbox","id":"sh/p432xg7m","slide":11,"text":"E","textPreview":"E","textChars":1,"textLines":1,"bbox":[83,560,54,52]}
+{"kind":"textbox","id":"sh/o3u14b61","slide":11,"text":"Migration and launch","textPreview":"Migration and launch","textChars":20,"textLines":1,"bbox":[166,558,280,40]}
+{"kind":"textbox","id":"sh/n2lkv6pg","slide":11,"text":"Profiling, ETL rehearsals, reconciliation, training, cutover and hypercare.","textPreview":"Profiling, ETL rehearsals, reconciliation, training, cutover and hypercare.","textChars":75,"textLines":1,"bbox":[460,558,690,54]}
+{"kind":"textbox","id":"sh/21cj2lov","slide":11,"text":"Each track ends with working software, automated controls and explicit exit criteria. Time and staffing estimates follow the profiling and domain-alignment work.","textPreview":"Each track ends with working software, automated controls and explicit exit criteria. Time and staffing estimates follow the profiling an...","textChars":161,"textLines":1,"bbox":[80,646,1100,34]}
+{"kind":"notes","id":"nt/lcb4x9","slide":11,"text":"This is sequencing rather than a duration estimate.\nSources:\n- database-redesign-proposal.docx, sections 10-11\n- ePTW-Requirements-Review.pdf, sections 22-24\n- README.md"}
+{"kind":"slide","id":"sl/ro5j5v","slide":12,"title":"11","textShapes":4}
+{"kind":"textbox","id":"sh/bitobqto","slide":12,"text":"11","textPreview":"11","textChars":2,"textLines":1,"bbox":[74,116,44,36]}
+{"kind":"textbox","id":"sh/wj254va9","slide":12,"text":"Principal delivery risks and controls","textPreview":"Principal delivery risks and controls","textChars":37,"textLines":1,"bbox":[116,108,1084,58]}
+{"kind":"textbox","id":"sh/xkb6d0be","slide":12,"text":"The main risks can be reduced before production migration begins","textPreview":"The main risks can be reduced before production migration begins","textChars":64,"textLines":1,"bbox":[116,158,1060,34]}
+{"kind":"textbox","id":"sh/nu9o7qtc","slide":12,"text":"Risk ownership and thresholds should be assigned during implementation planning.","textPreview":"Risk ownership and thresholds should be assigned during implementation planning.","textChars":80,"textLines":1,"bbox":[80,649,1100,30]}
+{"kind":"table","id":"tb/v2x8ri94","slide":12,"name":"","rows":7,"cols":3,"preview":"Risk | Potential impact | Primary control","bbox":[70,218,1140,418]}
+{"kind":"notes","id":"nt/ro5j5v","slide":12,"text":"Risks are derived from the supplied design gaps and open questions; no probability scoring is asserted.\nSources:\n- database-redesign-proposal.docx, sections 3, 10, 12 and 13\n- ePTW-Requirements-Review.pdf, sections 19 and 21-24"}
+{"kind":"slide","id":"sl/f9eod6","slide":13,"title":"12","textShapes":18}
+{"kind":"textbox","id":"sh/n6xo7614","slide":13,"text":"12","textPreview":"12","textChars":2,"textLines":1,"bbox":[74,116,44,36]}
+{"kind":"textbox","id":"sh/o7qpgbip","slide":13,"text":"Decision requested","textPreview":"Decision requested","textChars":18,"textLines":1,"bbox":[116,108,1084,58]}
+{"kind":"textbox","id":"sh/p8z69gja","slide":13,"text":"Approval now enables controlled discovery without committing to an unverified migration date","textPreview":"Approval now enables controlled discovery without committing to an unverified migration date","textChars":92,"textLines":1,"bbox":[116,158,1060,34]}
+{"kind":"textbox","id":"sh/ehona10n","slide":13,"text":"Approve the rebuild direction","textPreview":"Approve the rebuild direction","textChars":29,"textLines":1,"bbox":[82,220,520,58]}
+{"kind":"shape","id":"sh/fixo3618","slide":13,"bbox":[82,313,7,7]}
+{"kind":"textbox","id":"sh/g365crit","slide":13,"text":"PostgreSQL becomes the system of record for permits, workflow and audit history.","textPreview":"PostgreSQL becomes the system of record for permits, workflow and audit history.","textChars":80,"textLines":1,"bbox":[100,305,517,62]}
+{"kind":"shape","id":"sh/14f65wje","slide":13,"bbox":[82,390,7,7]}
+{"kind":"textbox","id":"sh/yd87ml0r","slide":13,"text":"The React frontend continues as the interaction baseline, backed by production services and server-side controls.","textPreview":"The React frontend continues as the interaction baseline, backed by production services and server-side controls.","textChars":113,"textLines":1,"bbox":[100,382,517,76]}
+{"kind":"shape","id":"sh/zehofq1c","slide":13,"bbox":[82,486,7,7]}
+{"kind":"textbox","id":"sh/32pkfexs","slide":13,"text":"Migration follows a profiled, restartable and reconciled cutover process.","textPreview":"Migration follows a profiled, restartable and reconciled cutover process.","textChars":73,"textLines":1,"bbox":[100,478,517,62]}
+{"kind":"shape","id":"sh/21g3m9g7","slide":13,"bbox":[706,214,474,350]}
+{"kind":"textbox","id":"sh/p472hofi","slide":13,"text":"Authorize next","textPreview":"Authorize next","textChars":14,"textLines":1,"bbox":[744,246,390,44]}
+{"kind":"textbox","id":"sh/o3ylojyd","slide":13,"text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[744,316,42,42]}
+{"kind":"textbox","id":"sh/b6pkjyxo","slide":13,"text":"Close policy decisions","textPreview":"Close policy decisions","textChars":22,"textLines":1,"bbox":[798,315,336,30]}
+{"kind":"textbox","id":"sh/q5g3qtg3","slide":13,"text":"Confirm roles, gating, group changes, templates, PDF history and expiry.","textPreview":"Confirm roles, gating, group changes, templates, PDF history and expiry.","textChars":72,"textLines":1,"bbox":[798,346,336,70]}
+{"kind":"textbox","id":"sh/dsr2l8fu","slide":13,"text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[744,414,42,42]}
+{"kind":"textbox","id":"sh/c7ils3y9","slide":13,"text":"Profile production data","textPreview":"Profile production data","textChars":23,"textLines":1,"bbox":[798,413,336,30]}
+{"kind":"textbox","id":"sh/zu9knyx0","slide":13,"text":"Use a recent sanitized snapshot and publish the reconciliation baseline.","textPreview":"Use a recent sanitized snapshot and publish the reconciliation baseline.","textChars":72,"textLines":1,"bbox":[798,444,336,70]}
+{"kind":"textbox","id":"sh/yt03utgf","slide":13,"text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[744,512,42,42]}
+{"kind":"textbox","id":"sh/apknmx0n","slide":13,"text":"Plan implementation","textPreview":"Plan implementation","textChars":19,"textLines":1,"bbox":[798,511,336,30]}
+{"kind":"textbox","id":"sh/vqdov2h8","slide":13,"text":"Assign owners, delivery capacity, environments and measurable exit criteria.","textPreview":"Assign owners, delivery capacity, environments and measurable exit criteria.","textChars":76,"textLines":1,"bbox":[798,542,336,70]}
+{"kind":"textbox","id":"sh/wrm5o7id","slide":13,"text":"Production build and migration dates follow these three actions.","textPreview":"Production build and migration dates follow these three actions.","textChars":64,"textLines":1,"bbox":[82,619,1090,42]}
+{"kind":"notes","id":"nt/f9eod6","slide":13,"text":"The requested decision is intentionally limited to direction and controlled discovery.\nSources:\n- database-redesign-proposal.docx, sections 1, 10-12\n- ePTW-Requirements-Review.pdf, pages 93-95"}
+{"kind":"slide","id":"sl/gscqkp","slide":14,"title":"A1","textShapes":4}
+{"kind":"textbox","id":"sh/9ofe1w3m","slide":14,"text":"A1","textPreview":"A1","textChars":2,"textLines":1,"bbox":[74,116,44,36]}
+{"kind":"textbox","id":"sh/mlovqhkb","slide":14,"text":"Appendix: frontend prototype coverage","textPreview":"Appendix: frontend prototype coverage","textChars":37,"textLines":1,"bbox":[116,108,1084,58]}
+{"kind":"textbox","id":"sh/7mxwzmlg","slide":14,"text":"The codebase demonstrates workflow intent but remains a browser-based functional draft","textPreview":"The codebase demonstrates workflow intent but remains a browser-based functional draft","textChars":86,"textLines":1,"bbox":[116,158,1060,34]}
+{"kind":"textbox","id":"sh/hsze5w3y","slide":14,"text":"Verification: React production build succeeded; 3 test files and 20 tests passed.","textPreview":"Verification: React production build succeeded; 3 test files and 20 tests passed.","textChars":81,"textLines":1,"bbox":[80,660,1100,26]}
+{"kind":"table","id":"tb/hkbid4bm","slide":14,"name":"","rows":8,"cols":2,"preview":"Demonstrated now | Production capability still required","bbox":[70,214,1140,435]}
+{"kind":"notes","id":"nt/gscqkp","slide":14,"text":"The README explicitly states that the draft has no real authentication, file upload, notification or backend security.\nSources:\n- README.md\n- src/App.tsx\n- src/TemplateBuilderPage.tsx\n- src/AdminUsersMaps.tsx\n- src/AdminDirectories.tsx\n- src/policy.ts\n- src/repository.ts\n- tests/*.ts and tests/*.tsx"}

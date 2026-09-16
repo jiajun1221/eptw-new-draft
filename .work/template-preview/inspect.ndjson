@@ -1,0 +1,208 @@
+{"kind":"deck","id":"pr/pibry4","name":"Deck"}
+{"kind":"layout","layoutId":"/ppt/slideMasters/slideMaster1.xml","name":"","type":"master"}
+{"kind":"layout","layoutId":"/ppt/slideLayouts/slideLayout1.xml","name":"Cover","placeholders":[{"name":"body","type":"body","textPreview":"PRESENTATION TITLE"}]}
+{"kind":"layout","layoutId":"/ppt/slideLayouts/slideLayout2.xml","name":"Company Name","placeholders":[{"name":"body","type":"body","textPreview":"PRESENTATION TITLE"},{"name":"body","type":"body","textPreview":"Company Name"}]}
+{"kind":"layout","layoutId":"/ppt/slideLayouts/slideLayout3.xml","name":"1_BACKGROUND","placeholders":[{"name":"title","type":"title","textPreview":"Click to edit Master title style"},{"name":"content placeholder 3","textPreview":"BODY TEXT"}]}
+{"kind":"layout","layoutId":"/ppt/slideLayouts/slideLayout4.xml","name":"Contact Us","placeholders":[{"name":"title","type":"title","textPreview":"CONTACT US"}]}
+{"kind":"layout","layoutId":"/ppt/slideLayouts/slideLayout5.xml","name":"Blank Page"}
+{"kind":"slide","id":"sl/y90nupkv","slide":1,"title":"Slide 1","textShapes":0}
+{"kind":"shape","id":"sh/547294r6","slide":1,"name":"Text Placeholder 1","placeholder":"body","bbox":[86.83,346.73,643.18,96]}
+{"kind":"slide","id":"sl/hwbqtkby","slide":2,"title":"01.","textShapes":29}
+{"kind":"shape","id":"sh/9072xkry","slide":2,"name":"Rectangle: Rounded Corners 1","bbox":[57.6,137.99,1164.2,524.41]}
+{"kind":"shape","id":"sh/ozy1ofad","slide":2,"name":"Freeform: Shape 1","bbox":[643.6,0,582.4,662.4]}
+{"kind":"textbox","id":"sh/w3i1sfa9","slide":2,"name":"TextBox 6","text":"01.","textPreview":"01.","textChars":3,"textLines":1,"bbox":[115.2,201.67,56.53,35.54]}
+{"kind":"textbox","id":"sh/r65knqtk","slide":2,"name":"TextBox 7","text":"CONTENT 1","textPreview":"CONTENT 1","textChars":9,"textLines":1,"bbox":[171.73,204.19,464.67,29.08]}
+{"kind":"textbox","id":"sh/q5wjelsz","slide":2,"name":"TextBox 8","text":"02.","textPreview":"02.","textChars":3,"textLines":1,"bbox":[115.2,267.51,56.53,35.54]}
+{"kind":"textbox","id":"sh/65kfmpor","slide":2,"name":"TextBox 22","text":"03.","textPreview":"03.","textChars":3,"textLines":1,"bbox":[115.2,333.34,56.53,35.54]}
+{"kind":"textbox","id":"sh/hcvy14ne","slide":2,"name":"TextBox 23","text":"04.","textPreview":"04.","textChars":3,"textLines":1,"bbox":[115.2,399.18,56.53,35.54]}
+{"kind":"textbox","id":"sh/gbmxszmt","slide":2,"name":"TextBox 24","text":"05.","textPreview":"05.","textChars":3,"textLines":1,"bbox":[115.26,465.01,56.53,35.54]}
+{"kind":"textbox","id":"sh/fadgzu58","slide":2,"name":"TextBox 25","text":"CONTENT PAGE","textPreview":"CONTENT PAGE","textChars":12,"textLines":1,"bbox":[748.23,39.38,492.23,64.62]}
+{"kind":"textbox","id":"sh/u94fqp4n","slide":2,"name":"TextBox 26","text":"CONTENT 2","textPreview":"CONTENT 2","textChars":9,"textLines":1,"bbox":[171.34,269.63,464.67,29.08]}
+{"kind":"textbox","id":"sh/p0vy54na","slide":2,"name":"TextBox 27","text":"CONTENT 3","textPreview":"CONTENT 3","textChars":9,"textLines":1,"bbox":[171.34,335.08,464.67,29.08]}
+{"kind":"textbox","id":"sh/4zmxwzmp","slide":2,"name":"TextBox 28","text":"CONTENT 4","textPreview":"CONTENT 4","textChars":9,"textLines":1,"bbox":[171.34,400.52,464.67,29.08]}
+{"kind":"textbox","id":"sh/mlgvq147","slide":2,"name":"TextBox 29","text":"CONTENT 5","textPreview":"CONTENT 5","textChars":9,"textLines":1,"bbox":[170.22,465.97,464.67,29.08]}
+{"kind":"textbox","id":"sh/je9crql0","slide":2,"name":"TextBox 38","text":"CONTENT 6","textPreview":"CONTENT 6","textChars":9,"textLines":1,"bbox":[170.22,531.42,464.67,29.08]}
+{"kind":"textbox","id":"sh/ru5cbqd4","slide":2,"name":"TextBox 39","text":"CONTENT 7","textPreview":"CONTENT 7","textChars":9,"textLines":1,"bbox":[170.22,596.86,464.67,29.08]}
+{"kind":"textbox","id":"sh/69wbilcj","slide":2,"name":"TextBox 40","text":"06","textPreview":"06","textChars":2,"textLines":1,"bbox":[115.26,530.84,56.53,35.54]}
+{"kind":"textbox","id":"sh/tw7ud0va","slide":2,"name":"TextBox 41","text":"07.","textPreview":"07.","textChars":3,"textLines":1,"bbox":[115.26,596.68,56.53,35.54]}
+{"kind":"textbox","id":"sh/exgvmlcv","slide":2,"name":"TextBox 44","text":"01.","textPreview":"01.","textChars":3,"textLines":1,"bbox":[674.19,201.67,56.53,35.54]}
+{"kind":"textbox","id":"sh/107uh0v6","slide":2,"name":"TextBox 45","text":"CONTENT 1","textPreview":"CONTENT 1","textChars":9,"textLines":1,"bbox":[730.72,204.19,464.67,29.08]}
+{"kind":"textbox","id":"sh/gzydovul","slide":2,"name":"TextBox 46","text":"02.","textPreview":"02.","textChars":3,"textLines":1,"bbox":[674.19,267.51,56.53,35.54]}
+{"kind":"textbox","id":"sh/v2lc36dw","slide":2,"name":"TextBox 47","text":"03.","textPreview":"03.","textChars":3,"textLines":1,"bbox":[674.19,333.34,56.53,35.54]}
+{"kind":"textbox","id":"sh/a1cba1wb","slide":2,"name":"TextBox 48","text":"04.","textPreview":"04.","textChars":3,"textLines":1,"bbox":[674.19,399.18,56.53,35.54]}
+{"kind":"textbox","id":"sh/0vq1o36x","slide":2,"name":"TextBox 49","text":"05.","textPreview":"05.","textChars":3,"textLines":1,"bbox":[674.25,465.01,56.53,35.54]}
+{"kind":"textbox","id":"sh/1wzix87i","slide":2,"name":"TextBox 50","text":"CONTENT 2","textPreview":"CONTENT 2","textChars":9,"textLines":1,"bbox":[730.33,269.63,464.67,29.08]}
+{"kind":"textbox","id":"sh/et8zmto7","slide":2,"name":"TextBox 51","text":"CONTENT 3","textPreview":"CONTENT 3","textChars":9,"textLines":1,"bbox":[730.33,335.08,464.67,29.08]}
+{"kind":"textbox","id":"sh/zuh0vypc","slide":2,"name":"TextBox 52","text":"CONTENT 4","textPreview":"CONTENT 4","textChars":9,"textLines":1,"bbox":[730.33,400.52,464.67,29.08]}
+{"kind":"textbox","id":"sh/c76hk361","slide":2,"name":"TextBox 53","text":"CONTENT 5","textPreview":"CONTENT 5","textChars":9,"textLines":1,"bbox":[729.2,465.97,464.67,29.08]}
+{"kind":"textbox","id":"sh/d8zit87m","slide":2,"name":"TextBox 54","text":"CONTENT 6","textPreview":"CONTENT 6","textChars":9,"textLines":1,"bbox":[729.2,531.42,464.67,29.08]}
+{"kind":"textbox","id":"sh/q5ozitov","slide":2,"name":"TextBox 55","text":"CONTENT 7","textPreview":"CONTENT 7","textChars":9,"textLines":1,"bbox":[729.2,596.86,464.67,29.08]}
+{"kind":"textbox","id":"sh/r6x0rypg","slide":2,"name":"TextBox 56","text":"06","textPreview":"06","textChars":2,"textLines":1,"bbox":[674.25,530.84,56.53,35.54]}
+{"kind":"textbox","id":"sh/w3a1wn65","slide":2,"name":"TextBox 57","text":"07.","textPreview":"07.","textChars":3,"textLines":1,"bbox":[674.25,596.68,56.53,35.54]}
+{"kind":"slide","id":"sl/ofy9wn61","slide":3,"title":"OST BRANDING GOOD PRACTICE RULES","textShapes":2}
+{"kind":"textbox","id":"sh/cza94vmx","slide":3,"name":"Title 1","placeholder":"title","text":"OST BRANDING GOOD PRACTICE RULES","textPreview":"OST BRANDING GOOD PRACTICE RULES","textChars":32,"textLines":1,"bbox":[0,0,0,0]}
+{"kind":"textbox","id":"sh/d0jax03i","slide":3,"name":"Content Placeholder 2","text":"Title: 32 – 44pt\nHeaders: 28 – 36pt \nBody Text: 12 – 20pt\nBullet Points: 12 – 18pt\nChart / Legends: 12 – 14 pt\n\n\n\nOST standard font sizes have been embedded in this template. \nPlease refer to the guide above should you need to make any adjustments.","textPreview":"Title: 32 – 44pt | Headers: 28 – 36pt  | Body Text: 12 – 20pt | Bullet Points: 12 – 18pt | Chart / Legends: 12 – 14 pt |  |  |  | OST sta...","textChars":248,"textLines":10,"bbox":[0,0,0,0]}
+{"kind":"slide","id":"sl/jyx0ra1s","slide":4,"title":"Slide 4","textShapes":0}
+{"kind":"shape","id":"sh/1cj2d8b6","slide":4,"name":"Title 1","placeholder":"title","bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/3ihk3et8","slide":4,"name":"Content Placeholder 7","bbox":[0,0,0,0]}
+{"kind":"slide","id":"sl/i107q5of","slide":5,"title":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempo...","textShapes":2}
+{"kind":"shape","id":"sh/dgbulwnm","slide":5,"name":"Title 1","placeholder":"title","bbox":[0,0,0,0]}
+{"kind":"textbox","id":"sh/yhkbe1o7","slide":5,"name":"Content Placeholder 2","text":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.","textPreview":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad mi...","textChars":191,"textLines":1,"bbox":[180.48,515.84,526.85,93.18]}
+{"kind":"shape","id":"sh/l4bupwny","slide":5,"name":"Oval 5","bbox":[192,436.22,60.67,60.67]}
+{"kind":"textbox","id":"sh/032tgr6d","slide":5,"name":"Content Placeholder 2","text":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.","textPreview":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad mi...","textChars":191,"textLines":1,"bbox":[180.48,303.96,526.85,87.72]}
+{"kind":"shape","id":"sh/n6dcr65o","slide":5,"name":"Oval 7","bbox":[192,224.34,60.67,60.67]}
+{"kind":"shape","id":"sh/z2tcnm5s","slide":5,"name":"Rectangle 3","bbox":[823.31,181.19,385.27,427.23]}
+{"kind":"image","id":"im/bqxsjm9g","slide":5,"name":"Graphic 8","bbox":[204.29,449.34,36.1,36.1]}
+{"kind":"image","id":"im/rqdw7qls","slide":5,"name":"Graphic 9","bbox":[204.77,240.45,33.31,33.31]}
+{"kind":"slide","id":"sl/x8f69ofe","slide":6,"title":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempo...","textShapes":7}
+{"kind":"shape","id":"sh/yhg7epsj","slide":6,"name":"Title 1","placeholder":"title","bbox":[0,0,0,0]}
+{"kind":"textbox","id":"sh/1k3mhozu","slide":6,"name":"Content Placeholder 2","text":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat ","textPreview":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad mi...","textChars":463,"textLines":2,"bbox":[74.5,372.23,608.17,213.68]}
+{"kind":"textbox","id":"sh/jet8nm1c","slide":6,"name":"TextBox 29","text":"Lorem Ipsum \nDolor Sit ","textPreview":"Lorem Ipsum  | Dolor Sit","textChars":23,"textLines":2,"bbox":[79.87,213.68,302.6,116.33]}
+{"kind":"shape","id":"sh/idk7ehkr","slide":6,"name":"Straight Connector 30","bbox":[85.25,185.86,44.54,0]}
+{"kind":"shape","id":"sh/87ipkzal","slide":6,"name":"Rectangle 3","bbox":[723.57,185.87,413.08,79.02]}
+{"kind":"shape","id":"sh/98rqt4r6","slide":6,"name":"Oval 4","bbox":[1094.37,185.86,84.74,79.04]}
+{"kind":"shape","id":"sh/ml07i9sv","slide":6,"name":"Oval 5","bbox":[1103.95,193.68,67.75,63.2]}
+{"kind":"shape","id":"sh/pc76hkr2","slide":6,"name":"Rectangle 8","bbox":[723.57,268.61,413.08,79.02]}
+{"kind":"shape","id":"sh/h4bupgn6","slide":6,"name":"Oval 9","bbox":[1094.37,268.59,84.74,79.04]}
+{"kind":"shape","id":"sh/w32twb6l","slide":6,"name":"Oval 10","bbox":[1103.95,276.42,67.75,63.2]}
+{"kind":"shape","id":"sh/u1kbu1ov","slide":6,"name":"Rectangle 12","bbox":[723.57,351.88,413.08,79.02]}
+{"kind":"shape","id":"sh/5svutgni","slide":6,"name":"Oval 13","bbox":[1094.37,351.86,84.74,79.04]}
+{"kind":"shape","id":"sh/47mt0b6x","slide":6,"name":"Oval 14","bbox":[1103.95,359.68,67.75,63.2]}
+{"kind":"shape","id":"sh/i54bylor","slide":6,"name":"Rectangle 16","bbox":[723.57,435.14,413.08,79.02]}
+{"kind":"shape","id":"sh/twfux0ne","slide":6,"name":"Oval 17","bbox":[1094.37,435.13,84.74,79.04]}
+{"kind":"shape","id":"sh/svmt4v6t","slide":6,"name":"Oval 18","bbox":[1103.95,442.95,67.75,63.2]}
+{"kind":"shape","id":"sh/dcnm98zm","slide":6,"name":"Rectangle 20","bbox":[723.57,518.41,413.08,79.02]}
+{"kind":"shape","id":"sh/qpwnet0b","slide":6,"name":"Oval 21","bbox":[1094.37,518.39,84.74,79.04]}
+{"kind":"shape","id":"sh/bq547yhw","slide":6,"name":"Oval 22","bbox":[1103.95,526.22,67.75,63.2]}
+{"kind":"textbox","id":"sh/50bqpcj2","slide":6,"name":"Content Placeholder 2","text":"Lorem ipsum dolor sit amet","textPreview":"Lorem ipsum dolor sit amet","textChars":26,"textLines":1,"bbox":[749.81,202.94,261.95,41.92]}
+{"kind":"textbox","id":"sh/4f2pgr2h","slide":6,"name":"Content Placeholder 2","text":"Lorem ipsum dolor sit amet","textPreview":"Lorem ipsum dolor sit amet","textChars":26,"textLines":1,"bbox":[749.81,283.83,261.95,41.92]}
+{"kind":"textbox","id":"sh/va98j210","slide":6,"name":"Content Placeholder 2","text":"Lorem ipsum dolor sit amet","textPreview":"Lorem ipsum dolor sit amet","textChars":26,"textLines":1,"bbox":[749.81,367.09,261.95,41.92]}
+{"kind":"textbox","id":"sh/u907axkf","slide":6,"name":"Content Placeholder 2","text":"Lorem ipsum dolor sit amet","textPreview":"Lorem ipsum dolor sit amet","textChars":26,"textLines":1,"bbox":[749.81,450.36,261.95,41.92]}
+{"kind":"textbox","id":"sh/hcrqlcj6","slide":6,"name":"Content Placeholder 2","text":"Lorem ipsum dolor sit amet","textPreview":"Lorem ipsum dolor sit amet","textChars":26,"textLines":1,"bbox":[749.81,533.63,261.95,41.92]}
+{"kind":"image","id":"im/ji9of2ps","slide":6,"name":"Graphic 42","bbox":[1121.52,213.81,33.74,31.47]}
+{"kind":"image","id":"im/4fm5krqh","slide":6,"name":"Graphic 44","bbox":[1120.4,289.76,37.11,34.62]}
+{"kind":"image","id":"im/pgv6tw72","slide":6,"name":"Graphic 46","bbox":[1119.5,376.2,34.41,32.1]}
+{"kind":"image","id":"im/10n2lone","slide":6,"name":"Graphic 48","bbox":[1122.42,456.97,34.19,31.89]}
+{"kind":"image","id":"im/0zelcj6t","slide":6,"name":"Graphic 52","bbox":[1125.12,548.65,29.24,27.27]}
+{"kind":"slide","id":"sl/gnmp4jqx","slide":7,"title":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempo...","textShapes":10}
+{"kind":"shape","id":"sh/cb2tkvap","slide":7,"name":"Title 1","placeholder":"title","bbox":[0,0,0,0]}
+{"kind":"textbox","id":"sh/ydkbm5sv","slide":7,"name":"Content Placeholder 2","text":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.","textPreview":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad mi...","textChars":231,"textLines":1,"bbox":[74.5,245.75,873.31,75.01]}
+{"kind":"textbox","id":"sh/zedcfa9g","slide":7,"name":"TextBox 4","text":"Lorem ipsum dolor sit amet, consectetur","textPreview":"Lorem ipsum dolor sit amet, consectetur","textChars":39,"textLines":1,"bbox":[79.87,183.96,1065.27,58.16]}
+{"kind":"shape","id":"sh/l0vuh0rm","slide":7,"name":"Rounded Rectangle 6","bbox":[82.29,373.33,104.38,90.67]}
+{"kind":"textbox","id":"sh/eh0ba1sr","slide":7,"name":"Content Placeholder 2","text":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.","textPreview":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.","textChars":123,"textLines":1,"bbox":[196.25,392.58,321.84,61.51]}
+{"kind":"textbox","id":"sh/fi9c369c","slide":7,"name":"Content Placeholder 2","text":"Content\nTitle Here","textPreview":"Content | Title Here","textChars":18,"textLines":2,"bbox":[96.39,391.06,77.32,61.51]}
+{"kind":"shape","id":"sh/baxkjqlk","slide":7,"name":"Rounded Rectangle 9","bbox":[82.29,511.2,104.38,90.67]}
+{"kind":"textbox","id":"sh/a9ojq5kz","slide":7,"name":"Content Placeholder 2","text":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.","textPreview":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.","textChars":123,"textLines":1,"bbox":[196.25,530.45,321.84,61.51]}
+{"kind":"textbox","id":"sh/xcz2l03q","slide":7,"name":"Content Placeholder 2","text":"Content\nTitle Here","textPreview":"Content | Title Here","textChars":18,"textLines":2,"bbox":[96.39,528.93,77.32,61.51]}
+{"kind":"shape","id":"sh/cbq1sv25","slide":7,"name":"Rounded Rectangle 12","bbox":[700.48,373.33,104.38,90.67]}
+{"kind":"textbox","id":"sh/n6x0fqlo","slide":7,"name":"Content Placeholder 2","text":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.","textPreview":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.","textChars":123,"textLines":1,"bbox":[814.45,392.58,321.84,61.51]}
+{"kind":"textbox","id":"sh/25ojml43","slide":7,"name":"Content Placeholder 2","text":"Content\nTitle Here","textPreview":"Content | Title Here","textChars":18,"textLines":2,"bbox":[714.58,391.06,77.32,61.51]}
+{"kind":"shape","id":"sh/p8fih03e","slide":7,"name":"Rounded Rectangle 15","bbox":[700.48,511.2,104.38,90.67]}
+{"kind":"textbox","id":"sh/o761ov2t","slide":7,"name":"Content Placeholder 2","text":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.","textPreview":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.","textChars":123,"textLines":1,"bbox":[814.45,530.45,321.84,61.51]}
+{"kind":"textbox","id":"sh/f2d0b6lc","slide":7,"name":"Content Placeholder 2","text":"Content\nTitle Here","textPreview":"Content | Title Here","textChars":18,"textLines":2,"bbox":[714.58,528.93,77.32,61.51]}
+{"kind":"slide","id":"sl/fu1gfa1s","slide":8,"title":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempo...","textShapes":3}
+{"kind":"shape","id":"sh/18byd4zy","slide":8,"name":"Title 1","placeholder":"title","bbox":[0,0,0,0]}
+{"kind":"textbox","id":"sh/sjix0zy1","slide":8,"name":"Content Placeholder 2","text":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.","textPreview":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.","textChars":123,"textLines":1,"bbox":[74.5,421.75,382.37,111.58]}
+{"kind":"textbox","id":"sh/je9g3ahk","slide":8,"name":"TextBox 7","text":"Lorem ipsum dolor sit amet, consectetur","textPreview":"Lorem ipsum dolor sit amet, consectetur","textChars":39,"textLines":1,"bbox":[79.87,304.34,466.41,116.33]}
+{"kind":"textbox","id":"sh/o7ydoret","slide":8,"name":"Content Placeholder 2","text":"Lorem ipsum dolor sit amet","textPreview":"Lorem ipsum dolor sit amet","textChars":26,"textLines":1,"bbox":[793.79,547.24,245.71,44.53]}
+{"kind":"image","id":"im/q1k7i9kr","slide":8,"name":"Picture 5","bbox":[635.43,202.03,523.24,348.83]}
+{"kind":"slide","id":"sl/udsvah03","slide":9,"title":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempo...","textShapes":2}
+{"kind":"shape","id":"sh/1cfmhgne","slide":9,"name":"Title 1","placeholder":"title","bbox":[0,0,0,0]}
+{"kind":"textbox","id":"sh/onmxcv69","slide":9,"name":"Content Placeholder 2","text":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.","textPreview":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.","textChars":123,"textLines":1,"bbox":[677.16,433.18,382.37,111.58]}
+{"kind":"textbox","id":"sh/pofy50nu","slide":9,"name":"TextBox 32","text":"Lorem ipsum dolor sit amet, consectetur","textPreview":"Lorem ipsum dolor sit amet, consectetur","textChars":39,"textLines":1,"bbox":[682.54,315.77,466.41,116.33]}
+{"kind":"shape","id":"sh/0b65obm9","slide":9,"name":"Rounded Rectangle 2","bbox":[119.52,192,214.25,223.15]}
+{"kind":"shape","id":"sh/nex4jq5k","slide":9,"name":"Rounded Rectangle 3","bbox":[349.74,192,214.25,223.15]}
+{"kind":"shape","id":"sh/mdonql4z","slide":9,"name":"Rounded Rectangle 4","bbox":[119.52,433.13,214.25,223.15]}
+{"kind":"shape","id":"sh/9gzml0nq","slide":9,"name":"Rounded Rectangle 5","bbox":[349.74,433.13,214.25,223.15]}
+{"kind":"slide","id":"sl/m90b6t0r","slide":10,"title":"CONTACT US","textShapes":13}
+{"kind":"shape","id":"sh/1cru1g3y","slide":10,"name":"Rounded Rectangle 14","bbox":[814.79,202.82,411.43,409.14]}
+{"kind":"textbox","id":"sh/xc3mho32","slide":10,"name":"Title 1","placeholder":"title","text":"CONTACT US\n","textPreview":"CONTACT US |","textChars":11,"textLines":2,"bbox":[0,0,0,0]}
+{"kind":"textbox","id":"sh/zelojyl8","slide":10,"name":"Content Placeholder 2","text":"Thank you for your interest in OneSystems Technologies.\nOur team is here to help with technical-specific questions or general inquiries.\n","textPreview":"Thank you for your interest in OneSystems Technologies. | Our team is here to help with technical-specific questions or general inquiries. |","textChars":137,"textLines":3,"bbox":[62,141.99,687.01,72.72]}
+{"kind":"textbox","id":"sh/725onyl4","slide":10,"name":"TextBox 7","text":"LinkedIn","textPreview":"LinkedIn","textChars":8,"textLines":1,"bbox":[879.6,366.38,116.16,29.08]}
+{"kind":"textbox","id":"sh/s7yt4b21","slide":10,"name":"TextBox 9","text":"Facebook","textPreview":"Facebook","textChars":8,"textLines":1,"bbox":[1049.67,365.69,116.16,29.08]}
+{"kind":"textbox","id":"sh/q5gb21kb","slide":10,"name":"TextBox 11","text":"Instagram","textPreview":"Instagram","textChars":9,"textLines":1,"bbox":[869.04,543.26,137.28,29.08]}
+{"kind":"textbox","id":"sh/0bit8b2d","slide":10,"name":"TextBox 13","text":"YouTube","textPreview":"YouTube","textChars":7,"textLines":1,"bbox":[1043.33,541.91,137.28,29.08]}
+{"kind":"textbox","id":"sh/ydcnatkn","slide":10,"name":"TextBox 4","text":"Singapore\n190 Woodlands Industrial Park E5\n#06-11 Woodlands Bizhub S757516\nT: +65 6776 7611 \n\n\nPhilippines\nEast Tower 1904b Tektite Building, \nExchange Road, San Antonio Pasig, Philippines 1600\nT: +63 945 6111 180","textPreview":"Singapore | 190 Woodlands Industrial Park E5 | #06-11 Woodlands Bizhub S757516 | T: +65 6776 7611  |  |  | Philippines | East Tower 1904b...","textChars":213,"textLines":10,"bbox":[108.68,281.24,252.6,190.64]}
+{"kind":"textbox","id":"sh/l036l83y","slide":10,"name":"TextBox 5","text":"Malaysia\n02-08, Blok G, Komersil Southkey Mozek,\nPersiaran Southkey 1, Kota Southkey, \n80150 Johor Bahru, Malaysia\nT: +607 6907 866\n\nIndia\nPlot No.23A Kk Salai Main, Road Akkarai, Sholinganallur,Kanchipuram, Saidapet, Tamil Nadu, India, 600119​\nT: +91 98842 13454","textPreview":"Malaysia | 02-08, Blok G, Komersil Southkey Mozek, | Persiaran Southkey 1, Kota Southkey,  | 80150 Johor Bahru, Malaysia | T: +607 6907 8...","textChars":263,"textLines":9,"bbox":[391.92,281.24,274.38,189.84]}
+{"kind":"textbox","id":"sh/wvetgbud","slide":10,"name":"TextBox 20","text":"Addresses","textPreview":"Addresses","textChars":9,"textLines":1,"bbox":[108.68,246.43,109.26,32.31]}
+{"kind":"textbox","id":"sh/q9srixs3","slide":10,"name":"TextBox 29","text":"Website","textPreview":"Website","textChars":7,"textLines":1,"bbox":[391.92,521.77,85.7,32.31]}
+{"kind":"textbox","id":"sh/ru18r2to","slide":10,"name":"TextBox 30","text":"www.onesystemstech.com ","textPreview":"www.onesystemstech.com","textChars":23,"textLines":1,"bbox":[391.92,552.16,252.6,25.85]}
+{"kind":"textbox","id":"sh/0zu9ora5","slide":10,"name":"TextBox 35","text":"Email","textPreview":"Email","textChars":5,"textLines":1,"bbox":[108.68,521.77,67.01,38.98]}
+{"kind":"textbox","id":"sh/103qxcbq","slide":10,"name":"TextBox 36","text":"​enquiries@onesystemstech.com              ","textPreview":"​enquiries@onesystemstech.com","textChars":43,"textLines":1,"bbox":[108.68,541.47,252.6,38.78]}
+{"kind":"image","id":"im/hczel0bq","slide":10,"name":"Picture 6","bbox":[883.82,252.33,107.72,108.37]}
+{"kind":"image","id":"im/wb6dcval","slide":10,"name":"Picture 8","bbox":[1053.89,252.33,107.72,108.37]}
+{"kind":"image","id":"im/0rehk3ut","slide":10,"name":"Picture 10","bbox":[883.82,428.69,107.72,108.37]}
+{"kind":"image","id":"im/lsnit8be","slide":10,"name":"Picture 12","bbox":[1058.11,428.69,107.72,108.37]}
+{"kind":"slide","id":"sl/jetc3ut0","slide":11,"title":"Icons","textShapes":1}
+{"kind":"shape","id":"sh/250zy18b","slide":11,"name":"Freeform: Shape 4","bbox":[312.53,509.14,8.23,16.1]}
+{"kind":"shape","id":"sh/98rytw72","slide":11,"name":"Freeform: Shape 5","bbox":[323.94,509.03,8.23,16.21]}
+{"kind":"shape","id":"sh/o7ih0r6h","slide":11,"name":"Freeform: Shape 6","bbox":[335.35,505.96,8.23,19.27]}
+{"kind":"shape","id":"sh/72t03qp0","slide":11,"name":"Freeform: Shape 7","bbox":[346.76,494.71,8.23,30.52]}
+{"kind":"shape","id":"sh/61kzalof","slide":11,"name":"Freeform: Shape 8","bbox":[309.08,480.15,50.95,32.36]}
+{"kind":"shape","id":"sh/9gza9sze","slide":11,"name":"Freeform: Shape 10","bbox":[450.23,398.4,26.76,30.09]}
+{"kind":"shape","id":"sh/mdobedg3","slide":11,"name":"Freeform: Shape 11","bbox":[470.68,398.4,18.42,25.24]}
+{"kind":"shape","id":"sh/nehs7iho","slide":11,"name":"Freeform: Shape 12","bbox":[438.15,398.4,18.42,25.24]}
+{"kind":"shape","id":"sh/epobatgr","slide":11,"name":"Graphic 11","bbox":[438.36,480.52,48.35,50.37]}
+{"kind":"shape","id":"sh/k3uhcb6h","slide":11,"name":"Google Shape;951;p31","bbox":[567.68,393.11,10.33,31.63]}
+{"kind":"shape","id":"sh/j2lgjq5w","slide":11,"name":"Google Shape;952;p31","bbox":[579.4,409.64,6.35,12.1]}
+{"kind":"shape","id":"sh/y1czalob","slide":11,"name":"Google Shape;953;p31","bbox":[571.39,403.32,9.29,11.66]}
+{"kind":"shape","id":"sh/p07ixkn6","slide":11,"name":"Google Shape;954;p31","bbox":[574.78,423.63,11.62,5.66]}
+{"kind":"shape","id":"sh/4zyhofml","slide":11,"name":"Google Shape;955;p31","bbox":[573.49,427.4,14.2,7.54]}
+{"kind":"shape","id":"sh/tsnip0ny","slide":11,"name":"Google Shape;957;p31","bbox":[598.66,393.11,10.33,31.63]}
+{"kind":"shape","id":"sh/87ehgv6d","slide":11,"name":"Google Shape;958;p31","bbox":[590.92,409.64,6.35,12.1]}
+{"kind":"shape","id":"sh/7650nq5s","slide":11,"name":"Google Shape;959;p31","bbox":[595.99,403.32,9.29,11.66]}
+{"kind":"shape","id":"sh/65wzelo7","slide":11,"name":"Google Shape;960;p31","bbox":[590.27,423.63,11.62,5.66]}
+{"kind":"shape","id":"sh/l43ilgn2","slide":11,"name":"Google Shape;961;p31","bbox":[588.98,427.4,14.2,7.54]}
+{"kind":"shape","id":"sh/6xk7ex4b","slide":11,"name":"Freeform: Shape 84","bbox":[929.91,508.61,8.23,16.1]}
+{"kind":"shape","id":"sh/t0b6pc32","slide":11,"name":"Freeform: Shape 85","bbox":[941.32,508.5,8.23,16.21]}
+{"kind":"shape","id":"sh/sz2pg7mh","slide":11,"name":"Freeform: Shape 86","bbox":[952.73,505.44,8.23,19.27]}
+{"kind":"shape","id":"sh/n2pobils","slide":11,"name":"Freeform: Shape 87","bbox":[964.14,494.18,8.23,30.52]}
+{"kind":"shape","id":"sh/m1gn2d47","slide":11,"name":"Freeform: Shape 88","bbox":[926.45,479.62,50.95,32.36]}
+{"kind":"shape","id":"sh/5wb6ls3q","slide":11,"name":"Freeform: Shape 81","bbox":[1067.6,397.88,26.76,30.09]}
+{"kind":"shape","id":"sh/kv2pcnm5","slide":11,"name":"Freeform: Shape 82","bbox":[1088.06,397.88,18.42,25.24]}
+{"kind":"shape","id":"sh/7yton2lw","slide":11,"name":"Freeform: Shape 83","bbox":[1055.53,397.88,18.42,25.24]}
+{"kind":"shape","id":"sh/k7mpsfmd","slide":11,"name":"Graphic 11","bbox":[1055.73,480,48.35,50.37]}
+{"kind":"shape","id":"sh/lk7elwru","slide":11,"name":"Google Shape;951;p31","bbox":[1185.05,392.59,10.33,31.63]}
+{"kind":"shape","id":"sh/elcvex8z","slide":11,"name":"Google Shape;952;p31","bbox":[1196.78,409.12,6.35,12.1]}
+{"kind":"shape","id":"sh/fmlw729k","slide":11,"name":"Google Shape;953;p31","bbox":[1188.77,402.8,9.29,11.66]}
+{"kind":"shape","id":"sh/jutoj2lk","slide":11,"name":"Google Shape;954;p31","bbox":[1192.15,423.1,11.62,5.66]}
+{"kind":"shape","id":"sh/i90nax4f","slide":11,"name":"Google Shape;955;p31","bbox":[1190.86,426.87,14.2,7.54]}
+{"kind":"shape","id":"sh/cfedorqx","slide":11,"name":"Google Shape;957;p31","bbox":[1216.04,392.59,10.33,31.63]}
+{"kind":"shape","id":"sh/xgnehwri","slide":11,"name":"Google Shape;958;p31","bbox":[1208.29,409.12,6.35,12.1]}
+{"kind":"shape","id":"sh/yhwvq183","slide":11,"name":"Google Shape;959;p31","bbox":[1213.36,402.8,9.29,11.66]}
+{"kind":"shape","id":"sh/zipwjm9o","slide":11,"name":"Google Shape;960;p31","bbox":[1207.65,423.1,11.62,5.66]}
+{"kind":"shape","id":"sh/kjyxsrq9","slide":11,"name":"Google Shape;961;p31","bbox":[1206.36,426.87,14.2,7.54]}
+{"kind":"shape","id":"sh/wbih4b6d","slide":11,"name":"Title 2","placeholder":"title","bbox":[0,0,0,0]}
+{"kind":"textbox","id":"sh/h4zado76","slide":11,"name":"TextBox 45","text":"Icons","textPreview":"Icons","textChars":5,"textLines":1,"bbox":[79.87,164.15,466.41,58.16]}
+{"kind":"image","id":"im/fu5sju90","slide":11,"name":"Graphic 13","bbox":[315.5,303,50.95,53.08]}
+{"kind":"image","id":"im/etcrap8f","slide":11,"name":"Graphic 14","bbox":[439.23,303,50.95,53.08]}
+{"kind":"image","id":"im/1gnal4rq","slide":11,"name":"Graphic 29","bbox":[562.97,303,50.95,53.08]}
+{"kind":"image","id":"im/0fe9czq5","slide":11,"name":"Graphic 30","bbox":[433.2,576.58,50.95,53.08]}
+{"kind":"image","id":"im/rqlsfa9o","slide":11,"name":"Graphic 31","bbox":[52.64,303,50.95,53.08]}
+{"kind":"image","id":"im/qpcr6583","slide":11,"name":"Graphic 32","bbox":[52.64,388.14,50.95,53.08]}
+{"kind":"image","id":"im/ds3ahkru","slide":11,"name":"Graphic 33","bbox":[52.64,478.6,50.95,53.08]}
+{"kind":"image","id":"im/sru98fq9","slide":11,"name":"Graphic 34","bbox":[184.07,577.1,50.95,53.08]}
+{"kind":"image","id":"im/3m18ba9s","slide":11,"name":"Graphic 35","bbox":[61.86,577.1,50.95,53.08]}
+{"kind":"image","id":"im/ilsr2587","slide":11,"name":"Graphic 36","bbox":[184.07,303,50.95,53.08]}
+{"kind":"image","id":"im/batczmtk","slide":11,"name":"Graphic 37","bbox":[184.07,388.14,50.95,53.08]}
+{"kind":"image","id":"im/apkv6hsz","slide":11,"name":"Graphic 38","bbox":[184.07,479.64,50.95,53.08]}
+{"kind":"image","id":"im/xcbu1wbq","slide":11,"name":"Graphic 39","bbox":[309.08,388.14,50.95,53.08]}
+{"kind":"image","id":"im/cb2d8ra5","slide":11,"name":"Graphic 40","bbox":[305.62,577.1,50.95,53.08]}
+{"kind":"image","id":"im/zedc3mtw","slide":11,"name":"Graphic 42","bbox":[559.74,481.75,50.95,53.08]}
+{"kind":"image","id":"im/yd4va1sb","slide":11,"name":"Graphic 44","bbox":[561.62,576.58,50.95,53.08]}
+{"kind":"image","id":"im/lgve5wbm","slide":11,"name":"Graphic 51","bbox":[932.87,302.48,50.95,53.08]}
+{"kind":"image","id":"im/kfmdcra1","slide":11,"name":"Graphic 52","bbox":[1056.61,302.48,50.95,53.08]}
+{"kind":"image","id":"im/7idw76ts","slide":11,"name":"Graphic 55","bbox":[1180.34,302.48,50.95,53.08]}
+{"kind":"image","id":"im/mh4ve1s7","slide":11,"name":"Graphic 56","bbox":[1050.58,576.05,50.95,53.08]}
+{"kind":"image","id":"im/4n6tobql","slide":11,"name":"Graphic 57","bbox":[670.01,302.48,50.95,53.08]}
+{"kind":"image","id":"im/58fuxg76","slide":11,"name":"Graphic 58","bbox":[670.01,387.61,50.95,53.08]}
+{"kind":"image","id":"im/ilobm18f","slide":11,"name":"Graphic 59","bbox":[670.01,478.08,50.95,53.08]}
+{"kind":"image","id":"im/jmxcv6p0","slide":11,"name":"Graphic 60","bbox":[801.44,576.58,50.95,53.08]}
+{"kind":"image","id":"im/wjmtkrq9","slide":11,"name":"Graphic 61","bbox":[679.23,576.58,50.95,53.08]}
+{"kind":"image","id":"im/hkfutw7u","slide":11,"name":"Graphic 62","bbox":[801.44,302.48,50.95,53.08]}
+{"kind":"image","id":"im/uh4bi183","slide":11,"name":"Graphic 63","bbox":[801.44,387.61,50.95,53.08]}
+{"kind":"image","id":"im/vidcr6po","slide":11,"name":"Graphic 64","bbox":[801.44,479.12,50.95,53.08]}
+{"kind":"image","id":"im/8fmtgrqd","slide":11,"name":"Graphic 65","bbox":[926.45,387.61,50.95,53.08]}
+{"kind":"image","id":"im/9gvupw7y","slide":11,"name":"Graphic 66","bbox":[922.99,576.58,50.95,53.08]}
+{"kind":"image","id":"im/pcnatsjm","slide":11,"name":"Graphic 67","bbox":[1177.12,481.22,50.95,53.08]}
+{"kind":"image","id":"im/obe9kni1","slide":11,"name":"Graphic 68","bbox":[1178.99,576.05,50.95,53.08]}

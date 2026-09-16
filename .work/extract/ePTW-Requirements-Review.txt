@@ -1,0 +1,1019 @@
+
+===== PAGE 1 =====
+e PT W S YST E M RE B U ILD
+ePTW Rebuild — Requirements
+Review
+Proposed features and logic, presented for end-user confirmation
+Requirements Confirmation Deck
+
+===== PAGE 2 =====
+How to Read This Deck
+Each section states the proposal, then asks what needs confirming
+PROPOSED BEHAVIOUR
+A plain statement of how the rebuilt system will work —not a pitch, just the facts as currently designed.
+CONFIRM WITH END USER
+Specific open questions where we need your input before this is finalised.
+How to Read This Deck 1
+
+===== PAGE 3 =====
+Agenda
+24 sections
+1. Purpose of the Rebuild 9. Review & Approval Workflow 17. Dashboards & Reports
+2. Proposed Scope 10. Permit Status & Lifecycle 18. Permit PDF Generation
+3. User Roles & Permission Matrix 11. Field/Button Enable-Disable 19. Audit Trail & Change History
+4. Login & Account Management 12. Approved Permit Amendment 20. Administration & Configuration
+5. Permit Type & Template Mgmt 13. Permit Extension & Expiry 21. Security & System Controls
+6. Permit Creation Process 14. Closure, Cancellation, Revocation 22. Proposed User Journey
+7. Permit Numbering Logic 15. Email & System Notifications 23. Key Changes from Existing ePTW
+8. Parent & Child Permit Logic 16. Permit Search & Listings 24. Items Requiring Confirmation
+Agenda 2
+
+===== PAGE 4 =====
+01
+Purpose of the ePTW Rebuild
+Why this system is being rebuilt
+
+===== PAGE 5 =====
+Why the System Is Being Rebuilt
+Four categories of problem found in the current system
+PROPOSED BEHAVIOUR
+Safety gaps —the approval sequence is enforced by the screen, not the server; a rejected permit can be resubmitted into a status where nobody can approve it
+Data integrity gaps —a company typo silently strands a permit; a renamed template field silently orphans historical data with no error
+Security gaps —an unguarded discipline API; a shared plaintext admin password reset with no role check
+Missing capability —no live safety monitoring (gas readings), no real audit trail, no way for admins to edit a site or discipline
+CONFIRM WITH END USER
+? Does this framing match leadership's understanding of why the rebuild was approved?
+1 · Purpose of the Rebuild 3
+
+===== PAGE 6 =====
+Main Improvement Objectives
+What the rebuild is designed to achieve
+PROPOSED BEHAVIOUR
+A fixed, server-enforced approval chain that cannot be bypassed or stalled
+Structured master data (Company, Site, Discipline) replacing free text —eliminates silent mismatches
+A genuine audit trail —every permit action and every configuration change, attributable and permanent
+New safety-monitoring capability for high-risk work (Assessor readings) that doesn't exist today
+A simplified, consistent role model —6 roles instead of 8, each with a distinct purpose
+Consistent, purposeful reporting —6 dashboards that each answer one clear question
+1 · Purpose of the Rebuild 4
+
+===== PAGE 7 =====
+Purpose of This Review Session
+What we need from you in this session
+PROPOSED BEHAVIOUR
+Every feature in this deck has already been designed in detail through prior working sessions
+This session is to CONFIRM the logic matches real operational needs —not to design from scratch
+Where a decision was made, it's stated as a fact. Where something is still open, it's flagged for your input
+Section 24 collects every open question in one place as a final checklist
+1 · Purpose of the Rebuild 5
+
+===== PAGE 8 =====
+02
+Proposed Scope
+What's in, what's kept, what's new, what's out
+
+===== PAGE 9 =====
+Scope Overview
+Category Examples
+Retained from today Company/permit visibility model, drawn signatures for contractor declaration & closure, email-only notifications, Carbon Saving & Daily SIPP dashboards
+Corrected logic Fixed approval chain, structured Company records, template field locking, closure request/confirm/revoke flow
+New capability Assessor role & readings, two structured logs (permit + system), Global Facilities Report portal page, Announcements admin screen, gated form sections
+Blocked Words feature, D1–D5 legacy dashboards, admin password reset, per-save PDF snapshots, MicronSupervisor/MicronManager/User roles, Excel export
+Explicitly removed
+from the portal
+Out of scope for this deck Data migration planning, integration architecture, infrastructure backup/recovery —covered separately with engineering
+2 · Proposed Scope 6
+
+===== PAGE 10 =====
+03
+User Roles & Permission Matrix
+• Available roles
+• Feature access per role
+• Create/View/Edit/Review/Approve/Close/Cancel
+• Conditional permissions
+• Reviewer group management
+
+===== PAGE 11 =====
+Available User Roles
+Six roles, each exclusive — nobody holds two
+PROPOSED BEHAVIOUR
+Super Admin —full access to everything, including raising and approving permits (support fallback; not normal usage)
+User Admin —configuration and administration only; cannot raise, approve, or enter readings
+Micron Staff —can raise permits AND approve them (when named on a permit); logs in via SSO only
+Contractor Requestor —can raise permits for their company; cannot approve
+Contractor PM —first-stage approval for their own company's permits only; cannot raise
+Assessor —enters safety readings on assigned child permits only; no other capability at all
+CONFIRM WITH END USER
+? Does any real job today not fit cleanly into one of these six roles?
+3 · User Roles & Permission Matrix 7
+
+===== PAGE 12 =====
+Feature Access by Role
+Role Login Raise Approve Readings Configure
+Super Admin Password Y Y Y Y
+User Admin Password N N N Y
+Micron Staff SSO Y Y if assigned N
+Contractor Requestor Password Y N if assigned N
+Contractor PM Password N Y (own company) N N
+Assessor Password N N Y (assigned only) N
+3 · User Roles & Permission Matrix 8
+
+===== PAGE 13 =====
+MT Group Membership & Permit Assignment
+Not roles — set per group or per permit
+MT Group Membership Permit Assignment
+Micron Staff join ONE group (ENV, EHS, or OPS). Any one member's approval covers the Host, Host Manager, Area Manager, and Assessor are all NAMED on a specific permit. A
+whole group. Two switches per group: can close permits, can edit after final approval. person in an MT Group cannot also be named an individual reviewer on the same
+permit.
+3 · User Roles & Permission Matrix 9
+
+===== PAGE 14 =====
+Create / View / Edit / Review / Approve / Close / Cancel — Who
+Can Do What
+Summary across the permit lifecycle
+PROPOSED BEHAVIOUR
+Create: Super Admin, Micron Staff, Contractor Requestor (subject to the open-permit limit)
+View: scoped by involvement —Contractor sees their whole company's permits; Micron Staff sees only permits they raised or are named on; Admin sees everything
+Edit (before final approval): only the CURRENT-TURN reviewer; Admin can add/remove reviewers at any time
+Edit (after final approval): only an MT Group selected on that permit, with the edit-after-approval switch enabled —readings are never editable by anyone
+Review/Approve: whoever is currently named at the active stage of the chain
+Request Close/Cancel: only the original submitter (or Super Admin, for support)
+Confirm Close/Cancel: an MT Group selected on the permit, with the closure switch enabled
+3 · User Roles & Permission Matrix 10
+
+===== PAGE 15 =====
+04
+User Login & Account Management
+• Microsoft SSO login
+• Non-SSO / vendor login
+• Account creation
+• Activation & deactivation
+• Company/role assignment
+
+===== PAGE 16 =====
+Microsoft SSO Login (Micron Staff)
+First login triggers a mandatory onboarding sequence
+PROPOSED BEHAVIOUR
+Azure AD confirms identity and supplies the user's email
+First-time login shows a course-check page: tick “I completed the ePTW LE course” + upload a certificate —BOTH required, or theaccount is not created
+Certificate is self-declared at registration; stored and viewable by Super Admin / User Admin for audit, not verified before activation
+User then supplies: Name, Email (from Azure AD), Company (fixed: Micron), Site (defaults to ALL sites, editable later by admin)
+Account created immediately as Micron Staff. Role can be changed later by an admin.
+CONFIRM WITH END USER
+? Should the uploaded certificate ever require admin sign-off before the account activates, or does self-declared + auditable staysufficient?
+4 · User Login & Account Management 11
+
+===== PAGE 17 =====
+Non-SSO / Vendor Login (Contractors & Assessors)
+Manually created — no self-registration path exists
+PROPOSED BEHAVIOUR
+Admin/Super Admin creates the account directly, via the existing manual submission process
+New account: ONE email with a link to set a password directly —no separate email-verification step, no expiry timer
+The link stays valid until the password is actually SAVED —not until the page is merely opened
+First login only: redirected once to the existing Forms & Tutorial Videos page —no new content area built for this
+From then on, logs in straight to the portal
+4 · User Login & Account Management 12
+
+===== PAGE 18 =====
+Forgot Password & Admin Password Reset
+Closing a real security gap in the current system
+PROPOSED BEHAVIOUR
+Admin password reset is REMOVED entirely —today it sets a shared plaintext password with no notification and no API role check
+Forgot Password is restored to the Sign In page (currently hidden) as the only self-service password recovery route
+Forgot Password link expires after 24 hours —different from the account-creation link, since this protects an account that already exists
+4 · User Login & Account Management 13
+
+===== PAGE 19 =====
+Activation, Deactivation & Assignment
+Company and role changes cascade predictably
+PROPOSED BEHAVIOUR
+Deactivating a user removes their MT Group membership automatically
+Named individual reviewer slots on LIVE permits are NOT auto-removed —flagged for manual reassignment
+Setting a Company to Inactive automatically deactivates every user under that company —one action ends a contract cleanly
+No sync with Azure AD account status —offboarding a Micron Staff leaver is fully manual
+CONFIRM WITH END USER
+? Is fully manual offboarding (no Azure AD sync) acceptable, given the risk that a departed leaver stays selectable as a reviewer until someone notices?
+4 · User Login & Account Management 14
+
+===== PAGE 20 =====
+05
+Permit Type & Template Management
+• Parent permit types
+• Child permit types
+• Mandatory vs optional children
+• Templates & checklists
+• Display conditions
+
+===== PAGE 21 =====
+Parent vs Child Templates
+Two separate template lists, matching how permits are actually raised
+PROPOSED BEHAVIOUR
+Templates split into Parent and Child lists in the admin builder —reflects real approval-chain differences
+A template is Draft or Published; only Published templates are usable for real permits
+Field NAME auto-generated and locked forever at first publish. Field TYPE locked too.
+Label, tooltip, required/optional, and ordering remain editable at any time, even after publish
+“Delete” on a field means “hide from new permits” —never a true delete, since old permits keep referencing it
+5 · Permit Type & Template Management 15
+
+===== PAGE 22 =====
+Mandatory vs Optional Child Permits
+Category Type Behaviour
+Mandatory checklist A-series, triggered by hazard answers Gated: ticking a hazard forces the matching child before Submit is enabled
+Merging, high-risk B1, B2, B3, B4 Raised separately; own full chain; merges into parent at COMPLETED, not at Approved
+Never merging B5 —LSS Impairment Raised separately; own full chain; NEVER merges; has an extra Executed state
+5 · Permit Type & Template Management 16
+
+===== PAGE 23 =====
+System Components — Reserved Fields
+Cannot be deleted or retyped by an admin
+PROPOSED BEHAVIOUR
+Start Date, End Date, Site, Discipline, Host, Host Manager, Area Manager, MT Group stages are all reserved components
+Work Description is also reserved —mandatory on every parent template, added to support the new admin keyword search (Section 16)
+These can be relabelled and marked optional, but never deleted or have their type changed
+This protects dashboards, filters, and reports from being silently broken by a template edit
+“Can be created under parent” is the ONLY merge-related setting exposed to an admin —whether a child type merges is system-determined by permit type, not editable
+5 · Permit Type & Template Management 17
+
+===== PAGE 24 =====
+Conditions for Displaying / Selecting a Permit Type
+Gated sections drive the approval chain automatically
+PROPOSED BEHAVIOUR
+A section header (e.g. “Environmental Impact”) must be ticked BEFORE its items can be ticked —items stay disabled until the header is active
+Ticking the header adds the matching approver (e.g. ENV Manager) to that permit's chain automatically
+Unticking the header after items were selected requires confirmation, since it clears everything inside
+B1–B5 never appear in the parent's child-permit picker —they are structurally excluded, not just hidden by a flag
+5 · Permit Type & Template Management 18
+
+===== PAGE 25 =====
+06
+Permit Creation Process
+• Step-by-step flow
+• Required/optional fields
+• Requestor & company info
+• Location, discipline, activity
+• Attachments
+• Draft & submission rules
+
+===== PAGE 26 =====
+Step-by-Step Creation Flow
+1 2 3 4 5
+Attach Files & Add
+Choose Template Fill the Form Name Reviewers Submit or Save Draft
+Children
+→ → → →
+Parent template list only. Builds Site picked per permit (not fixed Host, Host Manager mandatory. Attachments retained for Live validation with a clickable
+the whole form from that to account). Company inherited Area Manager, ENV, EHS optional approver review. Checklist checklist of what's blocking
+template's definition. from the account, never typed. —driven by gated sections. children added at the bottom; B1– submission. Autosave every 30s;
+B5 raised separately. cleared on submit.
+6 · Permit Creation Process 19
+
+===== PAGE 27 =====
+Required vs Optional Fields
+Mandatory reviewer stages and validation behaviour
+PROPOSED BEHAVIOUR
+Mandatory: Site, Discipline, Host, Host Manager, at least one OPS-capable MT Group (closure-capable)
+Optional, form-driven: Area Manager, ENV, EHS —required only if the matching section was ticked
+All required template fields must be complete before Submit enables —checklist shown live, clickable to jump to the field
+Numeric-only fields (e.g. readings) reject non-numeric input at the field level
+6 · Permit Creation Process 20
+
+===== PAGE 28 =====
+Draft Saving & Submission Rules
+PROPOSED BEHAVIOUR
+Drafts autosave every 30 seconds; no manual save action required
+Drafts are cleared automatically once the permit is successfully submitted
+Open-permit interlock warning is shown BEFORE the form opens, not after it's filled in —states the count and which permits are blocking
+Duplicate keeps its content but clears Host and Discipline, with an explicit on-screen message explaining why
+CONFIRM WITH END USER
+? Does the open-permit limit threshold need adjusting for the new system, or does it carry over unchanged?
+6 · Permit Creation Process 21
+
+===== PAGE 29 =====
+07
+Permit Numbering Logic
+• Parent format
+• Child format
+• Discipline/location/type codes
+• Running number generation
+• Number changes on merge
+• Duplicate/skipped handling
+
+===== PAGE 30 =====
+Parent Permit Numbering
+Format: SITECODE-TYPELETTERS-DISCIPLINE-YYYY-MM-DD/NNNN
+PROPOSED BEHAVIOUR
+Example: F10A1-GB1-FAC-2026-08-18/0231
+TYPELETTERS start with the parent's own type, then gain a letter for each embedded checklist at submission, and LATER gain a letter for each B1–B4 merged in as it
+completes
+This means the parent's permit number CHANGES OVER TIME as children merge —G becomes GB1, then GB1B2
+Discipline and Site codes are locked once used on any permit —renaming the record afterward never changes numbers already issued
+7 · Permit Numbering Logic 22
+
+===== PAGE 31 =====
+Child Permit Numbering (B1–B4)
+Format: TYPELETTERS-DISCIPLINE-YYYY-MM-DD/NNNN —no site code
+PROPOSED BEHAVIOUR
+Example: B1-FAC-2026-08-18/0007
+No site code —the child is linked to its parent, which already carries the site
+Once merged (at Completed), the child's own number stops being searchable —the record is deleted
+The number IS preserved permanently as text inside the parent's history log and PDF, tagged to every merged-in entry
+CONFIRM WITH END USER
+? Should a merged child's number ever be made searchable again (resolving to its parent), or does “number no longer found” stay the intended behaviour?
+7 · Permit Numbering Logic 23
+
+===== PAGE 32 =====
+08
+Parent and Child Permit Logic
+• Parent/child relationship
+• Adding/removing children
+• Approval & merging logic
+• Impact of child status on parent
+• Independent closure/cancellation/recall
+
+===== PAGE 33 =====
+The Three Child Permit Categories
+Category Raised Merges into parent Closure/Cancellation
+1. Checklist/embedded Bottom of parent form, before submission Already part of the parent Follows the parent —no independent action
+YES —at COMPLETED only. Cancelled children never Independent —can close/cancel without
+2. B1, B2, B3, B4 Separately, against an existing parent
+merge. affecting the parent
+Independent —same as above, plus its own
+3. B5 —LSS Separately, against an existing parent NEVER —permanent standalone record
+Executed state
+8 · Parent and Child Permit Logic 24
+
+===== PAGE 34 =====
+Merge Mechanics — What Actually Happens
+Fires automatically at Completed, never at Approved
+PROPOSED BEHAVIOUR
+Child reaches Completed → merge fires automatically, no manual step
+Child's type letter is added to the parent's permit number
+Child's full content AND its entire log history are copied into the parent, every entry tagged with the child's original permit number
+The standalone child record is then DELETED —from this point it only exists inside the parent's PDF and log
+A CANCELLED child (any type) never merges —it remains a standalone record permanently
+8 · Parent and Child Permit Logic 25
+
+===== PAGE 35 =====
+No Restriction Between Parent and Child Approval
+A deliberate, confirmed design decision
+PROPOSED BEHAVIOUR
+A separately-raised child permit (B1–B4 or B5) can reach Approved even while its parent is still Pending, PendingApproval, or Rejected
+The two chains run entirely independently —nothing links their approval progress
+This was explicitly confirmed rather than assumed —flagged here as a deliberate choice, not an oversight
+CONFIRM WITH END USER
+? Confirm: should high-risk child work ever be blocked from proceeding until the parent permit itself is authorised?
+8 · Parent and Child Permit Logic 26
+
+===== PAGE 36 =====
+09
+Permit Review & Approval Workflow
+• Reviewer/approver selection • Final approval
+• Review stages & sequence
+• Sequential (not parallel)
+• Routing conditions
+• Rejection & resubmission
+• Delegation —considered
+
+===== PAGE 37 =====
+Lifecycle A — Micron Staff Permit
+No PM stage — straight into the reviewer chain
+1 2 3 4 5
+Create & Submit Host approves Host Manager approves Optional stages OPS approves
+→ → → →
+Status set directly to First individual reviewer, Second individual stage, Area Manager, ENV, EHS —only if Mandatory MT Group stage.
+PendingApproval. mandatory. mandatory. that section was ticked on the Permit becomes Approved.
+form.
+9 · Review & Approval Workflow 27
+
+===== PAGE 38 =====
+Lifecycle B — Contractor Permit
+One extra gate at the front; identical from there on
+1 2 3 4 5
+Create & Submit Contractor PM approves Host → Host Manager Optional stages OPS approves
+→ → → →
+Status set to Pending —parked Must be a PM of the SAME Identical to Lifecycle A from here Area Manager, ENV, EHS —same Permit becomes Approved.
+awaiting the contractor's own PM. company. Only role that can act on. form-driven rule. Closure still confirmed by a
+here. Micron MT Group either way.
+9 · Review & Approval Workflow 28
+
+===== PAGE 39 =====
+Sequence Is Strictly Sequential — Not Parallel
+A deliberate design decision, stated explicitly for confirmation
+PROPOSED BEHAVIOUR
+Individual stages act in fixed order: Host → Host Manager → Area Manager
+Then group stages, in fixed order: ENV → EHS → OPS
+One member's signature satisfies the whole group stage —but stages themselves never run at the same time
+The sequence is enforced by the SERVER, not just the screen —closing the biggest defect in the current system
+CONFIRM WITH END USER
+? Parallel approval (e.g. ENV and EHS reviewed at the same time) was NOT included —confirm this is acceptable, or should any stages run in parallel to speed up the chain?
+9 · Review & Approval Workflow 29
+
+===== PAGE 40 =====
+Rejection & Resubmission
+One consistent rule — no route-dependent inconsistency
+PROPOSED BEHAVIOUR
+Rejection requires a mandatory reason
+Rejecting RESTARTS the whole chain from the beginning —every reviewer signs again on the corrected version
+This differs from today, where earlier approvals are sometimes kept and sometimes wiped depending on which button was used
+Distinct from editing: reject is for when the REQUESTOR must supply new information; a reviewer who can fix it themselves edits instead
+CONFIRM WITH END USER
+? Restarting the full chain on every rejection means more re-signing effort —confirm this trade-off (safety vs. speed) is acceptable.
+9 · Review & Approval Workflow 30
+
+===== PAGE 41 =====
+Reviewer Reassignment — No Formal Delegation Feature
+Considered and deliberately excluded
+PROPOSED BEHAVIOUR
+MT Group stages need no delegation —any member of the group can act, which already covers someone being on leave
+For named individuals (Host, Host Manager, Area Manager): a reviewer or admin can remove them and add a replacement at any time,fully logged
+A formal “nominate a backup in advance” feature was considered and excluded —manual reassignment was judged sufficient
+CONFIRM WITH END USER
+? Confirm manual reassignment is sufficient for named-individual absences, or is a formal delegation feature still needed?
+9 · Review & Approval Workflow 31
+
+===== PAGE 42 =====
+Final Approval Conditions
+PROPOSED BEHAVIOUR
+A permit becomes Approved the moment the LAST stage in its chain signs —whether that's OPS, or an earlier stage if later ones weren't triggered
+Every permit must carry at least one closure-capable MT Group —checked and required at creation, so a permit can never become unclosable
+Approval timestamp (approveAt) is a permanent fact once set —used later for reporting regardless of what happens to the permit afterward
+9 · Review & Approval Workflow 32
+
+===== PAGE 43 =====
+10
+Permit Status & Lifecycle
+• Draft • Pending cancellation
+• Pending review/approval • Cancelled
+• Approved • Status transitions
+• Rejected/returned
+• Pending closure
+• Completed
+
+===== PAGE 44 =====
+All Statuses
+No separate ‘Expired’ status — see Section 13
+Status Meaning Reached by
+Draft Saved but not submitted Save as Draft
+Pending Awaiting Contractor PM (contractor only) Submitted by a non-Micron company
+PendingApproval In the reviewer chain Submitted by Micron staff, or after the PM approves
+Rejected Sent back with a reason Any approver rejects
+Approved Fully signed off The last chain stage signs
+Executed (LSS only) Life-safety system currently impaired MT Group presses Execute on an approved LSS permit
+PendingClosure Closure acknowledgement submitted, awaiting confirmation Submitter/Host/Contractor signs the closure section
+PendingCancel Cancellation acknowledgement submitted, awaiting confirmation Same acknowledgement section, cancellation path
+Completed Closed out —end state Confirmed by a closure-capable MT Group, or LSS Complete pressed
+Cancelled Cancelled —end state Confirmed by a closure-capable MT Group
+10 · Permit Status & Lifecycle 33
+
+===== PAGE 45 =====
+Status Transition Rules
+PROPOSED BEHAVIOUR
+Rejection always returns to the very start of the chain —never resumes mid-chain
+Recall undoes exactly ONE step —the most recent approval only, never further back
+Revoke returns PendingClosure/PendingCancel back to Approved
+No automatic “Expired” transition exists —an overdue Approved permit simply stays Approved (see Section 13)
+10 · Permit Status & Lifecycle 34
+
+===== PAGE 46 =====
+Full Lifecycle — Parent Permit
+Creation through closure, including the reviewer chain and reject loop
+10 · Permit Status & Lifecycle 35
+
+===== PAGE 47 =====
+Full Lifecycle — Child Permit (B1–B4)
+Same chain as the parent, but Completed MERGES in while Cancelled stays standalone
+10 · Permit Status & Lifecycle 36
+
+===== PAGE 48 =====
+Full Lifecycle — LSS Permit (B5)
+Adds Execute/Complete, restricted to MT Group only — never merges into the parent
+10 · Permit Status & Lifecycle 37
+
+===== PAGE 49 =====
+11
+Field & Button Enable/Disable Logic
+• Buttons per status
+• Requestor-editable fields
+• Reviewer-editable fields
+• Locking after approval
+• Special edit permission
+
+===== PAGE 50 =====
+Who Can Edit, and When
+Stage Who can edit content What they can touch
+Before submission The requestor Everything
+During review (not yet final approval) Only the CURRENT-TURN reviewer Full content, including dates
+Only an MT Group selected on the permit, with the edit-after-
+After final approval Full content EXCEPT readings, which nobody can ever edit
+approval switch enabled
+Admin, at any time Super Admin / User Admin Reviewer list only (add/remove) —never permit content directly
+11 · Field & Button Enable/Disable Logic 38
+
+===== PAGE 51 =====
+Button Availability by Status
+Actions appear only when they're actually valid
+PROPOSED BEHAVIOUR
+Approve / Reject: visible only to the current-turn reviewer; hidden once the permit is already approved, rejected, or the user is the submitter (self-approval blocked)
+Request Closure/Cancellation: visible only to the original submitter, only when status is Approved
+Confirm Closure/Cancellation: visible only to an MT Group member selected on that permit with the closure switch enabled, only when status is
+PendingClosure/PendingCancel
+Revoke: visible to the submitter or Super Admin, only while a closure/cancellation request is still pending confirmation
+Recall: visible only to the specific approver who gave the most recent approval, or Super Admin
+Duplicate: visible only to the original requestor, hidden for Super Admin entirely
+11 · Field & Button Enable/Disable Logic 39
+
+===== PAGE 52 =====
+New: Closure/Cancellation Acknowledgement Interlock
+A signed declaration that IS the closure/cancellation request
+PROPOSED BEHAVIOUR
+A dedicated acknowledgement section (Name, drawn Signature, Date) sits greyed out and unfillable for the ENTIRE life of the permit up to Approved
+Once Approved, the section unlocks —either the Contractor or the Micron Host (whichever applies) can complete it
+Submitting this section IS the act of requesting closure/cancellation —status moves to PendingClosure/PendingCancel at that moment
+Name, Signature, and Date lock PERMANENTLY the instant it's submitted —frozen even from the edit-after-approval MT Group
+This section is shared by both closure and cancellation —same fields, same lock rule
+The MT Group Confirm step still happens afterward, unchanged, as a separate action
+CONFIRM WITH END USER
+? If a closure/cancellation request is revoked, should this signed acknowledgement be cleared for a fresh signature, or does the original signed record stay on file even through a revoke?
+11 · Field & Button Enable/Disable Logic 40
+
+===== PAGE 53 =====
+12
+Approved Permit Amendment
+• Content locked after approval
+• Who can amend
+• Group membership requirement
+• Fields allowed to change
+• Reapproval requirement
+• Audit history
+
+===== PAGE 54 =====
+Amending an Approved Permit
+One MT Group switch controls all post-approval editing
+PROPOSED BEHAVIOUR
+Content is locked to everyone EXCEPT an MT Group that is (a) selected as an approver on that specific permit, AND (b) has the edit-after-approval switch enabled
+Both conditions must hold —group membership alone, without being selected on that permit, is not enough
+Fields allowed to change: any permit content, including start/end dates —EXCEPT the readings table, which is never editable by anyone once saved
+No reapproval is triggered by a post-approval edit —the change takes effect silently on the existing approved permit
+Every edit is logged with old value, new value, who, and when —but nobody is notified automatically
+CONFIRM WITH END USER
+? Should certain high-impact edits (e.g. extending the end date by more than X days) trigger a notification to the original approvers, even though the edit itself doesn't require reapproval?
+12 · Approved Permit Amendment 41
+
+===== PAGE 55 =====
+13
+Permit Extension & Expiry
+• Validity period
+• Start/end date control
+• Extension process
+• Expiry notification
+• Automatic expiry logic
+
+===== PAGE 56 =====
+No New Expiry Mechanism — Extension and Expiry Are Handled
+by Existing Rules
+This section resolves to “no change needed” after review
+PROPOSED BEHAVIOUR
+There is NO separate ‘Expired’ status. A permit past its end date keeps its current status (e.g. stays Approved)
+“Extension” is simply an edit to the end date —covered entirely by the edit-after-approval MT Group switch in Section 12
+An overdue, unclosed permit continues to appear normally in listings and dashboards —no label, icon, colour, or notification marks it as overdue
+The ONLY consequence: an overdue Approved permit still counts toward the existing open-permit interlock, exactly as any other open permit does —there is no separate
+overdue threshold or configurable grace period
+CONFIRM WITH END USER
+? Confirm this is sufficient —no dedicated Expired status, no overdue flag, no expiry reminder email. Extension and overdue handling both ride on rules already built for other purposes.
+13 · Permit Extension & Expiry 42
+
+===== PAGE 57 =====
+14
+Permit Closure, Cancellation & Revocation
+• Who can request
+• Who approves
+• Withdrawing/revoking
+• Remarks & attachments
+• Impact on child permits
+
+===== PAGE 58 =====
+Closing a Permit
+Request → Revoke → Confirm → Closed
+1 2 3 4
+Request Revoke Confirm Closed
+→ → →
+Submitter (or Host/Contractor, per the Submitter or Super Admin can revoke while An MT Group SELECTED on the permit, with Status becomes Completed or Cancelled.
+acknowledgement section) signs still pending confirmation. Returns to the closure switch enabled, confirms. Acknowledgement fields lock permanently at
+Name/Signature/Date. This IS the request. Approved. the Request step.
+14 · Closure, Cancellation & Revocation 43
+
+===== PAGE 59 =====
+Impact on Related Child Permits
+Parent and child permits close independently
+PROPOSED BEHAVIOUR
+A separately-raised child permit (B1–B4, or LSS) can be closed or cancelled independently of its parent's status
+A child reaching Completed still merges into the parent, exactly as normal —closure and merge are the same event for B1–B4
+A child reaching Cancelled does NOT merge —stays a standalone record permanently
+LSS never merges regardless of outcome (Completed or Cancelled) —this is a permanent, non-configurable rule
+CONFIRM WITH END USER
+? Who should be authorised to change an LSS permit to Executed, and to Closed / Cancelled —see Section 24, item 16
+14 · Closure, Cancellation & Revocation 44
+
+===== PAGE 60 =====
+15
+Email & System Notifications
+• Submission
+• Review/approval
+• Rejection
+• Closure/cancellation
+• No escalation —by design
+• Recipients
+
+===== PAGE 61 =====
+All Notifications
+Email only — no in-app inbox, no push, no deep links
+Event Sent to
+Permit submitted Requestor
+Awaiting PM approval (contractor) Contractor PMs of that company
+Your turn to review Next reviewer / MT Group
+Approved (final) Requestor
+Rejected Requestor, with reason
+Closure/cancellation REQUESTED The closure-capable MT Group on that permit (new)
+Closure/completion confirmed Requestor
+Cancellation confirmed Requestor
+New account created New user
+Assigned as assessor The assessor (new)
+15 · Email & System Notifications 45
+
+===== PAGE 62 =====
+No Escalation or Reminders — A Deliberate Exclusion
+Considered and explicitly decided against
+PROPOSED BEHAVIOUR
+No reminder is sent if a permit sits unactioned at a reviewer's stage for any length of time
+No escalation to a manager or admin after a threshold period
+If something stalls, following up is the requestor's responsibility, same as today
+This was a deliberate simplicity choice —flagged here since it's a common expectation for a permit system
+CONFIRM WITH END USER
+? Confirm no escalation/reminder mechanism is acceptable —or is this needed, at least for the closure request stage, which can otherwise sit indefinitely?
+15 · Email & System Notifications 46
+
+===== PAGE 63 =====
+16
+Permit Search & List Management
+• Searchable info
+• Filtering
+• Sorting/pagination
+• Role-based visibility
+• Export
+
+===== PAGE 64 =====
+Visibility Rules
+Scoped strictly by involvement — a real tightening from today
+PROPOSED BEHAVIOUR
+Contractor Requestor / PM: sees every permit belonging to their OWN COMPANY (not just their own submissions)
+Micron Staff: sees ONLY permits they personally raised, or where they are named as a reviewer/approver/assessor —no browse-everything view
+Super Admin / User Admin: sees everything
+One listing page with tabs that adapt automatically per role —no empty tabs shown for capabilities a role doesn't have
+CONFIRM WITH END USER
+? Micron Staff losing a general ‘browse all permits’ view is a real behaviour change from today —confirm this tightened visibility is acceptable operationally.
+16 · Permit Search & List Management 47
+
+===== PAGE 65 =====
+Listing Columns — Parent Permit
+13 columns, search or filter as marked
+# Column Interaction
+1 Permit Number Search
+2 Permit Code Search
+3 Permit Type Filter
+4 Discipline Filter
+5 Requestor Email Search
+6 Requestor's Company Filter
+7 Host Search
+8 Applier Site Filter
+9 Date Applied Filter
+10 Start Date Filter
+11 End Date Filter
+12 Status Filter
+13 Action View / Review (if your turn) / Export PDF / Duplicate (own permits)
+16 · Permit Search & List Management 48
+
+===== PAGE 66 =====
+Listing Columns — Child Permit (B1–B4) & LSS
+Child listing links back to its parent; LSS gets its own dedicated day-by-day view
+Child Permit (B1–B4) — 12 columns LSS (B5) — dedicated view
+Child Type Day-by-day grouping, sub-grouped by status:
+Child Permit Number Pending · Approved · Executed · Completed
+Parent Permit Number 15-day default window (7 before, today, 7 after)
+Discipline Filters: Site, Date range
+Requestor Email Click a count → popup listing the
+Requestor Company contributing permit numbers
+Host
+Date Applied
+Start Date
+End Date
+Status
+Action —View / Review / Export PDF / Duplicate
+16 · Permit Search & List Management 49
+
+===== PAGE 67 =====
+Export & Sorting
+PROPOSED BEHAVIOUR
+Sort: newest first, by creation date
+Page size: user-selectable
+No bulk actions in the listing —it is purely a find-and-open tool
+No Excel export from the portal listing —the only Excel output is the separate Global Facilities Report (Section 17)
+16 · Permit Search & List Management 50
+
+===== PAGE 68 =====
+New: Search Permits — Admin Keyword Search
+A separate, dedicated page — distinct from the tabbed listing above
+PROPOSED BEHAVIOUR
+New nav item, separate from the main permit listing —Super Admin and User Admin only
+Scope: parent permits only —searches across EVERY parent permit, with no company or involvement scoping
+All matching is PARTIAL (“contains”), consistently across every field
+Filters: Permit Code, Work Description, Creation Date range, Host Email, Requestor Company, Discipline
+Work Description becomes a new RESERVED system component —mandatory on every parent template, name locked, cannot be removed by an admin —this is what
+makes it reliably searchable
+16 · Permit Search & List Management 51
+
+===== PAGE 69 =====
+Search Results — Columns
+10 columns; Permit Number is clickable and opens the permit page
+# Column
+1 Permit Number (click to open)
+2 Requestor Name
+3 Requestor Company
+4 Host Email
+5 Discipline
+6 Creation Date
+7 Start Time
+8 End Time
+9 Work Description
+10 Status
+16 · Permit Search & List Management 52
+
+===== PAGE 70 =====
+17
+Dashboards & Reports
+• Operational dashboard
+• Monthly permit report
+• Approved/completed counts
+• Report calculation logic
+• Excel/PDF export
+• Access permissions
+
+===== PAGE 71 =====
+Dashboards — Six Kept or Rebuilt, Everything Else Removed
+D1–D5 and the legacy V1 dashboard are DROPPED entirely — internally inconsistent, never reconciled with each other
+PROPOSED BEHAVIOUR
+Kept as-is: Carbon/Paper Saving, Daily SIPP Works
+New: Monthly Approved Permit Count, Child Permit Count by Type, General vs Tool Install, Child Permit Tree (drill-down)
+Every dashboard is filtered and calculated consistently —no two reports silently use different date fields or status sets
+17 · Dashboards & Reports 53
+
+===== PAGE 72 =====
+The Six Dashboards — Calculation Logic
+Dashboard Date basis Status scope
+Carbon / Paper Saving Work start date All statuses
+Daily SIPP Works Child start date Approved, PendingApproval
+Monthly Approved Permit Count approveAt (locked permanently once set) Any —count survives later status changes
+Child Permit Count by Type Creation date Child's own status: Approved, PendingClosure, Completed
+General vs Tool Install Creation date All statuses
+Child Permit Tree (drill-down) Creation date All 7 statuses
+17 · Dashboards & Reports 54
+
+===== PAGE 73 =====
+Global Facilities Report — Scheduled Excel Export
+A backend job, not a portal screen — kept from the current system
+PROPOSED BEHAVIOUR
+Generated automatically every day at 9:00am, unchanged from today
+Uploaded to S3 using the SAME FILENAME every day —this is a live pointer to today's data, not a dated archive
+Content structurally similar to today: every permit flattened by risk category, with per-role signature status
+NEW: a dedicated portal page with a download link and “Last generated: [date, time]” —replaces relying on a bookmarked raw S3 URL
+Access restricted to Super Admin and User Admin only
+CONFIRM WITH END USER
+? Does the report's column set / risk-category logic need updating for the new data model, or does “structurally similar to today”fully cover it?
+17 · Dashboards & Reports 55
+
+===== PAGE 74 =====
+18
+Permit PDF & Document Generation
+• PDF content
+• Parent/child presentation
+• Checklists & signatures
+• Approval history
+• Regeneration after amendment
+
+===== PAGE 75 =====
+What the PDF Contains
+One document, generated live, always complete
+PROPOSED BEHAVIOUR
+Generated ON DEMAND from current state —no stored per-save snapshots, unlike today's mechanism
+Anyone who can view the permit can generate it, at any time
+ALL merged children's full content appears inside the parent PDF —there is no separate child PDF
+Attachments included as clickable links, not embedded files
+Complete history log at the end —every entry, chronological, tagged by source (parent or which merged child)
+No table of contents or bookmarks —it's a point-in-time snapshot, not a navigable reference document
+18 · Permit PDF & Document Generation 56
+
+===== PAGE 76 =====
+Regeneration & Identification
+PROPOSED BEHAVIOUR
+Filename = parent permit code + generation timestamp —since the same permit can look different at different points in time as children merge
+No manual “regenerate” action needed —every generation reflects current state automatically
+A generated-timestamp line appears inside the document itself, so two printed copies of the same permit can be told apart
+No QR code or other verification marker is included on the PDF —the generation timestamp is sufficient
+18 · Permit PDF & Document Generation 57
+
+===== PAGE 77 =====
+19
+Audit Trail & Change History
+• Creation/update history
+• Review/approval records
+• Field-level tracking
+• User/date/time
+• Amendment reasons
+
+===== PAGE 78 =====
+Two Logs, Two Purposes
+Permit Log System (Configuration) Log
+Scope One log per permit System-wide admin activity
+Where Inside the permit's own page Dedicated admin page (not per-object)
+Visible to Anyone who can see the permit Super Admin and User Admin only
+Created, edited (old/new value), approved, rejected, recalled, readings, merges
+Captures Templates, users, sites, MT Groups, companies, disciplines, maps
+(tagged with child's number), failed attempts
+Entry grouping One entry per action One entry per SAVE —all changed fields grouped, not one entry per field
+19 · Audit Trail & Change History 58
+
+===== PAGE 79 =====
+Structure, Timezone & Retention
+PROPOSED BEHAVIOUR
+Every entry: actor ID + name at the time, event type, field, old value, new value, outcome (success/failed with error message)
+Timestamp stored in UTC internally, always DISPLAYED in Singapore time
+Both logs are append-only —never edited or deleted by anyone, including admins
+Retention: kept forever, no purging, ever
+Filterable by event type, source, and actor
+Login/logout events are NOT captured in the system log —considered and excluded
+19 · Audit Trail & Change History 59
+
+===== PAGE 80 =====
+20
+Administration & Configuration
+• User & role admin
+• Reviewer group setup
+• Company & contractor mgmt
+• Site & discipline config
+• Template config
+• Announcements
+
+===== PAGE 81 =====
+Sites, Maps & Disciplines
+Full admin control, with a real security gap closed
+PROPOSED BEHAVIOUR
+All three: full Create/Edit by admin —Sites currently have NO edit screen at all today
+Soft delete ONLY —an Active/Inactive toggle, never a true delete; anything referencing an inactive record keeps working exactlyas before
+Codes enforced unique, and LOCKED once used on any permit
+Permits display the NAME everywhere —code is only ever used inside the formatted permit number itself
+Discipline create/update currently has NO permission check in the API at all —closed in the rebuild
+20 · Administration & Configuration 60
+
+===== PAGE 82 =====
+Company Management
+Replaces a free-text field that silently strands permits today
+PROPOSED BEHAVIOUR
+Company becomes a real record: Name, Code, Type (Internal/Contractor), Status
+Micron itself is a Company record too, flagged Internal —the whole Micron-vs-contractor lifecycle branch becomes a flag check, not a string comparison
+Company code enforced unique
+Setting a Company Inactive cascades to deactivate every user under it
+20 · Administration & Configuration 61
+
+===== PAGE 83 =====
+MT Group / Reviewer Group Setup
+Membership, not a role — with two configurable switches
+PROPOSED BEHAVIOUR
+One group per person —a person is either a group approver, or an individual reviewer (Host/Host Manager/Area Manager), never both
+Two switches per group: Can Close Permits, Can Edit After Approval
+Adding/removing members from a group updates every LIVE permit using that group automatically
+20 · Administration & Configuration 62
+
+===== PAGE 84 =====
+Announcements — New Admin Feature
+From a database-only edit to a proper admin screen
+PROPOSED BEHAVIOUR
+Rich-text pop-up shown on the Sign In page, before login
+Multiple active announcements shown as bullet points inside ONE pop-up
+Always-on until manually turned off —no scheduling, shown every login with no dismissal memory
+Managed by Super Admin and User Admin
+20 · Administration & Configuration 63
+
+===== PAGE 85 =====
+21
+Security & System Controls
+• Role-based access control
+• Company/site data separation
+• Session & link expiry
+• Document access control
+• Backup/recovery —infra scope
+
+===== PAGE 86 =====
+Security Controls in Scope for This Review
+PROPOSED BEHAVIOUR
+Role-based access is enforced server-side for every action, not just hidden in the UI —closes the current system's biggest gap (approval sequence enforced only by the
+screen)
+Contractor visibility strictly scoped to their own company's data —no cross-company visibility possible
+Account-creation links: no expiry, valid until the password is set. Forgot-password links: 24-hour expiry
+Attachments and PDFs are only accessible to users who can already see the permit they belong to
+Backup, recovery, and infrastructure-level controls are designed separately as an engineering/IT concern —out of scope for thisworkshop
+21 · Security & System Controls 64
+
+===== PAGE 87 =====
+22
+Proposed User Journey Demonstration
+• Create a permit • Complete & archive
+• Submit for review
+• Review & amend
+• Final approval
+• Manage an approved permit
+• Request closure
+
+===== PAGE 88 =====
+End-to-End Journey — Part 1: Creation to Approval
+1 2 3 4 5
+Create Submit Review Amend if Rejected Final Approval
+→ → → →
+Requestor picks a template, fills Live validation confirms nothing is Current-turn reviewer can edit Requestor corrects and resubmits. Last chain stage signs. Status
+the form, names Host/Host missing. Chain determined by content before deciding. Approve, Whole chain restarts from the becomes Approved. Requestor
+Manager, attaches documents. company: Micron skips PM, reject (reason required), or recall beginning. notified.
+Contractor doesn't. a prior step.
+22 · Proposed User Journey Demonstration 65
+
+===== PAGE 89 =====
+End-to-End Journey — Part 2: Work to Archive
+1 2 3 4 5
+Work in Progress Request Closure Confirm Closure Merge Archive
+→ → → →
+Assessor enters hourly readings Host or Contractor signs the An MT Group selected on the Any B1–B4 children that After 2 years, moves to an
+on assigned B1/B2/B4 children. closure acknowledgement — permit, with the closure switch, completed fold into the parent Archived tab. PDF generation and
+Edit-permission MT Group can Name, Signature, Date. This IS the confirms. Status becomes automatically. Their history is all display rules stay exactly the
+amend content if needed. request. Completed. preserved, tagged by source. same, forever.
+22 · Proposed User Journey Demonstration 66
+
+===== PAGE 90 =====
+23
+Key Changes from Existing ePTW
+• Retained behaviour
+• Corrected logic
+• New features
+• Processes removed
+• Impact on current users
+
+===== PAGE 91 =====
+What's Being Removed Entirely
+Named plainly, so nobody is surprised when it's gone
+Removed Why
+Blocked Words feature Obsolete —Micron Manager becomes a mandatory selected reviewer, not free text to police
+Dashboards D1–D5 + legacy V1 Internally inconsistent, replaced by six purposeful reports
+Admin password reset Insecure workaround, replaced by a working Forgot Password
+Per-save PDF snapshot mechanism Replaced by on-demand generation from current state
+MicronSupervisor, MicronManager, MTGroup-as-role, User roles Collapsed into six roles with genuinely distinct capabilities
+Free-text company field Replaced by a managed Company record
+Portal Excel export Unreachable and unused —only the separate Global Facilities Report remains
+23 · Key Changes from Existing ePTW 67
+
+===== PAGE 92 =====
+Impact on Current Users
+What people will notice most
+PROPOSED BEHAVIOUR
+Micron Staff: lose the ability to browse every permit —visibility now strictly follows involvement
+Requestors: raising a permit is stricter (mandatory Host/Host Manager, gated sections) but gives clearer submission feedback
+Approvers: must now sign again on ANY rejection-resubmission, even a small fix —no partial chain resumption
+Everyone: onboarding is different —Micron Staff face a course-completion gate; contractors see a one-time tutorial
+Admins: two new admin screens (Announcements, Global Facilities Report page); one screen removed (admin password reset)
+23 · Key Changes from Existing ePTW 68
+
+===== PAGE 93 =====
+24
+Items Requiring End-User Confirmation
+Every open question from this review, collected in one place
+
+===== PAGE 94 =====
+Open Questions — Part 1
+# Question Section
+1 Does any real job today not fit cleanly into one of the six roles? 3
+2 Should the LE course certificate require admin sign-off before activation, or stay self-declared? 4
+3 Is fully manual offboarding (no Azure AD sync) acceptable? 4
+4 Does the open-permit limit threshold need adjusting for the new system? 6
+5 Should a merged child's permit number ever become searchable again? 7
+6 Should high-risk child work ever be blocked until the parent itself is authorised? 8
+7 Should any stages run in parallel rather than strictly sequential? 9
+8 Is restarting the full chain on every rejection an acceptable trade-off? 9
+9 Is manual reviewer reassignment sufficient, or is formal delegation still needed? 9
+24 · Items Requiring Confirmation 69
+
+===== PAGE 95 =====
+Open Questions — Part 2
+# Question Section
+10 Should a revoked closure/cancellation clear the signed acknowledgement, or keep the original record? 11
+11 Should high-impact edits (e.g. large date extensions) trigger a notification even without reapproval? 12
+12 Confirm no dedicated Expired status and no overdue flag/reminder is needed. 13
+13 Should escalation/reminders exist at least for closure requests specifically? 15
+14 Confirm tightened Micron Staff visibility (no browse-all view) is operationally acceptable. 16
+15 Does the Global Facilities Report's column set need updating for the new data model? 17
+16 Who should be the person to change the LSS permit to Executed, and to Closed / Cancelled? 8
+24 · Items Requiring Confirmation 70
