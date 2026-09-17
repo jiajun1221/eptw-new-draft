@@ -151,6 +151,21 @@ describe("application shell", () => {
     render(<MemoryRouter initialEntries={["/help?resource=tutorials"]}><App /></MemoryRouter>);
     expect(screen.getByRole("heading", { name: /tutorial videos/i })).toBeTruthy();
     expect(screen.getByRole("link", { name: /tutorial videos/i }).className).toContain("active");
+    expect(screen.getByRole("link", { name: "Watch B1 Hot Work permit" })).toBeTruthy();
+    fireEvent.click(screen.getByRole("button", { name: "Workflow" }));
+    expect(screen.getByText("Approval and rejection flow")).toBeTruthy();
+    expect(screen.queryByText("B1 Hot Work permit")).toBeNull();
+  });
+
+  it("shows and searches the form download library", () => {
+    render(<MemoryRouter initialEntries={["/help?resource=forms"]}><App /></MemoryRouter>);
+    expect(screen.getByRole("heading", { name: "Form downloads" })).toBeTruthy();
+    expect(screen.getByText("Risk Assessment")).toBeTruthy();
+    expect(screen.getByText("ePTW User Guide v3.0")).toBeTruthy();
+    expect(screen.getByRole("link", { name: "Download Hot Work Signage" }).hasAttribute("download")).toBe(true);
+    fireEvent.change(screen.getByLabelText("Search downloadable forms"), { target: { value: "confined" } });
+    expect(screen.getByText("Confined Space Signage")).toBeTruthy();
+    expect(screen.queryByText("Risk Assessment")).toBeNull();
   });
 
   it("uses the Dashboard for assigned reviews without a separate Approval queue menu", () => {
@@ -177,12 +192,24 @@ describe("application shell", () => {
     expect(screen.getByRole("heading", { name: /lss \/ fas impairment requests/i })).toBeTruthy();
     expect(screen.getByText("F10A1-LSS-2026-09/0012")).toBeTruthy();
     expect(document.querySelectorAll(".lss-date-group")).toHaveLength(4);
-    expect(document.querySelectorAll(".lss-status-group")).toHaveLength(4);
+    expect(document.querySelectorAll(".lss-status-group")).toHaveLength(7);
     fireEvent.click(screen.getByLabelText("Show empty statuses"));
     expect(document.querySelectorAll(".lss-status-group")).toHaveLength(16);
     fireEvent.change(screen.getByLabelText("Filter LSS/FAS by site"), { target: { value: "F10N" } });
     expect(screen.queryByText("F10A1-LSS-2026-09/0012")).toBeNull();
     expect(screen.getByText("F10N-FAS-2026-09/0011")).toBeTruthy();
+  });
+
+  it("groups SIPP reports by date and filters by year and month", () => {
+    localStorage.setItem("eptw-demo-user", "admin-1");
+    render(<MemoryRouter initialEntries={["/sipp-daily-report"]}><App /></MemoryRouter>);
+    expect(screen.getByRole("heading", { name: "SIPP daily reports" })).toBeTruthy();
+    expect(screen.getByText("SIPP-2026-02/0018")).toBeTruthy();
+    expect(screen.getAllByText("Pending Approval").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("Approved").length).toBeGreaterThan(0);
+    fireEvent.change(screen.getByLabelText("Filter SIPP reports by month"), { target: { value: "03" } });
+    expect(screen.queryByText("SIPP-2026-02/0018")).toBeNull();
+    expect(screen.getByText("SIPP-2026-03/0001")).toBeTruthy();
   });
 
   it("lets Micron Staff open the permit register and create a permit", () => {
@@ -234,16 +261,19 @@ describe("application shell", () => {
     fireEvent.change(screen.getByLabelText("Template name"), { target: { value: "Confined Space Checklist" } });
     fireEvent.change(screen.getByLabelText("Template code"), { target: { value: "CS" } });
     fireEvent.change(screen.getByLabelText("Description"), { target: { value: "Required controls for confined-space entry." } });
-    fireEvent.click(screen.getByRole("button", { name: /save child template/i }));
+    fireEvent.click(screen.getByRole("button", { name: /create child template/i }));
     expect(screen.getAllByText("Confined Space Checklist").length).toBeGreaterThan(0);
   });
 
   it("renders the staging site register and adds a site", () => {
     localStorage.setItem("eptw-demo-user", "admin-1");
     render(<MemoryRouter initialEntries={["/settings/sites"]}><App /></MemoryRouter>);
-    expect(screen.getByText("Micron Semiconductor Asia Pte Ltd - Fab 10A1")).toBeTruthy();
+    expect(screen.getByText("Micron Semiconductor Asia Pte Ltd")).toBeTruthy();
+    expect(screen.getByText("Fab 10A1")).toBeTruthy();
     expect(screen.getByText("1 Woodlands Industrial Park D Street 1, Singapore 738799")).toBeTruthy();
-    fireEvent.click(screen.getByRole("button", { name: /add site/i }));
+    expect(screen.getByText("Alternate address")).toBeTruthy();
+    fireEvent.click(screen.getByRole("button", { name: "Add site to 1 N Coast Dr, Singapore 757432" }));
+    expect((screen.getByLabelText("Site address") as HTMLInputElement).value).toBe("1 N Coast Dr, Singapore 757432");
     fireEvent.change(screen.getByLabelText("Site name"), { target: { value: "Micron Test Fab" } });
     fireEvent.change(screen.getByLabelText("Site code"), { target: { value: "MTF" } });
     fireEvent.change(screen.getByLabelText("Site address"), { target: { value: "2 Test Avenue, Singapore 123456" } });
@@ -285,6 +315,23 @@ describe("application shell", () => {
     render(<MemoryRouter initialEntries={["/dashboard"]}><App /></MemoryRouter>);
     expect(screen.queryByRole("link", { name: /analytics/i })).toBeNull();
     expect(screen.queryByRole("link", { name: /sipp daily report/i })).toBeNull();
+  });
+
+  it("renders all seven analytics reports with interactive breakdown tabs", () => {
+    localStorage.setItem("eptw-demo-user", "admin-1");
+    render(<MemoryRouter initialEntries={["/analytics"]}><App /></MemoryRouter>);
+    [
+      "Parent and child permit count by status",
+      "Child permits by date range",
+      "General vs tool install permits",
+      "Permit count by date range and site",
+      "General and tool install count by child permit",
+      "Monthly approved permit count",
+      "ePTW initiatives and carbon savings",
+    ].forEach((name) => expect(screen.getByRole("heading", { name })).toBeTruthy());
+    fireEvent.click(screen.getByRole("tab", { name: /by discipline/i }));
+    expect(screen.getByRole("tab", { name: /by discipline/i }).getAttribute("aria-selected")).toBe("true");
+    expect(screen.getByText("Facilities", { selector: "strong" })).toBeTruthy();
   });
 
   it("exports the currently filtered user list as CSV", () => {

@@ -12,9 +12,9 @@ export type SafetyChecklistItem = {
 };
 
 export const SAFETY_CHECKLIST_TABS: { id: SafetyChecklistTabId; badge: string; label: string; shortLabel: string; description: string }[] = [
-  { id: "health-safety", badge: "A", label: "Section 2a: Health & Safety Impact", shortLabel: "Health & Safety", description: "Identify work that can affect people, operations, or site safety systems." },
-  { id: "ehs-permits", badge: "B", label: "Section 2b: EHS Permit-to-Work System", shortLabel: "EHS Permit", description: "Select accompanying permits and checklists required before work starts." },
-  { id: "environmental", badge: "C", label: "Section 2c: Environmental Impact", shortLabel: "Environmental", description: "Identify environmental impacts that require an EAI assessment." },
+  { id: "health-safety", badge: "A", label: "Health & Safety Impact", shortLabel: "Health & Safety", description: "Identify work that can affect people, operations, or site safety systems." },
+  { id: "ehs-permits", badge: "B", label: "EHS Permit-to-Work System", shortLabel: "EHS Permit", description: "Select accompanying permits and checklists required before work starts." },
+  { id: "environmental", badge: "C", label: "Environmental Impact", shortLabel: "Environmental", description: "Identify environmental impacts that require an EAI assessment." },
 ];
 
 const impacts: Omit<SafetyChecklistItem, "tab" | "kind">[] = [

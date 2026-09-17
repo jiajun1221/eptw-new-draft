@@ -122,22 +122,19 @@ export default function MtGroupsManager({ user }: { user: User }) {
     <section className="group-directory-section" aria-labelledby="group-directory-title">
       <div className="group-section-heading"><div><h2 id="group-directory-title">Users and MT group access</h2><p>View every user account and its assigned MT groups.</p></div></div>
       <div className="card directory-card">
-        <div className="directory-toolbar user-directory-toolbar"><label className="search group-search"><SearchIcon /><input aria-label="Search users" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search user, role, company, or MT group" /></label><span className="result-count">Showing {visibleUsers.length} of {USERS.length} users</span></div>
+        <div className="directory-toolbar user-directory-toolbar"><label className="search group-search"><SearchIcon /><input aria-label="Search users" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search user or MT group" /></label><span className="result-count">Showing {visibleUsers.length} of {USERS.length} users</span></div>
         <div className="directory-table-scroll"><table className="directory-table user-directory-table"><thead><tr>
           <th><input type="checkbox" aria-label="Select all visible users" checked={visibleUsers.length > 0 && visibleUsers.every((person) => selectedUserIds.has(person.id))} onChange={(event) => setSelectedUserIds(event.target.checked ? new Set([...selectedUserIds, ...visibleUsers.map((person) => person.id)]) : new Set([...selectedUserIds].filter((id) => !visibleUsers.some((person) => person.id === id))))} /></th>
-          <th>User</th><th>Role</th><th>MT groups</th><th>Authentication</th><th>Organization</th><th>Status</th><th>Actions</th>
+          <th>User</th><th>MT groups</th><th>Status</th><th>Actions</th>
         </tr></thead><tbody>
           {visibleUsers.map((person, index) => { const personGroups = groupsForUser(person); return <tr key={person.id}>
             <td><input type="checkbox" aria-label={`Select ${person.name}`} checked={selectedUserIds.has(person.id)} onChange={(event) => { const next = new Set(selectedUserIds); event.target.checked ? next.add(person.id) : next.delete(person.id); setSelectedUserIds(next); }} /></td>
             <td><div className="user-identity-cell"><span className={`user-list-avatar avatar-${index % 5}`}>{initials(person.name)}</span><span><strong>{person.name}</strong><small>{person.email}</small></span></div></td>
-            <td><span className={`user-role role-${person.role.toLowerCase().replaceAll("_", "-")}`}><i aria-hidden="true" />{ROLE_LABELS[person.role] ?? person.role}</span></td>
             <td><div className="user-group-tags">{personGroups.length ? personGroups.map((group) => <button type="button" key={group.id} onClick={() => openMembers(group)}>{group.name}</button>) : <span>Not assigned</span>}</div></td>
-            <td><span className={`auth-badge ${person.authMethod === "SSO" ? "sso" : "password"}`}>{person.authMethod ?? "PASSWORD"}</span></td>
-            <td><span className="organization-cell">{person.company ?? (person.role === "MICRON_STAFF" ? "Micron" : "System access")}</span></td>
             <td><span className="user-status"><i />Active</span></td>
             <td><button type="button" className="user-row-action" onClick={() => setEditingUser(person)} aria-label={`Edit ${person.name}`}><EditIcon /><span>Edit</span></button></td>
           </tr>; })}
-          {!visibleUsers.length && <tr><td colSpan={8}><div className="membership-empty">No users match “{query}”.</div></td></tr>}
+          {!visibleUsers.length && <tr><td colSpan={5}><div className="membership-empty">No users match “{query}”.</div></td></tr>}
         </tbody></table></div>
       </div>
     </section>

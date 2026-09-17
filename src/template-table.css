@@ -34,16 +34,14 @@
 .template-table tbody tr:last-child td { border-bottom: 0; }
 .template-table tbody tr:hover { background: #fbfdff; }
 .template-table th:first-child,.template-table td:first-child { padding-left: 14px; }
-.template-table th:nth-child(1) { width: 24%; }
-.template-table th:nth-child(2) { width: 8%; }
-.template-table th:nth-child(3) { width: 12%; }
-.template-table th:nth-child(4) { width: 31%; }
-.template-table th:nth-child(5) { width: 12%; }
-.template-table th:nth-child(6) { width: 9%; text-align: center; }
-.template-table th:nth-child(7) { width: 4%; }
+.template-table th:nth-child(1) { width: 30%; }
+.template-table th:nth-child(2) { width: 43%; }
+.template-table th:nth-child(3) { width: 14%; }
+.template-table th:nth-child(4) { width: 9%; text-align: center; }
+.template-table th:nth-child(5) { width: 4%; }
 .template-table td:first-child { display: grid; grid-template-columns: 32px 1fr; align-items: center; gap: 9px; }
 .template-table td:first-child strong { color: #17498e; font-size: 11px; }
-.template-table td:nth-child(6) { text-align: center; }
+.template-table td:nth-child(4) { text-align: center; }
 .template-table td:last-child { padding-inline: 2px 8px; }
 .template-table td:last-child .row-menu { margin: auto; }
 .template-table tbody tr:last-child .row-menu-panel { top: auto; bottom: 34px; }
