@@ -317,16 +317,15 @@ describe("application shell", () => {
     expect(screen.queryByRole("link", { name: /sipp daily report/i })).toBeNull();
   });
 
-  it("renders all seven analytics reports with interactive breakdown tabs", () => {
+  it("renders all six analytics reports with interactive breakdown tabs", () => {
     localStorage.setItem("eptw-demo-user", "admin-1");
     render(<MemoryRouter initialEntries={["/analytics"]}><App /></MemoryRouter>);
     [
-      "Parent and child permit count by status",
+      "Monthly approved permit count",
       "Child permits by date range",
       "General vs tool install permits",
       "Permit count by date range and site",
       "General and tool install count by child permit",
-      "Monthly approved permit count",
       "ePTW initiatives and carbon savings",
     ].forEach((name) => expect(screen.getByRole("heading", { name })).toBeTruthy());
     fireEvent.click(screen.getByRole("tab", { name: /by discipline/i }));
