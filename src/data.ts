@@ -7,7 +7,7 @@ export const approvalStages = (): ApprovalStage[] => ["INDIVIDUAL_REVIEWER", "MT
 
 export const blankPermitData = (): PermitFormData => ({
   templateId: "", templateName: "", title: "", description: "", site: "F10A1", discipline: "AMHS", location: "", company: "", startAt: dateOffset(0), endAt: dateOffset(2, 18),
-  hostId: "pm-1", individualReviewerId: "ir-1", mtGroup: "Facilities MT", assessorIds: [], hazards: [], safetyDeclarations: [], attachments: [],
+  hostId: "pm-1", hostSupervisorId: "supervisor-1", hostManagerId: "admin-1", individualReviewerId: "ir-1", mtGroup: "Facilities MT", finalApprovalMtGroup: "Facilities MT", assessorIds: [], hazards: [], safetyDeclarations: [], attachments: [],
   safetyChecklistResponses: {},
 });
 

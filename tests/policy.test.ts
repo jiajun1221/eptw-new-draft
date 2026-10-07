@@ -38,6 +38,14 @@ describe("central workflow policy", () => {
     expect(getActionDecision(permit, "APPROVE", user("admin-1"), state.permits).allowed).toBe(true);
   });
 
+  it("keeps Micron Supervisors read-only throughout the permit workflow", () => {
+    const state = createSeedState(); const permit = state.permits.find((p) => p.id === "permit-review")!;
+    const supervisor = user("supervisor-1");
+    expect(getActionDecision(permit, "APPROVE", supervisor, state.permits).allowed).toBe(false);
+    expect(getActionDecision(permit, "REQUEST_CHANGES", supervisor, state.permits, "Needs revision").allowed).toBe(false);
+    expect(getActionDecision(permit, "REJECT", supervisor, state.permits, "Not acceptable").allowed).toBe(false);
+  });
+
   it("blocks parent final approval until its child is approved", () => {
     const state = createSeedState(); const parent = state.permits.find((p) => p.id === "permit-hot-parent")!;
     expect(getActionDecision(parent, "APPROVE", user("pm-1"), state.permits).reason).toMatch(/child permits/i);

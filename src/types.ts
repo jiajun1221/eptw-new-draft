@@ -1,4 +1,4 @@
-export type Role = "SUPER_ADMIN" | "USER_ADMIN" | "MICRON_STAFF" | "CONTRACTOR_REQUESTOR" | "CONTRACTOR_PM" | "ASSESSOR" | (string & {});
+export type Role = "SUPER_ADMIN" | "MICRON_SUPERVISOR" | "USER_ADMIN" | "MICRON_STAFF" | "CONTRACTOR_REQUESTOR" | "CONTRACTOR_PM" | "ASSESSOR" | (string & {});
 export interface User { id: string; name: string; email: string; role: Role; group?: string; authMethod?: "SSO" | "PASSWORD"; company?: string; sites?: string[] }
 export type PermitType = "GENERAL" | "HOT_WORK";
 export type PermitStatus = "DRAFT" | "INDIVIDUAL_REVIEW" | "MT_REVIEW" | "PM_REVIEW" | "CHANGES_REQUESTED" | "APPROVED" | "ACTIVE" | "SUSPENDED" | "CLOSURE_REQUESTED" | "CLOSED" | "REJECTED" | "CANCELLED" | "EXPIRED" | "SUPERSEDED";
@@ -10,9 +10,9 @@ export type SafetyChecklistResponse = Record<string, string | boolean>;
 export type SafetyChecklistResponses = Record<string, SafetyChecklistResponse>;
 export interface PermitFormData {
   templateId?: string; templateName?: string;
-  customFields?: Record<string, string | boolean>;
+  customFields?: Record<string, string | boolean | string[]>;
   title: string; description: string; site: string; discipline: string; location: string; company: string; startAt: string; endAt: string;
-  hostId: string; individualReviewerId: string; individualReviewerIds?: string[]; mtGroup: string; mtGroups?: string[]; hazards: string[]; safetyDeclarations: string[];
+  hostId: string; hostSupervisorId: string; hostManagerId: string; individualReviewerId: string; individualReviewerIds?: string[]; mtGroup: string; mtGroups?: string[]; finalApprovalMtGroup?: string; hazards: string[]; safetyDeclarations: string[];
   assessorIds?: string[];
   attachments: AttachmentMetadata[]; hotWork?: HotWorkDetails; safetyChecklistResponses?: SafetyChecklistResponses;
 }

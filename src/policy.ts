@@ -8,7 +8,7 @@ const yes = (reason = "Action permitted") => ({ allowed: true, reason });
 const no = (reason: string) => ({ allowed: false, reason });
 
 export function isComplete(data: PermitFormData, type: Permit["type"]): boolean {
-  const base = Boolean(data.title.trim() && data.description.trim() && data.site && data.discipline && data.location.trim() && data.company.trim() && data.startAt && data.endAt && data.hostId && (data.individualReviewerIds?.length || data.individualReviewerId) && (data.mtGroups?.length || data.mtGroup))
+  const base = Boolean(data.title.trim() && data.description.trim() && data.site && data.discipline && data.location.trim() && data.company.trim() && data.startAt && data.endAt && data.hostId && data.hostSupervisorId && data.hostManagerId && (data.individualReviewerIds?.length || data.individualReviewerId) && (data.mtGroups?.length || data.mtGroup) && (data.finalApprovalMtGroup || data.mtGroup))
     && new Date(data.startAt) < new Date(data.endAt)
     && safetyChecklistComplete(data.safetyChecklistResponses);
   if (!base || type !== "HOT_WORK") return base;

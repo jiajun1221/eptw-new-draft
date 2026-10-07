@@ -2,6 +2,7 @@ import { approvalStages, createSeedState, uid } from "./data";
 import { effectiveStatus, getActionDecision, isComplete, nextApprovalStatus } from "./policy";
 import type { ActivityLog, AuditEvent, EptwState, Permit, PermitFilters, PermitFormData, TransitionAction, TransitionPayload, User } from "./types";
 import { currentRevision } from "./types";
+import { sectionUpdateKeys } from "./sectionAccess";
 
 const STORAGE_KEY = "eptw-functional-draft:v2";
 const clone = <T,>(value: T): T => structuredClone(value);
@@ -11,6 +12,7 @@ export interface PermitRepository {
   getPermit(id: string): Permit | undefined;
   createPermit(input: PermitFormData, actor: User): Permit;
   updateDraft(id: string, input: PermitFormData, actor: User): Permit;
+  updateSection(id: string, sectionId: string, fields: Record<string, string | boolean | string[]>, actor: User): Permit;
   submitPermit(id: string, actor: User): Permit;
   performTransition(id: string, action: TransitionAction, payload: TransitionPayload, actor: User): Permit;
   addActivityLog(id: string, input: Pick<ActivityLog, "date" | "summary" | "safetyConfirmed">, actor: User): Permit;
@@ -59,6 +61,13 @@ export class LocalPermitRepository implements PermitRepository {
     const state = this.read(), permit = this.find(state, id), revision = currentRevision(permit);
     if (!["CONTRACTOR_REQUESTOR", "MICRON_STAFF", "SUPER_ADMIN"].includes(actor.role) || permit.requestorId !== actor.id || !["DRAFT", "CHANGES_REQUESTED"].includes(revision.status)) throw new Error("This revision cannot be edited by the current user.");
     revision.data = clone(input); this.audit(permit, actor, "DRAFT_UPDATED", revision.status, revision.status); this.write(state); return clone(permit);
+  }
+  updateSection(id: string, sectionId: string, fields: Record<string, string | boolean | string[]>, actor: User) {
+    const state = this.read(), permit = this.find(state, id), revision = currentRevision(permit);
+    sectionUpdateKeys(permit, sectionId, actor, fields);
+    revision.data.customFields = { ...revision.data.customFields, ...clone(fields) };
+    this.audit(permit, actor, "SECTION_UPDATED", revision.status, revision.status, `Section ${sectionId}`);
+    this.write(state); return clone(permit);
   }
   submitPermit(id: string, actor: User) { return this.performTransition(id, "SUBMIT", {}, actor); }
   performTransition(id: string, action: TransitionAction, payload: TransitionPayload, actor: User) {
