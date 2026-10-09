@@ -8,6 +8,7 @@ const yes = (reason = "Action permitted") => ({ allowed: true, reason });
 const no = (reason: string) => ({ allowed: false, reason });
 
 export function isComplete(data: PermitFormData, type: Permit["type"]): boolean {
+  if (data.templateId) return Boolean(data.site && data.discipline && data.startAt && data.endAt && data.hostId && data.hostSupervisorId && data.hostManagerId && (data.individualReviewerIds?.length || data.individualReviewerId) && (data.mtGroups?.length || data.mtGroup) && (data.finalApprovalMtGroup || data.mtGroup)) && new Date(data.startAt) < new Date(data.endAt);
   const base = Boolean(data.title.trim() && data.description.trim() && data.site && data.discipline && data.location.trim() && data.company.trim() && data.startAt && data.endAt && data.hostId && data.hostSupervisorId && data.hostManagerId && (data.individualReviewerIds?.length || data.individualReviewerId) && (data.mtGroups?.length || data.mtGroup) && (data.finalApprovalMtGroup || data.mtGroup))
     && new Date(data.startAt) < new Date(data.endAt)
     && safetyChecklistComplete(data.safetyChecklistResponses);
@@ -48,10 +49,6 @@ export function getActionDecision(permit: Permit, action: TransitionAction, acto
     if (!["INDIVIDUAL_REVIEW", "MT_REVIEW", "PM_REVIEW"].includes(status)) return no("This permit is not awaiting a review decision.");
     if (revision.createdBy === actor.id || permit.requestorId === actor.id) return no("Separation of duties prevents reviewing your own permit.");
     if (!assignedReviewer(permit, actor, status)) return no("Approval requires assignment to the current approval stage.");
-    if (action === "APPROVE" && status === "PM_REVIEW" && permit.type === "GENERAL") {
-      const blocked = permit.childIds.map((id) => permits.find((item) => item.id === id)).filter((item) => item && effectiveStatus(item, now) !== "APPROVED");
-      if (blocked.length) return no("All required Hot Work child permits must be approved first.");
-    }
     return yes();
   }
   if (action === "CANCEL") return owner && canRaise(actor) && ["DRAFT", "CHANGES_REQUESTED", "INDIVIDUAL_REVIEW", "MT_REVIEW", "PM_REVIEW", "APPROVED"].includes(status) ? yes() : no("Only the original requestor can request cancellation.");
@@ -59,8 +56,7 @@ export function getActionDecision(permit: Permit, action: TransitionAction, acto
     if (!owner || !canRaise(actor) || status !== "APPROVED") return no("Only the original requestor can activate an approved permit.");
     const start = new Date(revision.data.startAt), end = new Date(revision.data.endAt);
     if (now < start || now > end) return no("The permit can activate only within its approved work period.");
-    const ready = permit.childIds.every((id) => { const child = permits.find((item) => item.id === id); return child && effectiveStatus(child, now) === "APPROVED"; });
-    return ready ? yes() : no("Required child permits are not approved.");
+    return yes();
   }
   if (action === "SUSPEND") return ["MICRON_STAFF", "SUPER_ADMIN"].includes(actor.role) && status === "ACTIVE" ? yes() : no("Only authorised Micron Staff can suspend active work.");
   if (action === "RESUME") return ["MICRON_STAFF", "SUPER_ADMIN"].includes(actor.role) && status === "SUSPENDED" && now <= new Date(revision.data.endAt) ? yes() : no("Only authorised Micron Staff can resume a valid suspended permit.");

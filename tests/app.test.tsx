@@ -150,8 +150,8 @@ describe("application shell", () => {
     expect(screen.getByRole("link", { name: /parent permits/i })).toBeTruthy();
     expect(screen.getByRole("link", { name: /child permits/i })).toBeTruthy();
     expect(screen.getByRole("heading", { name: /child permits/i })).toBeTruthy();
-    fireEvent.click(screen.getByLabelText(/actions for f10a1-hw/i));
-    expect(screen.getByRole("link", { name: /^view$/i })).toBeTruthy();
+    fireEvent.click(screen.getByLabelText(/actions for f10a1-b1/i));
+    expect(screen.getAllByRole("link", { name: /^view$/i }).length).toBeGreaterThan(0);
     expect(screen.queryByRole("link", { name: /^review$/i })).toBeNull();
     expect(screen.queryByRole("button", { name: /export as pdf/i })).toBeNull();
     expect(screen.queryByRole("button", { name: /duplicate/i })).toBeNull();
@@ -299,6 +299,22 @@ describe("application shell", () => {
     expect(screen.getByLabelText("Access route")).toBeTruthy();
   });
 
+  it("uploads and removes documents from template file fields", async () => {
+    localStorage.setItem("eptw-demo-user", "req-1");
+    localStorage.setItem("eptw-templates:v4", JSON.stringify([{ id: "file-parent", kind: "PARENT", name: "Document permit", code: "DOC", discipline: "Facilities", description: "Permit with attachments.", active: true, updatedAt: "2026-10-09T00:00:00.000Z", sections: [{ id: "documents", title: "Documents", description: "Upload supporting files.", fields: [{ id: "supporting-file", label: "Supporting document", type: "FILE", required: true, width: 3 }] }] }]));
+    render(<MemoryRouter initialEntries={["/permits/new"]}><App /></MemoryRouter>);
+    fireEvent.change(screen.getByLabelText("Permit template type"), { target: { value: "file-parent" } });
+    const file = new File(["document contents"], "risk-assessment.pdf", { type: "application/pdf" });
+    fireEvent.change(screen.getByLabelText("Supporting document *"), { target: { files: [file] } });
+
+    expect(await screen.findByText("risk-assessment.pdf")).toBeTruthy();
+    expect(screen.queryByText("Choose document")).toBeNull();
+    expect(screen.getByRole("link", { name: "Download" }).getAttribute("download")).toBe("risk-assessment.pdf");
+    fireEvent.click(screen.getByRole("button", { name: "Remove risk-assessment.pdf" }));
+    expect(screen.queryByText("risk-assessment.pdf")).toBeNull();
+    expect(screen.getByText("Choose document")).toBeTruthy();
+  });
+
   it("opens the permit row menu with icon-labelled actions", () => {
     render(<MemoryRouter initialEntries={["/permits"]}><App /></MemoryRouter>);
     fireEvent.click(screen.getAllByLabelText(/actions for/i)[0]);
@@ -375,7 +391,7 @@ describe("application shell", () => {
     expect(Array.from(childTemplate.options).some((option) => option.text.includes("A01 · Upload Risk Assessment Form"))).toBe(true);
     fireEvent.change(childTemplate, { target: { value: "tpl-child-a01" } });
     expect(childTemplate.value).toBe("tpl-child-a01");
-    expect(firstLabel.value).toBe("Upload Risk Assessment Form");
+    expect(firstLabel.value).toBe("Isolation confirmed");
   });
 
   it("opens the child template attached to a selected multiple-checkbox option", () => {
@@ -413,6 +429,25 @@ describe("application shell", () => {
     expect(screen.queryByPlaceholderText("Choices separated by commas")).toBeNull();
   });
 
+  it("closes field settings when clicking away or opening another field", () => {
+    localStorage.setItem("eptw-demo-user", "admin-1");
+    render(<MemoryRouter initialEntries={["/settings/templates/new?kind=PARENT"]}><App /></MemoryRouter>);
+    fireEvent.click(screen.getByRole("button", { name: /add form element/i }));
+    const firstSettings = screen.getByLabelText("Edit Equipment / system reference").closest("details") as HTMLDetailsElement;
+    const secondSettings = screen.getByLabelText("Edit Field 2").closest("details") as HTMLDetailsElement;
+
+    fireEvent.click(firstSettings.querySelector("summary")!);
+    expect(firstSettings.open).toBe(true);
+    fireEvent.pointerDown(screen.getByLabelText("Section 1 title"));
+    expect(firstSettings.open).toBe(false);
+
+    fireEvent.click(firstSettings.querySelector("summary")!);
+    fireEvent.pointerDown(secondSettings.querySelector("summary")!);
+    fireEvent.click(secondSettings.querySelector("summary")!);
+    expect(firstSettings.open).toBe(false);
+    expect(secondSettings.open).toBe(true);
+  });
+
   it("adds configurable tabs to a template section and renders them on a permit", () => {
     localStorage.setItem("eptw-demo-user", "admin-1");
     render(<MemoryRouter initialEntries={["/settings/templates/new?kind=PARENT"]}><App /></MemoryRouter>);
@@ -441,6 +476,38 @@ describe("application shell", () => {
     fireEvent.click(screen.getByRole("tab", { name: /ehs permit/i }));
     expect(screen.getByLabelText("Permit reference")).toBeTruthy();
     expect(screen.queryByLabelText("Impact details")).toBeNull();
+  });
+
+  it("reorders template sections with move up and down controls", () => {
+    localStorage.setItem("eptw-demo-user", "admin-1");
+    render(<MemoryRouter initialEntries={["/settings/templates/new?kind=PARENT"]}><App /></MemoryRouter>);
+    fireEvent.change(screen.getByLabelText("Section 1 title"), { target: { value: "First section" } });
+    fireEvent.click(screen.getByRole("button", { name: /add section/i }));
+    fireEvent.change(screen.getByLabelText("Section 2 title"), { target: { value: "Second section" } });
+
+    expect((screen.getByRole("button", { name: "Move section 1 up" }) as HTMLButtonElement).disabled).toBe(true);
+    expect((screen.getByRole("button", { name: "Move section 2 down" }) as HTMLButtonElement).disabled).toBe(true);
+    fireEvent.click(screen.getByRole("button", { name: "Move section 2 up" }));
+    expect((screen.getByLabelText("Section 1 title") as HTMLInputElement).value).toBe("Second section");
+    expect((screen.getByLabelText("Section 2 title") as HTMLInputElement).value).toBe("First section");
+
+    fireEvent.click(screen.getByRole("button", { name: "Move section 1 down" }));
+    expect((screen.getByLabelText("Section 1 title") as HTMLInputElement).value).toBe("First section");
+    expect((screen.getByLabelText("Section 2 title") as HTMLInputElement).value).toBe("Second section");
+  });
+
+  it("only shows the section permission summary when edit access is assigned", () => {
+    localStorage.setItem("eptw-demo-user", "admin-1");
+    render(<MemoryRouter initialEntries={["/settings/templates/new?kind=PARENT"]}><App /></MemoryRouter>);
+    expect(screen.queryByLabelText("Section edit permissions")).toBeNull();
+
+    fireEvent.click(screen.getByRole("button", { name: "Edit permissions" }));
+    const assessorAccess = screen.getByRole("checkbox", { name: /allow assigned assessor/i });
+    fireEvent.click(assessorAccess);
+    expect(screen.getByLabelText("Section edit permissions").textContent).toContain("Assigned Assessor");
+
+    fireEvent.click(assessorAccess);
+    expect(screen.queryByLabelText("Section edit permissions")).toBeNull();
   });
 
   it("toggles template status and supports view, edit, and delete actions", () => {

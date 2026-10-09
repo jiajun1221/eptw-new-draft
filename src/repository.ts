@@ -31,6 +31,19 @@ export class LocalPermitRepository implements PermitRepository {
         const draft = createSeedState().permits.find((permit) => permit.id === "permit-draft");
         if (draft) { state.permits.push(draft); this.write(state); }
       }
+      const seeds = createSeedState();
+      const sampleChildIds = ["permit-confined-child", "permit-lifting-child", "permit-height-child", "permit-a01-child"];
+      const missingChildren = seeds.permits.filter((permit) => sampleChildIds.includes(permit.id) && !state.permits.some((existing) => existing.id === permit.id));
+      const sampleParent = state.permits.find((permit) => permit.id === "permit-hot-parent");
+      const originalChild = state.permits.find((permit) => permit.id === "permit-hot-child");
+      const originalChildData = originalChild ? currentRevision(originalChild).data : undefined;
+      const upgradeOriginalChild = Boolean(originalChildData && !originalChildData.templateId);
+      if (missingChildren.length || upgradeOriginalChild || (sampleParent && sampleChildIds.some((id) => !sampleParent.childIds.includes(id)))) {
+        state.permits.push(...missingChildren);
+        if (originalChildData && upgradeOriginalChild) { originalChildData.templateId = "tpl-child-b1"; originalChildData.templateName = "HOT WORKS"; }
+        if (sampleParent) sampleParent.childIds = [...new Set([...sampleParent.childIds, ...sampleChildIds])];
+        this.write(state);
+      }
       return this.expire(state);
     }
     catch { return this.resetDemoData(); }

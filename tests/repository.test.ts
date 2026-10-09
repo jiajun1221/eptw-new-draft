@@ -27,11 +27,11 @@ describe("local permit repository", () => {
     expect(currentRevision(permits.find((permit) => permit.id === "permit-draft")!).status).toBe("DRAFT");
   });
 
-  it("executes the sequential approval workflow and enforces child gating", () => {
+  it("keeps parent and child approval workflows independent", () => {
     const repo = new LocalPermitRepository(); const parent = repo.getPermit("permit-hot-parent")!; const childId = parent.childIds[0];
-    expect(() => repo.performTransition(parent.id, "APPROVE", {}, user("pm-1"))).toThrow(/child permits/i);
-    repo.performTransition(childId, "APPROVE", {}, user("pm-1")); repo.performTransition(parent.id, "APPROVE", {}, user("pm-1"));
+    repo.performTransition(parent.id, "APPROVE", {}, user("pm-1"));
     expect(currentRevision(repo.getPermit(parent.id)!).status).toBe("APPROVED");
+    expect(currentRevision(repo.getPermit(childId)!).status).toBe("PM_REVIEW");
   });
 
   it("records operational logs and PM-verified closure", () => {

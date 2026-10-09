@@ -46,10 +46,8 @@ describe("central workflow policy", () => {
     expect(getActionDecision(permit, "REJECT", supervisor, state.permits, "Not acceptable").allowed).toBe(false);
   });
 
-  it("blocks parent final approval until its child is approved", () => {
+  it("keeps parent approval independent from child permit status", () => {
     const state = createSeedState(); const parent = state.permits.find((p) => p.id === "permit-hot-parent")!;
-    expect(getActionDecision(parent, "APPROVE", user("pm-1"), state.permits).reason).toMatch(/child permits/i);
-    currentRevision(state.permits.find((p) => p.id === "permit-hot-child")!).status = "APPROVED";
     expect(getActionDecision(parent, "APPROVE", user("pm-1"), state.permits).allowed).toBe(true);
   });
 

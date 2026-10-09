@@ -27,12 +27,17 @@ function makePermit(id: string, number: string, type: PermitType, status: Permit
 
 export function createSeedState(): EptwState {
   const review = makePermit("permit-review", "F10A1-G-AMHS-2026-09-08/0001", "GENERAL", "INDIVIDUAL_REVIEW", "req-1", completeData("Cooling system preventative maintenance"));
-  const child = makePermit("permit-hot-child", "F10A1-HW-Facilities-2026-09-09/0002-1", "HOT_WORK", "PM_REVIEW", "req-2", { ...completeData("Pipe bracket welding", true), discipline: "Facilities" }, "permit-hot-parent");
-  const parent = makePermit("permit-hot-parent", "F10A1-G-Facilities-2026-09-09/0002", "GENERAL", "PM_REVIEW", "req-2", { ...completeData("Utility pipe replacement", true), discipline: "Facilities" }); parent.childIds = [child.id];
+  const child = makePermit("permit-hot-child", "F10A1-B1-Facilities-2026-09-09/0002-1", "HOT_WORK", "PM_REVIEW", "req-2", { ...completeData("Pipe bracket welding", true), templateId: "tpl-child-b1", templateName: "HOT WORKS", discipline: "Facilities" }, "permit-hot-parent");
+  const confinedSpace = makePermit("permit-confined-child", "F10A1-B2-Facilities-2026-09-09/0002-2", "HOT_WORK", "DRAFT", "req-2", { ...completeData("Utility pit inspection"), templateId: "tpl-child-b2", templateName: "CONFINED SPACE", discipline: "Facilities", location: "Level 1 utility pit", company: "SafeSpace Engineering" }, "permit-hot-parent");
+  const lifting = makePermit("permit-lifting-child", "F10A1-B3-Facilities-2026-09-09/0002-3", "HOT_WORK", "DRAFT", "req-2", { ...completeData("Chiller motor lifting"), templateId: "tpl-child-b3", templateName: "LIFTING", discipline: "Facilities", location: "Central utility building", company: "Prime Lifting Services" }, "permit-hot-parent");
+  const workAtHeight = makePermit("permit-height-child", "F10A1-B4-Facilities-2026-09-09/0002-4", "HOT_WORK", "DRAFT", "req-2", { ...completeData("Overhead pipe support installation"), templateId: "tpl-child-b4", templateName: "WORK AT HEIGHT", discipline: "Facilities", location: "Level 3 service corridor", company: "Acme Engineering" }, "permit-hot-parent");
+  const riskAssessment = makePermit("permit-a01-child", "F10A1-A01-Facilities-2026-09-09/0002-5", "HOT_WORK", "DRAFT", "req-2", { ...completeData("Risk assessment submission"), templateId: "tpl-child-a01", templateName: "Upload Risk Assessment Form", discipline: "Facilities", location: "Utility Bay 4" }, "permit-hot-parent");
+  const sampleChildren = [child, confinedSpace, lifting, workAtHeight, riskAssessment];
+  const parent = makePermit("permit-hot-parent", "F10A1-G-Facilities-2026-09-09/0002", "GENERAL", "PM_REVIEW", "req-2", { ...completeData("Utility pipe replacement", true), discipline: "Facilities" }); parent.childIds = sampleChildren.map((item) => item.id);
   const active = makePermit("permit-active", "F10N-G-IT-2026-09-09/0003", "GENERAL", "ACTIVE", "req-1", { ...completeData("Server room cable inspection"), site: "F10N", discipline: "IT" });
   active.activities.push({ id: uid(), date: dateOffset(0), summary: "Pre-start briefing completed; barricades inspected.", safetyConfirmed: true, actorId: "req-1", createdAt: new Date().toISOString() });
   const draft = makePermit("permit-draft", "F10A2-G-Facilities-2026-09-09/0004", "GENERAL", "DRAFT", "req-1", { ...blankPermitData(), site: "F10A2", discipline: "Facilities", title: "Air handler inspection", company: "Acme Engineering" });
-  return { version: 2, permits: [review, parent, child, active, draft] };
+  return { version: 2, permits: [review, parent, ...sampleChildren, active, draft] };
 }
 
 export const findUser = (id: string): User => USERS.find((user) => user.id === id) ?? USERS[0];

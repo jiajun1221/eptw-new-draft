@@ -18,6 +18,231 @@
     --shadow: 0 8px 28px rgba(19, 45, 92, .07)
 }
 
+/* Permit detail tabs */
+.permit-detail-tabs {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(190px, 230px));
+    justify-content: start;
+    gap: 0;
+    padding: 0 18px;
+    border: 1px solid var(--line);
+    border-radius: 11px;
+    overflow-x: auto;
+    background: #fff;
+    box-shadow: var(--shadow)
+}
+
+.permit-detail-tabs button {
+    position: relative;
+    display: grid;
+    grid-template-columns: 32px minmax(0, 1fr) auto;
+    min-width: 190px;
+    align-items: center;
+    justify-content: initial;
+    gap: 10px;
+    padding: 12px 16px 11px;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: #4c607b;
+    text-align: left
+}
+
+.permit-detail-tabs button::after {
+    content: "";
+    position: absolute;
+    right: 16px;
+    bottom: 0;
+    left: 16px;
+    height: 3px;
+    border-radius: 3px 3px 0 0;
+    background: transparent
+}
+
+.permit-detail-tabs button:hover {
+    background: #f6f9fe;
+    color: #174f9b
+}
+
+.permit-detail-tabs button.active {
+    background: #f3f7ff;
+    color: #164f9f
+}
+
+.permit-detail-tabs button.active::after {
+    background: #2864dc
+}
+
+.permit-detail-tabs .tab-icon {
+    display: grid;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    place-items: center;
+    border-radius: 8px;
+    background: #eaf1fb;
+    color: #41658f;
+    font-size: 11px;
+    font-weight: 900
+}
+
+.permit-detail-tabs button.active .tab-icon {
+    background: #2864dc;
+    color: #fff
+}
+
+.permit-detail-tabs .tab-copy,
+.permit-detail-tabs .tab-copy strong,
+.permit-detail-tabs .tab-copy small {
+    display: block;
+    min-width: 0
+}
+
+.permit-detail-tabs .tab-copy {
+    height: auto;
+    padding: 0;
+    border-radius: 0;
+    background: transparent;
+    color: inherit
+}
+
+.permit-detail-tabs .tab-copy strong {
+    overflow: hidden;
+    font-size: 11px;
+    text-overflow: ellipsis;
+    white-space: nowrap
+}
+
+.permit-detail-tabs .tab-copy small {
+    margin-top: 2px;
+    overflow: hidden;
+    color: #7a899d;
+    font-size: 9px;
+    font-weight: 600;
+    text-overflow: ellipsis;
+    white-space: nowrap
+}
+
+.permit-detail-tabs .tab-count {
+    display: grid;
+    min-width: 21px;
+    height: 21px;
+    padding: 0 6px;
+    place-items: center;
+    border-radius: 999px;
+    background: #e4ebf5;
+    color: #49617f;
+    font-size: 9px;
+    font-weight: 800
+}
+
+.permit-detail-tabs button.active .tab-count {
+    background: #dce9ff;
+    color: #1658b5
+}
+
+@media(max-width:700px) {
+    .permit-detail-tabs {
+        grid-template-columns: repeat(3, minmax(180px, 1fr));
+        padding: 0 8px
+    }
+
+    .permit-detail-tabs button {
+        padding-right: 12px;
+        padding-left: 12px
+    }
+}
+
+/* Keep permit facts compact without squeezing values into vertical text. */
+.permit-hero-details .summary-grid .info {
+    display: flex;
+    min-width: 0;
+    align-items: center;
+    flex-wrap: wrap;
+    column-gap: 8px;
+    row-gap: 4px
+}
+
+.permit-hero-details .summary-grid .info dt {
+    flex: 0 1 auto;
+    min-width: 0
+}
+
+.permit-hero-details .summary-grid .info dd {
+    flex: 0 0 auto;
+    min-width: max-content;
+    max-width: 100%;
+    overflow-wrap: normal;
+    word-break: normal
+}
+
+@media(max-width:1350px) {
+    .permit-hero-details .summary-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr))
+    }
+}
+
+@media(max-width:700px) {
+    .permit-hero-details .summary-grid {
+        grid-template-columns: 1fr
+    }
+
+    .permit-hero-details .summary-grid .info {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 4px
+    }
+}
+
+.permit-hero-details .summary-grid .info {
+    display: grid;
+    grid-template-columns: max-content minmax(0, 1fr);
+    align-items: center;
+    gap: 8px;
+    min-width: 0
+}
+
+.permit-hero-details .summary-grid .info dt,
+.permit-hero-details .summary-grid .info dd {
+    min-width: 0;
+    margin: 0
+}
+
+.permit-hero-details .summary-grid .info dt::after {
+    content: ":"
+}
+
+.permit-hero-details .summary-grid .info dd {
+    overflow-wrap: anywhere
+}
+
+.permit-type-value {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px
+}
+
+.permit-code-badge {
+    display: inline-grid;
+    min-width: 30px;
+    height: 24px;
+    padding: 0 7px;
+    place-items: center;
+    border-radius: 6px;
+    background: #e8f1ff;
+    color: #1760c2;
+    font-size: 9px;
+    font-weight: 900
+}
+.permit-code-badge.child{border:1px solid #f0cf83;background:#fff4cf;color:#8a5700}
+
+@media(max-width:560px) {
+    .permit-hero-details .summary-grid .info {
+        grid-template-columns: 1fr;
+        gap: 4px
+    }
+}
+
 /* Permit form footer keeps draft saving alongside step navigation. */
 .form-actions {
     display: grid !important;
@@ -1173,7 +1398,8 @@ a {
 
 .permit-hero {
     padding: 24px 28px;
-    margin: 0
+    margin: 0;
+    position: relative
 }
 
 .detail-header-layout {
@@ -1249,8 +1475,13 @@ a {
 .permit-details-actions {
     display: flex;
     justify-content: flex-end;
-    padding: 10px 28px 0
+    position: absolute;
+    top: 24px;
+    right: 28px;
+    padding: 0
 }
+
+.permit-hero:has(.permit-details-actions) .permit-hero-heading{padding-right:110px}
 
 .permit-hero .hero-top {
     min-height: 25px
@@ -2195,6 +2426,9 @@ a {
 }
 
 @media(max-width:800px) {
+    .permit-details-actions{position:static;padding:10px 0 0}
+    .permit-hero:has(.permit-details-actions) .permit-hero-heading{padding-right:0}
+
     .detail-header-layout {
         grid-template-columns: 1fr
     }
@@ -2473,6 +2707,145 @@ a {
 
     .form-actions>span {
         display: none
+    }
+}
+
+.permit-detail-tabs {
+    display: flex;
+    gap: 4px;
+    margin: 0 0 16px;
+    padding: 5px;
+    overflow-x: auto;
+    border: 1px solid var(--line);
+    border-radius: 11px;
+    background: #fff;
+    box-shadow: var(--shadow)
+}
+
+.permit-detail-tabs button {
+    display: inline-flex;
+    min-width: 120px;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 18px;
+    border: 0;
+    border-radius: 7px;
+    background: transparent;
+    color: #52657e;
+    font: inherit;
+    font-size: 12px;
+    font-weight: 800;
+    white-space: nowrap;
+    cursor: pointer
+}
+
+.permit-detail-tabs button:hover {
+    background: #f1f6fd;
+    color: #174f9b
+}
+
+.permit-detail-tabs button.active {
+    background: #2864dc;
+    color: #fff
+}
+
+.permit-detail-tabs button span {
+    display: grid;
+    min-width: 19px;
+    height: 19px;
+    padding: 0 5px;
+    place-items: center;
+    border-radius: 999px;
+    background: #e7eef8;
+    color: #48627f;
+    font-size: 9px
+}
+
+.permit-detail-tabs button.active span {
+    background: rgba(255, 255, 255, .2);
+    color: #fff
+}
+
+.child-permit-panel {
+    overflow: hidden
+}
+
+.child-permit-panel>.empty {
+    min-height: 220px
+}
+
+.child-permit-table-wrap {
+    width: 100%;
+    overflow-x: auto
+}
+
+.child-permit-table {
+    width: 100%;
+    min-width: 760px;
+    border-collapse: collapse
+}
+
+.child-permit-table th,
+.child-permit-table td {
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--line);
+    text-align: left;
+    vertical-align: middle
+}
+
+.child-permit-table th {
+    background: #f7f9fc;
+    color: #5d6f87;
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: .04em
+}
+
+.child-permit-table tbody tr:last-child td {
+    border-bottom: 0
+}
+
+.child-permit-table td:first-child {
+    display: flex;
+    align-items: center;
+    gap: 12px
+}
+
+.child-permit-table td:first-child strong,
+.child-permit-table td:first-child small {
+    display: block
+}
+
+.child-permit-table td:first-child small {
+    margin-top: 3px;
+    color: var(--muted)
+}
+
+.child-code {
+    display: grid;
+    min-width: 42px;
+    height: 32px;
+    padding: 0 8px;
+    place-items: center;
+    border-radius: 6px;
+    background: #e8f1ff;
+    color: #1760c2;
+    font-size: 10px;
+    font-weight: 800
+}
+
+@media(max-width:560px) {
+    .permit-detail-tabs button {
+        min-width: 105px;
+        padding-right: 12px;
+        padding-left: 12px
+    }
+
+    .child-permit-table th,
+    .child-permit-table td {
+        padding: 12px
     }
 }
 
@@ -3710,12 +4083,13 @@ a {
 
 /* Minimal permit decision header. */
 .detail-header-layout {
-    grid-template-columns: minmax(0, 1fr) 320px
+    grid-template-columns: 1fr
 }
 
 .detail-header-layout .detail-side {
     display: grid;
-    border-left: 1px solid var(--line)
+    border-top: 1px solid var(--line);
+    border-left: 0
 }
 
 .detail-header-layout .detail-side>.card {
@@ -3723,53 +4097,100 @@ a {
 }
 
 .permit-decision-panel {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto auto;
-    justify-items: center;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto;
+    align-items: center;
     align-content: center;
-    padding: 16px 18px 14px
+    padding: 18px 28px
 }
 
 .permit-decision-status {
     display: flex;
-    justify-content: center
+    justify-content: center;
+    width: 100%
+}
+
+.permit-decision-actions {
+    display: grid;
+    gap: 10px;
+    width: min(100%, 460px);
+    align-items: center
+}
+
+.permit-hero-heading {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 28px
+}
+
+.permit-title-status {
+    display: flex;
+    min-width: 0;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px 18px
+}
+
+.permit-title-status .permit-decision-status {
+    width: auto;
+    justify-content: flex-start
+}
+
+.permit-hero-heading .permit-decision-actions {
+    flex: 0 1 460px
 }
 
 .permit-decision-panel>.approval-progress {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(135px, 1fr);
     width: 100%;
-    max-width: 250px;
-    margin: 20px auto
+    max-width: none;
+    margin: 0;
+    grid-column: 1;
+    grid-row: 1;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-bottom: 6px
 }
 
 .permit-decision-panel>.approval-progress>div {
-    min-height: 48px;
-    padding: 0 0 14px 34px;
+    min-width: 0;
+    min-height: 58px;
+    padding: 24px 10px 0 0;
     align-items: flex-start
 }
 
 .permit-decision-panel>.approval-progress>div:before {
-    top: 15px;
-    bottom: -1px;
-    left: 8px !important;
-    right: auto !important;
-    width: 3px;
-    height: auto
+    display: block;
+    top: 5px;
+    bottom: auto;
+    left: 0 !important;
+    right: 0 !important;
+    width: auto;
+    height: 3px
+}
+
+.permit-decision-panel>.approval-progress>div:first-child:before {
+    left: 8px !important
 }
 
 .permit-decision-panel>.approval-progress>div:last-child:before {
-    display: none
+    display: block;
+    right: calc(100% - 8px) !important
 }
 
 .permit-decision-panel>.approval-progress b {
-    top: 0;
+    top: -2px;
     left: 0
 }
 
 .permit-decision-panel>.approval-progress span {
     display: block;
-    margin-top: -2px
+    min-width: 0;
+    margin-top: -2px;
+    overflow-wrap: anywhere
 }
 
 .permit-decision-panel>.approval-progress strong,
@@ -3791,9 +4212,16 @@ a {
 .detail-header-layout .action-card {
     display: grid;
     width: 100%;
-    align-self: start;
+    align-self: center;
     border: 0;
     background: transparent
+}
+
+.permit-hero-details .summary-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px 24px;
+    padding-top: 14px;
+    padding-bottom: 16px
 }
 
 .detail-header-layout .action-list {
@@ -3803,13 +4231,41 @@ a {
 }
 
 @media(max-width:1100px) {
-    .detail-header-layout {
+    .permit-decision-panel {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        gap: 16px;
+        justify-items: stretch
+    }
+
+    .permit-decision-panel>.approval-progress {
+        grid-column: 1;
+        grid-row: 1;
+        padding-bottom: 8px
+    }
+
+    .detail-header-layout .action-card {
+        max-width: none
+    }
+
+    .permit-hero-details .summary-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr))
+    }
+}
+
+@media(max-width:800px) {
+    .permit-hero-heading {
+        display: grid;
         grid-template-columns: 1fr
     }
 
-    .detail-header-layout .detail-side {
-        border-top: 1px solid var(--line);
-        border-left: 0
+    .permit-hero-heading .permit-decision-actions {
+        width: 100%;
+        max-width: 460px
+    }
+
+    .permit-decision-status {
+        justify-content: flex-start
     }
 }
 
@@ -3817,4 +4273,142 @@ a {
     .detail-header-layout .action-list {
         grid-template-columns: 1fr
     }
+
+    .permit-hero-details .summary-grid {
+        grid-template-columns: 1fr
+    }
+
+    .permit-decision-panel {
+        padding: 16px
+    }
+
+    .permit-hero-heading .permit-decision-actions {
+        width: 100%;
+        max-width: none
+    }
 }
+
+.permit-detail-tabs{display:grid;grid-template-columns:repeat(3,minmax(190px,230px));justify-content:start;gap:0;padding:0 18px;overflow-x:auto}
+.permit-detail-tabs button{position:relative;display:grid;grid-template-columns:32px minmax(0,1fr) auto;min-width:190px;align-items:center;justify-content:initial;gap:10px;padding:12px 16px 11px;border-radius:0;background:transparent;color:#4c607b;text-align:left}
+.permit-detail-tabs button::after{content:"";position:absolute;right:16px;bottom:0;left:16px;height:3px;border-radius:3px 3px 0 0;background:transparent}
+.permit-detail-tabs button:hover{background:#f6f9fe;color:#174f9b}.permit-detail-tabs button.active{background:#f3f7ff;color:#164f9f}.permit-detail-tabs button.active::after{background:#2864dc}
+.permit-detail-tabs .tab-icon{display:grid;width:32px;min-width:32px;height:32px;padding:0;place-items:center;border-radius:8px;background:#eaf1fb;color:#41658f;font-size:11px;font-weight:900}.permit-detail-tabs button.active .tab-icon{background:#2864dc;color:#fff}
+.permit-detail-tabs .tab-copy,.permit-detail-tabs .tab-copy strong,.permit-detail-tabs .tab-copy small{display:block;min-width:0}.permit-detail-tabs .tab-copy{height:auto;padding:0;border-radius:0;background:transparent;color:inherit}.permit-detail-tabs .tab-copy strong,.permit-detail-tabs .tab-copy small{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.permit-detail-tabs .tab-copy strong{font-size:11px}.permit-detail-tabs .tab-copy small{margin-top:2px;color:#7a899d;font-size:9px;font-weight:600}
+.permit-detail-tabs .tab-count{display:grid;min-width:21px;height:21px;padding:0 6px;place-items:center;border-radius:999px;background:#e4ebf5;color:#49617f;font-size:9px;font-weight:800}.permit-detail-tabs button.active .tab-count{background:#dce9ff;color:#1658b5}
+@media(max-width:700px){.permit-detail-tabs{grid-template-columns:repeat(3,minmax(180px,1fr));padding:0 8px}.permit-detail-tabs button{padding-right:12px;padding-left:12px}}
+
+/* Permit tabs mirror the template-section tab pattern. */
+.permit-detail-tabs {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(190px, 1fr));
+    gap: 0;
+    margin-bottom: 16px;
+    padding: 0;
+    border: 1px solid #cbd8e8;
+    border-radius: 0;
+    background: #f3f6fa;
+    box-shadow: none
+}
+
+.permit-detail-tabs button {
+    position: relative;
+    display: flex;
+    min-width: 190px;
+    min-height: 52px;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    padding: 11px 18px;
+    border: 0;
+    border-right: 1px solid #d9e2ee;
+    border-radius: 0;
+    background: transparent;
+    color: #52657e;
+    text-align: left
+}
+
+.permit-detail-tabs button:last-child {
+    border-right: 0
+}
+
+.permit-detail-tabs button::after {
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    border-radius: 0
+}
+
+.permit-detail-tabs button:hover {
+    background: #f8fbff;
+    color: #1760c2
+}
+
+.permit-detail-tabs button.active {
+    background: #fff;
+    color: #1760c2
+}
+
+.permit-detail-tabs button.active::after {
+    background: #2864dc
+}
+
+.permit-detail-tabs .tab-icon {
+    display: grid;
+    width: 22px;
+    min-width: 22px;
+    height: 22px;
+    padding: 0;
+    place-items: center;
+    border-radius: 50%;
+    background: #dfe9f6;
+    color: #315b91;
+    font-size: 10px;
+    font-weight: 800
+}
+
+.permit-detail-tabs button.active .tab-icon {
+    background: #2f6dde;
+    color: #fff
+}
+
+.permit-detail-tabs button>strong {
+    overflow: hidden;
+    font-size: 10px;
+    text-overflow: ellipsis;
+    text-transform: uppercase;
+    white-space: nowrap
+}
+
+@media(max-width:700px) {
+    .permit-detail-tabs {
+        grid-template-columns: repeat(3, minmax(165px, 1fr))
+    }
+
+    .permit-detail-tabs button {
+        min-width: 165px;
+        padding-right: 14px;
+        padding-left: 14px
+    }
+}
+
+.permit-hero-details .summary-grid .info{display:flex;min-width:0;align-items:center;flex-wrap:wrap;column-gap:8px;row-gap:4px}
+.permit-hero-details .summary-grid .info dt{flex:0 1 auto;min-width:0}.permit-hero-details .summary-grid .info dd{flex:0 0 auto;min-width:max-content;max-width:100%;overflow-wrap:normal;word-break:normal}
+@media(max-width:1350px){.permit-hero-details .summary-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:700px){.permit-hero-details .summary-grid{grid-template-columns:1fr}.permit-hero-details .summary-grid .info{display:grid;grid-template-columns:1fr;gap:4px}}
+
+.permit-detail-tabs button{flex-wrap:wrap}.permit-detail-tabs .tab-code-badges{display:inline-flex;min-width:0;height:auto;align-items:center;flex-wrap:wrap;gap:5px;padding:0;border-radius:0;background:transparent}
+.permit-detail-tabs .tab-code-badge{display:inline-grid;min-width:28px;height:22px;padding:0 7px;place-items:center;border:1px solid transparent;border-radius:6px;font-size:9px;font-weight:900;line-height:1}
+.permit-detail-tabs .tab-code-badge.parent{border-color:#bfd5f6;background:#e8f1ff;color:#1760c2}.permit-detail-tabs .tab-code-badge.child{border-color:#f0cf83;background:#fff4cf;color:#8a5700}
+.permit-detail-tabs button.active .tab-code-badge.parent{border-color:#99bff3;background:#dceaff}.permit-detail-tabs button.active .tab-code-badge.child{border-color:#e8bc55;background:#ffedb0;color:#754800}
+
+.child-permit-forms{display:grid;gap:14px}.child-form-nav{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:8px;padding:10px;border:1px solid var(--line);border-radius:11px;background:#fff;box-shadow:var(--shadow)}
+.child-form-nav>div{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:10px;padding:10px 12px;border:1px solid #d6e0ec;border-radius:8px;background:#f9fbfe}.child-form-nav>div>span:nth-child(2),.child-form-nav strong,.child-form-nav small{display:block;min-width:0}.child-form-nav strong{overflow:hidden;color:var(--navy);font-size:11px;text-overflow:ellipsis;white-space:nowrap}.child-form-nav small{margin-top:2px;overflow:hidden;color:var(--muted);font-size:9px;text-overflow:ellipsis;white-space:nowrap}
+.child-form-nav button{display:grid;width:30px;height:30px;place-items:center;border:1px solid #9dbce8;border-radius:7px;background:#edf5ff;color:#1760c2;cursor:pointer}.child-form-nav button:hover{border-color:#2864dc;background:#dfeeff}.child-form-nav button svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.child-form-list{display:grid;gap:12px}.child-permit-form{overflow:hidden}.child-permit-form>summary{display:grid;grid-template-columns:auto minmax(0,1fr) auto auto;align-items:center;gap:12px;padding:14px 18px;cursor:pointer;list-style:none}.child-permit-form>summary::-webkit-details-marker{display:none}.child-permit-form>summary>span:nth-child(2),.child-permit-form>summary strong,.child-permit-form>summary small{display:block;min-width:0}.child-permit-form>summary strong{color:var(--navy)}.child-permit-form>summary small{margin-top:2px;color:var(--muted)}.child-permit-form>summary>i{font-style:normal;transition:transform .2s}.child-permit-form:not([open])>summary>i{transform:rotate(-90deg)}
+.child-permit-form-content{padding:18px;border-top:1px solid var(--line);background:#fbfdff}.child-form-summary{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 24px;margin:0 0 18px}.child-form-summary .info{display:grid;grid-template-columns:max-content minmax(0,1fr);gap:8px}.child-readonly-section{overflow:hidden;margin-top:12px;border:1px solid #d6e0ec;border-radius:9px;background:#fff}.child-readonly-section>header{padding:14px 18px;border-bottom:1px solid var(--line)}.child-readonly-section h3,.child-readonly-section p{margin:0}.child-readonly-section p{margin-top:3px;color:var(--muted);font-size:10px}.child-readonly-section fieldset{margin:0;padding:0;border:0}.child-readonly-section fieldset:disabled{opacity:1}.child-readonly-section fieldset:disabled input,.child-readonly-section fieldset:disabled select,.child-readonly-section fieldset:disabled textarea{color:var(--ink);opacity:1}
+@media(max-width:700px){.child-form-nav{grid-template-columns:1fr}.child-permit-form>summary{grid-template-columns:auto minmax(0,1fr) auto}.child-permit-form>summary>.status-pill{grid-column:2}.child-permit-form>summary>i{grid-column:3;grid-row:1/3}.child-form-summary{grid-template-columns:1fr}.child-form-summary .info{grid-template-columns:1fr;gap:3px}.child-permit-form-content{padding:14px}}
+
+.child-form-nav .child-code,.child-permit-form .child-code,.child-permit-table .child-code{border:1px solid #f0cf83;background:#fff4cf;color:#8a5700}
+.child-form-nav strong,.child-permit-form>summary strong{font-size:13px;font-weight:800}.child-form-nav small,.child-permit-form>summary small{margin-top:4px;color:#40536f;font-size:11px;font-weight:800}
+.child-permit-form>summary{grid-template-columns:auto minmax(0,1fr) auto}.child-permit-form>summary>i{grid-column:3}
