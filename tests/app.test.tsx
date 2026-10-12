@@ -1,7 +1,8 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { cleanup, fireEvent, render, screen, within } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
-import App from "../src/App";
+import App from "../src/app/App";
+import { createSeedState } from "../src/domain/data";
 
 describe("application shell", () => {
   beforeEach(() => { localStorage.clear(); localStorage.setItem("eptw-demo-user", "req-1"); });
@@ -262,13 +263,132 @@ describe("application shell", () => {
     expect(firstTemplate?.textContent).toContain("General");
   });
 
-  it("shows the work period on one line in the permit register", () => {
+  it("lists B1-B4 permits attached by parentId and opens the child permit", () => {
+    const state = createSeedState();
+    const parent = state.permits.find((permit) => permit.id === "permit-hot-parent")!;
+    parent.childIds = parent.childIds.filter((id) => id !== "permit-hot-child");
+    localStorage.setItem("eptw-functional-draft:v2", JSON.stringify(state));
+
+    render(<MemoryRouter initialEntries={["/permits/permit-hot-parent"]}><App /></MemoryRouter>);
+    fireEvent.click(screen.getByRole("tab", { name: /B1.B4 permits/i }));
+
+    expect(screen.getByText("F10A1-B1-Facilities-2026-09-09/0002-1")).toBeTruthy();
+    fireEvent.click(screen.getAllByRole("link", { name: "View child permit" })[0]);
+    expect(screen.getByRole("heading", { name: "F10A1-B1-Facilities-2026-09-09/0002-1" })).toBeTruthy();
+  });
+
+  it("creates selected B1-B4 template options as navigable child permits", () => {
+    localStorage.setItem("eptw-templates:v4", JSON.stringify([
+      { id: "parent", kind: "PARENT", name: "General", code: "G", discipline: "Facilities", description: "General work", active: true, updatedAt: "2026-10-09T00:00:00.000Z", sections: [{ id: "safety", title: "Safety Checklist", description: "Select sub permits", fields: [{ id: "sub-permits", label: "Select Sub Permit", type: "MULTI_CHECKBOX", required: false, options: ["HOT WORK PERMIT"], childTemplateIds: ["b1"] }] }] },
+      { id: "b1", kind: "CHILD", name: "HOT WORKS", code: "B1", discipline: "Facilities", description: "Hot work controls", active: true, updatedAt: "2026-10-09T00:00:00.000Z" },
+    ]));
+    render(<MemoryRouter initialEntries={["/permits/new"]}><App /></MemoryRouter>);
+    fireEvent.change(screen.getByLabelText("Permit template type"), { target: { value: "parent" } });
+    fireEvent.click(screen.getByRole("checkbox", { name: /HOT WORK PERMIT/i }));
+    fireEvent.click(screen.getByRole("button", { name: "Create Permit" }));
+    fireEvent.click(screen.getByRole("tab", { name: /B1.B4 permits/i }));
+
+    expect(screen.getByText("HOT WORKS")).toBeTruthy();
+    expect(screen.getByRole("link", { name: "View child permit" })).toBeTruthy();
+  });
+
+  it("backfills B1-B4 child permits for previously saved selections", () => {
+    const state = createSeedState();
+    const parent = state.permits.find((permit) => permit.id === "permit-review")!;
+    const revision = parent.revisions.find((item) => item.id === parent.currentRevisionId)!;
+    revision.data.templateId = "parent-with-b1";
+    revision.data.customFields = { "sub-permits": ["0"] };
+    localStorage.setItem("eptw-functional-draft:v2", JSON.stringify(state));
+    localStorage.setItem("eptw-templates:v4", JSON.stringify([
+      { id: "parent-with-b1", kind: "PARENT", name: "General", code: "G", sections: [{ fields: [{ id: "sub-permits", type: "MULTI_CHECKBOX", childTemplateIds: ["b1"] }] }] },
+      { id: "b1", kind: "CHILD", name: "HOT WORKS", code: "B1" },
+    ]));
+
+    render(<MemoryRouter initialEntries={["/permits/permit-review"]}><App /></MemoryRouter>);
+    fireEvent.click(screen.getByRole("tab", { name: /B1.B4 permits/i }));
+
+    expect(screen.getByText("HOT WORKS")).toBeTruthy();
+    expect(screen.getByRole("link", { name: "View child permit" })).toBeTruthy();
+  });
+
+  it("shows navigation for embedded attached child permits", () => {
+    const state = createSeedState();
+    const parent = state.permits.find((permit) => permit.id === "permit-review")!;
+    const revision = parent.revisions.find((item) => item.id === parent.currentRevisionId)!;
+    revision.data.templateId = "parent-with-children";
+    revision.data.customFields = { attachments: ["0", "1"] };
+    localStorage.setItem("eptw-functional-draft:v2", JSON.stringify(state));
+    localStorage.setItem("eptw-templates:v4", JSON.stringify([
+      { id: "parent-with-children", kind: "PARENT", name: "General", code: "G", sections: [{ fields: [{ id: "attachments", type: "MULTI_CHECKBOX", options: ["Risk assessment", "Work plan"], childTemplateIds: ["a04", "a05"] }] }] },
+      { id: "a04", kind: "CHILD", name: "Risk Assessment", code: "A04" },
+      { id: "a05", kind: "CHILD", name: "Work Plan", code: "A05" },
+    ]));
+    render(<MemoryRouter initialEntries={["/permits/permit-review"]}><App /></MemoryRouter>);
+    fireEvent.click(screen.getByRole("tab", { name: /Child permits/i }));
+
+    const navigation = screen.getByRole("navigation", { name: "Attached child permit forms" });
+    expect(within(navigation).getByRole("button", { name: "Go to A04 Risk Assessment form" })).toBeTruthy();
+    expect(within(navigation).getByRole("button", { name: "Go to A05 Work Plan form" })).toBeTruthy();
+  });
+
+  it("shows navigation for parent permit sections", () => {
+    const state = createSeedState();
+    const parent = state.permits.find((permit) => permit.id === "permit-review")!;
+    const revision = parent.revisions.find((item) => item.id === parent.currentRevisionId)!;
+    revision.data.templateId = "sectioned-parent";
+    localStorage.setItem("eptw-functional-draft:v2", JSON.stringify(state));
+    localStorage.setItem("eptw-templates:v4", JSON.stringify([{ id: "sectioned-parent", kind: "PARENT", name: "General", code: "G", sections: [{ id: "general", title: "General information", description: "Work details", fields: [] }, { id: "safety", title: "Safety Checklist", description: "Safety details", fields: [] }] }]));
+    render(<MemoryRouter initialEntries={["/permits/permit-review"]}><App /></MemoryRouter>);
+
+    const navigation = screen.getByRole("navigation", { name: "Parent permit sections" });
+    expect(within(navigation).getByRole("button", { name: "Go to parent section 1 General information" })).toBeTruthy();
+    expect(within(navigation).getByRole("button", { name: "Go to parent section 2 Safety Checklist" })).toBeTruthy();
+    expect(document.getElementById("parent-section-general")).toBeTruthy();
+    expect(document.getElementById("parent-section-safety")).toBeTruthy();
+  });
+
+  it("shows a floating back-to-top button after scrolling a permit", () => {
+    const scrollTo = vi.spyOn(window, "scrollTo").mockImplementation(() => undefined);
+    Object.defineProperty(window, "scrollY", { value: 500, configurable: true });
+    render(<MemoryRouter initialEntries={["/permits/permit-hot-parent"]}><App /></MemoryRouter>);
+    fireEvent.scroll(window);
+
+    const button = screen.getByRole("button", { name: "Back to top" });
+    expect(button.classList.contains("visible")).toBe(true);
+    fireEvent.click(button);
+    expect(scrollTo).toHaveBeenCalledWith({ top: 0, behavior: "smooth" });
+
+    Object.defineProperty(window, "scrollY", { value: 0, configurable: true });
+    scrollTo.mockRestore();
+  });
+
+  it("switches configured section tabs while the permit remains read only", () => {
+    const state = createSeedState();
+    const permit = state.permits.find((item) => item.id === "permit-hot-parent")!;
+    const revision = permit.revisions.find((item) => item.id === permit.currentRevisionId)!;
+    revision.data.templateId = "tabbed-readonly";
+    revision.data.templateName = "Tabbed read-only permit";
+    revision.data.customFields = { health: "Recorded health value", environmental: "Recorded environmental value" };
+    localStorage.setItem("eptw-functional-draft:v2", JSON.stringify(state));
+    localStorage.setItem("eptw-templates:v4", JSON.stringify([{ id: "tabbed-readonly", kind: "PARENT", name: "Tabbed read-only permit", code: "TR", discipline: "Facilities", description: "Read-only tab test.", active: true, updatedAt: "2026-10-09T00:00:00.000Z", sections: [{ id: "safety", title: "Safety Checklist", description: "", tabs: [{ id: "health-tab", label: "Health & Safety Impact" }, { id: "environment-tab", label: "Environmental Impact" }], fields: [{ id: "health", tabId: "health-tab", label: "Health value", type: "TEXT", required: false }, { id: "environmental", tabId: "environment-tab", label: "Environmental value", type: "TEXT", required: false }] }] }]));
+    localStorage.setItem("eptw-demo-user", "admin-1");
+
+    render(<MemoryRouter initialEntries={["/permits/permit-hot-parent"]}><App /></MemoryRouter>);
+    expect(screen.getByLabelText("Health value")).toBeTruthy();
+    fireEvent.click(screen.getByRole("tab", { name: /environmental impact/i }));
+    expect(screen.getByLabelText("Environmental value")).toBeTruthy();
+    expect((screen.getByLabelText("Environmental value") as HTMLInputElement).disabled).toBe(true);
+    expect(screen.queryByLabelText("Health value")).toBeNull();
+  });
+
+  it("shows separate start and end dates in the permit register", () => {
     localStorage.setItem("eptw-demo-user", "admin-1");
     render(<MemoryRouter initialEntries={["/permits"]}><App /></MemoryRouter>);
-    expect(screen.getByRole("columnheader", { name: "Work period" })).toBeTruthy();
-    const workPeriod = document.querySelector(".permit-table tbody .work-period-inline");
-    expect(workPeriod?.textContent).toMatch(/^.+ to .+$/);
-    expect(workPeriod?.querySelector("span")?.textContent).toBe("to");
+    expect(screen.getByRole("columnheader", { name: "Start date" })).toBeTruthy();
+    expect(screen.getByRole("columnheader", { name: "End date" })).toBeTruthy();
+    const firstRow = document.querySelector(".permit-table tbody tr");
+    expect(firstRow?.querySelector("td:nth-child(7)")?.textContent).toBeTruthy();
+    expect(firstRow?.querySelector("td:nth-child(8)")?.textContent).toBeTruthy();
   });
 
   it("selects multiple individual reviewers and MT Groups when creating a permit", () => {
@@ -322,6 +442,18 @@ describe("application shell", () => {
     expect(screen.getAllByRole("button", { name: "Export as PDF" })[0]).toBeTruthy();
     expect(screen.getAllByRole("link", { name: "Review" })[0]).toBeTruthy();
     expect(screen.getAllByRole("button", { name: "Duplicate" })[0]).toBeTruthy();
+  });
+
+  it("lets a user delete their own draft from the permit menu", () => {
+    render(<MemoryRouter initialEntries={["/permits"]}><App /></MemoryRouter>);
+    const permitNumber = "F10A2-G-Facilities-2026-09-09/0004";
+    fireEvent.click(screen.getByLabelText(`Actions for ${permitNumber}`));
+    fireEvent.click(screen.getByRole("button", { name: "Delete draft" }));
+    const dialog = screen.getByRole("dialog", { name: "Delete draft?" });
+    expect(within(dialog).getByText(permitNumber)).toBeTruthy();
+    fireEvent.click(within(dialog).getByRole("button", { name: "Delete draft" }));
+
+    expect(screen.queryAllByText(permitNumber)).toHaveLength(0);
   });
 
   it("keeps parent and child templates in separate tabs and adds a child template", () => {

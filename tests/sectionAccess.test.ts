@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it } from "vitest";
-import { LocalPermitRepository } from "../src/repository";
-import { currentRevision, type User } from "../src/types";
+import { LocalPermitRepository } from "../src/domain/repository";
+import { currentRevision, type User } from "../src/domain/types";
 
 describe("section edit permissions", () => {
   const repository = new LocalPermitRepository();

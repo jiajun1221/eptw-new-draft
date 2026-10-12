@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest";
-import { USERS } from "../src/constants";
-import { createSeedState } from "../src/data";
-import { effectiveStatus, getActionDecision, isComplete, nextApprovalStatus } from "../src/policy";
-import { currentRevision } from "../src/types";
+import { USERS } from "../src/domain/constants";
+import { createSeedState } from "../src/domain/data";
+import { effectiveStatus, getActionDecision, isComplete, nextApprovalStatus } from "../src/domain/policy";
+import { currentRevision } from "../src/domain/types";
 
 const user = (id: string) => USERS.find((item) => item.id === id)!;
 

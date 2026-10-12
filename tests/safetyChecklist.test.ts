@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { checklistItemsForTab, checklistResponse, safetyChecklistComplete, safetyChecklistErrors } from "../src/safetyChecklist";
-import type { SafetyChecklistResponse, SafetyChecklistResponses } from "../src/types";
+import { checklistItemsForTab, checklistResponse, safetyChecklistComplete, safetyChecklistErrors } from "../src/domain/safetyChecklist";
+import type { SafetyChecklistResponse, SafetyChecklistResponses } from "../src/domain/types";
 
 describe("embedded safety checklists", () => {
   it("keeps selections independent between tabs and discards an unchecked response", () => {
