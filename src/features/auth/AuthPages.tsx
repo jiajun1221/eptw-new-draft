@@ -7,7 +7,7 @@ import type { Role, User } from "../../domain/types";
 type AuthProps = { user: User | null; onDemoLogin: (user: User) => void; onRegister: (user: User) => void };
 
 function BrandPanel() {
-  return <aside className="auth-brand"><div className="auth-logo"><span>micron</span><sup>®</sup><small>ePTW</small></div><div><p>Electronic Permit to Work</p><h1>Safer work starts with the right access.</h1><span>Apply, review, and manage permits across Micron sites.</span></div></aside>;
+  return <aside className="auth-brand"><div className="auth-logo"><img src="/Micron-logo.svg" alt="Micron" /><small>ePTW</small></div><div><p>Electronic Permit to Work</p><h1>Safer work starts with the right access.</h1><span>Apply, review, and manage permits across Micron sites.</span></div></aside>;
 }
 
 function AuthLayout({ children }: { children: React.ReactNode }) {

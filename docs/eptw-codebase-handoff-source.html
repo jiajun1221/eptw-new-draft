@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>ePTW Codebase Handoff Guide</title>
+<style>
+  @page { size: A4; margin: 18mm 18mm 18mm 18mm; }
+  body { font-family: Aptos, Arial, sans-serif; color: #1f2937; font-size: 10pt; line-height: 1.35; margin: 0; }
+  h1, h2, h3 { color: #000; font-family: "Aptos Display", Arial, sans-serif; page-break-after: avoid; }
+  h1 { font-size: 19pt; margin: 18pt 0 7pt; }
+  h2 { font-size: 14pt; margin: 13pt 0 5pt; }
+  h3 { font-size: 11pt; margin: 9pt 0 4pt; }
+  p { margin: 0 0 7pt; }
+  ul, ol { margin: 4pt 0 9pt 20pt; padding: 0; }
+  li { margin-bottom: 3pt; }
+  table { width: 100%; border-collapse: collapse; margin: 7pt 0 11pt; page-break-inside: auto; }
+  thead { display: table-header-group; }
+  tr { page-break-inside: avoid; }
+  th { background: #17365d; color: white; border: 1px solid #d9d9d9; padding: 7px 8px; text-align: left; vertical-align: middle; font-size: 9pt; }
+  td { border: 1px solid #d9d9d9; padding: 7px 8px; vertical-align: middle; font-size: 9pt; }
+  tbody tr:nth-child(even) td { background: #eaf1f8; }
+  code, pre { font-family: Consolas, monospace; }
+  pre { background: #f4f6f8; padding: 10pt 12pt; margin: 6pt 0 10pt; white-space: pre-wrap; font-size: 8.5pt; line-height: 1.2; }
+  .title-page { page-break-after: always; padding-top: 70pt; }
+  .title { font-size: 30pt; line-height: 1.08; margin: 0 0 12pt; color: #000; }
+  .subtitle { font-size: 14pt; color: #4b5563; margin-bottom: 28pt; }
+  .intro { font-size: 12pt; line-height: 1.45; margin-bottom: 22pt; }
+  .conclusion-label { color: #a61c1c; font-weight: bold; }
+  .contents { page-break-after: always; }
+  .contents p { margin: 0 0 5pt 10pt; }
+  .page-break { page-break-before: always; }
+  .small { font-size: 8.5pt; color: #4b5563; }
+  .status-blocking { font-weight: bold; color: #a61c1c; }
+  .status-high { font-weight: bold; color: #9c5700; }
+  .nowrap { white-space: nowrap; }
+</style>
+</head>
+<body>
+
+<div class="title-page">
+  <div class="title">ePTW Codebase Handoff Guide</div>
+  <div class="subtitle">Frontend prototype review and backend continuation requirements</div>
+  <p class="intro">This document explains the current ePTW frontend, the business behaviour already represented, the limitations of the prototype, and the work required to continue development with a production database and backend.</p>
+  <table>
+    <thead><tr><th style="width:25%">Document item</th><th>Value</th></tr></thead>
+    <tbody>
+      <tr><td>Document purpose</td><td>Technical and functional handoff to the receiving development team</td></tr>
+      <tr><td>System</td><td>Electronic Permit to Work frontend prototype</td></tr>
+      <tr><td>Repository</td><td>eptw-new-draft</td></tr>
+      <tr><td>Prepared date</td><td>27 October 2026</td></tr>
+      <tr><td>Current readiness</td><td>Prototype suitable for reference but not ready for production or a clean code handoff</td></tr>
+      <tr><td>Primary audience</td><td>Solution architects, backend developers, frontend developers, QA, security, DevOps, and product owners</td></tr>
+    </tbody>
+  </table>
+  <p><span class="conclusion-label">Current conclusion</span> The repository is a useful functional prototype, but the current working tree does not pass the build, handoff check, and complete test suite. The receiving team should first restore a clean, reproducible baseline and confirm the workflow rules before implementing the backend.</p>
+</div>
+
+<div class="contents">
+  <h1>Document contents</h1>
+  <p>1 Executive summary</p><p>2 Technology stack</p><p>3 Repository structure</p><p>4 Local setup and commands</p>
+  <p>5 Functional scope</p><p>6 Permit workflow</p><p>7 Roles and permissions</p><p>8 Current data model</p>
+  <p>9 Browser storage</p><p>10 Authentication and security</p><p>11 Recommended backend architecture</p>
+  <p>12 Recommended database design</p><p>13 Suggested API surface</p><p>14 Current defects and handoff blockers</p>
+  <p>15 Maintainability and testing</p><p>16 Business decisions required</p><p>17 Recommended delivery plan</p>
+  <p>18 Receiving team checklist</p>
+</div>
+
+<h1>1 Executive summary</h1>
+<p>The current application is a frontend-only functional prototype for an Electronic Permit-to-Work system. It demonstrates permit screens, dynamic templates, role-aware navigation, approval stages, operational states, revisions, checklists, and administration pages. It does not include a server, database, real authentication, durable file storage, notification service, production audit service, or deployment pipeline.</p>
+<p>The existing TypeScript domain code should be treated as a draft functional specification. It is useful for identifying expected behaviour and frontend contracts, but it is not a security boundary. The backend must independently validate identity, authorization, object access, transition rules, input data, concurrency, and audit events.</p>
+<p>The cleanest integration path is to retain the <code>PermitRepository</code> interface and replace the <code>localStorage</code> implementation with an HTTP-backed repository. This approach limits unnecessary UI changes while moving authority to the server.</p>
+<h2>Immediate handoff priorities</h2>
+<ul>
+  <li>Resolve the untracked duplicate <code>src/App.tsx</code> file that currently breaks TypeScript compilation and the handoff structure check.</li>
+  <li>Fix the remaining UI test failure and rerun the full verification suite.</li>
+  <li>Correct stale role checks that currently hide activity logging and the audit page.</li>
+  <li>Confirm parent and child permit lifecycle rules before they are encoded in a database.</li>
+  <li>Commit and tag a clean, reproducible handoff revision.</li>
+</ul>
+
+<h1>2 Technology stack</h1>
+<table>
+  <thead><tr><th style="width:20%">Area</th><th style="width:28%">Current technology</th><th>Receiving team note</th></tr></thead>
+  <tbody>
+    <tr><td>Primary language</td><td>TypeScript 5.8</td><td>Strict TypeScript is enabled for source and tests</td></tr>
+    <tr><td>User interface</td><td>React 19 with TSX</td><td>Client-rendered single-page application</td></tr>
+    <tr><td>Routing</td><td>React Router 7</td><td>BrowserRouter with routes declared in the main application file</td></tr>
+    <tr><td>Forms</td><td>React Hook Form 7</td><td>Used for permit forms</td></tr>
+    <tr><td>Validation</td><td>Zod and Hook Form resolvers installed</td><td>These dependencies currently appear unused</td></tr>
+    <tr><td>Styling</td><td>Plain CSS</td><td>Global and feature CSS files are imported centrally</td></tr>
+    <tr><td>Build</td><td>Vite 7</td><td>TypeScript project compilation and Vite bundling</td></tr>
+    <tr><td>Testing</td><td>Vitest, React Testing Library, jsdom</td><td>Unit and browser-like component tests</td></tr>
+    <tr><td>Persistence</td><td>Browser localStorage</td><td>Must be replaced for production</td></tr>
+    <tr><td>Package management</td><td>npm with package-lock.json</td><td>Use the lock file for reproducible installations</td></tr>
+    <tr><td>Backend and database</td><td>Not implemented</td><td>Technology choice remains open</td></tr>
+  </tbody>
+</table>
+<p>The frontend does not require a particular backend language. A TypeScript backend would reduce context switching, but the receiving team can use its approved enterprise stack if it publishes stable API contracts and preserves the confirmed workflow behaviour.</p>
+
+<h1>3 Repository structure</h1>
+<pre>src/
+|-- main.tsx                 Browser entry point
+|-- app/App.tsx              Application shell routes and permit screens
+|-- components/              Shared presentation components
+|-- domain/                  Types rules seeded data and browser repository
+|-- features/                Authentication administration analytics templates
+`-- styles/                  Global and feature CSS
+
+tests/                       Unit and UI integration tests
+docs/                        Architecture notes and proposal material
+scripts/                     Repository and handoff utilities
+dist/                        Generated output from an earlier build</pre>
+<table>
+  <thead><tr><th style="width:32%">Path</th><th>Responsibility</th></tr></thead>
+  <tbody>
+    <tr><td>src/main.tsx</td><td>Mounts React, configures BrowserRouter, and imports global style layers</td></tr>
+    <tr><td>src/app/App.tsx</td><td>Owns the application shell, routes, dashboards, permit lists, forms, and details</td></tr>
+    <tr><td>src/domain/types.ts</td><td>Defines users, roles, permits, revisions, approvals, activity logs, and audit events</td></tr>
+    <tr><td>src/domain/policy.ts</td><td>Determines transition availability, separation of duties, expiry, and completion</td></tr>
+    <tr><td>src/domain/repository.ts</td><td>Implements browser persistence and lifecycle mutations</td></tr>
+    <tr><td>src/features</td><td>Contains authentication, administrative, analytics, and template pages</td></tr>
+    <tr><td>tests</td><td>Covers policy, repository, checklist, section access, and integrated UI behaviour</td></tr>
+  </tbody>
+</table>
+
+<h1>4 Local setup and commands</h1>
+<h2>Prerequisites</h2>
+<ul><li>Node.js 22 or later</li><li>npm 10 or later</li></ul>
+<table>
+  <thead><tr><th style="width:32%">Command</th><th>Purpose</th></tr></thead>
+  <tbody>
+    <tr><td><code>npm install</code></td><td>Install locked dependencies</td></tr>
+    <tr><td><code>npm run dev</code></td><td>Start the Vite development server</td></tr>
+    <tr><td><code>npm run build</code></td><td>Type-check and create a production bundle</td></tr>
+    <tr><td><code>npm test</code></td><td>Run the complete Vitest suite once</td></tr>
+    <tr><td><code>npm run test:watch</code></td><td>Run tests continuously during development</td></tr>
+    <tr><td><code>npm run check:handoff</code></td><td>Verify the expected repository structure</td></tr>
+    <tr><td><code>npm run preview</code></td><td>Preview the generated production bundle</td></tr>
+  </tbody>
+</table>
+<p>On Windows systems where PowerShell blocks <code>npm.ps1</code>, invoke <code>npm.cmd</code> instead.</p>
+
+<h1>5 Functional scope</h1>
+<h2>Implemented prototype behaviour</h2>
+<ul>
+  <li>Mock login, Micron registration, contractor registration, and tutorial screens</li>
+  <li>Role-specific navigation and dashboard views</li>
+  <li>Parent and child permit registers</li>
+  <li>Permit creation, editing, duplication, and owner draft deletion</li>
+  <li>Dynamic parent and child permit templates with sections, tabs, custom fields, permissions, and child-template attachment</li>
+  <li>Individual Reviewer, MT Group, and PM approval stages</li>
+  <li>Permit revision history, expiry, activation, suspension, resumption, closure, rejection, and cancellation rules</li>
+  <li>Safety checklist selection and conditional validation</li>
+  <li>Activity logs and locally generated audit events</li>
+  <li>Companies, sites, users, disciplines, and MT Group administration</li>
+  <li>Analytics, LSS/FAS, SIPP, resource library, and browser-print demonstrations</li>
+</ul>
+<h2>Prototype only or incomplete</h2>
+<ul>
+  <li>The SSO screen only checks the email domain and does not contact an identity provider.</li>
+  <li>Contractor registration does not create a durable account or approval request.</li>
+  <li>Uploads are held in browser memory or data URLs rather than transferred to file storage.</li>
+  <li>Notifications are not connected to email, messaging, or an event service.</li>
+  <li>Several destinations display reserved module placeholders.</li>
+  <li>PDF export uses the browser print dialog rather than a controlled document-generation service.</li>
+  <li>Analytics and reporting operate on seeded or browser-local data.</li>
+</ul>
+
+<h1>6 Permit workflow</h1>
+<pre>DRAFT
+  -> INDIVIDUAL_REVIEW
+  -> MT_REVIEW
+  -> PM_REVIEW
+  -> APPROVED
+  -> ACTIVE
+  -> SUSPENDED or ACTIVE
+  -> CLOSURE_REQUESTED
+  -> CLOSED</pre>
+<table>
+  <thead><tr><th style="width:25%">Status</th><th>Meaning</th></tr></thead>
+  <tbody>
+    <tr><td>DRAFT</td><td>The requestor can edit and submit the current revision</td></tr>
+    <tr><td>INDIVIDUAL_REVIEW</td><td>An assigned Micron staff reviewer must decide</td></tr>
+    <tr><td>MT_REVIEW</td><td>A member of an assigned MT Group must decide</td></tr>
+    <tr><td>PM_REVIEW</td><td>The configured contractor PM stage must decide</td></tr>
+    <tr><td>APPROVED</td><td>All configured approval stages have approved</td></tr>
+    <tr><td>ACTIVE</td><td>Approved work has been activated within its work period</td></tr>
+    <tr><td>SUSPENDED</td><td>Active work has been paused</td></tr>
+    <tr><td>CLOSURE_REQUESTED</td><td>The requestor has asked an authorized group to close the permit</td></tr>
+    <tr><td>CLOSED</td><td>The permit lifecycle has completed</td></tr>
+    <tr><td>CHANGES_REQUESTED</td><td>A reviewer returned the revision for correction</td></tr>
+    <tr><td>REJECTED</td><td>A reviewer rejected the revision</td></tr>
+    <tr><td>CANCELLED</td><td>The requestor cancelled the permit</td></tr>
+    <tr><td>EXPIRED</td><td>The approved or operational end date has passed</td></tr>
+    <tr><td>SUPERSEDED</td><td>A previous approved revision was replaced after reapproval</td></tr>
+  </tbody>
+</table>
+<p>Every server-side transition should verify the persisted status, authenticated actor, role assignments, separation of duties, required comments, date boundaries, and concurrent updates in one transaction. The API must not accept an arbitrary new status from the browser.</p>
+
+<h1>7 Roles and permissions</h1>
+<table>
+  <thead><tr><th style="width:25%">Role code</th><th style="width:24%">Displayed role</th><th>Current intended responsibility</th></tr></thead>
+  <tbody>
+    <tr><td>SUPER_ADMIN</td><td>Micron Administrator</td><td>System configuration, reporting, and prototype override capabilities</td></tr>
+    <tr><td>MICRON_SUPERVISOR</td><td>Micron Supervisor</td><td>Organization-wide visibility and reporting without permit decisions</td></tr>
+    <tr><td>USER_ADMIN</td><td>Vendor Administrator</td><td>Selected configuration and directory management</td></tr>
+    <tr><td>MICRON_STAFF</td><td>Micron Staff</td><td>Permit creation, review, operational control, and closure when assigned</td></tr>
+    <tr><td>CONTRACTOR_REQUESTOR</td><td>Contractor Requestor</td><td>Create, edit, submit, activate, revise, and request closure for owned permits</td></tr>
+    <tr><td>CONTRACTOR_PM</td><td>Contractor PM</td><td>Final approval stage for assigned permits</td></tr>
+    <tr><td>ASSESSOR</td><td>Assessor</td><td>Read access and restricted updates to assigned template sections</td></tr>
+  </tbody>
+</table>
+<p>Approval stages use separate values named <code>INDIVIDUAL_REVIEWER</code>, <code>MT_GROUP</code>, and <code>PM</code>. The receiving team should define a formal permission matrix because permissions are currently distributed across route guards, component visibility, domain policies, and repository methods.</p>
+
+<h1>8 Current data model</h1>
+<table>
+  <thead><tr><th style="width:20%">Entity</th><th style="width:45%">Important fields</th><th>Notes</th></tr></thead>
+  <tbody>
+    <tr><td>Permit</td><td>ID, permit number, type, parent ID, child IDs, requestor ID, current revision ID</td><td>Stable identity and parent-child relationship</td></tr>
+    <tr><td>Permit revision</td><td>Revision number, status, form data, approvals, creator, submitted time</td><td>Historical revisions are retained</td></tr>
+    <tr><td>Approval stage</td><td>Role, status, actor, acted time, comment</td><td>Three sequential stages per revision</td></tr>
+    <tr><td>Activity log</td><td>Date, summary, safety confirmation, actor, created time</td><td>Operational work record</td></tr>
+    <tr><td>Audit event</td><td>Actor, actor role, revision, action, old status, new status, comment</td><td>Currently generated in the browser</td></tr>
+    <tr><td>Permit form data</td><td>Template, work details, dates, assignments, groups, hazards, attachments, custom fields</td><td>Fixed fields plus dynamic answers</td></tr>
+  </tbody>
+</table>
+<h2>Dynamic templates</h2>
+<p>Templates can be parent or child templates. A template contains sections, optional tabs, field definitions, required flags, option lists, layout information, section edit access, and child-template references. Permit responses to dynamic fields are stored in a <code>customFields</code> map.</p>
+<p>The backend should version templates. Each submitted permit revision must retain the exact template version and field definition used at submission time so that later template changes do not alter historical records.</p>
+
+<h1>9 Browser storage</h1>
+<table>
+  <thead><tr><th style="width:30%">Storage key</th><th style="width:34%">Current contents</th><th>Production replacement</th></tr></thead>
+  <tbody>
+    <tr><td>eptw-functional-draft:v2</td><td>Permits, revisions, activities, audit events, deleted IDs</td><td>Transactional permit database</td></tr>
+    <tr><td>eptw-demo-user</td><td>Selected prototype identity</td><td>Authenticated session and identity claims</td></tr>
+    <tr><td>eptw-templates:v4</td><td>Templates and dynamic fields</td><td>Versioned template service</td></tr>
+    <tr><td>eptw-mt-groups:v2</td><td>Groups, membership, closure authority</td><td>Group tables or directory sync</td></tr>
+    <tr><td>eptw-companies:v1</td><td>Company directory</td><td>Company master data</td></tr>
+    <tr><td>eptw-sites:v1</td><td>Site directory</td><td>Site master data</td></tr>
+    <tr><td>eptw-disciplines:v1</td><td>Discipline directory</td><td>Discipline master data</td></tr>
+    <tr><td>eptw-user-directory:v1</td><td>Prototype user directory</td><td>Identity and profile service</td></tr>
+  </tbody>
+</table>
+<p>Browser data is limited to one profile, can be edited through developer tools, has no concurrency control, and cannot support backup, retention, recovery, or trustworthy audit requirements. Large data URL attachments can also exhaust browser storage.</p>
+
+<h1>10 Authentication and security</h1>
+<h2>Current state</h2>
+<ul>
+  <li>The prototype trusts the browser to select an identity and role.</li>
+  <li>The Micron login demonstration only validates an email suffix.</li>
+  <li>There are no sessions, signed tokens, password controls, MFA, account lockout, or identity-provider calls.</li>
+  <li>Route guards and hidden buttons are not authorization controls.</li>
+  <li>Audit records can be changed or deleted with browser storage tools.</li>
+</ul>
+<h2>Production requirements</h2>
+<ul>
+  <li>Integrate the approved corporate OIDC or SAML identity provider for Micron users.</li>
+  <li>Define the identity, registration approval, password, and recovery process for contractors.</li>
+  <li>Derive roles, site access, company scope, assignments, and MT Group membership on the server.</li>
+  <li>Authorize every endpoint and scope every object query to the authenticated user.</li>
+  <li>Enforce separation of duties and transition rules on the server.</li>
+  <li>Validate every request against a documented schema.</li>
+  <li>Use restrictive CORS, CSRF protection where applicable, rate limits, security headers, and centralized error handling.</li>
+  <li>Scan uploads for malware and enforce content type, extension, and size rules.</li>
+  <li>Keep workflow and security audit events append-only.</li>
+</ul>
+
+<h1>11 Recommended backend architecture</h1>
+<p>A conventional service architecture is sufficient for the first production release. The frontend should call a documented HTTP API. The API should own authentication context, authorization, workflow commands, database transactions, audit generation, attachment metadata, and notification events.</p>
+<pre>React frontend
+  -> HTTP API
+      -> Identity and authorization
+      -> Permit workflow service
+      -> Template and directory services
+      -> Relational database
+      -> Object storage for files
+      -> Notification outbox and workers
+      -> Central logging and monitoring</pre>
+<h2>Frontend integration seam</h2>
+<p>Preserve the <code>PermitRepository</code> method surface where practical and implement an HTTP repository behind it. React components should request operations through the repository or feature-specific client services rather than reading <code>localStorage</code> directly.</p>
+<h2>Operational requirements</h2>
+<ul>
+  <li>Use database transactions and row locking or optimistic concurrency for permit transitions.</li>
+  <li>Use idempotency keys for commands that may be retried.</li>
+  <li>Generate permit numbers through a database sequence or dedicated numbering service.</li>
+  <li>Store timestamps in UTC and format user-facing values for Asia/Singapore.</li>
+  <li>Use an outbox pattern for notifications after committed workflow changes.</li>
+  <li>Provide structured logs, trace IDs, metrics, alerting, backups, and restore procedures.</li>
+</ul>
+
+<h1>12 Recommended database design</h1>
+<p>A relational database such as PostgreSQL is a strong fit because permits have structured ownership, revision, approval, and parent-child relationships. JSON or JSONB can hold dynamic template definitions and dynamic answers while core workflow data remains relational.</p>
+<table>
+  <thead><tr><th style="width:38%">Table or aggregate</th><th>Purpose</th></tr></thead>
+  <tbody>
+    <tr><td>users, roles, user_roles</td><td>Identity profiles and application roles</td></tr>
+    <tr><td>companies, sites, user_sites</td><td>Organization and access scope</td></tr>
+    <tr><td>disciplines</td><td>Controlled permit discipline directory</td></tr>
+    <tr><td>mt_groups, mt_group_members</td><td>Review groups, membership, and closure authority</td></tr>
+    <tr><td>templates, template_versions</td><td>Versioned form definitions and publication state</td></tr>
+    <tr><td>permits</td><td>Stable permit identity, number, ownership, and parent relationship</td></tr>
+    <tr><td>permit_revisions</td><td>Controlled revision records and dynamic answers</td></tr>
+    <tr><td>approval_stages</td><td>Stage assignment, decision, actor, date, and comment</td></tr>
+    <tr><td>activity_logs</td><td>Daily operational and safety records</td></tr>
+    <tr><td>audit_events</td><td>Append-only lifecycle and security history</td></tr>
+    <tr><td>attachments</td><td>File metadata, storage key, hash, scan status, and retention state</td></tr>
+    <tr><td>notification_outbox</td><td>Reliable post-transaction notification delivery</td></tr>
+  </tbody>
+</table>
+<h2>Important constraints</h2>
+<ul>
+  <li>Use UUIDs internally and a separate human-readable permit number.</li>
+  <li>Add foreign keys and unique constraints for permit numbers and revision numbers.</li>
+  <li>Index status, site, company, requestor, reviewer, MT Group, dates, and parent permit.</li>
+  <li>Prevent submitted historical revisions from being silently overwritten.</li>
+  <li>Snapshot template version references on every permit revision.</li>
+  <li>Store object-storage references rather than file bodies in the relational database.</li>
+  <li>Include a concurrency version on mutable aggregates.</li>
+</ul>
+
+<h1>13 Suggested API surface</h1>
+<pre>GET    /api/me
+GET    /api/users
+GET    /api/sites
+GET    /api/companies
+GET    /api/disciplines
+GET    /api/mt-groups
+
+GET    /api/templates
+POST   /api/templates
+PUT    /api/templates/{id}
+POST   /api/templates/{id}/versions
+
+GET    /api/permits
+POST   /api/permits
+GET    /api/permits/{id}
+PUT    /api/permits/{id}/draft
+DELETE /api/permits/{id}/draft
+POST   /api/permits/{id}/submit
+POST   /api/permits/{id}/approve
+POST   /api/permits/{id}/request-changes
+POST   /api/permits/{id}/reject
+POST   /api/permits/{id}/activate
+POST   /api/permits/{id}/suspend
+POST   /api/permits/{id}/resume
+POST   /api/permits/{id}/request-closure
+POST   /api/permits/{id}/close
+POST   /api/permits/{id}/revisions
+POST   /api/permits/{id}/activities
+
+POST   /api/attachments/upload-session
+GET    /api/audit-events
+GET    /api/reports/{report}</pre>
+<p>Use command endpoints for workflow transitions. A generic endpoint that accepts any status would make authorization and state-machine validation difficult to enforce. Publish request, response, validation, authorization, and error contracts through OpenAPI.</p>
+
+<h1>14 Current defects and handoff blockers</h1>
+<table>
+  <thead><tr><th style="width:12%">Priority</th><th style="width:29%">Finding</th><th style="width:27%">Impact</th><th>Required action</th></tr></thead>
+  <tbody>
+    <tr><td class="status-blocking">Blocking</td><td>An untracked duplicate <code>src/App.tsx</code> is compiled with broken legacy imports</td><td>The TypeScript build fails and the structure check rejects the repository</td><td>Remove it or merge required work into <code>src/app/App.tsx</code></td></tr>
+    <tr><td class="status-blocking">Blocking</td><td>One UI test fails in the configured section tab read-only scenario</td><td>The full automated test suite is not green</td><td>Confirm the intended behaviour and correct the code or test</td></tr>
+    <tr><td class="status-high">High</td><td>ActivityPanel checks obsolete <code>REQUESTOR</code> and <code>PM</code> roles</td><td>Eligible users do not see the activity-log form</td><td>Use the current role model and add regression coverage</td></tr>
+    <tr><td class="status-high">High</td><td>AuditPage checks <code>ADMIN</code> instead of <code>SUPER_ADMIN</code></td><td>The audit register redirects the real administrator</td><td>Correct the guard and add a route test</td></tr>
+    <tr><td class="status-high">High</td><td>Parent activation forces every child to <code>ACTIVE</code></td><td>Unapproved children can be activated and the previous audit status may be wrong</td><td>Confirm the rule and enforce it transactionally</td></tr>
+    <tr><td class="status-high">High</td><td>README wording states child gating while policy tests permit independent approval</td><td>The functional specification is contradictory</td><td>Obtain product-owner approval for one rule</td></tr>
+    <tr><td>Medium</td><td>The working tree contains modified and untracked files</td><td>The delivered commit does not reproduce the inspected state</td><td>Clean, commit, tag, and record verification results</td></tr>
+    <tr><td>Medium</td><td>Current dist output predates the inspected source</td><td>The bundle cannot be trusted as the current release</td><td>Regenerate it after the build is restored</td></tr>
+  </tbody>
+</table>
+<h2>Verification results from the current working tree</h2>
+<table>
+  <thead><tr><th style="width:25%">Check</th><th style="width:20%">Result</th><th>Evidence</th></tr></thead>
+  <tbody>
+    <tr><td>Handoff structure check</td><td>Failed</td><td>Unexpected uncategorized source file <code>src/App.tsx</code></td></tr>
+    <tr><td>Production build</td><td>Failed</td><td>Broken legacy imports and TypeScript errors in <code>src/App.tsx</code></td></tr>
+    <tr><td>Automated tests</td><td>Failed overall</td><td>83 tests passed and 1 test failed across 5 test files</td></tr>
+    <tr><td>Current dist</td><td>Stale</td><td>Generated before the current inspected source state</td></tr>
+  </tbody>
+</table>
+
+<h1>15 Maintainability and testing</h1>
+<p>The project already separates domain helpers and several feature pages, but the main application file still owns too many responsibilities. The largest application files are approximately 773 lines for <code>src/app/App.tsx</code> and 4,420 lines for the main CSS file. Template contracts are also duplicated in React files.</p>
+<h2>Recommended frontend decomposition</h2>
+<ul>
+  <li>Move permit list, create, edit, detail, workflow, activity, and audit screens into separate feature modules.</li>
+  <li>Define template and directory contracts once in the domain or API contract layer.</li>
+  <li>Route persistence through API clients rather than direct <code>localStorage</code> calls.</li>
+  <li>Split the largest CSS file by stable feature ownership or adopt an approved scoped approach.</li>
+  <li>Add ESLint, a formatter, an application error boundary, and production telemetry.</li>
+</ul>
+<h2>Test strategy for continuation</h2>
+<ul>
+  <li>Keep existing domain tests as behaviour references while server rules are implemented.</li>
+  <li>Add API integration tests against a real test database.</li>
+  <li>Add authorization tests for every role, site, company, assignment, and object scope.</li>
+  <li>Add concurrency tests for duplicate approvals, edits, activation, closure, and numbering.</li>
+  <li>Add file-upload security and object-storage integration tests.</li>
+  <li>Add end-to-end tests for requestor, reviewer, MT Group, PM, assessor, and administrator journeys.</li>
+  <li>Require build, unit, integration, security, and end-to-end checks in CI.</li>
+</ul>
+
+<h1>16 Business decisions required</h1>
+<ol>
+  <li>Must every selected child permit be approved before the parent can be approved or activated?</li>
+  <li>Do parent and child permits have independent approval chains?</li>
+  <li>What happens to children when a parent is suspended, cancelled, closed, expired, or revised?</li>
+  <li>Is PM approval performed by the contractor PM, the host, or another configured approver?</li>
+  <li>Can a Micron administrator override normal approvals, and how must the override be audited?</li>
+  <li>Which roles can create permits and add daily activity logs?</li>
+  <li>Which MT Group can close a permit when several groups are assigned?</li>
+  <li>Should expiry be calculated on access or committed by a scheduled server process?</li>
+  <li>Can an expired permit be revised, reactivated, or only closed?</li>
+  <li>Which revision fields become immutable after submission?</li>
+  <li>What is the required permit-number format, sequence scope, and reset period?</li>
+  <li>What upload types, limits, retention periods, and malware-scanning rules apply?</li>
+  <li>What are the audit, privacy, and legal retention requirements?</li>
+  <li>Which analytics and reports are operational requirements rather than mockups?</li>
+  <li>Which corporate systems own users, companies, sites, training records, disciplines, and groups?</li>
+  <li>Does contractor self-registration require sponsor or administrator approval?</li>
+</ol>
+
+<h1>17 Recommended delivery plan</h1>
+<table>
+  <thead><tr><th style="width:17%">Phase</th><th style="width:30%">Outcome</th><th>Main work</th></tr></thead>
+  <tbody>
+    <tr><td>1 Baseline</td><td>Clean reproducible frontend</td><td>Resolve duplicate source, fix tests, run build, commit, and tag</td></tr>
+    <tr><td>2 Requirements</td><td>Approved workflow and permission specification</td><td>Confirm roles, child rules, numbering, files, retention, and reporting</td></tr>
+    <tr><td>3 Contracts</td><td>Stable frontend-backend boundary</td><td>Extract shared contracts and publish OpenAPI</td></tr>
+    <tr><td>4 Identity and directories</td><td>Authenticated users and managed reference data</td><td>Implement identity, users, sites, companies, disciplines, and groups</td></tr>
+    <tr><td>5 Templates</td><td>Versioned dynamic forms</td><td>Persist template versions and validated field definitions</td></tr>
+    <tr><td>6 Permit workflow</td><td>Transactional permit lifecycle</td><td>Implement permits, revisions, approvals, activities, and audit</td></tr>
+    <tr><td>7 Files and notifications</td><td>Durable supporting services</td><td>Add object storage, scanning, outbox, and delivery workers</td></tr>
+    <tr><td>8 Frontend integration</td><td>Browser storage removed</td><td>Replace local repositories with HTTP clients</td></tr>
+    <tr><td>9 Production readiness</td><td>Deployable supported system</td><td>Add CI/CD, monitoring, security testing, backups, recovery, and operating guides</td></tr>
+  </tbody>
+</table>
+
+<h1>18 Receiving team checklist</h1>
+<ul style="list-style-type:none; margin-left:0">
+  <li>&#9744; Confirm the handoff commit and tag</li>
+  <li>&#9744; Install from package-lock.json on an approved Node.js version</li>
+  <li>&#9744; Run the structure check, build, and full test suite</li>
+  <li>&#9744; Review the domain types, policy, repository, and seed data</li>
+  <li>&#9744; Approve the role and permission matrix</li>
+  <li>&#9744; Approve the permit state machine and all transition preconditions</li>
+  <li>&#9744; Resolve parent and child lifecycle behaviour</li>
+  <li>&#9744; Approve the database model and template-version strategy</li>
+  <li>&#9744; Approve the OpenAPI contract and error model</li>
+  <li>&#9744; Confirm identity-provider and contractor-access architecture</li>
+  <li>&#9744; Confirm object-storage, upload-security, and retention requirements</li>
+  <li>&#9744; Define audit immutability and reporting requirements</li>
+  <li>&#9744; Define environment, secret-management, CI/CD, monitoring, backup, and recovery standards</li>
+  <li>&#9744; Map every existing browser store to an API and database owner</li>
+  <li>&#9744; Create acceptance tests for every supported user journey</li>
+</ul>
+<h2>Final handoff position</h2>
+<p>The prototype provides a substantial starting point for frontend behaviour and workflow discussion. The receiving team should preserve confirmed user journeys and visual intent, but it should not reproduce browser persistence or client-side authorization as production architecture. The next release should make the server authoritative for identity, access, workflow transitions, concurrency, files, notifications, and audit history.</p>
+
+</body>
+</html>

@@ -27,7 +27,7 @@ Open the URL printed by Vite. Use the **Demo identity** selector in the sidebar 
 |   |-- components/        Reusable UI components
 |   |-- domain/            Types, policy, data, persistence, and business rules
 |   |-- features/          Feature-specific pages
-|   |   |-- admin/         Users, maps, companies, disciplines, and MT groups
+|   |   |-- admin/         Users, companies, disciplines, and MT groups
 |   |   |-- analytics/     Analytics dashboard
 |   |   |-- auth/          Login, registration, and tutorial flows
 |   |   `-- templates/     Permit-template builder

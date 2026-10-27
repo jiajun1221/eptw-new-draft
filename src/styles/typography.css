@@ -4,26 +4,37 @@ body {
   line-height: 1.4;
 }
 
-/*
- * Give compact desktop windows a wider effective canvas. Applying zoom at
- * the document root lets the browser reflow to the new scale without the
- * horizontal overflow caused by enlarging the application shell itself.
- */
-@media (min-width: 801px) and (max-width: 1919px) {
+/* Fit the full workspace into typical laptop viewports. */
+@media (min-width: 901px) and (max-width: 1600px) {
   :root { zoom: .82; }
 
-  .app-shell { min-height: 121.952vh; }
-  .sidebar { height: 121.952vh; }
+  .app-shell { min-height: 121.952dvh; }
 }
 
 /* A compact frame that always remains within the browser viewport. */
 .app-shell {
+  display: block;
   width: 100%;
   max-width: 100%;
-  grid-template-columns: 232px minmax(0, 1fr);
+  overflow-x: hidden;
 }
-.main-content { max-width: 100%; overflow-x: clip; }
-.sidebar { padding: 18px 12px; }
+.main-content {
+  max-width: 100%;
+  margin-left: 232px;
+  overflow-x: clip;
+}
+.sidebar {
+  position: fixed;
+  inset: 0 auto 0 0;
+  width: 232px;
+  height: 100vh;
+  height: 100dvh;
+  padding: 18px 12px;
+}
+
+@media (min-width: 901px) and (max-width: 1600px) {
+  .sidebar { height: 121.952dvh; }
+}
 .micron-brand { padding: 0 6px 15px; }
 .primary-nav a { gap: 9px; padding: 9px 10px; }
 .primary-nav p { margin: 11px 9px 2px; }
@@ -94,8 +105,25 @@ body {
   grid-template-columns: minmax(240px, 1fr) 155px 155px auto;
   gap: 7px;
 }
-.permit-table-wrap { display: block; padding-right: 10px; }
+.permit-table-wrap {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  padding-right: 0;
+  overflow-x: hidden;
+}
 .permit-mobile-list { display: none; }
+.permit-table {
+  width: 100%;
+  min-width: 0;
+  table-layout: fixed;
+}
+.permit-table th,
+.permit-table td {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
 .permit-table th { padding: 8px 5px; }
 .permit-table td { padding: 9px 5px; }
 .permit-table th:first-child,
@@ -142,13 +170,148 @@ body {
 .row-menu summary { width: 26px; }
 .row-menu summary { height: 26px; }
 
-@media (max-width: 1100px) {
+@media (min-width: 901px) and (max-width: 1600px) {
+  .dashboard-metric-groups {
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  .dashboard-metric-group > h2 {
+    margin-bottom: 6px;
+    font-size: 12px;
+  }
+
+  .dashboard-metric-group .stats { gap: 10px; }
+
+  .dashboard-metric {
+    min-height: 0;
+    padding: 10px 12px 12px;
+    border-top-width: 2px;
+    border-radius: 9px;
+  }
+
+  .dashboard-metric span {
+    font-size: 9.5px;
+    line-height: 1.2;
+  }
+
+  .dashboard-metric strong {
+    margin: 3px 0 1px;
+    font-size: 24px;
+    line-height: 1.1;
+  }
+
+  .dashboard-metric small {
+    font-size: 9px;
+    line-height: 1.25;
+  }
+
+  .permit-table th {
+    padding: 6px 4px;
+    font-size: 8.5px;
+    line-height: 1.2;
+  }
+
+  .permit-table th small,
+  .permit-table td small {
+    font-size: 8px;
+    line-height: 1.2;
+  }
+
+  .permit-table td {
+    padding: 7px 4px;
+    font-size: 9.5px;
+    line-height: 1.25;
+  }
+
+  .permit-table td strong,
+  .permit-table .permit-number {
+    font-size: 9.5px;
+    line-height: 1.25;
+  }
+
+  .permit-template { gap: 5px; }
+  .permit-template-code {
+    min-width: 26px;
+    min-height: 21px;
+    padding: 2px 5px;
+    font-size: 8px;
+  }
+
+  .draft-row-label {
+    margin-left: 4px;
+    padding: 1px 4px;
+    font-size: 7.5px !important;
+  }
+
+  .permit-table .status-pill {
+    padding: 4px 5px;
+    font-size: 8.5px !important;
+  }
+
+  .permit-table .approval-status { min-width: 68px; }
+  .approval-status .status-copy strong { font-size: 8.5px; }
+  .approval-status .status-copy small { font-size: 7.5px; }
+  .row-menu,
+  .row-menu summary { width: 23px; }
+  .row-menu summary { height: 23px; }
+}
+
+@media (min-width: 901px) and (max-width: 1200px) {
+  .permit-register-page .filters {
+    grid-template-columns: minmax(240px, 1fr) 155px 155px;
+  }
+
+  .permit-register-page .result-count { grid-column: 1 / -1; }
+}
+
+@media (max-width: 900px) {
+  .app-shell { display: block; }
+
+  .main-content { margin-left: 0; }
+
+  .sidebar {
+    position: fixed;
+    inset: 0 auto 0 0;
+    width: min(280px, 86vw);
+    height: 100dvh;
+    transform: translateX(-100%);
+    transition: transform .2s ease;
+  }
+
+  .sidebar.open { transform: translateX(0); }
+
+  .mobile-menu {
+    display: grid;
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    z-index: 20;
+    width: 42px;
+    height: 42px;
+    place-items: center;
+    border: 0;
+    border-radius: 9px;
+    background: var(--nav);
+    color: #fff;
+    font-size: 20px;
+  }
+
+  .backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 25;
+    border: 0;
+    background: rgba(8, 25, 43, .45);
+  }
+
+  .page { padding: 70px 15px 24px; }
   .permit-table-wrap { display: none; }
   .permit-mobile-list { display: grid; }
 }
 
 @media (max-width: 800px) {
-  .sidebar { width: 232px; }
   .page-header h1 { font-size: 20px; }
   .page-header p { font-size: 12px; }
 }

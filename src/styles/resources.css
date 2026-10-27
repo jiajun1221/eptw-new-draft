@@ -1,53 +1,3 @@
-.downloads-page { display: grid; gap: 16px; }
-.downloads-page > .page-header { margin-bottom: 0; }
-.downloads-toolbar { display: grid; grid-template-columns: minmax(280px, 620px) auto; justify-content: space-between; align-items: center; gap: 18px; padding: 13px; }
-.downloads-toolbar .search input { width: 100%; height: 40px; padding: 9px 12px 9px 37px; border: 1px solid #cbd6e4; border-radius: 8px; background: #fff; font-size: 11px; }
-.download-summary { display: flex; align-items: center; gap: 7px; color: #718096; font-size: 10px; white-space: nowrap; }
-.download-summary strong { display: grid; place-items: center; min-width: 26px; height: 26px; border-radius: 50%; background: #e9f1fc; color: #245995; font-size: 10px; }
-.download-section { overflow: hidden; }
-.download-section-heading { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 15px 17px; border-bottom: 1px solid var(--line); background: #f8fafc; }
-.download-section-heading h2 { margin: 0 0 3px; color: var(--navy); font-size: 14px; }
-.download-section-heading p { margin: 0; color: var(--muted); font-size: 10px; }
-.download-section-heading > span { padding: 4px 8px; border-radius: 999px; background: #e9f1fc; color: #315d91; font-size: 9px; font-weight: 800; white-space: nowrap; }
-.download-list { display: grid; }
-.download-row { display: grid; grid-template-columns: 38px minmax(240px, 1fr) 180px 108px; align-items: center; gap: 12px; min-height: 62px; padding: 9px 16px; border-bottom: 1px solid var(--line); }
-.download-row:last-child { border-bottom: 0; }
-.download-row:hover { background: #fbfdff; }
-.pdf-icon { display: grid; place-items: center; width: 32px; height: 36px; border-radius: 5px; background: #fff0f0; color: #c33434; font-size: 8px; font-weight: 900; box-shadow: inset 0 0 0 1px #f0caca; }
-.download-file strong,.download-file small,.download-updated span,.download-updated time { display: block; }
-.download-file strong { margin-bottom: 3px; color: #173b6d; font-size: 11px; }
-.download-file small { color: #7a899d; font-size: 9px; overflow-wrap: anywhere; }
-.download-updated span { margin-bottom: 3px; color: #8a97a9; font-size: 8px; font-weight: 800; text-transform: uppercase; letter-spacing: .04em; }
-.download-updated time { color: #40536e; font-size: 10px; }
-.download-action { display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 7px 10px; border: 1px solid #bfd1e8; border-radius: 6px; background: #fff; color: #245a9d; font-size: 9px; font-weight: 800; text-decoration: none; }
-.download-action:hover { border-color: #2e6dd2; background: #edf4ff; }
-.download-action span { font-size: 12px; }
-.user-guide-feature { display: grid; grid-template-columns: 112px minmax(0,1fr) auto; align-items: center; gap: 22px; padding: 20px 22px; overflow: hidden; border-color: #cdddf1; background: linear-gradient(115deg, #f7fbff, #fff 64%); box-shadow: 0 7px 20px rgba(27, 67, 112, .08); }
-.guide-illustration { position: relative; display: grid; place-items: center; width: 100px; height: 100px; border-radius: 18px; background: linear-gradient(145deg, #2869c8, #174985); color: #fff; box-shadow: 0 9px 20px rgba(32, 91, 162, .2); }
-.guide-illustration span { display: grid; place-items: center; width: 43px; height: 43px; border: 2px solid rgba(255,255,255,.7); border-radius: 50%; font-size: 22px; font-weight: 800; }
-.guide-illustration i { position: absolute; right: 9px; bottom: 7px; color: rgba(255,255,255,.6); font-size: 9px; font-style: normal; font-weight: 800; letter-spacing: .06em; }
-.guide-eyebrow { color: #2865b6; font-size: 8.5px; font-weight: 900; letter-spacing: .07em; text-transform: uppercase; }
-.guide-content h2 { margin: 5px 0 5px; color: #173b6d; font-size: 17px; }
-.guide-content > p { max-width: 650px; margin: 0 0 13px; color: #67778e; font-size: 10px; line-height: 1.55; }
-.guide-meta { display: flex; align-items: center; flex-wrap: wrap; gap: 13px; }
-.document-file-pill { display: inline-flex; align-items: center; gap: 7px; max-width: 100%; padding: 7px 10px; border-radius: 6px; background: #eef0f3; color: #687385; font-size: 9.5px; font-weight: 700; overflow-wrap: anywhere; }
-.document-file-pill b { color: #c43232; font-size: 7px; }
-.guide-updated { color: #56677e; font-size: 9px; }
-.guide-updated small { display: block; margin-bottom: 2px; color: #8a97a9; font-size: 7.5px; font-weight: 800; text-transform: uppercase; }
-.guide-download { display: inline-flex; align-items: center; gap: 7px; white-space: nowrap; text-decoration: none; }
-@media(max-width:700px) {
-  .downloads-toolbar { grid-template-columns: 1fr; }
-  .download-summary { justify-content: flex-end; }
-  .download-row { grid-template-columns: 38px minmax(0,1fr) auto; }
-  .download-updated { display: none; }
-  .download-action { width: 34px; padding: 7px; font-size: 0; }
-  .download-action span { font-size: 12px; }
-  .user-guide-feature { grid-template-columns: 74px minmax(0,1fr); gap: 14px; padding: 16px; }
-  .guide-illustration { width: 70px; height: 70px; border-radius: 13px; }
-  .guide-illustration span { width: 32px; height: 32px; font-size: 16px; }
-  .guide-download { grid-column: 1/-1; justify-content: center; }
-}
-
 .tutorials-page { display: grid; gap: 16px; }
 .tutorials-page > .page-header { margin-bottom: 0; }
 .tutorial-toolbar { display: grid; grid-template-columns: minmax(260px, 1fr) auto; align-items: center; gap: 16px; padding: 13px; }
@@ -95,3 +45,24 @@
   .tutorial-featured > div:last-child { padding: 24px; }
   .tutorial-grid { grid-template-columns: 1fr; }
 }
+
+.report-issue-page { width: 100%; max-width: none; }
+.report-issue-settings { display: grid; gap: 18px; padding: 24px; }
+.report-issue-settings h2 { margin: 5px 0 6px; color: var(--navy); font-size: 18px; }
+.report-issue-settings > div > p { max-width: 680px; margin: 0; color: var(--muted); font-size: 11px; line-height: 1.55; }
+.settings-kicker { color: #2865b6; font-size: 9px; font-weight: 900; letter-spacing: .07em; text-transform: uppercase; }
+.report-issue-settings label { display: grid; max-width: 720px; gap: 6px; }
+.report-issue-settings label > span,.report-issue-current > span { color: #40536f; font-size: 10px; font-weight: 800; }
+.report-issue-settings input { min-height: 42px; padding: 10px 12px; border: 1px solid #c6d4e5; border-radius: 8px; color: var(--ink); font: inherit; }
+.report-issue-settings input:focus { border-color: #3978d7; outline: 3px solid #e5efff; }
+.report-issue-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.form-message { max-width: 720px; margin: -7px 0 0; padding: 9px 11px; border-radius: 7px; font-size: 10px; font-weight: 700; }
+.form-message.error { background: #fff0f0; color: #a82d2d; }
+.form-message.success { background: #eaf8ef; color: #247044; }
+.report-issue-current { display: grid; max-width: 720px; gap: 5px; padding-top: 14px; border-top: 1px solid var(--line); }
+.report-issue-current a { color: #2864c7; font-size: 11px; overflow-wrap: anywhere; }
+.report-issue-unavailable { display: grid; justify-items: center; min-height: 260px; place-content: center; padding: 30px; text-align: center; }
+.report-issue-unavailable .report-issue-icon { display: grid; width: 42px; height: 42px; place-items: center; border-radius: 50%; background: #e9f1fc; color: #245995; font-size: 18px; font-weight: 900; }
+.report-issue-unavailable h2 { margin: 12px 0 5px; color: var(--navy); font-size: 16px; }
+.report-issue-unavailable p { margin: 0 0 16px; color: var(--muted); font-size: 11px; }
+.report-issue-unavailable a { text-decoration: none; }

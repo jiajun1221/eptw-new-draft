@@ -11,6 +11,7 @@ export interface PermitRepository {
   listPermits(filters?: PermitFilters): Permit[];
   getPermit(id: string): Permit | undefined;
   createPermit(input: PermitFormData, actor: User): Permit;
+  createChildPermit(input: PermitFormData, parentId: string, templateCode: string, actor: User): Permit;
   updateDraft(id: string, input: PermitFormData, actor: User): Permit;
   deleteDraft(id: string, actor: User): void;
   syncAttachedChildren(parentId: string, children: AttachedChildInput[], actor: User): Permit;
@@ -96,6 +97,18 @@ export class LocalPermitRepository implements PermitRepository {
     const state = this.read(); const id = uid(); const sequence = String(state.permits.length + 1).padStart(4, "0"); const revisionId = uid(); const today = new Date().toISOString().slice(0, 10);
     const permit: Permit = { id, permitNumber: `${input.site}-G-${input.discipline}-${today}/${sequence}`, type: "GENERAL", childIds: [], requestorId: actor.id, currentRevisionId: revisionId, revisions: [{ id: revisionId, number: 1, status: "DRAFT", data: clone(input), approvals: approvalStages(), createdAt: new Date().toISOString(), createdBy: actor.id }], activities: [], audit: [] };
     this.audit(permit, actor, "CREATED", undefined, "DRAFT"); state.permits.unshift(permit);
+    this.write(state); return clone(permit);
+  }
+  createChildPermit(input: PermitFormData, parentId: string, templateCode: string, actor: User) {
+    if (!["CONTRACTOR_REQUESTOR", "MICRON_STAFF", "SUPER_ADMIN"].includes(actor.role)) throw new Error("This role cannot create permits.");
+    const state = this.read(), parent = this.find(state, parentId);
+    if (parent.parentId || parent.type !== "GENERAL" || parent.requestorId !== actor.id) throw new Error("Select one of your valid parent permits.");
+    const id = uid(), revisionId = uid(), createdAt = new Date().toISOString();
+    const sequence = state.permits.filter((item) => item.parentId === parent.id).length + 1;
+    const code = templateCode.trim().toUpperCase() || "CHILD";
+    const permit: Permit = { id, permitNumber: `${parent.permitNumber.replace(/-G-/i, `-${code}-`)}-${sequence}`, type: "HOT_WORK", parentId: parent.id, attachmentKey: `manual:${id}`, childIds: [], requestorId: actor.id, currentRevisionId: revisionId, revisions: [{ id: revisionId, number: 1, status: "DRAFT", data: clone(input), approvals: approvalStages(), createdAt, createdBy: actor.id }], activities: [], audit: [] };
+    this.audit(permit, actor, "CREATED_AND_ATTACHED_TO_PARENT", undefined, "DRAFT");
+    state.permits.unshift(permit); parent.childIds.push(permit.id);
     this.write(state); return clone(permit);
   }
   updateDraft(id: string, input: PermitFormData, actor: User) {

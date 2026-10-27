@@ -98,11 +98,11 @@ describe("application shell", () => {
     expect(screen.getByRole("button", { name: /all rejected permits/i })).toBeTruthy();
   });
 
-  it("gives a Micron Supervisor all-permit visibility without create or configuration access", () => {
+  it("gives a Micron Supervisor submitted-permit visibility without exposing other users' drafts", () => {
     localStorage.setItem("eptw-demo-user", "supervisor-1");
     render(<MemoryRouter initialEntries={["/permits"]}><App /></MemoryRouter>);
     expect(screen.getAllByText("F10A1-G-AMHS-2026-09-08/0001").length).toBeGreaterThan(0);
-    expect(screen.getAllByText("F10A2-G-Facilities-2026-09-09/0004").length).toBeGreaterThan(0);
+    expect(screen.queryByText("F10A2-G-Facilities-2026-09-09/0004")).toBeNull();
     expect(screen.queryByRole("link", { name: /create permit/i })).toBeNull();
     expect(screen.queryByRole("link", { name: /^users$/i })).toBeNull();
     expect(screen.queryByRole("link", { name: /^templates$/i })).toBeNull();
@@ -162,21 +162,28 @@ describe("application shell", () => {
     render(<MemoryRouter initialEntries={["/help?resource=tutorials"]}><App /></MemoryRouter>);
     expect(screen.getByRole("heading", { name: /tutorial videos/i })).toBeTruthy();
     expect(screen.getByRole("link", { name: /tutorial videos/i }).className).toContain("active");
+    expect(screen.queryByRole("link", { name: /form downloads/i })).toBeNull();
     expect(screen.getByRole("link", { name: "Watch B1 Hot Work permit" })).toBeTruthy();
     fireEvent.click(screen.getByRole("button", { name: "Workflow" }));
     expect(screen.getByText("Approval and rejection flow")).toBeTruthy();
     expect(screen.queryByText("B1 Hot Work permit")).toBeNull();
   });
 
-  it("shows and searches the form download library", () => {
-    render(<MemoryRouter initialEntries={["/help?resource=forms"]}><App /></MemoryRouter>);
-    expect(screen.getByRole("heading", { name: "Form downloads" })).toBeTruthy();
-    expect(screen.getByText("Risk Assessment")).toBeTruthy();
-    expect(screen.getByText("ePTW User Guide v3.0")).toBeTruthy();
-    expect(screen.getByRole("link", { name: "Download Hot Work Signage" }).hasAttribute("download")).toBe(true);
-    fireEvent.change(screen.getByLabelText("Search downloadable forms"), { target: { value: "confined" } });
-    expect(screen.getByText("Confined Space Signage")).toBeTruthy();
-    expect(screen.queryByText("Risk Assessment")).toBeNull();
+  it("lets the Vendor Admin configure the Report issue destination for other users", () => {
+    localStorage.setItem("eptw-demo-user", "user-admin-1");
+    render(<MemoryRouter initialEntries={["/help?resource=issue"]}><App /></MemoryRouter>);
+
+    expect(screen.getByRole("heading", { name: "Report issue" })).toBeTruthy();
+    fireEvent.change(screen.getByLabelText("Report issue URL"), { target: { value: "https://support.example.com/new-ticket" } });
+    fireEvent.click(screen.getByRole("button", { name: "Save link" }));
+    expect(screen.getByRole("status").textContent).toContain("saved for all users");
+    expect(localStorage.getItem("eptw-report-issue-url:v1")).toBe("https://support.example.com/new-ticket");
+
+    cleanup();
+    localStorage.setItem("eptw-demo-user", "req-1");
+    render(<MemoryRouter initialEntries={["/dashboard"]}><App /></MemoryRouter>);
+    expect(screen.getByRole("link", { name: /report issue/i }).getAttribute("href")).toBe("https://support.example.com/new-ticket");
+    expect(screen.queryByLabelText("Report issue URL")).toBeNull();
   });
 
   it("uses the Dashboard for assigned reviews without a separate Approval queue menu", () => {
@@ -244,13 +251,12 @@ describe("application shell", () => {
   });
 
   it("orders the permit register by operational status priority", () => {
-    localStorage.setItem("eptw-demo-user", "admin-1");
+    localStorage.setItem("eptw-demo-user", "req-1");
     render(<MemoryRouter initialEntries={["/permits"]}><App /></MemoryRouter>);
     const rows = Array.from(document.querySelectorAll<HTMLTableRowElement>(".permit-table tbody tr"));
     expect(rows[0].textContent).toContain("Draft permit");
     expect(rows[1].textContent).toContain("Pending");
-    expect(rows[2].textContent).toContain("Pending");
-    expect(rows[3].textContent).toContain("Active");
+    expect(rows[2].textContent).toContain("Active");
   });
 
   it("shows the template code badge and template name in the permit register", () => {
@@ -272,9 +278,42 @@ describe("application shell", () => {
     render(<MemoryRouter initialEntries={["/permits/permit-hot-parent"]}><App /></MemoryRouter>);
     fireEvent.click(screen.getByRole("tab", { name: /B1.B4 permits/i }));
 
-    expect(screen.getByText("F10A1-B1-Facilities-2026-09-09/0002-1")).toBeTruthy();
+    expect(screen.getAllByText("F10A1-B1-Facilities-2026-09-09/0002-1").length).toBeGreaterThan(0);
     fireEvent.click(screen.getAllByRole("link", { name: "View child permit" })[0]);
     expect(screen.getByRole("heading", { name: "F10A1-B1-Facilities-2026-09-09/0002-1" })).toBeTruthy();
+  });
+
+  it("shows child information and its attached parent without permit tabs", () => {
+    render(<MemoryRouter initialEntries={["/permits/permit-a01-child"]}><App /></MemoryRouter>);
+
+    expect(screen.queryByRole("tablist", { name: "Permit information" })).toBeNull();
+    expect(screen.getByRole("heading", { name: "F10A1-G-Facilities-2026-09-09/0002" })).toBeTruthy();
+    expect(screen.getByText("Attached parent permit")).toBeTruthy();
+    const parentCard = screen.getByRole("heading", { name: "F10A1-G-Facilities-2026-09-09/0002" }).closest("section")!;
+    expect(within(parentCard).getByText("Host supervisor", { selector: "dt" })).toBeTruthy();
+    expect(within(parentCard).getByText("Final approval MT group", { selector: "dt" })).toBeTruthy();
+    expect(screen.getByRole("link", { name: "View parent permit" }).getAttribute("href")).toBe("/permits/permit-hot-parent");
+    expect(screen.getByRole("heading", { name: "Child permit information" })).toBeTruthy();
+    expect(screen.queryByRole("navigation", { name: "Parent permit sections" })).toBeNull();
+  });
+
+  it("creates a child permit from a child template and attaches it to the selected parent", () => {
+    render(<MemoryRouter initialEntries={["/child-permits"]}><App /></MemoryRouter>);
+    fireEvent.click(screen.getByRole("link", { name: /create child permit/i }));
+
+    expect(screen.getByRole("heading", { name: "Create Child Permit" })).toBeTruthy();
+    expect(screen.getByText("Host & approval route")).toBeTruthy();
+    expect(screen.getByText("Site", { selector: "label > span" })).toBeTruthy();
+    expect(screen.getByText("Discipline", { selector: "label > span" })).toBeTruthy();
+
+    fireEvent.change(screen.getByLabelText("Permit template type"), { target: { value: "tpl-child-b1" } });
+    fireEvent.change(screen.getByLabelText("Parent permit"), { target: { value: "permit-review" } });
+    fireEvent.click(screen.getByRole("button", { name: "Create Permit" }));
+
+    const state = JSON.parse(localStorage.getItem("eptw-functional-draft:v2")!);
+    const child = state.permits.find((permit: { parentId?: string; revisions: { data: { templateId?: string } }[] }) => permit.parentId === "permit-review" && permit.revisions[0].data.templateId === "tpl-child-b1");
+    expect(child.type).toBe("HOT_WORK");
+    expect(state.permits.find((permit: { id: string }) => permit.id === "permit-review").childIds).toContain(child.id);
   });
 
   it("creates selected B1-B4 template options as navigable child permits", () => {
@@ -456,6 +495,17 @@ describe("application shell", () => {
     expect(screen.queryAllByText(permitNumber)).toHaveLength(0);
   });
 
+  it("hides drafts owned by another user from the permit register", () => {
+    localStorage.setItem("eptw-demo-user", "pm-1");
+    render(<MemoryRouter initialEntries={["/child-permits"]}><App /></MemoryRouter>);
+
+    expect(screen.getAllByText("F10A1-B1-Facilities-2026-09-09/0002-1").length).toBeGreaterThan(0);
+    expect(screen.queryByText("F10A1-B2-Facilities-2026-09-09/0002-2")).toBeNull();
+    expect(screen.queryByText("F10A1-B3-Facilities-2026-09-09/0002-3")).toBeNull();
+    expect(screen.queryByText("F10A1-B4-Facilities-2026-09-09/0002-4")).toBeNull();
+    expect(screen.queryByText("F10A1-A01-Facilities-2026-09-09/0002-5")).toBeNull();
+  });
+
   it("keeps parent and child templates in separate tabs and adds a child template", () => {
     localStorage.setItem("eptw-demo-user", "admin-1");
     render(<MemoryRouter initialEntries={["/settings/templates"]}><App /></MemoryRouter>);
@@ -489,10 +539,10 @@ describe("application shell", () => {
     const createdRow = screen.getByText("Confined Space Checklist").closest("tr")!;
     fireEvent.click(within(createdRow).getByRole("button", { name: "View" }));
     const viewDialog = within(screen.getByRole("dialog", { name: /view confined space checklist/i }));
-    expect(viewDialog.getByRole("heading", { name: "Form sections" })).toBeTruthy();
+    expect(viewDialog.getByText("Template preview")).toBeTruthy();
     expect(viewDialog.getByText("General information")).toBeTruthy();
-    expect(viewDialog.getByText("Equipment / system reference")).toBeTruthy();
-    expect(viewDialog.getByText("Short text · Required")).toBeTruthy();
+    expect(viewDialog.getByLabelText("Equipment / system reference preview")).toBeTruthy();
+    expect(viewDialog.getByLabelText("Required")).toBeTruthy();
   });
 
   it("creates templates on a dedicated page and saves drafts", () => {
@@ -681,7 +731,8 @@ describe("application shell", () => {
     expect(screen.getByText("Micron Semiconductor Asia Pte Ltd")).toBeTruthy();
     expect(screen.getByText("Fab 10A1")).toBeTruthy();
     expect(screen.getByText("1 Woodlands Industrial Park D Street 1, Singapore 738799")).toBeTruthy();
-    expect(screen.getByText("Alternate address")).toBeTruthy();
+    expect(screen.queryByText("Primary address")).toBeNull();
+    expect(screen.queryByText("Alternate address")).toBeNull();
     fireEvent.click(screen.getByRole("button", { name: "Add site to 1 N Coast Dr, Singapore 757432" }));
     expect((screen.getByLabelText("Site address") as HTMLInputElement).value).toBe("1 N Coast Dr, Singapore 757432");
     fireEvent.change(screen.getByLabelText("Site name"), { target: { value: "Micron Test Fab" } });
@@ -727,19 +778,21 @@ describe("application shell", () => {
     expect(screen.queryByRole("link", { name: /sipp daily report/i })).toBeNull();
   });
 
-  it("renders all six analytics reports with interactive breakdown tabs", () => {
+  it("renders all six analytics reports with selectable date bases", () => {
     localStorage.setItem("eptw-demo-user", "admin-1");
     render(<MemoryRouter initialEntries={["/analytics"]}><App /></MemoryRouter>);
     [
-      "Monthly approved permit count",
-      "Child permits by date range",
-      "General vs tool install permits",
-      "Permit count by date range and site",
-      "General and tool install count by child permit",
-      "ePTW initiatives and carbon savings",
+      "Monthly Approved Permit Count",
+      "Permit Submission Count by Type and Status",
+      "Permit Count by Contractor",
+      "Permit Count by Discipline",
+      "Permit Count by Level",
+      "ePTW Initiatives",
     ].forEach((name) => expect(screen.getByRole("heading", { name })).toBeTruthy());
-    fireEvent.click(screen.getByRole("tab", { name: /by discipline/i }));
-    expect(screen.getByRole("tab", { name: /by discipline/i }).getAttribute("aria-selected")).toBe("true");
+    const dateSelectors = screen.getAllByLabelText("Date used");
+    fireEvent.change(dateSelectors[1], { target: { value: "approval" } });
+    expect((dateSelectors[1] as HTMLSelectElement).value).toBe("approval");
+    expect(screen.getAllByRole("img").filter((item) => item.classList.contains("bar-chart"))).toHaveLength(6);
     expect(screen.getByText("Facilities", { selector: "strong" })).toBeTruthy();
   });
 
