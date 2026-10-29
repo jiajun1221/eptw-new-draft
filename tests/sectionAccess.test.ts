@@ -19,6 +19,12 @@ describe("section edit permissions", () => {
     expect(() => repository.updateSection(permit.id, "allowed", { secret: "changed" }, assessor)).toThrow();
     expect(() => repository.updateSection(permit.id, "allowed", { reading: "43" }, { ...assessor, id: "unassigned" })).toThrow();
   });
+  it("limits assessor editing to users selected on the template section", () => {
+    localStorage.setItem("eptw-templates:v4", JSON.stringify([{ id: "template", sections: [{ id: "allowed", editAccess: { assessor: true, assessorIds: [assessor.id] }, fields: [{ id: "reading", type: "TEXT" }] }] }]));
+    const permit = create();
+    expect(() => repository.updateSection(permit.id, "allowed", { reading: "blocked" }, { ...assessor, id: "another-assessor" })).toThrow();
+    expect(currentRevision(repository.updateSection(permit.id, "allowed", { reading: "allowed" }, assessor)).data.customFields?.reading).toBe("allowed");
+  });
   it("requires matching MT membership and permit group assignment", () => {
     const permit = create();
     const staff: User = { id: "mt-1", name: "MT", email: "mt@example.com", role: "MICRON_STAFF" };

@@ -3,7 +3,7 @@ import type { ApprovalStage, EptwState, Permit, PermitFormData, PermitStatus, Pe
 
 const uid = () => globalThis.crypto?.randomUUID?.() ?? `${Date.now()}-${Math.random()}`;
 const dateOffset = (days: number, hour = 8) => { const d = new Date(); d.setDate(d.getDate() + days); d.setHours(hour, 0, 0, 0); return d.toISOString(); };
-export const approvalStages = (): ApprovalStage[] => ["INDIVIDUAL_REVIEWER", "MT_GROUP", "PM"].map((role) => ({ role: role as ApprovalStage["role"], status: "PENDING" }));
+export const approvalStages = (): ApprovalStage[] => ["VENDOR_PM", "HOST_SUPERVISOR", "HOST_MANAGER", "AREA_MANAGER", "MT_GROUP", "FINAL_MT_GROUP"].map((role) => ({ role: role as ApprovalStage["role"], status: "PENDING" }));
 
 export const blankPermitData = (): PermitFormData => ({
   templateId: "", templateName: "", title: "", description: "", site: "F10A1", discipline: "AMHS", location: "", company: "", startAt: dateOffset(0), endAt: dateOffset(2, 18),
@@ -20,8 +20,9 @@ const completeData = (title: string, hot = false): PermitFormData => ({
 
 function makePermit(id: string, number: string, type: PermitType, status: PermitStatus, requestorId: string, data: PermitFormData, parentId?: string): Permit {
   const revisionId = `${id}-r1`; const createdAt = dateOffset(-1);
-  const approvedCount = status === "MT_REVIEW" ? 1 : status === "PM_REVIEW" ? 2 : ["APPROVED", "ACTIVE", "SUSPENDED", "CLOSURE_REQUESTED", "CLOSED"].includes(status) ? 3 : 0;
-  const approvals = approvalStages().map((stage, index) => index < approvedCount ? { ...stage, status: "APPROVED" as const, actorId: ["ir-1", "mt-1", "pm-1"][index], actedAt: createdAt } : stage);
+  const reviewOrder: PermitStatus[] = ["INDIVIDUAL_REVIEW", "MT_REVIEW", "PM_REVIEW", "AREA_MANAGER_REVIEW", "MT_GROUP_REVIEW", "FINAL_MT_REVIEW"];
+  const approvedCount = reviewOrder.includes(status) ? reviewOrder.indexOf(status) : ["APPROVED", "ACTIVE", "SUSPENDED", "CLOSURE_REQUESTED", "CLOSED"].includes(status) ? reviewOrder.length : 0;
+  const approvals = approvalStages().map((stage, index) => index < approvedCount ? { ...stage, status: "APPROVED" as const, actorId: ["pm-1", "supervisor-1", "admin-1", "ir-1", "mt-1", "ms-2"][index], actedAt: createdAt } : stage);
   return { id, permitNumber: number, type, parentId, childIds: [], requestorId, currentRevisionId: revisionId, revisions: [{ id: revisionId, number: 1, status, data, approvals, createdAt, createdBy: requestorId, submittedAt: status !== "DRAFT" ? createdAt : undefined }], activities: [], audit: [{ id: uid(), at: createdAt, actorId: requestorId, actorRole: "CONTRACTOR_REQUESTOR", revision: 1, action: "CREATED", toStatus: "DRAFT" }] };
 }
 

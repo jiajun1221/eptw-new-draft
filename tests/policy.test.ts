@@ -15,40 +15,60 @@ describe("central workflow policy", () => {
 
   it("allows only the assigned role at each sequential stage", () => {
     const state = createSeedState(); const permit = state.permits.find((p) => p.id === "permit-review")!;
-    expect(getActionDecision(permit, "APPROVE", user("ir-1"), state.permits).allowed).toBe(true);
+    expect(getActionDecision(permit, "APPROVE", user("pm-1"), state.permits).allowed).toBe(true);
+    expect(getActionDecision(permit, "APPROVE", user("ir-1"), state.permits).reason).toMatch(/assignment.*current approval stage/i);
     expect(getActionDecision(permit, "APPROVE", user("mt-1"), state.permits).reason).toMatch(/assignment.*current approval stage/i);
     expect(nextApprovalStatus("INDIVIDUAL_REVIEW")).toBe("MT_REVIEW");
     expect(nextApprovalStatus("MT_REVIEW")).toBe("PM_REVIEW");
-    expect(nextApprovalStatus("PM_REVIEW")).toBe("APPROVED");
+    expect(nextApprovalStatus("PM_REVIEW")).toBe("AREA_MANAGER_REVIEW");
+    expect(nextApprovalStatus("AREA_MANAGER_REVIEW")).toBe("MT_GROUP_REVIEW");
+    expect(nextApprovalStatus("MT_GROUP_REVIEW")).toBe("FINAL_MT_REVIEW");
+    expect(nextApprovalStatus("FINAL_MT_REVIEW")).toBe("APPROVED");
   });
 
-  it("allows any selected reviewer and any selected MT Group member at their stage", () => {
+  it("allows only each assigned approver as the permit advances through all six stages", () => {
     const state = createSeedState(); const permit = state.permits.find((p) => p.id === "permit-review")!; const data = currentRevision(permit).data;
-    data.individualReviewerIds = ["ir-1", "mt-1"];
-    expect(getActionDecision(permit, "APPROVE", user("mt-1"), state.permits).allowed).toBe(true);
+    expect(getActionDecision(permit, "APPROVE", user("pm-1"), state.permits).allowed).toBe(true);
     currentRevision(permit).status = "MT_REVIEW";
+    expect(getActionDecision(permit, "APPROVE", user("supervisor-1"), state.permits).allowed).toBe(true);
+    currentRevision(permit).status = "PM_REVIEW";
+    expect(getActionDecision(permit, "APPROVE", user("admin-1"), state.permits).allowed).toBe(true);
+    currentRevision(permit).status = "AREA_MANAGER_REVIEW";
+    expect(getActionDecision(permit, "APPROVE", user("ir-1"), state.permits).allowed).toBe(true);
+    currentRevision(permit).status = "MT_GROUP_REVIEW";
     data.mtGroups = ["F10A1 AMHS Engineer", "Facilities MT"];
     expect(getActionDecision(permit, "APPROVE", user("mt-1"), state.permits).allowed).toBe(true);
+    currentRevision(permit).status = "FINAL_MT_REVIEW";
+    expect(getActionDecision(permit, "APPROVE", user("mt-1"), state.permits).allowed).toBe(true);
   });
 
-  it("prevents self approval and allows Micron Admin support", () => {
+  it("prevents self approval and does not give Micron Admin an approval override", () => {
     const state = createSeedState(); const permit = state.permits.find((p) => p.id === "permit-review")!;
     const selfReviewer = { ...user("ir-1"), id: permit.requestorId };
     expect(getActionDecision(permit, "APPROVE", selfReviewer, state.permits).reason).toMatch(/own permit/i);
-    expect(getActionDecision(permit, "APPROVE", user("admin-1"), state.permits).allowed).toBe(true);
+    expect(getActionDecision(permit, "APPROVE", user("admin-1"), state.permits).allowed).toBe(false);
+    expect(getActionDecision(permit, "APPROVE", user("admin-1"), state.permits).reason).toMatch(/assignment.*current approval stage/i);
   });
 
-  it("keeps Micron Supervisors read-only throughout the permit workflow", () => {
+  it("prevents submission when the creator is assigned as an approver", () => {
+    const state = createSeedState(); const permit = state.permits.find((p) => p.id === "permit-draft")!; const creator = user(permit.requestorId);
+    currentRevision(permit).data.hostManagerId = creator.id;
+    expect(getActionDecision(permit, "SUBMIT", creator, state.permits).reason).toMatch(/cannot assign yourself/i);
+  });
+
+  it("allows a Micron Supervisor only at their assigned host-supervisor stage", () => {
     const state = createSeedState(); const permit = state.permits.find((p) => p.id === "permit-review")!;
     const supervisor = user("supervisor-1");
     expect(getActionDecision(permit, "APPROVE", supervisor, state.permits).allowed).toBe(false);
     expect(getActionDecision(permit, "REQUEST_CHANGES", supervisor, state.permits, "Needs revision").allowed).toBe(false);
     expect(getActionDecision(permit, "REJECT", supervisor, state.permits, "Not acceptable").allowed).toBe(false);
+    currentRevision(permit).status = "MT_REVIEW";
+    expect(getActionDecision(permit, "APPROVE", supervisor, state.permits).allowed).toBe(true);
   });
 
   it("keeps parent approval independent from child permit status", () => {
     const state = createSeedState(); const parent = state.permits.find((p) => p.id === "permit-hot-parent")!;
-    expect(getActionDecision(parent, "APPROVE", user("pm-1"), state.permits).allowed).toBe(true);
+    expect(getActionDecision(parent, "APPROVE", user("admin-1"), state.permits).allowed).toBe(true);
   });
 
   it.each(["REQUEST_CHANGES", "REJECT", "SUSPEND", "RESUME", "REQUEST_CLOSURE", "CLOSE"] as const)("requires a comment for %s", (action) => {

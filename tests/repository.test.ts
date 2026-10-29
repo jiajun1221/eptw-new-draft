@@ -16,6 +16,20 @@ describe("local permit repository", () => {
     expect(saved.childIds).toEqual([]); expect(currentRevision(saved).data.safetyChecklistResponses?.["hot-work"].executionDetails).toContain("Fire watch"); expect(localStorage.getItem(STORAGE_KEY)).toBeTruthy();
   });
 
+  it("duplicates a permit as an editable draft owned by the current user", () => {
+    const repo = new LocalPermitRepository(); const source = repo.getPermit("permit-review")!; const sourceData = currentRevision(source).data;
+    sourceData.customFields = { "work-description": "Copied work details", building: ["ADMIN"] };
+    const copy = repo.duplicatePermit(source.id, sourceData, user("req-2")); const revision = currentRevision(copy);
+
+    expect(copy.id).not.toBe(source.id);
+    expect(copy.requestorId).toBe("req-2");
+    expect(revision.status).toBe("DRAFT");
+    expect(revision.data.customFields).toEqual(sourceData.customFields);
+    expect(revision.approvals.every((approval) => approval.status === "PENDING")).toBe(true);
+    expect(copy.audit[0].action).toBe("DUPLICATED_FROM");
+    expect(copy.childIds).toEqual([]);
+  });
+
   it("adds the walkthrough draft to older persisted demo data without resetting it", () => {
     const repo = new LocalPermitRepository();
     const state = repo.resetDemoData();
@@ -27,10 +41,68 @@ describe("local permit repository", () => {
     expect(currentRevision(permits.find((permit) => permit.id === "permit-draft")!).status).toBe("DRAFT");
   });
 
+  it("repairs legacy approval routes that assign the permit submitter as an approver", () => {
+    const repo = new LocalPermitRepository(); const state = repo.resetDemoData(); const permit = state.permits.find((item) => item.id === "permit-review")!; const revision = currentRevision(permit);
+    revision.data.hostSupervisorId = permit.requestorId;
+    revision.data.hostManagerId = permit.requestorId;
+    revision.data.individualReviewerId = permit.requestorId;
+    revision.data.individualReviewerIds = [permit.requestorId];
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+
+    const repaired = repo.getPermit(permit.id)!; const data = currentRevision(repaired).data;
+    expect(data.hostSupervisorId).not.toBe(repaired.requestorId);
+    expect(data.hostManagerId).not.toBe(repaired.requestorId);
+    expect(data.individualReviewerIds).not.toContain(repaired.requestorId);
+    expect(repaired.audit[0].action).toBe("APPROVAL_ROUTE_REASSIGNED");
+  });
+
+  it("normalizes out-of-order legacy approval markers to the current workflow stage", () => {
+    const repo = new LocalPermitRepository(); const state = repo.resetDemoData(); const permit = state.permits.find((item) => item.id === "permit-hot-parent")!; const revision = currentRevision(permit);
+    revision.status = "PM_REVIEW";
+    revision.approvals = revision.approvals.map((stage) => ({ ...stage, status: stage.role === "MT_GROUP" ? "APPROVED" as const : "PENDING" as const }));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+
+    const repaired = currentRevision(repo.getPermit(permit.id)!);
+    expect(repaired.approvals.find((stage) => stage.role === "VENDOR_PM")?.status).toBe("APPROVED");
+    expect(repaired.approvals.find((stage) => stage.role === "HOST_SUPERVISOR")?.status).toBe("APPROVED");
+    expect(repaired.approvals.find((stage) => stage.role === "HOST_MANAGER")?.status).toBe("PENDING");
+    expect(repaired.approvals.find((stage) => stage.role === "MT_GROUP")?.status).toBe("PENDING");
+  });
+
+  it("requires selected Area Managers to approve one by one in selection order", () => {
+    const repo = new LocalPermitRepository(); const state = repo.resetDemoData(); const permit = state.permits.find((item) => item.id === "permit-review")!; const revision = currentRevision(permit);
+    revision.status = "AREA_MANAGER_REVIEW";
+    revision.data.individualReviewerId = "ir-1";
+    revision.data.individualReviewerIds = ["ir-1", "mt-1", "ms-2"];
+    revision.areaManagerApprovals = undefined;
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+
+    expect(() => repo.performTransition(permit.id, "APPROVE", {}, user("mt-1"))).toThrow(/current approval stage/i);
+    repo.performTransition(permit.id, "APPROVE", {}, user("ir-1"));
+    let current = currentRevision(repo.getPermit(permit.id)!);
+    expect(current.status).toBe("AREA_MANAGER_REVIEW");
+    expect(current.areaManagerApprovals?.map((approval) => approval.status)).toEqual(["APPROVED", "PENDING", "PENDING"]);
+
+    repo.performTransition(permit.id, "APPROVE", {}, user("mt-1"));
+    current = currentRevision(repo.getPermit(permit.id)!);
+    expect(current.status).toBe("AREA_MANAGER_REVIEW");
+    expect(() => repo.performTransition(permit.id, "APPROVE", {}, user("ir-1"))).toThrow(/current approval stage/i);
+
+    repo.performTransition(permit.id, "APPROVE", {}, user("ms-2"));
+    current = currentRevision(repo.getPermit(permit.id)!);
+    expect(current.status).toBe("MT_GROUP_REVIEW");
+    expect(current.areaManagerApprovals?.every((approval) => approval.status === "APPROVED")).toBe(true);
+  });
+
+  it("never allows the permit submitter to approve their own permit", () => {
+    const repo = new LocalPermitRepository(); const permit = repo.getPermit("permit-review")!;
+    expect(() => repo.performTransition(permit.id, "APPROVE", {}, user(permit.requestorId))).toThrow(/own permit/i);
+  });
+
   it("keeps parent and child approval workflows independent", () => {
     const repo = new LocalPermitRepository(); const parent = repo.getPermit("permit-hot-parent")!; const childId = parent.childIds[0];
-    repo.performTransition(parent.id, "APPROVE", {}, user("pm-1"));
-    expect(currentRevision(repo.getPermit(parent.id)!).status).toBe("APPROVED");
+    repo.performTransition(parent.id, "APPROVE", {}, user("admin-1"));
+    expect(currentRevision(repo.getPermit(parent.id)!).status).toBe("AREA_MANAGER_REVIEW");
     expect(currentRevision(repo.getPermit(childId)!).status).toBe("PM_REVIEW");
   });
 
@@ -43,7 +115,12 @@ describe("local permit repository", () => {
 
   it("keeps the previous revision and supersedes it after reapproval", () => {
     const repo = new LocalPermitRepository(); const permit = repo.getPermit("permit-active")!; repo.createRevision(permit.id, user("req-1")); repo.submitPermit(permit.id, user("req-1"));
-    repo.performTransition(permit.id, "APPROVE", {}, user("ir-1")); repo.performTransition(permit.id, "APPROVE", {}, user("mt-1")); repo.performTransition(permit.id, "APPROVE", {}, user("pm-1"));
+    repo.performTransition(permit.id, "APPROVE", {}, user("pm-1"));
+    repo.performTransition(permit.id, "APPROVE", {}, user("supervisor-1"));
+    repo.performTransition(permit.id, "APPROVE", {}, user("admin-1"));
+    repo.performTransition(permit.id, "APPROVE", {}, user("ir-1"));
+    repo.performTransition(permit.id, "APPROVE", {}, user("mt-1"));
+    repo.performTransition(permit.id, "APPROVE", {}, user("mt-1"));
     const revised = repo.getPermit(permit.id)!; expect(revised.revisions).toHaveLength(2); expect(revised.revisions[0].status).toBe("SUPERSEDED"); expect(currentRevision(revised).number).toBe(2);
   });
 

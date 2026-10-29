@@ -15,7 +15,63 @@ export const USERS: User[] = [
   { id: "assessor-1", name: "Permit Assessor", email: "assessor@site.example", role: "ASSESSOR", authMethod: "PASSWORD" },
 ];
 export const ROLE_LABELS: Record<Role, string> = { SUPER_ADMIN: "Micron Admin", MICRON_SUPERVISOR: "Micron Supervisor", USER_ADMIN: "Vendor Admin", MICRON_STAFF: "Micron Staff", CONTRACTOR_REQUESTOR: "Contractor Requestor", CONTRACTOR_PM: "Contractor PM", ASSESSOR: "Assessor" };
-export const STATUS_LABELS: Record<PermitStatus, string> = { DRAFT: "Draft", INDIVIDUAL_REVIEW: "Individual review", MT_REVIEW: "MT Group review", PM_REVIEW: "PM review", CHANGES_REQUESTED: "Changes requested", APPROVED: "Approved", ACTIVE: "Active", SUSPENDED: "Suspended", CLOSURE_REQUESTED: "Closure requested", CLOSED: "Closed", REJECTED: "Rejected", CANCELLED: "Cancelled", EXPIRED: "Expired", SUPERSEDED: "Superseded" };
-export const SITES = ["F10A1", "F10A2", "F10N"];
-export const DISCIPLINES = ["AMHS", "Facilities", "IT"];
+export const APPROVAL_ROLE_LABELS: Partial<Record<PermitStatus, string>> = { INDIVIDUAL_REVIEW: "Vendor PM", MT_REVIEW: "Host Supervisor", PM_REVIEW: "Host Manager", AREA_MANAGER_REVIEW: "Area Manager", MT_GROUP_REVIEW: "MT Groups", FINAL_MT_REVIEW: "Final Approval MT Group" };
+export const STATUS_LABELS: Record<PermitStatus, string> = { DRAFT: "Draft", INDIVIDUAL_REVIEW: "Pending Vendor PM approval", MT_REVIEW: "Pending Host Supervisor approval", PM_REVIEW: "Pending Host Manager approval", AREA_MANAGER_REVIEW: "Pending Area Manager approval", MT_GROUP_REVIEW: "Pending MT Groups approval", FINAL_MT_REVIEW: "Pending Final Approval MT Group approval", CHANGES_REQUESTED: "Changes requested", APPROVED: "Approved", ACTIVE: "Active", SUSPENDED: "Suspended", CLOSURE_REQUESTED: "Closure requested", CLOSED: "Closed", REJECTED: "Rejected", CANCELLED: "Cancelled", EXPIRED: "Expired", SUPERSEDED: "Superseded" };
+export const SITES = ["F10A1", "F10A2", "F10N", "F10NX", "F10W", "F10X", "MSH", "TC"];
+export const DISCIPLINE_RECORDS = [
+  ["WAREHOUSE", "WAREHOUSE"],
+  ["SECURITY", "SECURITY"],
+  ["RDA", "RDA"],
+  ["QEM PQE", "QEM PQE"],
+  ["QEM CHEM LAB", "QEM CHEM LAB"],
+  ["QEM CC", "QEM CC"],
+  ["PROBE", "PROBE"],
+  ["PMO", "PMO"],
+  ["PLANNING", "PLANNING"],
+  ["PIE YE", "PIE YE"],
+  ["PIE RAM", "PIE RAM"],
+  ["PIE PI", "PIE PI"],
+  ["PEE WET", "PEE WET"],
+  ["PEE PI", "PEE PI"],
+  ["PEE PHOTO", "PEE PHOTO"],
+  ["PEE IMPLANT", "PEE IMPLANT"],
+  ["PEE FAB SUPPORT", "PEE FAB SUPPORT"],
+  ["PEE DRY ETCH", "PEE DRY ETCH"],
+  ["PEE DIFFUSION", "PEE DIFFUSION"],
+  ["PEE CVD/PVD", "PEE CVD/PVD"],
+  ["PEE CMP/PC", "PEE CMP/PC"],
+  ["Others", "Others"],
+  ["MFG WET", "MFG WET"],
+  ["MFG PROCURMENT", "MFG PROCURMENT"],
+  ["MFG PHOTO", "MFG PHOTO"],
+  ["MFG IMPLANT", "MFG IMPLANT"],
+  ["MFG DRY ETCH", "MFG DRY ETCH"],
+  ["MFG DIFFUSION", "MFG DIFFUSION"],
+  ["MFG CVD/PD", "MFG CVD/PD"],
+  ["MFG CMP/PC", "MFG CMP/PC"],
+  ["METRO", "METRO"],
+  ["MATERIAL HANDLING", "MATERIAL HANDLING"],
+  ["IT", "IT"],
+  ["GSC", "Global Supply Chain"],
+  ["FAC UPW & WWTP/EXYTE", "FAC UPW & WWTP/EXYTE"],
+  ["FAC UPW & WWTP", "FAC UPW & WWTP"],
+  ["FAC TOOL INSTALL/EXYTE", "FAC TOOL INSTALL/EXYTE"],
+  ["FAC TOOL INSTALL", "FAC TOOL INSTALL"],
+  ["FAC OPERATION/EXYTE", "FAC OPERATION/EXYTE"],
+  ["FAC OPERATION", "FAC OPERATION"],
+  ["FAC MECHANICAL/EXYTE", "FAC MECHANICAL/EXYTE"],
+  ["FAC MECHANICAL", "FAC MECHANICAL"],
+  ["FAC ELECTRICAL/EXYTE", "FAC ELECTRICAL/EXYTE"],
+  ["FAC ELECTRICAL", "FAC ELECTRICAL"],
+  ["FAC CONTROL/EXYTE", "FAC CONTROL/EXYTE"],
+  ["FAC CONTROL", "FAC CONTROL"],
+  ["FAC CHEM & GAS/EXYTE", "FAC CHEM & GAS/EXYTE"],
+  ["FAC CHEM & GAS", "FAC CHEM & GAS"],
+  ["FAC BUILDING SERVICES/EXYTE", "FAC BUILDING SERVICES/EXYTE"],
+  ["FAC BUILDING SERVICES", "FAC BUILDING SERVICES"],
+  ["ENV", "ENV"],
+  ["EHS", "EHS"],
+  ["AMHS", "AMHS"],
+] as const;
+export const DISCIPLINES: string[] = DISCIPLINE_RECORDS.map(([code]) => code);
 export const SAFETY_DECLARATIONS = ["Risk assessment reviewed", "Workers briefed", "Area barricaded"];

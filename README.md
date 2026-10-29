@@ -10,11 +10,11 @@ A frontend-only React and TypeScript demonstration of a controlled electronic Pe
 - npm 10 or newer
 
 ```powershell
-npm install
+npm ci
 npm run dev
 ```
 
-Open the URL printed by Vite. Use the **Demo identity** selector in the sidebar to walk a permit through the Requestor, Individual Reviewer, MT Group, PM, and Administrator views. Use **Reset demo data** on the overview page to restore the walkthrough.
+Open the URL printed by Vite. Expand **Use a demo account** on the sign-in page, then use **Account settings** to switch identities while walking a permit through the Requestor, Individual Reviewer, MT Group, PM, and Administrator views. Use **Reset demo data** on the Dashboard to restore the walkthrough.
 
 ## Project map
 
@@ -39,6 +39,8 @@ Open the URL printed by Vite. Use the **Demo identity** selector in the sidebar 
 ```
 
 See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for ownership boundaries, data flow, extension points, and known prototype limitations.
+
+For a colleague-friendly setup and walkthrough, see [docs/CLONE_AND_RUN_GUIDE.md](docs/CLONE_AND_RUN_GUIDE.md).
 
 ## Common commands
 

@@ -2,17 +2,73 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { cleanup, fireEvent, render, screen, within } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import App from "../src/app/App";
+import { APPROVAL_ROLE_LABELS, DISCIPLINE_RECORDS, SITES, STATUS_LABELS, USERS } from "../src/domain/constants";
 import { createSeedState } from "../src/domain/data";
+import { currentRevision } from "../src/domain/types";
 
 describe("application shell", () => {
   beforeEach(() => { localStorage.clear(); localStorage.setItem("eptw-demo-user", "req-1"); });
   afterEach(() => { cleanup(); vi.useRealTimers(); });
 
+  it("uses the current approval role in every pending permit status label", () => {
+    expect(APPROVAL_ROLE_LABELS.INDIVIDUAL_REVIEW).toBe("Vendor PM");
+    expect(STATUS_LABELS.INDIVIDUAL_REVIEW).toBe("Pending Vendor PM approval");
+    expect(STATUS_LABELS.MT_REVIEW).toBe("Pending Host Supervisor approval");
+    expect(STATUS_LABELS.PM_REVIEW).toBe("Pending Host Manager approval");
+    expect(STATUS_LABELS.AREA_MANAGER_REVIEW).toBe("Pending Area Manager approval");
+    expect(STATUS_LABELS.MT_GROUP_REVIEW).toBe("Pending MT Groups approval");
+    expect(STATUS_LABELS.FINAL_MT_REVIEW).toBe("Pending Final Approval MT Group approval");
+  });
+
+  it("displays pending approval statuses as a bold heading and role", () => {
+    localStorage.setItem("eptw-demo-user", "ir-1");
+    render(<MemoryRouter initialEntries={["/permits/permit-review"]}><App /></MemoryRouter>);
+    const status = document.querySelector(".permit-decision-status .status-copy")!;
+    expect(status.querySelector("strong")?.textContent).toBe("Pending Approval:");
+    expect(status.querySelector("small")?.textContent).toBe("Vendor PM");
+  });
+
+  it("emphasizes permits awaiting the signed-in user's approval", () => {
+    localStorage.setItem("eptw-demo-user", "pm-1");
+    render(<MemoryRouter initialEntries={["/permits"]}><App /></MemoryRouter>);
+
+    const permitLink = screen.getByRole("link", { name: "F10A1-G-AMHS-2026-09-08/0001" });
+    const badge = permitLink.closest("tr")!.querySelector<HTMLElement>(".status-pill")!;
+    expect(badge.querySelector("strong")?.textContent).toBe("Pending Approval:");
+    expect(badge.querySelector("small")?.textContent).toBe("Vendor PM (YOU)");
+    expect(badge.querySelector("small b")?.textContent).toBe("YOU");
+    expect(badge.classList.contains("your-approval")).toBe(true);
+  });
+
+  it("does not let Micron Admin override the assigned Vendor PM approver", () => {
+    localStorage.setItem("eptw-demo-user", "admin-1");
+    render(<MemoryRouter initialEntries={["/permits/permit-review"]}><App /></MemoryRouter>);
+
+    const approve = screen.getByRole("button", { name: "Approve permit" }) as HTMLButtonElement;
+    expect(approve.disabled).toBe(true);
+    expect(document.querySelector(".permit-decision-status .status-copy strong")?.textContent).toBe("Pending Approval:");
+    expect(document.querySelector(".permit-decision-status .status-copy small")?.textContent).toBe("Vendor PM");
+    expect(document.querySelector(".permit-decision-status .your-approval")).toBeNull();
+  });
+
+  it("allows Priya Menon to approve a permit at the Vendor PM stage", () => {
+    localStorage.setItem("eptw-demo-user", "pm-1");
+    render(<MemoryRouter initialEntries={["/permits/permit-review"]}><App /></MemoryRouter>);
+    const approve = screen.getByRole("button", { name: "Approve permit" }) as HTMLButtonElement;
+    expect(approve.disabled).toBe(false);
+    fireEvent.click(approve);
+    expect(document.querySelector(".permit-decision-status .status-copy small")?.textContent).toBe("Host Supervisor");
+    const progress = Array.from(document.querySelectorAll<HTMLElement>(".approval-progress > div"));
+    expect(progress[1].dataset.approvalState).toBe("approved");
+    expect(progress[2].dataset.approvalState).toBe("pending");
+    expect(progress[3].dataset.approvalState).toBe("upcoming");
+  });
+
   it("renders the requestor dashboard and role-aware navigation", () => {
     render(<MemoryRouter initialEntries={["/dashboard"]}><App /></MemoryRouter>);
     expect(screen.getByRole("heading", { name: /welcome, aisha/i })).toBeTruthy();
     expect(screen.getByRole("heading", { name: /awaiting approval/i })).toBeTruthy();
-    expect(screen.getByRole("button", { name: /raised/i })).toBeTruthy();
+    expect(screen.queryByRole("button", { name: /^submitted permits/i })).toBeNull();
     expect(screen.getByRole("button", { name: /drafted permits/i })).toBeTruthy();
     expect(screen.getByRole("button", { name: /pending approval/i })).toBeTruthy();
     expect(screen.getByRole("button", { name: /approved permits/i })).toBeTruthy();
@@ -88,6 +144,34 @@ describe("application shell", () => {
     expect(screen.getByRole("link", { name: /sites/i })).toBeTruthy();
   });
 
+  it("groups account identities in the configured role order", () => {
+    render(<MemoryRouter initialEntries={["/account"]}><App /></MemoryRouter>);
+
+    const select = screen.getByLabelText("User and role") as HTMLSelectElement;
+    expect(Array.from(select.querySelectorAll("optgroup")).map((group) => group.label)).toEqual([
+      "Micron Admin",
+      "Vendor Admin",
+      "Micron Staff",
+      "Micron Supervisor",
+      "Contractor Requestor",
+      "Contractor PM",
+      "Assessor",
+    ]);
+  });
+
+  it("shows the current login account in the sidebar and opens Account settings", () => {
+    localStorage.setItem("eptw-demo-user", "admin-1");
+    render(<MemoryRouter initialEntries={["/dashboard"]}><App /></MemoryRouter>);
+
+    const accountLink = screen.getByRole("link", { name: /micron administrator, micronadmin@site.example/i });
+    expect(within(accountLink).getByText("Micron Admin")).toBeTruthy();
+    expect(within(accountLink).getByText("Micron Administrator")).toBeTruthy();
+    expect(within(accountLink).getByText("micronadmin@site.example")).toBeTruthy();
+    expect(within(accountLink).queryByText("Current login account")).toBeNull();
+    fireEvent.click(accountLink);
+    expect(screen.getByRole("heading", { name: "Account settings" })).toBeTruthy();
+  });
+
   it("shows organisation-wide status counts on the Micron Admin dashboard", () => {
     localStorage.setItem("eptw-demo-user", "admin-1");
     render(<MemoryRouter initialEntries={["/dashboard"]}><App /></MemoryRouter>);
@@ -98,14 +182,32 @@ describe("application shell", () => {
     expect(screen.getByRole("button", { name: /all rejected permits/i })).toBeTruthy();
   });
 
-  it("gives a Micron Supervisor submitted-permit visibility without exposing other users' drafts", () => {
+  it("shows a Micron Supervisor all submitted parent permits but hides other users' drafts", () => {
     localStorage.setItem("eptw-demo-user", "supervisor-1");
     render(<MemoryRouter initialEntries={["/permits"]}><App /></MemoryRouter>);
     expect(screen.getAllByText("F10A1-G-AMHS-2026-09-08/0001").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("F10A1-G-Facilities-2026-09-09/0002").length).toBeGreaterThan(0);
     expect(screen.queryByText("F10A2-G-Facilities-2026-09-09/0004")).toBeNull();
     expect(screen.queryByRole("link", { name: /create permit/i })).toBeNull();
     expect(screen.queryByRole("link", { name: /^users$/i })).toBeNull();
     expect(screen.queryByRole("link", { name: /^templates$/i })).toBeNull();
+  });
+
+  it("shows every submitted parent permit plus only the signed-in user's drafts", () => {
+    render(<MemoryRouter initialEntries={["/permits"]}><App /></MemoryRouter>);
+
+    expect(screen.getAllByText("F10A1-G-AMHS-2026-09-08/0001").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("F10A1-G-Facilities-2026-09-09/0002").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("F10A2-G-Facilities-2026-09-09/0004").length).toBeGreaterThan(0);
+  });
+
+  it("does not expose another user's parent draft to Micron Admin", () => {
+    localStorage.setItem("eptw-demo-user", "admin-1");
+    render(<MemoryRouter initialEntries={["/permits"]}><App /></MemoryRouter>);
+
+    expect(screen.getAllByText("F10A1-G-AMHS-2026-09-08/0001").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("F10A1-G-Facilities-2026-09-09/0002").length).toBeGreaterThan(0);
+    expect(screen.queryByText("F10A2-G-Facilities-2026-09-09/0004")).toBeNull();
   });
 
   it("filters dashboard permit results when a status card is selected", () => {
@@ -118,17 +220,138 @@ describe("application shell", () => {
     expect(screen.getByRole("heading", { name: /drafted permits/i })).toBeTruthy();
     expect(screen.getAllByText("F10A2-G-Facilities-2026-09-09/0004").length).toBeGreaterThan(0);
     expect(screen.queryByText("F10A1-G-AMHS-2026-09-08/0001")).toBeNull();
+    fireEvent.click(draftCard);
+    expect(draftCard.className).not.toContain("selected");
+    expect(draftCard.getAttribute("aria-pressed")).toBe("false");
+    expect(screen.getByRole("heading", { name: "All available permits" })).toBeTruthy();
+    expect(screen.getAllByText("F10A1-G-AMHS-2026-09-08/0001").length).toBeGreaterThan(0);
   });
 
-  it("separates Micron Staff assigned approvals from their own permits", () => {
+  it("returns to the Dashboard when a permit was opened from the Dashboard", () => {
+    render(<MemoryRouter initialEntries={["/dashboard"]}><App /></MemoryRouter>);
+    const permitLink = document.querySelector<HTMLAnchorElement>(".dashboard-results .permit-table .permit-number")!;
+    fireEvent.click(permitLink);
+
+    const backLink = screen.getByRole("link", { name: /Back to Dashboard/ });
+    expect(backLink.getAttribute("href")).toBe("/dashboard");
+  });
+
+  it("returns to Parent permits when a permit was opened directly", () => {
+    render(<MemoryRouter initialEntries={["/permits/permit-review"]}><App /></MemoryRouter>);
+
+    const backLink = screen.getByRole("link", { name: /Back to permits/ });
+    expect(backLink.getAttribute("href")).toBe("/permits");
+  });
+
+  it("splits the Micron Staff dashboard into approval and submitted-permit sections", () => {
     localStorage.setItem("eptw-demo-user", "ir-1");
     render(<MemoryRouter initialEntries={["/dashboard"]}><App /></MemoryRouter>);
-    expect(screen.getByRole("heading", { name: /pending my approval/i })).toBeTruthy();
-    expect(screen.getByRole("heading", { name: /awaiting approval/i })).toBeTruthy();
-    expect(screen.getAllByRole("button", { name: /pending approval/i }).length).toBeGreaterThan(0);
-    expect(screen.getAllByRole("button", { name: /approved permits/i }).length).toBeGreaterThan(0);
-    expect(screen.queryByRole("button", { name: /active permits/i })).toBeNull();
-    expect(screen.getByRole("heading", { name: /all available permits/i })).toBeTruthy();
+    expect(screen.getAllByRole("heading", { name: "My Approval" })).toHaveLength(2);
+    expect(screen.getAllByRole("heading", { name: "Submitted Permit" })).toHaveLength(2);
+    const cards = Array.from(document.querySelectorAll<HTMLButtonElement>(".dashboard-metric"));
+    expect(cards.map((card) => card.querySelector("span")?.textContent)).toEqual(["Pending My Approval", "Approved By Me", "Rejected By Me", "Drafted Permit", "Pending Approval", "Approved Permits", "Rejected Permits"]);
+    expect(Array.from(document.querySelectorAll(".dashboard-section-count")).map((pill) => pill.textContent)).toEqual(["1", "0"]);
+    expect(screen.queryByRole("heading", { name: /awaiting approval/i })).toBeNull();
+    expect(screen.getByRole("button", { name: /^approved permits/i })).toBeTruthy();
+    expect(document.querySelectorAll(".dashboard-grouped-results .dashboard-results")).toHaveLength(2);
+    const sections = Array.from(document.querySelectorAll<HTMLElement>(".dashboard-staff-section"));
+    expect(sections).toHaveLength(2);
+    expect(sections[0].querySelector(".dashboard-metric-group h2 > span")?.textContent).toBe("My Approval");
+    expect(sections[0].querySelector(".dashboard-results h2")?.textContent).toBe("My Approval");
+    expect(sections[1].querySelector(".dashboard-metric-group h2 > span")?.textContent).toBe("Submitted Permit");
+    expect(sections[1].querySelector(".dashboard-results h2")?.textContent).toBe("Submitted Permit");
+    expect(screen.queryByRole("heading", { name: /all available permits/i })).toBeNull();
+  });
+
+  it("colors My Approval rows by the signed-in user's approval outcome", () => {
+    const state = createSeedState();
+    const pending = state.permits.find((permit) => permit.id === "permit-review")!;
+    const pendingRevision = currentRevision(pending);
+    pendingRevision.status = "AREA_MANAGER_REVIEW";
+    pendingRevision.data.individualReviewerId = "ir-1";
+    pendingRevision.data.individualReviewerIds = ["ir-1"];
+    pendingRevision.areaManagerApprovals = [{ userId: "ir-1", status: "PENDING" }];
+
+    const approved = state.permits.find((permit) => permit.id === "permit-hot-parent")!;
+    const approvedRevision = currentRevision(approved);
+    approvedRevision.status = "PM_REVIEW";
+    approvedRevision.approvals[0] = { ...approvedRevision.approvals[0], status: "APPROVED", actorId: "ir-1" };
+
+    const rejected = state.permits.find((permit) => permit.id === "permit-active")!;
+    const rejectedRevision = currentRevision(rejected);
+    rejectedRevision.status = "REJECTED";
+    rejectedRevision.approvals[0] = { ...rejectedRevision.approvals[0], status: "REJECTED", actorId: "ir-1" };
+
+    localStorage.setItem("eptw-functional-draft:v2", JSON.stringify(state));
+    localStorage.setItem("eptw-demo-user", "ir-1");
+    render(<MemoryRouter initialEntries={["/dashboard"]}><App /></MemoryRouter>);
+
+    const approvalTable = document.querySelector<HTMLElement>(".dashboard-staff-section .dashboard-results .permit-table")!;
+    const rowFor = (number: string) => Array.from(approvalTable.querySelectorAll("tbody tr")).find((row) => row.textContent?.includes(number))!;
+    expect(rowFor(pending.permitNumber).classList.contains("status-warn")).toBe(true);
+    expect(rowFor(approved.permitNumber).classList.contains("status-good")).toBe(true);
+    expect(rowFor(rejected.permitNumber).classList.contains("status-bad")).toBe(true);
+  });
+
+  it("filters each Micron Staff dashboard section independently", () => {
+    localStorage.setItem("eptw-demo-user", "ir-1");
+    render(<MemoryRouter initialEntries={["/dashboard"]}><App /></MemoryRouter>);
+    const sections = Array.from(document.querySelectorAll<HTMLElement>(".dashboard-staff-section"));
+
+    fireEvent.click(within(sections[0]).getByRole("button", { name: /^Approved By Me/i }));
+    expect(sections[0].querySelector(".dashboard-results h2")?.textContent).toBe("Approved By Me");
+    expect(sections[1].querySelector(".dashboard-results h2")?.textContent).toBe("Submitted Permit");
+
+    fireEvent.click(within(sections[1]).getByRole("button", { name: /^Pending Approval/i }));
+    expect(sections[0].querySelector(".dashboard-results h2")?.textContent).toBe("Approved By Me");
+    expect(sections[1].querySelector(".dashboard-results h2")?.textContent).toBe("Pending Approval");
+    expect(within(sections[0]).getByRole("button", { name: /^Approved By Me/i }).getAttribute("aria-pressed")).toBe("true");
+
+    fireEvent.click(within(sections[1]).getByRole("button", { name: /^Pending Approval/i }));
+    expect(sections[1].querySelector(".dashboard-results h2")?.textContent).toBe("Submitted Permit");
+    expect(sections[0].querySelector(".dashboard-results h2")?.textContent).toBe("Approved By Me");
+  });
+
+  it("shows Contractor PM the My Approval counters and approval table", () => {
+    localStorage.setItem("eptw-demo-user", "pm-1");
+    render(<MemoryRouter initialEntries={["/dashboard"]}><App /></MemoryRouter>);
+
+    const cards = Array.from(document.querySelectorAll<HTMLButtonElement>(".dashboard-metric"));
+    expect(cards.map((card) => card.querySelector("span")?.textContent)).toEqual(["Pending My Approval", "Approved By Me", "Rejected By Me"]);
+    expect(document.querySelectorAll(".dashboard-results")).toHaveLength(1);
+    expect(document.querySelector(".dashboard-results h2")?.textContent).toBe("My Approval");
+    expect(screen.queryByRole("heading", { name: "Submitted Permit" })).toBeNull();
+
+    fireEvent.click(screen.getByRole("button", { name: /^Approved By Me/i }));
+    expect(document.querySelector(".dashboard-results h2")?.textContent).toBe("Approved By Me");
+    expect(screen.getByRole("button", { name: /^Approved By Me/i }).getAttribute("aria-pressed")).toBe("true");
+  });
+
+  it("shows Assessors only assigned editable permits in a quarter-width Allow Reading card", () => {
+    const state = createSeedState();
+    const assignedPermit = state.permits[0];
+    const revision = currentRevision(assignedPermit);
+    revision.data.assessorIds = ["assessor-1"];
+    revision.data.templateId = "assessor-editable-template";
+    localStorage.setItem("eptw-functional-draft:v2", JSON.stringify(state));
+    localStorage.setItem("eptw-templates:v4", JSON.stringify([{ id: "assessor-editable-template", kind: "PARENT", name: "Assessor editable", code: "G", discipline: "AMHS", description: "", active: true, updatedAt: "2026-10-28T00:00:00.000Z", sections: [{ id: "reading", title: "Reading", fields: [], editAccess: { assessor: true, assessorIds: ["assessor-1"] } }] }]));
+    localStorage.setItem("eptw-demo-user", "assessor-1");
+    render(<MemoryRouter initialEntries={["/dashboard"]}><App /></MemoryRouter>);
+
+    const cards = screen.getAllByRole("button", { name: /Allow Reading/i });
+    expect(cards).toHaveLength(1);
+    expect(cards[0].textContent).toContain("1");
+    expect(cards[0].closest(".dashboard-metric-group")?.classList.contains("quarter-width")).toBe(true);
+    expect(screen.getAllByText(assignedPermit.permitNumber).length).toBeGreaterThan(0);
+    expect(document.querySelectorAll(".dashboard-metric")).toHaveLength(1);
+  });
+
+  it("uses the permit status marker for permits raised by the signed-in user", () => {
+    render(<MemoryRouter initialEntries={["/dashboard"]}><App /></MemoryRouter>);
+
+    const permitLink = screen.getByRole("link", { name: "F10A1-G-AMHS-2026-09-08/0001" });
+    const row = permitLink.closest("tr")!;
+    expect(row.classList.contains("status-warn")).toBe(true);
   });
 
   it("provides Dashboard navigation to every user role", () => {
@@ -250,13 +473,86 @@ describe("application shell", () => {
     expect(screen.queryByRole("link", { name: /other permits/i })).toBeNull();
   });
 
+  it("does not allow a permit creator to select themselves as an approver", () => {
+    localStorage.setItem("eptw-demo-user", "admin-1");
+    render(<MemoryRouter initialEntries={["/permits/new"]}><App /></MemoryRouter>);
+
+    const hostManager = screen.getByLabelText("Host manager *");
+    fireEvent.click(hostManager);
+    expect(within(hostManager.closest("details")!).queryByText("Micron Administrator", { selector: ".multi-select-options strong" })).toBeNull();
+    expect(screen.getByText(/you cannot assign yourself/i)).toBeTruthy();
+  });
+
+  it("searches only Micron Staff for host supervisor and host manager", () => {
+    render(<MemoryRouter initialEntries={["/permits/new"]}><App /></MemoryRouter>);
+
+    const hostSupervisor = screen.getByLabelText("Host supervisor *");
+    fireEvent.click(hostSupervisor);
+    const hostSupervisorControl = within(hostSupervisor.closest("details")!);
+    const search = screen.getByLabelText("Search host supervisors");
+    expect(hostSupervisorControl.queryByText("Micron Supervisor", { selector: ".multi-select-options strong" })).toBeNull();
+    expect(hostSupervisorControl.queryByText("Micron Administrator", { selector: ".multi-select-options strong" })).toBeNull();
+    fireEvent.change(search, { target: { value: "Marcus" } });
+    expect(hostSupervisorControl.getByText("Marcus Teo", { selector: ".multi-select-options strong" })).toBeTruthy();
+    expect(hostSupervisorControl.queryByText("Irene Lim", { selector: ".multi-select-options strong" })).toBeNull();
+  });
+
   it("orders the permit register by operational status priority", () => {
     localStorage.setItem("eptw-demo-user", "req-1");
     render(<MemoryRouter initialEntries={["/permits"]}><App /></MemoryRouter>);
     const rows = Array.from(document.querySelectorAll<HTMLTableRowElement>(".permit-table tbody tr"));
     expect(rows[0].textContent).toContain("Draft permit");
+    expect(rows[0].classList.contains("status-neutral")).toBe(true);
     expect(rows[1].textContent).toContain("Pending");
+    expect(rows[1].classList.contains("status-warn")).toBe(true);
     expect(rows[2].textContent).toContain("Active");
+    expect(rows[2].classList.contains("status-good")).toBe(true);
+    expect(document.querySelectorAll(".permit-mobile-card.permit-status-row")).toHaveLength(rows.length);
+  });
+
+  it("shows completed permit approval stages with checked markers", () => {
+    localStorage.setItem("eptw-demo-user", "pm-1");
+    render(<MemoryRouter initialEntries={["/permits/permit-hot-parent"]}><App /></MemoryRouter>);
+    const completedStages = Array.from(document.querySelectorAll<HTMLElement>('.approval-progress [data-approval-state="approved"]'));
+    expect(completedStages.length).toBeGreaterThan(0);
+    completedStages.forEach((stage) => expect(stage.querySelector("b")?.textContent).toBe("✓"));
+    expect(document.querySelector('.approval-progress [data-approval-state="pending"] b')?.textContent).not.toBe("✓");
+  });
+
+  it("shows selected Area Managers one user per row in approval order", () => {
+    const state = createSeedState(); const permit = state.permits.find((item) => item.id === "permit-review")!; const revision = currentRevision(permit);
+    revision.status = "AREA_MANAGER_REVIEW";
+    revision.data.individualReviewerId = "ir-1";
+    revision.data.individualReviewerIds = ["ir-1", "mt-1", "ms-2"];
+    revision.areaManagerApprovals = [{ userId: "ir-1", status: "APPROVED" }, { userId: "mt-1", status: "PENDING" }, { userId: "ms-2", status: "PENDING" }];
+    localStorage.setItem("eptw-functional-draft:v2", JSON.stringify(state));
+    localStorage.setItem("eptw-demo-user", "mt-1");
+    render(<MemoryRouter initialEntries={["/permits/permit-review"]}><App /></MemoryRouter>);
+
+    const rows = Array.from(document.querySelectorAll<HTMLElement>(".area-manager-approval-list > span"));
+    expect(rows.map((row) => row.textContent)).toEqual(["1. Irene Lim ✓", "2. Marcus Teo (current)", "3. Nur Aisyah"]);
+  });
+
+  it("requires a reason before rejecting a permit", () => {
+    localStorage.setItem("eptw-demo-user", "pm-1");
+    render(<MemoryRouter initialEntries={["/permits/permit-review"]}><App /></MemoryRouter>);
+
+    fireEvent.click(screen.getByRole("button", { name: "Reject permit" }));
+    const dialog = screen.getByRole("dialog", { name: "Reject permit?" });
+    const confirm = within(dialog).getByRole("button", { name: "Confirm rejection" }) as HTMLButtonElement;
+    expect(confirm.disabled).toBe(true);
+    fireEvent.change(within(dialog).getByLabelText("Reject reason *"), { target: { value: "The isolation plan is incomplete." } });
+    expect(confirm.disabled).toBe(false);
+    fireEvent.click(confirm);
+
+    expect(screen.queryByRole("dialog", { name: "Reject permit?" })).toBeNull();
+    expect(screen.getByText("Rejected", { selector: ".status-pill" })).toBeTruthy();
+    const rejectedStage = document.querySelector<HTMLElement>('.approval-progress [data-approval-state="rejected"]');
+    expect(rejectedStage?.textContent).toContain("Vendor PM");
+    expect(rejectedStage?.querySelector("b")?.textContent).toBe("×");
+    const approvedStages = Array.from(document.querySelectorAll<HTMLElement>('.approval-progress [data-approval-state="approved"]'));
+    expect(approvedStages.length).toBeGreaterThan(0);
+    approvedStages.forEach((stage) => expect(stage.querySelector("b")?.textContent).toBe("✓"));
   });
 
   it("shows the template code badge and template name in the permit register", () => {
@@ -432,7 +728,7 @@ describe("application shell", () => {
 
   it("selects multiple individual reviewers and MT Groups when creating a permit", () => {
     render(<MemoryRouter initialEntries={["/permits/new"]}><App /></MemoryRouter>);
-    const selectors = document.querySelectorAll(".search-multi-select");
+    const selectors = document.querySelectorAll(".search-multi-select:not(.search-single-select)");
     fireEvent.click(selectors[0].querySelector("summary")!);
     fireEvent.click(screen.getByRole("checkbox", { name: /Marcus Teo/i }));
     expect(selectors[0].querySelector("summary")?.textContent).toContain("Irene Lim");
@@ -476,11 +772,128 @@ describe("application shell", () => {
 
   it("opens the permit row menu with icon-labelled actions", () => {
     render(<MemoryRouter initialEntries={["/permits"]}><App /></MemoryRouter>);
-    fireEvent.click(screen.getAllByLabelText(/actions for/i)[0]);
-    expect(screen.getAllByRole("link", { name: "View" })[0]).toBeTruthy();
-    expect(screen.getAllByRole("button", { name: "Export as PDF" })[0]).toBeTruthy();
-    expect(screen.getAllByRole("link", { name: "Review" })[0]).toBeTruthy();
-    expect(screen.getAllByRole("button", { name: "Duplicate" })[0]).toBeTruthy();
+    const menu = screen.getByLabelText("Actions for F10A1-G-AMHS-2026-09-08/0001");
+    fireEvent.click(menu);
+    expect(within(menu.closest("details")!).getByRole("link", { name: "View" })).toBeTruthy();
+    expect(within(menu.closest("details")!).getByRole("button", { name: "Export as PDF" })).toBeTruthy();
+    expect(screen.queryByRole("link", { name: "Review" })).toBeNull();
+    expect(within(menu.closest("details")!).getByRole("button", { name: "Duplicate" })).toBeTruthy();
+  });
+
+  it("shows only Edit, Duplicate, and Delete actions for an owned draft permit", () => {
+    render(<MemoryRouter initialEntries={["/permits"]}><App /></MemoryRouter>);
+    const menu = screen.getByLabelText("Actions for F10A2-G-Facilities-2026-09-09/0004");
+    fireEvent.click(menu);
+    const actions = within(menu.closest("details")!);
+    expect(actions.getByRole("link", { name: "Edit" })).toBeTruthy();
+    expect(actions.getByRole("button", { name: "Duplicate" })).toBeTruthy();
+    expect(actions.getByRole("button", { name: "Delete draft" })).toBeTruthy();
+    expect(actions.queryByRole("link", { name: "View" })).toBeNull();
+    expect(actions.queryByRole("button", { name: "Export as PDF" })).toBeNull();
+  });
+
+  it("lets the owner edit and save the draft permit setup and approval route", () => {
+    render(<MemoryRouter initialEntries={["/permits/permit-draft/edit"]}><App /></MemoryRouter>);
+
+    expect(screen.getByRole("heading", { name: "Permit setup & approval route" })).toBeTruthy();
+    expect(screen.getByText("Host & approval route")).toBeTruthy();
+    fireEvent.change(screen.getByText("Site", { selector: "label > span" }).closest("label")!.querySelector("select")!, { target: { value: "F10N" } });
+    const hostSupervisor = screen.getByLabelText("Host supervisor *");
+    fireEvent.click(hostSupervisor);
+    fireEvent.click(within(hostSupervisor.closest("details")!).getByRole("radio", { name: /Marcus Teo/i }));
+    fireEvent.click(screen.getByRole("button", { name: "Save as draft" }));
+
+    const state = JSON.parse(localStorage.getItem("eptw-functional-draft:v2")!);
+    const draft = state.permits.find((permit: { id: string }) => permit.id === "permit-draft");
+    const revision = draft.revisions.find((item: { id: string }) => item.id === draft.currentRevisionId);
+    expect(revision.data.site).toBe("F10N");
+    expect(revision.data.hostSupervisorId).toBe("mt-1");
+  });
+
+  it("opens action menus upward for the bottom permit rows", () => {
+    render(<MemoryRouter initialEntries={["/permits"]}><App /></MemoryRouter>);
+    const menus = screen.getAllByLabelText(/actions for/i);
+    const bottomMenu = menus.at(-1)!;
+    expect(bottomMenu.closest("details")?.classList.contains("open-up")).toBe(true);
+    fireEvent.click(bottomMenu);
+    expect(bottomMenu.closest("details")?.hasAttribute("open")).toBe(true);
+  });
+
+  it("moves action menus in grouped dashboard tables to the front layer", () => {
+    localStorage.setItem("eptw-demo-user", "ir-1");
+    render(<MemoryRouter initialEntries={["/dashboard"]}><App /></MemoryRouter>);
+
+    const groupedTable = document.querySelector(".dashboard-grouped-results .dashboard-results")!;
+    const menu = within(groupedTable as HTMLElement).getAllByLabelText(/actions for/i)[0];
+    fireEvent.click(menu);
+    expect(menu.closest("details")?.hasAttribute("open")).toBe(true);
+    expect(within(menu.closest("details")!).getByRole("link", { name: "View" })).toBeTruthy();
+  });
+
+  it("shows a create permit action instead of view-all links on dashboards for permitted users", () => {
+    localStorage.setItem("eptw-demo-user", "ir-1");
+    render(<MemoryRouter initialEntries={["/dashboard"]}><App /></MemoryRouter>);
+
+    const submittedResults = Array.from(document.querySelectorAll<HTMLElement>(".dashboard-results")).find((section) => section.querySelector("h2")?.textContent === "Submitted Permit")!;
+    expect(within(submittedResults).getByRole("link", { name: /Create permit/i }).getAttribute("href")).toBe("/permits/new");
+    expect(document.querySelector(".page-header a[href='/permits/new']")).toBeNull();
+    expect(screen.queryByRole("link", { name: /View all/i })).toBeNull();
+  });
+
+  it("hides the create permit action from dashboard users without create permission", () => {
+    localStorage.setItem("eptw-demo-user", "pm-1");
+    render(<MemoryRouter initialEntries={["/dashboard"]}><App /></MemoryRouter>);
+
+    expect(screen.queryByRole("link", { name: /Create permit/i })).toBeNull();
+    expect(screen.queryByRole("link", { name: /View all/i })).toBeNull();
+  });
+
+  it("keeps only one permit action menu open at a time", () => {
+    render(<MemoryRouter initialEntries={["/permits"]}><App /></MemoryRouter>);
+    const menus = screen.getAllByLabelText(/actions for/i);
+    fireEvent.click(menus[0]);
+    expect(menus[0].closest("details")?.hasAttribute("open")).toBe(true);
+    fireEvent.click(menus[1]);
+    expect(menus[0].closest("details")?.hasAttribute("open")).toBe(false);
+    expect(menus[1].closest("details")?.hasAttribute("open")).toBe(true);
+    expect(document.querySelectorAll(".row-menu[open]")).toHaveLength(1);
+  });
+
+  it("duplicates a permit into an owned editable draft with the same form information", () => {
+    const state = createSeedState(); const source = state.permits.find((permit) => permit.id === "permit-review")!; const sourceRevision = currentRevision(source);
+    sourceRevision.data.templateId = "duplicate-template";
+    sourceRevision.data.templateName = "Duplicate test";
+    sourceRevision.data.customFields = {
+      equipment: "Original equipment information",
+      attachment: JSON.stringify({ name: "large-plan.pdf", type: "application/pdf", size: 1_900_000, dataUrl: `data:application/pdf;base64,${"A".repeat(2_550_000)}` }),
+      signature: "data:image/png;base64,AAAA",
+    };
+    sourceRevision.data.startAt = "27/10/2026";
+    sourceRevision.data.endAt = "30/10/2026";
+    localStorage.setItem("eptw-functional-draft:v2", JSON.stringify(state));
+    localStorage.setItem("eptw-templates:v4", JSON.stringify([{ id: "duplicate-template", kind: "PARENT", name: "Duplicate test", code: "G", discipline: "AMHS", description: "Duplicate workflow", active: true, updatedAt: "2026-10-28T00:00:00.000Z", sections: [{ id: "general", title: "General information", description: "", fields: [{ id: "equipment", label: "Equipment reference", type: "TEXT", required: true }, { id: "attachment", label: "Plan", type: "FILE", required: false }, { id: "signature", label: "Signature", type: "SIGNATURE", required: false }] }] }]));
+    render(<MemoryRouter initialEntries={["/permits"]}><App /></MemoryRouter>);
+
+    const menuButton = screen.getByLabelText(`Actions for ${source.permitNumber}`);
+    fireEvent.click(menuButton);
+    fireEvent.click(within(menuButton.closest("details")!).getByRole("button", { name: "Duplicate" }));
+
+    expect(screen.getByRole("heading", { name: "Edit permit revision" })).toBeTruthy();
+    const field = screen.getByLabelText("Equipment reference *") as HTMLInputElement;
+    expect(field.value).toBe("Original equipment information");
+    fireEvent.change(field, { target: { value: "Updated duplicate information" } });
+    fireEvent.click(screen.getByRole("button", { name: "Save as draft" }));
+
+    const savedState = JSON.parse(localStorage.getItem("eptw-functional-draft:v2")!);
+    const duplicate = savedState.permits.find((permit: { audit: { action: string }[] }) => permit.audit.some((event) => event.action === "DUPLICATED_FROM"));
+    expect(duplicate.requestorId).toBe("req-1");
+    expect(duplicate.revisions[0].status).toBe("DRAFT");
+    expect(duplicate.revisions[0].data.customFields.equipment).toBe("Updated duplicate information");
+    expect(duplicate.revisions[0].data.customFields.attachment).toBe("");
+    expect(duplicate.revisions[0].data.customFields.signature).toBe("");
+    const singaporeDay = (value: string) => Object.fromEntries(new Intl.DateTimeFormat("en", { year: "numeric", month: "2-digit", day: "2-digit", timeZone: "Asia/Singapore" }).formatToParts(new Date(value)).map((part) => [part.type, part.value]));
+    expect(singaporeDay(duplicate.revisions[0].data.startAt)).toMatchObject({ year: "2026", month: "10", day: "27" });
+    expect(singaporeDay(duplicate.revisions[0].data.endAt)).toMatchObject({ year: "2026", month: "10", day: "30" });
   });
 
   it("lets a user delete their own draft from the permit menu", () => {
@@ -684,9 +1097,9 @@ describe("application shell", () => {
     expect(screen.queryByLabelText("Section edit permissions")).toBeNull();
 
     fireEvent.click(screen.getByRole("button", { name: "Edit permissions" }));
-    const assessorAccess = screen.getByRole("checkbox", { name: /allow assigned assessor/i });
+    const assessorAccess = screen.getByRole("checkbox", { name: /permit assessor/i });
     fireEvent.click(assessorAccess);
-    expect(screen.getByLabelText("Section edit permissions").textContent).toContain("Assigned Assessor");
+    expect(screen.getByLabelText("Section edit permissions").textContent).toContain("Permit Assessor");
 
     fireEvent.click(assessorAccess);
     expect(screen.queryByLabelText("Section edit permissions")).toBeNull();
@@ -807,13 +1220,46 @@ describe("application shell", () => {
 
     render(<MemoryRouter initialEntries={["/settings/users"]}><App /></MemoryRouter>);
     expect(screen.getByRole("button", { name: /export user list/i })).toBeTruthy();
-    fireEvent.change(screen.getByLabelText("Search users"), { target: { value: "Sean" } });
+    fireEvent.change(screen.getByLabelText("Search users"), { target: { value: "Irene" } });
     fireEvent.click(screen.getByRole("button", { name: /export user list/i }));
 
     expect(downloadedName).toMatch(/^eptw-user-list-\d{4}-\d{2}-\d{2}\.csv$/);
-    expect(decodeURIComponent(downloadedHref)).toContain("Sean Wei Tat Justin");
-    expect(decodeURIComponent(downloadedHref)).not.toContain("pm2@abc.com");
+    expect(decodeURIComponent(downloadedHref)).toContain("Irene Lim");
+    expect(decodeURIComponent(downloadedHref)).not.toContain("priya@contractor.example");
     click.mockRestore();
+  });
+
+  it("uses the available account directory on the Users page", () => {
+    localStorage.setItem("eptw-demo-user", "admin-1");
+    localStorage.setItem("eptw-user-directory:v1", JSON.stringify([{ id: "directory-user-1", name: "Legacy Demo User", email: "legacy@example.com", sites: ["F10A1"], role: "Micron Staff", groups: [], status: "Approved" }]));
+    render(<MemoryRouter initialEntries={["/settings/users"]}><App /></MemoryRouter>);
+
+    expect(screen.getByText("Aisha Rahman")).toBeTruthy();
+    expect(screen.getAllByText("Micron Administrator").length).toBeGreaterThan(0);
+    expect(screen.getByText("Permit Assessor")).toBeTruthy();
+    expect(screen.queryByText("Legacy Demo User")).toBeNull();
+    expect(screen.getByText(`${USERS.length} users`)).toBeTruthy();
+  });
+
+  it("shows the configured 53 discipline records in the required order", () => {
+    localStorage.setItem("eptw-demo-user", "admin-1");
+    localStorage.setItem("eptw-disciplines:v1", JSON.stringify([{ id: "discipline-21", number: 21, code: "LEGACY", description: "Legacy seed" }]));
+    render(<MemoryRouter initialEntries={["/settings/disciplines"]}><App /></MemoryRouter>);
+
+    const rows = Array.from(document.querySelectorAll<HTMLTableRowElement>(".disciplines-table tbody tr"));
+    expect(rows).toHaveLength(53);
+    expect(rows.map((row) => row.cells[1].textContent)).toEqual(DISCIPLINE_RECORDS.map(([code]) => code));
+    expect(rows[33].cells[2].textContent).toBe("Global Supply Chain");
+    expect(screen.queryByText("LEGACY")).toBeNull();
+  });
+
+  it("shows every available site when creating a permit", () => {
+    render(<MemoryRouter initialEntries={["/permits/new"]}><App /></MemoryRouter>);
+
+    const siteLabel = screen.getByText("Site", { selector: "label > span" });
+    const siteSelect = siteLabel.closest("label")!.querySelector("select")!;
+    expect(Array.from(siteSelect.options).map((option) => option.value)).toEqual(SITES);
+    expect(SITES).toEqual(["F10A1", "F10A2", "F10N", "F10NX", "F10W", "F10X", "MSH", "TC"]);
   });
 
   it("shows all users in the MT Groups user directory", () => {
@@ -821,7 +1267,7 @@ describe("application shell", () => {
     render(<MemoryRouter initialEntries={["/settings/mt-groups"]}><App /></MemoryRouter>);
     expect(screen.getByRole("columnheader", { name: "User" })).toBeTruthy();
     expect(screen.getByText("Aisha Rahman")).toBeTruthy();
-    expect(screen.getByText("Micron Administrator")).toBeTruthy();
+    expect(screen.getAllByText("Micron Administrator").length).toBeGreaterThan(0);
     expect(screen.getByText("Showing 13 of 13 users")).toBeTruthy();
     fireEvent.click(screen.getByRole("button", { name: /add mt group/i }));
     expect(screen.getByText("Can edit permit information", { selector: "label" })).toBeTruthy();

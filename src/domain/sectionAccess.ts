@@ -1,11 +1,14 @@
 import { currentRevision, type Permit, type User } from "./types";
 import { readGroups } from "./groupStore";
 
-export type SectionEditAccess = { assessor?: boolean; mtGroupIds?: string[] };
+export type SectionEditAccess = { assessor?: boolean; assessorIds?: string[]; mtGroupIds?: string[] };
 export function canEditTemplateSection(permit: Permit, actor: User, access?: SectionEditAccess) {
   const revision = currentRevision(permit);
   if (["CLOSED", "CANCELLED", "REJECTED", "EXPIRED", "SUPERSEDED"].includes(revision.status)) return false;
-  if (actor.role === "ASSESSOR") return Boolean(access?.assessor && revision.data.assessorIds?.includes(actor.id));
+  if (actor.role === "ASSESSOR") {
+    const permittedByTemplate = access?.assessorIds?.length ? access.assessorIds.includes(actor.id) : access?.assessor;
+    return Boolean(permittedByTemplate && revision.data.assessorIds?.includes(actor.id));
+  }
   if (actor.role !== "MICRON_STAFF") return false;
   const assigned = revision.data.mtGroups?.length ? revision.data.mtGroups : [revision.data.mtGroup];
   return readGroups().some((group) => access?.mtGroupIds?.includes(group.id) && assigned.includes(group.name) && group.memberIds?.includes(actor.id));

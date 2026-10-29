@@ -112,6 +112,11 @@ body {
   padding-right: 0;
   overflow-x: hidden;
 }
+.permit-table-wrap:has(.row-menu[open]) {
+  position: relative;
+  z-index: 10000;
+  overflow: visible;
+}
 .permit-mobile-list { display: none; }
 .permit-table {
   width: 100%;
@@ -151,6 +156,9 @@ body {
   padding: 5px 7px;
   text-align: center;
 }
+.approval-status.your-approval {
+  border-width: 2px;
+}
 .approval-status .status-copy,
 .approval-status .status-copy strong,
 .approval-status .status-copy small { display: block; }
@@ -166,6 +174,9 @@ body {
   font-weight: 600;
   line-height: 1.2;
 }
+.approval-status .status-copy small b {
+  font-weight: 900;
+}
 .row-menu,
 .row-menu summary { width: 26px; }
 .row-menu summary { height: 26px; }
@@ -177,7 +188,7 @@ body {
   }
 
   .dashboard-metric-group > h2 {
-    margin-bottom: 6px;
+    margin-bottom: 9px;
     font-size: 12px;
   }
 
@@ -185,7 +196,7 @@ body {
 
   .dashboard-metric {
     min-height: 0;
-    padding: 10px 12px 12px;
+    padding: 9px 11px 10px;
     border-top-width: 2px;
     border-radius: 9px;
   }
@@ -196,9 +207,9 @@ body {
   }
 
   .dashboard-metric strong {
-    margin: 3px 0 1px;
-    font-size: 24px;
-    line-height: 1.1;
+    margin: 0;
+    font-size: 23px;
+    line-height: 1;
   }
 
   .dashboard-metric small {

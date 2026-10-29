@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from "react";
 import { Navigate } from "react-router-dom";
 import type { User } from "../../domain/types";
+import { DISCIPLINE_RECORDS } from "../../domain/constants";
 import MtGroupsManager from "./MtGroupsManager";
 
 type Discipline = { id: string; number: number; code: string; description: string };
@@ -8,19 +9,18 @@ type MtGroup = { id: string; number: number; name: string; site: string; canClos
 
 const DISCIPLINE_KEY = "eptw-disciplines:v1";
 const GROUP_KEY = "eptw-mt-groups:v1";
-const disciplineSeeds: Discipline[] = [
-  "MFG WET", "MFG PROCUREMENT", "MFG PHOTO", "MFG IMPLANT", "MFG DRY ETCH", "MFG DIFFUSION", "MFG CVD/PD", "MFG CMP/PC", "METRO", "MATERIAL HANDLING", "IT", "FAC UPW & WWTP/EXYTE", "FAC UPW & WWTP",
-].map((code, index) => ({ id: `discipline-${index + 21}`, number: index + 21, code, description: code }));
+const disciplineSeeds: Discipline[] = DISCIPLINE_RECORDS.map(([code, description], index) => ({ id: `discipline-${index + 1}`, number: index + 1, code, description }));
 const groupNames = ["F10A1 AMHS Engineer", "F10A1 AMHS Manager", "F10A1 Building Services Engineer", "F10A1 Building Services Manager", "F10A1 Chemical Gas Manager", "F10A1 Control Manager", "F10A1 Electrical Engineer/Technician", "F10A1 Electrical Manager", "F10A1 Equipment Engineer", "F10A1 Equipment Manager", "F10A1 Facilities SIPP Coordinators", "F10A1 Mechanical Senior Manager", "F10A1 PEE Dry Engineer/Technician"];
 const groupSeeds: MtGroup[] = groupNames.map((name, index) => ({ id: `group-${index + 1}`, number: index + 1, name, site: "F10A1", canClose: index === 10 }));
 
 function readLocal<T>(key: string, seeds: T[]): T[] { try { const value = localStorage.getItem(key); return value ? JSON.parse(value) as T[] : seeds; } catch { return seeds; } }
+function readDisciplines() { const saved = readLocal<Discipline>(DISCIPLINE_KEY, []); const custom = saved.filter((item) => !item.id.startsWith("discipline-")); return [...disciplineSeeds, ...custom.map((item, index) => ({ ...item, number: disciplineSeeds.length + index + 1 }))]; }
 function saveLocal<T>(key: string, value: T[], setter: (items: T[]) => void) { localStorage.setItem(key, JSON.stringify(value)); setter(value); }
 function Header({ title, text, onAdd }: { title: string; text: string; onAdd: () => void }) { return <header className="page-header"><div><span className="eyebrow">System management</span><h1>{title}</h1><p>{text}</p></div><button className="button primary" onClick={onAdd}>＋ Add {title === "Disciplines" ? "discipline" : "MT Group"}</button></header>; }
 function DirectoryMenu({ label }: { label: string }) { return <details className="row-menu"><summary aria-label={`Actions for ${label}`}>⋯</summary><div className="row-menu-panel"><button><span className="directory-menu-icon">◉</span><span>View</span></button><button><span className="directory-menu-icon">✎</span><span>Edit</span></button></div></details>; }
 
 export function DisciplinesPage({ user }: { user: User }) {
-  const [items, setItems] = useState(() => readLocal(DISCIPLINE_KEY, disciplineSeeds)); const [query, setQuery] = useState(""); const [adding, setAdding] = useState(false); const [form, setForm] = useState({ code: "", description: "" });
+  const [items, setItems] = useState(readDisciplines); const [query, setQuery] = useState(""); const [adding, setAdding] = useState(false); const [form, setForm] = useState({ code: "", description: "" });
   if (!["SUPER_ADMIN", "USER_ADMIN"].includes(user.role)) return <Navigate to="/dashboard" replace />;
   const visible = items.filter((item) => `${item.code} ${item.description}`.toLowerCase().includes(query.toLowerCase()));
   const submit = (event: FormEvent) => { event.preventDefault(); if (!form.code.trim() || !form.description.trim()) return; const next = [...items, { id: crypto.randomUUID(), number: Math.max(0, ...items.map((item) => item.number)) + 1, code: form.code.trim().toUpperCase(), description: form.description.trim() }]; saveLocal(DISCIPLINE_KEY, next, setItems); setForm({ code: "", description: "" }); setAdding(false); };

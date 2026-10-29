@@ -1,19 +1,20 @@
 import { useState, type FormEvent } from "react";
 import { Navigate } from "react-router-dom";
 import type { User } from "../../domain/types";
+import { ROLE_LABELS, SITES, USERS } from "../../domain/constants";
+import { readGroups } from "../../domain/groupStore";
 
 type DirectoryUser = { id: string; name: string; email: string; sites: string[]; role: string; groups: string[]; status: "Pending" | "Approved" };
 const USER_KEY = "eptw-user-directory:v1";
-const allSites = ["F10A1", "F10A2", "F10N", "F10NX", "F10W", "F10X"];
+const allSites = SITES;
 const accountRoles = ["Micron Admin", "Micron Supervisor", "Vendor Admin", "Micron Staff", "Contractor Requestor", "Contractor PM", "Assessor"];
-const normalizeAccountRole = (role: string) => role === "MT Group" || role === "Individual Reviewer" ? "Micron Staff" : role;
-const people = [["Sean Wei Tat Justin","seanjustin@micron.com","Micron Staff","Pending"],["pm2","pm2@abc.com","Contractor PM","Pending"],["OSS MTGroup User","ossmtgroup@email.com","Micron Staff","Pending"],["audit","audit@email.com","Micron Admin","Pending"],["reqdef","req@def.com","Contractor Requestor","Approved"],["Jereny Loow","jloow@micron.com","Micron Staff","Approved"],["Muhammad Nabl Bin Asnawi","mbinasnawi@micron.com","Micron Staff","Approved"],["TestMicronPM","pm@testmicron.com","Contractor PM","Approved"],["TestMicronRequestor","tm@testmicron.com","Contractor Requestor","Approved"],["Third MT Group Reviewer","thirdmt@micron.com","Micron Staff","Approved"],["Second MTGroup Reviewer","secondmt@micron.com","Micron Staff","Approved"],["First MTGroup Reviewer","firstmt@micron.com","Micron Staff","Approved"],["Third Individual Approver","third@micron.com","Micron Staff","Approved"],["Second Individual Approver","second@micron.com","Micron Staff","Approved"],["First Individual Approver","first@micron.com","Micron Staff","Approved"]] as const;
-const userSeeds: DirectoryUser[] = people.map(([name,email,role,status],i) => ({ id:`directory-user-${i+1}`,name,email,role,status,groups:i===1?[]:i===0||i===2?["Facilities MT","F10A1 AMHS Engineer"]:["Facilities MT"],sites:i===0||i===2?["F10A1","F10A2"]:i===4?["F10A1"]:allSites }));
+const availableUsers = (): DirectoryUser[] => { const groups = readGroups(); return USERS.map((account) => ({ id: account.id, name: account.name, email: account.email, role: ROLE_LABELS[account.role], status: "Approved", sites: account.sites?.length ? account.sites : allSites, groups: Array.from(new Set([...groups.filter((group) => group.memberIds?.includes(account.id)).map((group) => group.name), ...(account.group ? [account.group] : [])])) })); };
 function load<T>(key:string,fallback:T[]):T[]{try{const value=localStorage.getItem(key);return value?JSON.parse(value) as T[]:fallback}catch{return fallback}}
+const loadAvailableUsers = () => { const accounts = availableUsers(); const saved = load<DirectoryUser>(USER_KEY, []); const statusById = new Map(saved.map((item) => [item.id, item.status])); const custom = saved.filter((item) => !item.id.startsWith("directory-user-") && !USERS.some((account) => account.id === item.id)); return [...accounts.map((account) => ({ ...account, status: statusById.get(account.id) ?? account.status })), ...custom]; };
 function Actions({label,onView,onEdit}:{label:string;onView:()=>void;onEdit:()=>void}){return <details className="row-menu"><summary aria-label={`Actions for ${label}`}>&hellip;</summary><div className="row-menu-panel"><button onClick={onView}><span aria-hidden="true">◉</span>View</button><button onClick={onEdit}><span aria-hidden="true">✎</span>Edit</button></div></details>}
 
 export function UsersPage({user}:{user:User}){
- const [items,setItems]=useState(()=>load(USER_KEY,userSeeds).map(item=>({...item,role:normalizeAccountRole(item.role),groups:item.groups??[]}))),[query,setQuery]=useState(""),[adding,setAdding]=useState(false),[selected,setSelected]=useState<DirectoryUser>();
+ const [items,setItems]=useState(loadAvailableUsers),[query,setQuery]=useState(""),[adding,setAdding]=useState(false),[selected,setSelected]=useState<DirectoryUser>();
  const [form,setForm]=useState({name:"",email:"",role:"Contractor Requestor",site:"F10A1"});
  if(!["SUPER_ADMIN","USER_ADMIN"].includes(user.role))return <Navigate to="/dashboard" replace/>;
  const visible=items.filter(x=>`${x.name} ${x.email} ${x.role} ${x.sites.join(" ")} ${(x.groups??[]).join(" ")}`.toLowerCase().includes(query.toLowerCase()));
