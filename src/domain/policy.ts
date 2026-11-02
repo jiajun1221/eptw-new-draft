@@ -1,6 +1,6 @@
-import type { Permit, PermitFormData, PermitStatus, TransitionAction, User } from "./types";
+import type { ApprovalRole, Permit, PermitFormData, PermitStatus, TransitionAction, User } from "./types";
 import { currentRevision } from "./types";
-import { canCloseForGroup, isGroupMember } from "./groupStore";
+import { isGroupMember } from "./groupStore";
 import { safetyChecklistComplete } from "./safetyChecklist";
 
 export interface Decision { allowed: boolean; reason: string }
@@ -22,7 +22,7 @@ export function effectiveStatus(permit: Permit, now = new Date()): PermitStatus 
   return revision.status;
 }
 
-const commentRequired = new Set<TransitionAction>(["REQUEST_CHANGES", "REJECT", "CANCEL", "SUSPEND", "RESUME", "REQUEST_CLOSURE", "CLOSE"]);
+const commentRequired = new Set<TransitionAction>(["REQUEST_CHANGES", "REJECT", "CANCEL", "REQUEST_CANCELLATION", "SUSPEND", "RESUME", "REQUEST_CLOSURE", "CLOSE"]);
 const canRaise = (actor: User) => ["CONTRACTOR_REQUESTOR", "MICRON_STAFF", "SUPER_ADMIN"].includes(actor.role);
 export const hasSelfApprovalAssignment = (data: PermitFormData, actorId: string): boolean => {
   const individualReviewerIds = data.individualReviewerIds?.length ? data.individualReviewerIds : data.individualReviewerId ? [data.individualReviewerId] : [];
@@ -42,6 +42,47 @@ const assignedReviewer = (permit: Permit, actor: User, status: PermitStatus) => 
   if (status === "FINAL_MT_REVIEW") return actor.role === "MICRON_STAFF" && isGroupMember(actor, data.finalApprovalMtGroup || data.mtGroup);
   return false;
 };
+const canRequestFinalDecision = (permit: Permit, actor: User) => {
+  const data = currentRevision(permit).data;
+  const vendorPm = actor.role === "CONTRACTOR_PM" && actor.id === data.hostId;
+  const hostSupervisor = ["MICRON_SUPERVISOR", "MICRON_STAFF"].includes(actor.role) && actor.id === data.hostSupervisorId;
+  return vendorPm || hostSupervisor;
+};
+const isFinalMtGroupPersonnel = (permit: Permit, actor: User) => {
+  const data = currentRevision(permit).data;
+  return actor.role === "MICRON_STAFF" && isGroupMember(actor, data.finalApprovalMtGroup || data.mtGroup);
+};
+
+const approvalStatusForRole: Record<ApprovalRole, PermitStatus> = {
+  VENDOR_PM: "INDIVIDUAL_REVIEW",
+  HOST_SUPERVISOR: "MT_REVIEW",
+  HOST_MANAGER: "PM_REVIEW",
+  AREA_MANAGER: "AREA_MANAGER_REVIEW",
+  MT_GROUP: "MT_GROUP_REVIEW",
+  FINAL_MT_GROUP: "FINAL_MT_REVIEW",
+};
+
+export type RevertApprovalTarget = { kind: "STAGE"; role: ApprovalRole; status: PermitStatus } | { kind: "AREA_MANAGER"; userId: string; status: "AREA_MANAGER_REVIEW" };
+
+export function revertApprovalTarget(permit: Permit, actor: User): RevertApprovalTarget | undefined {
+  const revision = currentRevision(permit);
+  if (!["INDIVIDUAL_REVIEW", "MT_REVIEW", "PM_REVIEW", "AREA_MANAGER_REVIEW", "MT_GROUP_REVIEW", "FINAL_MT_REVIEW", "APPROVED"].includes(revision.status)) return undefined;
+  const ordered = revision.approvals.flatMap((stage) => {
+    if (stage.role !== "AREA_MANAGER") return stage.status === "APPROVED" ? [{ kind: "STAGE" as const, role: stage.role, actorId: stage.actorId }] : [];
+    const areaApprovals = revision.areaManagerApprovals ?? [];
+    if (areaApprovals.length) return areaApprovals.filter((approval) => approval.status === "APPROVED").map((approval) => ({ kind: "AREA_MANAGER" as const, userId: approval.userId, actorId: approval.actorId }));
+    return stage.status === "APPROVED" ? [{ kind: "STAGE" as const, role: stage.role, actorId: stage.actorId }] : [];
+  });
+  const latest = ordered.at(-1);
+  if (!latest || latest.actorId !== actor.id) return undefined;
+  if (latest.kind === "AREA_MANAGER") {
+    if (!["AREA_MANAGER_REVIEW", "MT_GROUP_REVIEW"].includes(revision.status)) return undefined;
+    return { kind: "AREA_MANAGER", userId: latest.userId, status: "AREA_MANAGER_REVIEW" };
+  }
+  const status = approvalStatusForRole[latest.role];
+  if (revision.status !== nextApprovalStatus(status)) return undefined;
+  return { kind: "STAGE", role: latest.role, status };
+}
 
 export function getActionDecision(permit: Permit, action: TransitionAction, actor: User, permits: Permit[], comment = "", now = new Date()): Decision {
   const revision = currentRevision(permit);
@@ -62,7 +103,10 @@ export function getActionDecision(permit: Permit, action: TransitionAction, acto
     if (!assignedReviewer(permit, actor, status)) return no("Approval requires assignment to the current approval stage.");
     return yes();
   }
-  if (action === "CANCEL") return owner && canRaise(actor) && ["DRAFT", "CHANGES_REQUESTED", "INDIVIDUAL_REVIEW", "MT_REVIEW", "PM_REVIEW", "AREA_MANAGER_REVIEW", "MT_GROUP_REVIEW", "FINAL_MT_REVIEW", "APPROVED"].includes(status) ? yes() : no("Only the original requestor can request cancellation.");
+  if (action === "REVERT_APPROVAL") return revertApprovalTarget(permit, actor) ? yes("Approval can be reverted until the next reviewer approves.") : no("Only the most recent reviewer can revert before the next approval.");
+  if (action === "CANCEL") return owner && canRaise(actor) && ["DRAFT", "CHANGES_REQUESTED", "INDIVIDUAL_REVIEW", "MT_REVIEW", "PM_REVIEW", "AREA_MANAGER_REVIEW", "MT_GROUP_REVIEW", "FINAL_MT_REVIEW"].includes(status) ? yes() : no("Only the original requestor can cancel before final approval.");
+  if (action === "REQUEST_CANCELLATION") return canRequestFinalDecision(permit, actor) && ["APPROVED", "ACTIVE", "SUSPENDED", "EXPIRED"].includes(status) ? yes() : no("Only the assigned Vendor PM or Host Supervisor can request cancellation after final approval.");
+  if (action === "APPROVE_CANCELLATION") return status === "CANCELLATION_REQUESTED" && isFinalMtGroupPersonnel(permit, actor) ? yes() : no("Cancellation approval requires personnel from the Final Approval MT Group.");
   if (action === "ACTIVATE") {
     if (!owner || !canRaise(actor) || status !== "APPROVED") return no("Only the original requestor can activate an approved permit.");
     const start = new Date(revision.data.startAt), end = new Date(revision.data.endAt);
@@ -71,14 +115,15 @@ export function getActionDecision(permit: Permit, action: TransitionAction, acto
   }
   if (action === "SUSPEND") return ["MICRON_STAFF", "SUPER_ADMIN"].includes(actor.role) && status === "ACTIVE" ? yes() : no("Only authorised Micron Staff can suspend active work.");
   if (action === "RESUME") return ["MICRON_STAFF", "SUPER_ADMIN"].includes(actor.role) && status === "SUSPENDED" && now <= new Date(revision.data.endAt) ? yes() : no("Only authorised Micron Staff can resume a valid suspended permit.");
-  if (action === "REQUEST_CLOSURE") return owner && canRaise(actor) && ["ACTIVE", "SUSPENDED", "EXPIRED"].includes(status) ? yes() : no("Only the original requestor can request closure.");
-  if (action === "CLOSE") return actor.role === "MICRON_STAFF" && status === "CLOSURE_REQUESTED" && (revision.data.mtGroups?.length ? revision.data.mtGroups : [revision.data.mtGroup]).some((group) => canCloseForGroup(actor, group)) ? yes() : no("Closure requires assigned Micron Staff in an MT Group with closure permission.");
+  if (action === "REQUEST_CLOSURE") return canRequestFinalDecision(permit, actor) && ["APPROVED", "ACTIVE", "SUSPENDED", "EXPIRED"].includes(status) ? yes() : no("Only the assigned Vendor PM or Host Supervisor can request closure after final approval.");
+  if (action === "APPROVE_CLOSURE") return status === "CLOSURE_REQUESTED" && isFinalMtGroupPersonnel(permit, actor) ? yes() : no("Closure approval requires personnel from the Final Approval MT Group.");
+  if (action === "CLOSE") return status === "CLOSURE_REQUESTED" && isFinalMtGroupPersonnel(permit, actor) ? yes() : no("Closure requires personnel from the Final Approval MT Group.");
   return no("Action is unavailable.");
 }
 
 export const nextApprovalStatus = (status: PermitStatus): PermitStatus => status === "INDIVIDUAL_REVIEW" ? "MT_REVIEW" : status === "MT_REVIEW" ? "PM_REVIEW" : status === "PM_REVIEW" ? "AREA_MANAGER_REVIEW" : status === "AREA_MANAGER_REVIEW" ? "MT_GROUP_REVIEW" : status === "MT_GROUP_REVIEW" ? "FINAL_MT_REVIEW" : "APPROVED";
 
 export function availableActions(permit: Permit, actor: User, permits: Permit[]): { action: TransitionAction; decision: Decision }[] {
-  const actions: TransitionAction[] = ["SUBMIT", "APPROVE", "REQUEST_CHANGES", "REJECT", "CANCEL", "ACTIVATE", "SUSPEND", "RESUME", "REQUEST_CLOSURE", "CLOSE"];
+  const actions: TransitionAction[] = ["SUBMIT", "APPROVE", "REVERT_APPROVAL", "REQUEST_CHANGES", "REJECT", "CANCEL", "REQUEST_CANCELLATION", "APPROVE_CANCELLATION", "ACTIVATE", "SUSPEND", "RESUME", "REQUEST_CLOSURE", "APPROVE_CLOSURE", "CLOSE"];
   return actions.map((action) => ({ action, decision: getActionDecision(permit, action, actor, permits, commentRequired.has(action) ? "preview" : "") }));
 }

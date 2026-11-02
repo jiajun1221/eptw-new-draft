@@ -1,7 +1,7 @@
 export type Role = "SUPER_ADMIN" | "MICRON_SUPERVISOR" | "USER_ADMIN" | "MICRON_STAFF" | "CONTRACTOR_REQUESTOR" | "CONTRACTOR_PM" | "ASSESSOR" | (string & {});
 export interface User { id: string; name: string; email: string; role: Role; group?: string; authMethod?: "SSO" | "PASSWORD"; company?: string; sites?: string[] }
 export type PermitType = "GENERAL" | "HOT_WORK";
-export type PermitStatus = "DRAFT" | "INDIVIDUAL_REVIEW" | "MT_REVIEW" | "PM_REVIEW" | "AREA_MANAGER_REVIEW" | "MT_GROUP_REVIEW" | "FINAL_MT_REVIEW" | "CHANGES_REQUESTED" | "APPROVED" | "ACTIVE" | "SUSPENDED" | "CLOSURE_REQUESTED" | "CLOSED" | "REJECTED" | "CANCELLED" | "EXPIRED" | "SUPERSEDED";
+export type PermitStatus = "DRAFT" | "INDIVIDUAL_REVIEW" | "MT_REVIEW" | "PM_REVIEW" | "AREA_MANAGER_REVIEW" | "MT_GROUP_REVIEW" | "FINAL_MT_REVIEW" | "CHANGES_REQUESTED" | "APPROVED" | "ACTIVE" | "SUSPENDED" | "CANCELLATION_REQUESTED" | "CLOSURE_REQUESTED" | "CLOSED" | "REJECTED" | "CANCELLED" | "EXPIRED" | "SUPERSEDED";
 export type ApprovalRole = "VENDOR_PM" | "HOST_SUPERVISOR" | "HOST_MANAGER" | "AREA_MANAGER" | "MT_GROUP" | "FINAL_MT_GROUP";
 export interface ApprovalStage { role: ApprovalRole; status: "PENDING" | "APPROVED" | "CHANGES_REQUESTED" | "REJECTED"; actorId?: string; actedAt?: string; comment?: string }
 export interface AreaManagerApproval { userId: string; status: "PENDING" | "APPROVED" | "CHANGES_REQUESTED" | "REJECTED"; actorId?: string; actedAt?: string; comment?: string }
@@ -19,10 +19,10 @@ export interface PermitFormData {
 }
 export interface PermitRevision { id: string; number: number; status: PermitStatus; data: PermitFormData; approvals: ApprovalStage[]; areaManagerApprovals?: AreaManagerApproval[]; createdAt: string; createdBy: string; submittedAt?: string }
 export interface ActivityLog { id: string; date: string; summary: string; safetyConfirmed: boolean; actorId: string; createdAt: string }
-export interface AuditEvent { id: string; at: string; actorId: string; actorRole: Role; revision: number; action: string; fromStatus?: PermitStatus; toStatus?: PermitStatus; comment?: string }
+export interface AuditEvent { id: string; at: string; actorId: string; actorRole: Role; revision: number; action: string; fromStatus?: PermitStatus; toStatus?: PermitStatus; comment?: string; signature?: string; signedAt?: string }
 export interface Permit { id: string; permitNumber: string; type: PermitType; parentId?: string; attachmentKey?: string; childIds: string[]; requestorId: string; currentRevisionId: string; revisions: PermitRevision[]; activities: ActivityLog[]; audit: AuditEvent[] }
-export type TransitionAction = "SUBMIT" | "APPROVE" | "REQUEST_CHANGES" | "REJECT" | "CANCEL" | "ACTIVATE" | "SUSPEND" | "RESUME" | "REQUEST_CLOSURE" | "CLOSE";
-export interface TransitionPayload { comment?: string }
+export type TransitionAction = "SUBMIT" | "APPROVE" | "REVERT_APPROVAL" | "REQUEST_CHANGES" | "REJECT" | "CANCEL" | "REQUEST_CANCELLATION" | "APPROVE_CANCELLATION" | "ACTIVATE" | "SUSPEND" | "RESUME" | "REQUEST_CLOSURE" | "APPROVE_CLOSURE" | "CLOSE";
+export interface TransitionPayload { comment?: string; signature?: string; signedAt?: string }
 export interface PermitFilters { query?: string; status?: PermitStatus | ""; type?: PermitType | ""; site?: string; discipline?: string }
 export interface EptwState { version: number; permits: Permit[]; deletedPermitIds?: string[]; deletedChildSelections?: string[] }
 export const currentRevision = (permit: Permit) => permit.revisions.find((revision) => revision.id === permit.currentRevisionId)!;

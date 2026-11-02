@@ -1,36 +1,50 @@
 import { useMemo, useState, type ReactNode } from "react";
 
 type DateBasis = "submission" | "approval";
-type PermitCounts = { general: number; tool: number; child: number };
+type PermitCounts = { general: number; tool: number; child: number; b1b4: number };
 type BreakdownRow = PermitCounts & { label: string };
 
 const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-const permitTypes = ["General", "Tool install", "Child permit"];
-const approvedMonthly = [15, 21, 18, 28, 24, 31, 29, 36, 33, 39, 37, 43];
+const permitTypes = ["General", "Tool Install", "Child", "B1-B4"];
+const approvedMonthlyRows: BreakdownRow[] = [
+  { label: "Jan", general: 6, tool: 3, child: 4, b1b4: 2 },
+  { label: "Feb", general: 8, tool: 4, child: 6, b1b4: 3 },
+  { label: "Mar", general: 7, tool: 3, child: 5, b1b4: 3 },
+  { label: "Apr", general: 11, tool: 5, child: 8, b1b4: 4 },
+  { label: "May", general: 9, tool: 5, child: 6, b1b4: 4 },
+  { label: "Jun", general: 12, tool: 6, child: 8, b1b4: 5 },
+  { label: "Jul", general: 11, tool: 6, child: 7, b1b4: 5 },
+  { label: "Aug", general: 14, tool: 7, child: 9, b1b4: 6 },
+  { label: "Sep", general: 13, tool: 6, child: 9, b1b4: 5 },
+  { label: "Oct", general: 15, tool: 8, child: 10, b1b4: 6 },
+  { label: "Nov", general: 14, tool: 7, child: 10, b1b4: 6 },
+  { label: "Dec", general: 17, tool: 8, child: 11, b1b4: 7 },
+];
+const approvedMonthly = approvedMonthlyRows.map((row) => row.general + row.tool + row.child + row.b1b4);
 const contractorRows: BreakdownRow[] = [
-  { label: "Acme Engineering", general: 24, tool: 11, child: 19 },
-  { label: "Vendor Services", general: 18, tool: 9, child: 14 },
-  { label: "Northstar Engineering", general: 13, tool: 7, child: 10 },
-  { label: "Prime M&E", general: 9, tool: 5, child: 8 },
+  { label: "Acme Engineering", general: 24, tool: 11, child: 19, b1b4: 8 },
+  { label: "Vendor Services", general: 18, tool: 9, child: 14, b1b4: 6 },
+  { label: "Northstar Engineering", general: 13, tool: 7, child: 10, b1b4: 5 },
+  { label: "Prime M&E", general: 9, tool: 5, child: 8, b1b4: 4 },
 ];
 const disciplineRows: BreakdownRow[] = [
-  { label: "Facilities", general: 31, tool: 16, child: 28 },
-  { label: "AMHS", general: 22, tool: 12, child: 14 },
-  { label: "IT", general: 11, tool: 4, child: 9 },
+  { label: "Facilities", general: 31, tool: 16, child: 28, b1b4: 12 },
+  { label: "AMHS", general: 22, tool: 12, child: 14, b1b4: 7 },
+  { label: "IT", general: 11, tool: 4, child: 9, b1b4: 4 },
 ];
 const levelRows: BreakdownRow[] = [
-  { label: "Basement", general: 14, tool: 5, child: 12 },
-  { label: "Level 1", general: 21, tool: 12, child: 18 },
-  { label: "Level 2", general: 18, tool: 10, child: 15 },
-  { label: "Roof", general: 11, tool: 5, child: 6 },
+  { label: "Basement", general: 14, tool: 5, child: 12, b1b4: 6 },
+  { label: "Level 1", general: 21, tool: 12, child: 18, b1b4: 8 },
+  { label: "Level 2", general: 18, tool: 10, child: 15, b1b4: 6 },
+  { label: "Roof", general: 11, tool: 5, child: 6, b1b4: 3 },
 ];
 const statusRows = [
-  { label: "Draft", values: [5, 3, 9] },
-  { label: "Pending approval", values: [18, 9, 12] },
-  { label: "Approved", values: [34, 16, 28] },
-  { label: "Active", values: [11, 7, 10] },
-  { label: "Closed", values: [28, 13, 21] },
-  { label: "Rejected / cancelled", values: [6, 2, 4] },
+  { label: "Draft", values: [5, 3, 9, 4] },
+  { label: "Pending approval", values: [18, 9, 12, 7] },
+  { label: "Approved", values: [34, 16, 28, 14] },
+  { label: "Active", values: [11, 7, 10, 5] },
+  { label: "Closed", values: [28, 13, 21, 11] },
+  { label: "Rejected / cancelled", values: [6, 2, 4, 2] },
 ];
 const initiativeSites = ["F10A1", "F10A2", "F10N", "F10NX", "F10W", "F10X"];
 const initiativeCounts = initiativeSites.map((site, siteIndex) => ({
@@ -63,13 +77,13 @@ function Bars({ labels, values, color = "#2f6ddd", ariaLabel }: { labels: string
 }
 
 function BreakdownTable({ dimension, rows }: { dimension: string; rows: BreakdownRow[] }) {
-  return <div className="analytics-table-wrap"><table className="analytics-table"><thead><tr><th>{dimension}</th><th>General</th><th>Tool install</th><th>Child permit</th><th>Total</th></tr></thead><tbody>{rows.map((row) => <tr key={row.label}><td><strong>{row.label}</strong></td><td>{row.general}</td><td>{row.tool}</td><td>{row.child}</td><td><b>{row.general + row.tool + row.child}</b></td></tr>)}</tbody></table></div>;
+  return <div className="analytics-table-wrap"><table className="analytics-table"><thead><tr><th>{dimension}</th><th>General</th><th>Tool Install</th><th>Child</th><th>B1-B4</th><th>Total</th></tr></thead><tbody>{rows.map((row) => <tr key={row.label}><td><strong>{row.label}</strong></td><td>{row.general}</td><td>{row.tool}</td><td>{row.child}</td><td>{row.b1b4}</td><td><b>{row.general + row.tool + row.child + row.b1b4}</b></td></tr>)}</tbody></table></div>;
 }
 
 function DateBreakdown({ dimension, rows }: { dimension: string; rows: BreakdownRow[] }) {
   const [basis, setBasis] = useState<DateBasis>("submission");
-  const displayedRows = basis === "submission" ? rows : rows.map((row) => ({ ...row, general: Math.round(row.general * .72), tool: Math.round(row.tool * .72), child: Math.round(row.child * .72) }));
-  const totals = displayedRows.map((row) => row.general + row.tool + row.child);
+  const displayedRows = basis === "submission" ? rows : rows.map((row) => ({ ...row, general: Math.round(row.general * .72), tool: Math.round(row.tool * .72), child: Math.round(row.child * .72), b1b4: Math.round(row.b1b4 * .72) }));
+  const totals = displayedRows.map((row) => row.general + row.tool + row.child + row.b1b4);
   return <><DateRangeFilters basis={basis} selectable onBasisChange={setBasis} /><div className="analytics-context" aria-live="polite">Showing permits by <strong>{dimension.toLowerCase()}</strong>, split by permit type, using <strong>{basis} date</strong>.</div><div className="analytics-table-chart"><BreakdownTable dimension={dimension} rows={displayedRows} /><div className="analytics-chart-panel"><h3>Total permits by {dimension.toLowerCase()}</h3><Bars labels={displayedRows.map((row) => row.label)} values={totals} color="#7c3aed" ariaLabel={`Permit count by ${dimension.toLowerCase()}`} /></div></div></>;
 }
 
@@ -86,7 +100,7 @@ export default function AnalyticsPage() {
     <div className="analytics-grid">
       <ReportCard number={1} title="Monthly Approved Permit Count" text="Number of permits approved within each month." wide>
         <DateRangeFilters basis="approval" />
-        <div className="analytics-chart-panel"><h3>Approved permits by month</h3><Bars labels={months} values={approvedMonthly} ariaLabel="Approved permit count by month" /></div>
+        <div className="analytics-table-chart monthly-table-chart"><BreakdownTable dimension="Month" rows={approvedMonthlyRows} /><div className="analytics-chart-panel"><h3>Approved permits by month</h3><Bars labels={months} values={approvedMonthly} ariaLabel="Approved permit count by month" /></div></div>
       </ReportCard>
 
       <ReportCard number={2} title="Permit Submission Count by Type and Status" text="For each permit type, the number of permits in each status." wide>

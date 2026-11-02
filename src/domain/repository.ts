@@ -1,11 +1,12 @@
 import { approvalStages, createSeedState, uid } from "./data";
 import { USERS } from "./constants";
-import { effectiveStatus, getActionDecision, hasSelfApprovalAssignment, isComplete, nextApprovalStatus } from "./policy";
+import { effectiveStatus, getActionDecision, hasSelfApprovalAssignment, isComplete, nextApprovalStatus, revertApprovalTarget } from "./policy";
 import type { ActivityLog, ApprovalRole, AuditEvent, EptwState, Permit, PermitFilters, PermitFormData, PermitRevision, PermitStatus, TransitionAction, TransitionPayload, User } from "./types";
 import { currentRevision } from "./types";
 import { sectionUpdateKeys } from "./sectionAccess";
 
 const STORAGE_KEY = "eptw-functional-draft:v2";
+const PENDING_FINAL_DECISION_MS = 7 * 24 * 60 * 60 * 1000;
 const clone = <T,>(value: T): T => structuredClone(value);
 const isEmbeddedBinary = (value: string) => /^data:[^;,]+;base64,/i.test(value);
 const duplicateFieldValue = (value: string | boolean | string[]) => {
@@ -32,6 +33,10 @@ const approvalStageFor = (revision: PermitRevision, status: PermitStatus) => {
 };
 const selectedAreaManagerIds = (revision: PermitRevision) => revision.data.individualReviewerIds?.length ? revision.data.individualReviewerIds : revision.data.individualReviewerId ? [revision.data.individualReviewerId] : [];
 const resetAreaManagerApprovals = (revision: PermitRevision) => { revision.areaManagerApprovals = selectedAreaManagerIds(revision).map((userId) => ({ userId, status: "PENDING" })); };
+const childPermitNumber = (parentPermitNumber: string, code: string, sequence: number) => {
+  const parentSuffix = parentPermitNumber.replace(/^[^-]+-G-/i, "");
+  return `${code.trim().toUpperCase() || "CHILD"}-${parentSuffix}-${sequence}`;
+};
 
 export interface PermitRepository {
   listPermits(filters?: PermitFilters): Permit[];
@@ -43,7 +48,7 @@ export interface PermitRepository {
   deleteDraft(id: string, actor: User): void;
   syncAttachedChildren(parentId: string, children: AttachedChildInput[], actor: User): Permit;
   updateSection(id: string, sectionId: string, fields: Record<string, string | boolean | string[]>, actor: User): Permit;
-  submitPermit(id: string, actor: User): Permit;
+  submitPermit(id: string, actor: User, payload?: TransitionPayload): Permit;
   performTransition(id: string, action: TransitionAction, payload: TransitionPayload, actor: User): Permit;
   addActivityLog(id: string, input: Pick<ActivityLog, "date" | "summary" | "safetyConfirmed">, actor: User): Permit;
   createRevision(id: string, actor: User): Permit;
@@ -53,9 +58,21 @@ export interface PermitRepository {
 export type AttachedChildInput = { key: string; code: string; data: PermitFormData };
 
 export class LocalPermitRepository implements PermitRepository {
+  private normalizeChildPermitNumbers(state: EptwState): boolean {
+    let changed = false;
+    state.permits.forEach((permit) => {
+      if (!permit.parentId) return;
+      const sitePrefix = `${currentRevision(permit).data.site}-`;
+      if (!permit.permitNumber.toUpperCase().startsWith(sitePrefix.toUpperCase())) return;
+      permit.permitNumber = permit.permitNumber.slice(sitePrefix.length);
+      changed = true;
+    });
+    return changed;
+  }
+
   private migrateAreaManagerApprovals(state: EptwState): boolean {
     let changed = false;
-    const completedStatuses: PermitStatus[] = ["MT_GROUP_REVIEW", "FINAL_MT_REVIEW", "APPROVED", "ACTIVE", "SUSPENDED", "CLOSURE_REQUESTED", "CLOSED", "EXPIRED", "SUPERSEDED"];
+    const completedStatuses: PermitStatus[] = ["MT_GROUP_REVIEW", "FINAL_MT_REVIEW", "APPROVED", "ACTIVE", "SUSPENDED", "CANCELLATION_REQUESTED", "CLOSURE_REQUESTED", "CLOSED", "CANCELLED", "EXPIRED", "SUPERSEDED"];
     state.permits.forEach((permit) => {
       const revision = currentRevision(permit), selectedIds = selectedAreaManagerIds(revision);
       const existing = revision.areaManagerApprovals ?? [];
@@ -69,7 +86,7 @@ export class LocalPermitRepository implements PermitRepository {
 
   private normalizeApprovalStageHistory(state: EptwState): boolean {
     let changed = false;
-    const fullyApprovedStatuses: PermitStatus[] = ["APPROVED", "ACTIVE", "SUSPENDED", "CLOSURE_REQUESTED", "CLOSED", "EXPIRED", "SUPERSEDED"];
+    const fullyApprovedStatuses: PermitStatus[] = ["APPROVED", "ACTIVE", "SUSPENDED", "CANCELLATION_REQUESTED", "CLOSURE_REQUESTED", "CLOSED", "CANCELLED", "EXPIRED", "SUPERSEDED"];
     state.permits.forEach((permit) => {
       const revision = currentRevision(permit);
       const currentRole = approvalRoleForStatus[revision.status];
@@ -136,7 +153,7 @@ export class LocalPermitRepository implements PermitRepository {
         const alreadyAttached = state.permits.some((child) => (parent.childIds.includes(child.id) || child.parentId === parent.id) && currentRevision(child).data.templateId === template?.id);
         if (!template || alreadyAttached || state.deletedChildSelections?.includes(`${parent.id}:${template.id}`)) return;
         const id = uid(), revisionId = uid(), createdAt = new Date().toISOString(), sequence = parent.childIds.length + 1;
-        const child: Permit = { id, permitNumber: `${parent.permitNumber.replace(/-G-/i, `-${code.toUpperCase()}-`)}-${sequence}`, type: code.toUpperCase() === "B1" ? "HOT_WORK" : "GENERAL", parentId: parent.id, attachmentKey: `migrated:${code.toUpperCase()}`, childIds: [], requestorId: parent.requestorId, currentRevisionId: revisionId, revisions: [{ id: revisionId, number: 1, status: "DRAFT", data: { ...clone(data), templateId: template.id, templateName: template.name, title: template.name, customFields: {} }, approvals: approvalStages(), createdAt, createdBy: parent.requestorId }], activities: [], audit: [{ id: uid(), at: createdAt, actorId: "system", actorRole: "SUPER_ADMIN", revision: 1, action: "BACKFILLED_FROM_PARENT_SELECTION", toStatus: "DRAFT" }] };
+        const child: Permit = { id, permitNumber: childPermitNumber(parent.permitNumber, code, sequence), type: code.toUpperCase() === "B1" ? "HOT_WORK" : "GENERAL", parentId: parent.id, attachmentKey: `migrated:${code.toUpperCase()}`, childIds: [], requestorId: parent.requestorId, currentRevisionId: revisionId, revisions: [{ id: revisionId, number: 1, status: "DRAFT", data: { ...clone(data), templateId: template.id, templateName: template.name, title: template.name, customFields: {} }, approvals: approvalStages(), createdAt, createdBy: parent.requestorId }], activities: [], audit: [{ id: uid(), at: createdAt, actorId: "system", actorRole: "SUPER_ADMIN", revision: 1, action: "BACKFILLED_FROM_PARENT_SELECTION", toStatus: "DRAFT" }] };
         state.permits.push(child); parent.childIds.push(child.id); changed = true;
       });
     });
@@ -154,18 +171,27 @@ export class LocalPermitRepository implements PermitRepository {
       }
       const seeds = createSeedState();
       const sampleChildIds = ["permit-confined-child", "permit-lifting-child", "permit-height-child", "permit-a01-child"];
-      const missingChildren = seeds.permits.filter((permit) => sampleChildIds.includes(permit.id) && !state.permits.some((existing) => existing.id === permit.id));
+      const deletedPermitIds = new Set(state.deletedPermitIds ?? []);
+      const deletedChildSelections = new Set(state.deletedChildSelections ?? []);
+      const restorableSampleChildren = seeds.permits.filter((permit) => {
+        if (!sampleChildIds.includes(permit.id) || deletedPermitIds.has(permit.id)) return false;
+        const templateId = currentRevision(permit).data.templateId;
+        return !permit.parentId || !templateId || !deletedChildSelections.has(`${permit.parentId}:${templateId}`);
+      });
+      const restorableSampleChildIds = restorableSampleChildren.map((permit) => permit.id);
+      const missingChildren = restorableSampleChildren.filter((permit) => !state.permits.some((existing) => existing.id === permit.id));
       const sampleParent = state.permits.find((permit) => permit.id === "permit-hot-parent");
       const originalChild = state.permits.find((permit) => permit.id === "permit-hot-child");
       const originalChildData = originalChild ? currentRevision(originalChild).data : undefined;
       const upgradeOriginalChild = Boolean(originalChildData && !originalChildData.templateId);
-      if (missingChildren.length || upgradeOriginalChild || (sampleParent && sampleChildIds.some((id) => !sampleParent.childIds.includes(id)))) {
+      if (missingChildren.length || upgradeOriginalChild || (sampleParent && restorableSampleChildIds.some((id) => !sampleParent.childIds.includes(id)))) {
         state.permits.push(...missingChildren);
         if (originalChildData && upgradeOriginalChild) { originalChildData.templateId = "tpl-child-b1"; originalChildData.templateName = "HOT WORKS"; }
-        if (sampleParent) sampleParent.childIds = [...new Set([...sampleParent.childIds, ...sampleChildIds])];
+        if (sampleParent) sampleParent.childIds = [...new Set([...sampleParent.childIds.filter((id) => !deletedPermitIds.has(id)), ...restorableSampleChildIds])];
         this.write(state);
       }
       if (this.backfillSelectedBChildren(state)) this.write(state);
+      if (this.normalizeChildPermitNumbers(state)) this.write(state);
       if (this.repairSelfAssignedApprovalRoutes(state)) this.write(state);
       if (this.migrateAreaManagerApprovals(state)) this.write(state);
       if (this.normalizeApprovalStageHistory(state)) this.write(state);
@@ -182,12 +208,41 @@ export class LocalPermitRepository implements PermitRepository {
   }
   private expire(state: EptwState): EptwState {
     let changed = false;
-    state.permits.forEach((permit) => { const revision = currentRevision(permit); const effective = effectiveStatus(permit); if (effective === "EXPIRED" && revision.status !== "EXPIRED") { const before = revision.status; revision.status = "EXPIRED"; permit.audit.unshift({ id: uid(), at: new Date().toISOString(), actorId: "system", actorRole: "SUPER_ADMIN", revision: revision.number, action: "AUTO_EXPIRED", fromStatus: before, toStatus: "EXPIRED" }); changed = true; } });
+    const now = new Date();
+    const applyToChildren = (permit: Permit, status: "CANCELLED" | "CLOSED", action: string) => permit.childIds.forEach((childId) => {
+      const child = state.permits.find((candidate) => candidate.id === childId);
+      if (!child) return;
+      const childRevision = currentRevision(child), before = childRevision.status;
+      if (before === status) return;
+      childRevision.status = status;
+      child.audit.unshift({ id: uid(), at: now.toISOString(), actorId: "system", actorRole: "SUPER_ADMIN", revision: childRevision.number, action, fromStatus: before, toStatus: status, comment: "Automatically updated with the parent permit after the seven-day approval period." });
+    });
+    state.permits.forEach((permit) => {
+      const revision = currentRevision(permit), effective = effectiveStatus(permit, now);
+      if (effective === "EXPIRED" && revision.status !== "EXPIRED") {
+        const before = revision.status; revision.status = "EXPIRED";
+        permit.audit.unshift({ id: uid(), at: now.toISOString(), actorId: "system", actorRole: "SUPER_ADMIN", revision: revision.number, action: "AUTO_EXPIRED", fromStatus: before, toStatus: "EXPIRED" });
+        changed = true;
+        return;
+      }
+      const automaticDecision = revision.status === "CANCELLATION_REQUESTED"
+        ? { requestAction: "REQUEST_CANCELLATION", status: "CANCELLED" as const, action: "AUTO_CANCELLED_AFTER_7_DAYS", childAction: "AUTO_CANCELLED_WITH_PARENT" }
+        : revision.status === "CLOSURE_REQUESTED"
+          ? { requestAction: "REQUEST_CLOSURE", status: "CLOSED" as const, action: "AUTO_COMPLETED_AFTER_7_DAYS", childAction: "AUTO_COMPLETED_WITH_PARENT" }
+          : undefined;
+      if (!automaticDecision) return;
+      const requested = permit.audit.find((event) => event.revision === revision.number && event.action === automaticDecision.requestAction);
+      if (!requested || now.getTime() < new Date(requested.at).getTime() + PENDING_FINAL_DECISION_MS) return;
+      const before = revision.status; revision.status = automaticDecision.status;
+      permit.audit.unshift({ id: uid(), at: now.toISOString(), actorId: "system", actorRole: "SUPER_ADMIN", revision: revision.number, action: automaticDecision.action, fromStatus: before, toStatus: automaticDecision.status, comment: "Automatically completed because Final Approval MT Group approval was not recorded within seven days." });
+      applyToChildren(permit, automaticDecision.status, automaticDecision.childAction);
+      changed = true;
+    });
     if (changed) this.write(state); return state;
   }
   private find(state: EptwState, id: string) { const permit = state.permits.find((item) => item.id === id); if (!permit) throw new Error("Permit not found."); return permit; }
-  private audit(permit: Permit, actor: User, action: string, fromStatus?: AuditEvent["fromStatus"], toStatus?: AuditEvent["toStatus"], comment?: string) {
-    permit.audit.unshift({ id: uid(), at: new Date().toISOString(), actorId: actor.id, actorRole: actor.role, revision: currentRevision(permit).number, action, fromStatus, toStatus, comment });
+  private audit(permit: Permit, actor: User, action: string, fromStatus?: AuditEvent["fromStatus"], toStatus?: AuditEvent["toStatus"], comment?: string, signature?: string, signedAt?: string) {
+    permit.audit.unshift({ id: uid(), at: new Date().toISOString(), actorId: actor.id, actorRole: actor.role, revision: currentRevision(permit).number, action, fromStatus, toStatus, comment, signature, signedAt });
   }
   listPermits(filters: PermitFilters = {}) {
     const permits = this.read().permits; const q = filters.query?.trim().toLowerCase();
@@ -224,7 +279,7 @@ export class LocalPermitRepository implements PermitRepository {
     const id = uid(), revisionId = uid(), createdAt = new Date().toISOString();
     const sequence = state.permits.filter((item) => item.parentId === parent.id).length + 1;
     const code = templateCode.trim().toUpperCase() || "CHILD";
-    const permit: Permit = { id, permitNumber: `${parent.permitNumber.replace(/-G-/i, `-${code}-`)}-${sequence}`, type: "HOT_WORK", parentId: parent.id, attachmentKey: `manual:${id}`, childIds: [], requestorId: actor.id, currentRevisionId: revisionId, revisions: [{ id: revisionId, number: 1, status: "DRAFT", data: clone(input), approvals: approvalStages(), createdAt, createdBy: actor.id }], activities: [], audit: [] };
+    const permit: Permit = { id, permitNumber: childPermitNumber(parent.permitNumber, code, sequence), type: "HOT_WORK", parentId: parent.id, attachmentKey: `manual:${id}`, childIds: [], requestorId: actor.id, currentRevisionId: revisionId, revisions: [{ id: revisionId, number: 1, status: "DRAFT", data: clone(input), approvals: approvalStages(), createdAt, createdBy: actor.id }], activities: [], audit: [] };
     this.audit(permit, actor, "CREATED_AND_ATTACHED_TO_PARENT", undefined, "DRAFT");
     state.permits.unshift(permit); parent.childIds.push(permit.id);
     this.write(state); return clone(permit);
@@ -264,7 +319,7 @@ export class LocalPermitRepository implements PermitRepository {
         return;
       }
       const id = uid(), revisionId = uid();
-      const permitNumber = `${parent.permitNumber.replace(/-G-/i, `-${input.code.toUpperCase()}-`)}-${index + 1}`;
+      const permitNumber = childPermitNumber(parent.permitNumber, input.code, index + 1);
       const child: Permit = { id, permitNumber, type: input.code.toUpperCase() === "B1" ? "HOT_WORK" : "GENERAL", parentId: parent.id, attachmentKey: input.key, childIds: [], requestorId: actor.id, currentRevisionId: revisionId, revisions: [{ id: revisionId, number: 1, status: "DRAFT", data: clone(input.data), approvals: approvalStages(), createdAt: new Date().toISOString(), createdBy: actor.id }], activities: [], audit: [] };
       this.audit(child, actor, "CREATED_FROM_PARENT_SELECTION", undefined, "DRAFT");
       state.permits.unshift(child); parent.childIds.push(child.id);
@@ -278,21 +333,39 @@ export class LocalPermitRepository implements PermitRepository {
     this.audit(permit, actor, "SECTION_UPDATED", revision.status, revision.status, `Section ${sectionId}`);
     this.write(state); return clone(permit);
   }
-  submitPermit(id: string, actor: User) { return this.performTransition(id, "SUBMIT", {}, actor); }
+  submitPermit(id: string, actor: User, payload: TransitionPayload = {}) { return this.performTransition(id, "SUBMIT", payload, actor); }
   performTransition(id: string, action: TransitionAction, payload: TransitionPayload, actor: User) {
     const state = this.read(), permit = this.find(state, id), revision = currentRevision(permit), before = revision.status;
+    if (["SUBMIT", "REQUEST_CANCELLATION", "REQUEST_CLOSURE"].includes(action) && !payload.signature) throw new Error("A signature is required to complete this action.");
     const decision = getActionDecision(permit, action, actor, state.permits, payload.comment); if (!decision.allowed) throw new Error(decision.reason);
     if (action === "SUBMIT") { revision.status = "INDIVIDUAL_REVIEW"; revision.submittedAt = new Date().toISOString(); revision.approvals = approvalStages(); resetAreaManagerApprovals(revision); }
     if (action === "APPROVE") { const stage = approvalStageFor(revision, before); if (before === "AREA_MANAGER_REVIEW") { if (!revision.areaManagerApprovals?.length) resetAreaManagerApprovals(revision); const reviewer = revision.areaManagerApprovals?.find((approval) => approval.status === "PENDING"); if (reviewer) Object.assign(reviewer, { status: "APPROVED", actorId: actor.id, actedAt: new Date().toISOString(), comment: payload.comment }); const areaComplete = revision.areaManagerApprovals?.every((approval) => approval.status === "APPROVED") ?? true; if (areaComplete) { if (stage) Object.assign(stage, { status: "APPROVED", actorId: actor.id, actedAt: new Date().toISOString(), comment: payload.comment }); revision.status = nextApprovalStatus(before); } } else { if (stage) Object.assign(stage, { status: "APPROVED", actorId: actor.id, actedAt: new Date().toISOString(), comment: payload.comment }); revision.status = nextApprovalStatus(before); } if (revision.status === "APPROVED" && revision.number > 1) permit.revisions.filter((item) => item.id !== revision.id && ["APPROVED", "SUSPENDED", "ACTIVE", "EXPIRED"].includes(item.status)).forEach((item) => { item.status = "SUPERSEDED"; }); }
+    if (action === "REVERT_APPROVAL") {
+      const target = revertApprovalTarget(permit, actor);
+      if (!target) throw new Error("Only the most recent reviewer can revert before the next approval.");
+      if (target.kind === "AREA_MANAGER") {
+        const approval = revision.areaManagerApprovals?.find((item) => item.userId === target.userId);
+        if (approval) Object.assign(approval, { status: "PENDING", actorId: undefined, actedAt: undefined, comment: undefined });
+        const areaStage = revision.approvals.find((stage) => stage.role === "AREA_MANAGER");
+        if (areaStage) Object.assign(areaStage, { status: "PENDING", actorId: undefined, actedAt: undefined, comment: undefined });
+      } else {
+        const stage = revision.approvals.find((item) => item.role === target.role);
+        if (stage) Object.assign(stage, { status: "PENDING", actorId: undefined, actedAt: undefined, comment: undefined });
+      }
+      revision.status = target.status;
+    }
     if (action === "REQUEST_CHANGES") { const stage = approvalStageFor(revision, before); if (stage) Object.assign(stage, { status: "CHANGES_REQUESTED", actorId: actor.id, actedAt: new Date().toISOString(), comment: payload.comment }); if (before === "AREA_MANAGER_REVIEW") { const reviewer = revision.areaManagerApprovals?.find((approval) => approval.status === "PENDING"); if (reviewer) Object.assign(reviewer, { status: "CHANGES_REQUESTED", actorId: actor.id, actedAt: new Date().toISOString(), comment: payload.comment }); } revision.status = "CHANGES_REQUESTED"; }
     if (action === "REJECT") { const stage = approvalStageFor(revision, before); if (stage) Object.assign(stage, { status: "REJECTED", actorId: actor.id, actedAt: new Date().toISOString(), comment: payload.comment }); if (before === "AREA_MANAGER_REVIEW") { const reviewer = revision.areaManagerApprovals?.find((approval) => approval.status === "PENDING"); if (reviewer) Object.assign(reviewer, { status: "REJECTED", actorId: actor.id, actedAt: new Date().toISOString(), comment: payload.comment }); } revision.status = "REJECTED"; }
     if (action === "CANCEL") revision.status = "CANCELLED";
+    if (action === "REQUEST_CANCELLATION") revision.status = "CANCELLATION_REQUESTED";
+    if (action === "APPROVE_CANCELLATION") { revision.status = "CANCELLED"; permit.childIds.forEach((childId) => { const child = this.find(state, childId); const childRevision = currentRevision(child); const old = childRevision.status; childRevision.status = "CANCELLED"; this.audit(child, actor, "CANCELLED_WITH_PARENT", old, "CANCELLED", payload.comment); }); }
     if (action === "ACTIVATE") { revision.status = "ACTIVE"; permit.childIds.forEach((childId) => { const child = this.find(state, childId); currentRevision(child).status = "ACTIVE"; this.audit(child, actor, "ACTIVATED_WITH_PARENT", "APPROVED", "ACTIVE"); }); }
     if (action === "SUSPEND") revision.status = "SUSPENDED";
     if (action === "RESUME") revision.status = "ACTIVE";
     if (action === "REQUEST_CLOSURE") revision.status = "CLOSURE_REQUESTED";
+    if (action === "APPROVE_CLOSURE") { revision.status = "CLOSED"; permit.childIds.forEach((childId) => { const child = this.find(state, childId); const childRevision = currentRevision(child); const old = childRevision.status; childRevision.status = "CLOSED"; this.audit(child, actor, "COMPLETED_WITH_PARENT", old, "CLOSED", payload.comment); }); }
     if (action === "CLOSE") { revision.status = "CLOSED"; permit.childIds.forEach((childId) => { const child = this.find(state, childId); const childRevision = currentRevision(child); const old = childRevision.status; childRevision.status = "CLOSED"; this.audit(child, actor, "CLOSED_WITH_PARENT", old, "CLOSED", payload.comment); }); }
-    this.audit(permit, actor, action, before, revision.status, payload.comment); this.write(state); return clone(permit);
+    this.audit(permit, actor, action, before, revision.status, payload.comment, payload.signature, payload.signedAt); this.write(state); return clone(permit);
   }
   addActivityLog(id: string, input: Pick<ActivityLog, "date" | "summary" | "safetyConfirmed">, actor: User) {
     const state = this.read(), permit = this.find(state, id), status = effectiveStatus(permit);

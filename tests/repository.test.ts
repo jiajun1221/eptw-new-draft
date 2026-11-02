@@ -5,6 +5,7 @@ import { LocalPermitRepository, STORAGE_KEY } from "../src/domain/repository";
 import { currentRevision } from "../src/domain/types";
 
 const user = (id: string) => USERS.find((item) => item.id === id)!;
+const signed = { signature: "data:image/png;base64,workflow-signature", signedAt: "2026-10-30T08:00:00.000Z" };
 const complete = () => ({ ...blankPermitData(), title: "Cooling pipe welding", description: "Replace the damaged cooling pipe under controlled conditions.", location: "Utility bay 2", company: "Acme Engineering", hazards: ["HOT_WORK"], safetyDeclarations: ["Risk assessment reviewed", "Workers briefed", "Area barricaded"], hotWork: { fireWatchName: "Lee Wei", fireWatchMobile: "+65 8123 4567", gasTestingRequired: true, combustibleMaterialsRemoved: true, extinguishersAvailable: true } });
 
 describe("local permit repository", () => {
@@ -94,6 +95,32 @@ describe("local permit repository", () => {
     expect(current.areaManagerApprovals?.every((approval) => approval.status === "APPROVED")).toBe(true);
   });
 
+  it("lets the latest reviewer revert before the next reviewer approves", () => {
+    const repo = new LocalPermitRepository(); const permit = repo.getPermit("permit-review")!;
+    repo.performTransition(permit.id, "APPROVE", {}, user("pm-1"));
+    expect(currentRevision(repo.getPermit(permit.id)!).status).toBe("MT_REVIEW");
+
+    repo.performTransition(permit.id, "REVERT_APPROVAL", {}, user("pm-1"));
+    let current = currentRevision(repo.getPermit(permit.id)!);
+    expect(current.status).toBe("INDIVIDUAL_REVIEW");
+    expect(current.approvals.find((stage) => stage.role === "VENDOR_PM")?.status).toBe("PENDING");
+
+    repo.performTransition(permit.id, "APPROVE", {}, user("pm-1"));
+    repo.performTransition(permit.id, "APPROVE", {}, user("supervisor-1"));
+    expect(() => repo.performTransition(permit.id, "REVERT_APPROVAL", {}, user("pm-1"))).toThrow(/most recent reviewer/i);
+  });
+
+  it("lets only the current reviewer edit submitted template sections", () => {
+    const repo = new LocalPermitRepository(); const state = repo.resetDemoData(); const permit = state.permits.find((item) => item.id === "permit-review")!;
+    currentRevision(permit).data.templateId = "review-template";
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    localStorage.setItem("eptw-templates:v4", JSON.stringify([{ id: "review-template", kind: "PARENT", sections: [{ id: "review-section", fields: [{ id: "review-note", type: "TEXT" }] }] }]));
+
+    repo.updateSection(permit.id, "review-section", { "review-note": "Checked during Vendor PM review" }, user("pm-1"));
+    expect(currentRevision(repo.getPermit(permit.id)!).data.customFields?.["review-note"]).toBe("Checked during Vendor PM review");
+    expect(() => repo.updateSection(permit.id, "review-section", { "review-note": "Not my turn" }, user("supervisor-1"))).toThrow(/permission/i);
+  });
+
   it("never allows the permit submitter to approve their own permit", () => {
     const repo = new LocalPermitRepository(); const permit = repo.getPermit("permit-review")!;
     expect(() => repo.performTransition(permit.id, "APPROVE", {}, user(permit.requestorId))).toThrow(/own permit/i);
@@ -106,15 +133,67 @@ describe("local permit repository", () => {
     expect(currentRevision(repo.getPermit(childId)!).status).toBe("PM_REVIEW");
   });
 
-  it("records operational logs and PM-verified closure", () => {
+  it("records operational logs and Final MT Group-approved closure", () => {
     const repo = new LocalPermitRepository(); const permit = repo.getPermit("permit-active")!;
     repo.addActivityLog(permit.id, { date: new Date().toISOString(), summary: "Barricade and isolation rechecked.", safetyConfirmed: true }, user("req-1"));
-    repo.performTransition(permit.id, "REQUEST_CLOSURE", { comment: "Work complete; area restored." }, user("req-1")); repo.performTransition(permit.id, "CLOSE", { comment: "Restoration inspected and accepted." }, user("mt-1"));
-    const closed = repo.getPermit(permit.id)!; expect(currentRevision(closed).status).toBe("CLOSED"); expect(closed.audit.some((event) => event.action === "CLOSE")).toBe(true);
+    repo.performTransition(permit.id, "REQUEST_CLOSURE", { comment: "Work complete; area restored.", ...signed }, user("pm-1")); repo.performTransition(permit.id, "APPROVE_CLOSURE", {}, user("mt-1"));
+    const closed = repo.getPermit(permit.id)!; expect(currentRevision(closed).status).toBe("CLOSED"); expect(closed.audit.some((event) => event.action === "APPROVE_CLOSURE")).toBe(true);
+  });
+
+  it("moves an approved permit through requested cancellation to cancelled", () => {
+    const repo = new LocalPermitRepository(); const state = repo.resetDemoData(); const permit = state.permits.find((item) => item.id === "permit-review")!;
+    const storedPermit = state.permits.find((item) => item.id === permit.id)!;
+    currentRevision(storedPermit).status = "APPROVED";
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+
+    repo.performTransition(permit.id, "REQUEST_CANCELLATION", { comment: "Work is no longer required.", ...signed }, user("supervisor-1"));
+    expect(currentRevision(repo.getPermit(permit.id)!).status).toBe("CANCELLATION_REQUESTED");
+    expect(() => repo.performTransition(permit.id, "APPROVE_CANCELLATION", {}, user("pm-1"))).toThrow(/Final Approval MT Group/i);
+    repo.performTransition(permit.id, "APPROVE_CANCELLATION", {}, user("mt-1"));
+    expect(currentRevision(repo.getPermit(permit.id)!).status).toBe("CANCELLED");
+  });
+
+  it("requires and records signatures for submission, cancellation, and closure requests", () => {
+    const repo = new LocalPermitRepository(); const state = repo.resetDemoData(); const permit = state.permits.find((item) => item.id === "permit-review")!;
+    currentRevision(permit).status = "APPROVED";
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    expect(() => repo.performTransition(permit.id, "REQUEST_CANCELLATION", { comment: "No longer needed" }, user("pm-1"))).toThrow(/signature is required/i);
+    repo.performTransition(permit.id, "REQUEST_CANCELLATION", { comment: "No longer needed", ...signed }, user("pm-1"));
+    const request = repo.getPermit(permit.id)!.audit.find((event) => event.action === "REQUEST_CANCELLATION")!;
+    expect(request.signature).toBe(signed.signature);
+    expect(request.signedAt).toBe(signed.signedAt);
+  });
+
+  it("automatically cancels a cancellation request after seven days", () => {
+    const repo = new LocalPermitRepository(); const state = repo.resetDemoData(); const permit = state.permits.find((item) => item.id === "permit-review")!;
+    currentRevision(permit).status = "APPROVED";
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    repo.performTransition(permit.id, "REQUEST_CANCELLATION", { comment: "Work is no longer required.", ...signed }, user("pm-1"));
+    const pending = JSON.parse(localStorage.getItem(STORAGE_KEY)!) as typeof state;
+    const request = pending.permits.find((item) => item.id === permit.id)!.audit.find((event) => event.action === "REQUEST_CANCELLATION")!;
+    request.at = new Date(Date.now() - (8 * 24 * 60 * 60 * 1000)).toISOString();
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(pending));
+
+    const cancelled = repo.getPermit(permit.id)!;
+    expect(currentRevision(cancelled).status).toBe("CANCELLED");
+    expect(cancelled.audit.some((event) => event.action === "AUTO_CANCELLED_AFTER_7_DAYS")).toBe(true);
+  });
+
+  it("automatically completes a closure request after seven days", () => {
+    const repo = new LocalPermitRepository(); const permit = repo.getPermit("permit-active")!;
+    repo.performTransition(permit.id, "REQUEST_CLOSURE", { comment: "Work and restoration are complete.", ...signed }, user("supervisor-1"));
+    const pending = JSON.parse(localStorage.getItem(STORAGE_KEY)!) as ReturnType<LocalPermitRepository["resetDemoData"]>;
+    const request = pending.permits.find((item) => item.id === permit.id)!.audit.find((event) => event.action === "REQUEST_CLOSURE")!;
+    request.at = new Date(Date.now() - (8 * 24 * 60 * 60 * 1000)).toISOString();
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(pending));
+
+    const completed = repo.getPermit(permit.id)!;
+    expect(currentRevision(completed).status).toBe("CLOSED");
+    expect(completed.audit.some((event) => event.action === "AUTO_COMPLETED_AFTER_7_DAYS")).toBe(true);
   });
 
   it("keeps the previous revision and supersedes it after reapproval", () => {
-    const repo = new LocalPermitRepository(); const permit = repo.getPermit("permit-active")!; repo.createRevision(permit.id, user("req-1")); repo.submitPermit(permit.id, user("req-1"));
+    const repo = new LocalPermitRepository(); const permit = repo.getPermit("permit-active")!; repo.createRevision(permit.id, user("req-1")); repo.submitPermit(permit.id, user("req-1"), signed);
     repo.performTransition(permit.id, "APPROVE", {}, user("pm-1"));
     repo.performTransition(permit.id, "APPROVE", {}, user("supervisor-1"));
     repo.performTransition(permit.id, "APPROVE", {}, user("admin-1"));
@@ -129,6 +208,8 @@ describe("local permit repository", () => {
     const parent = repo.createPermit(complete(), user("req-1"));
     repo.syncAttachedChildren(parent.id, [{ key: "b1", code: "B1", data: { ...complete(), templateId: "tpl-child-b1", templateName: "HOT WORKS" } }], user("req-1"));
     const childId = repo.getPermit(parent.id)!.childIds[0];
+    expect(repo.getPermit(childId)!.permitNumber).toMatch(/^B1-/);
+    expect(repo.getPermit(childId)!.permitNumber).not.toMatch(/^F10A1-/);
 
     expect(() => repo.deleteDraft(parent.id, user("req-2"))).toThrow(/only the owner/i);
     repo.deleteDraft(parent.id, user("req-1"));

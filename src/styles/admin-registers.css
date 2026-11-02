@@ -40,3 +40,58 @@
   .users-table th:nth-child(7) { width: 10%; }
   .users-table th:nth-child(8) { width: 7%; }
 }
+
+/* Expanded Users register and account lifecycle. */
+.users-table-wrap { width: 100%; overflow-x: auto; }
+.users-table { min-width: 1180px; }
+.users-table th:nth-child(1) { width: 3%; }
+.users-table th:nth-child(2) { width: 13%; }
+.users-table th:nth-child(3) { width: 12%; }
+.users-table th:nth-child(4) { width: 15%; }
+.users-table th:nth-child(5) { width: 16%; }
+.users-table th:nth-child(6) { width: 17%; }
+.users-table th:nth-child(7) { width: 10%; text-align: left; }
+.users-table th:nth-child(8) { width: 7%; text-align: center; }
+.users-table th:nth-child(9) { width: 7%; text-align: center; }
+.users-table td:nth-child(7) { text-align: left; }
+.users-table td:nth-child(8),.users-table td:nth-child(9) { text-align: center; }
+.account-status.active { border-color: #b8e69d; background: #f2fbe9; color: #458d16; }
+.account-status.inactive { border-color: #cbd3dd; background: #f2f4f7; color: #667085; }
+.user-status-definitions { display: flex; flex-wrap: wrap; gap: 8px; padding: 10px 12px; border-bottom: 1px solid var(--line); background: #fbfcfe; }
+.user-status-definitions span { padding: 6px 9px; border-radius: 6px; background: #eef3f9; color: #607086; font-size: 9px; }
+.user-status-definitions b { margin-right: 4px; color: #274f82; }
+.users-page > .page-header { margin-bottom: 16px; }
+.user-create-form { grid-template-columns: repeat(4, minmax(125px, 1fr)); }
+.user-create-form > .user-host-section { grid-column: 1 / -1; margin-top: 2px; }
+.user-create-form > div { grid-column: 1 / -1; justify-content: flex-end; }
+.user-edit-form { display: grid; grid-template-columns: 1fr 1fr; align-items: start; gap: 12px; width: min(680px, 100%); max-height: calc(100dvh - 40px); overflow-y: auto; }
+.user-edit-form > h2,.user-edit-form > .user-host-section,.user-edit-form > .user-readonly-field,.user-edit-form > .user-edit-actions { grid-column: 1 / -1; }
+.user-readonly-field { display: grid; gap: 7px; padding: 11px; border: 1px solid var(--line); border-radius: 7px; background: #f8fafc; }
+.user-readonly-field > span { color: #425574; font-size: 10px; font-weight: 700; }
+.user-readonly-field > div { display: flex; flex-wrap: wrap; gap: 5px; }
+.user-readonly-field em { color: var(--muted); font-size: 10px; font-style: normal; }
+.user-readonly-field small { color: var(--muted); font-size: 9px; }
+.user-view-modal { width: min(640px, 100%); max-height: calc(100dvh - 40px); overflow-y: auto; }
+.user-host-section { display: grid; gap: 10px; margin-top: 16px; }
+.user-host-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.user-host-heading h3,.user-host-heading p { margin: 0; }
+.user-host-heading h3 { color: var(--navy); font-size: 14px; }
+.user-host-heading p { margin-top: 3px; color: var(--muted); font-size: 9px; }
+.user-host-table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; }
+.user-host-table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+.user-host-table th,.user-host-table td { padding: 9px 11px; border-bottom: 1px solid var(--line); text-align: left; font-size: 10px; }
+.user-host-table th { background: #f7f9fc; color: #526079; font-size: 8.5px; text-transform: uppercase; }
+.user-host-table th:nth-child(2) { width: 150px; }
+.user-host-table th:last-child:not(:nth-child(2)) { width: 95px; text-align: center; }
+.user-host-table td:last-child:not(:nth-child(2)) { text-align: center; }
+.user-host-table tbody tr:last-child td { border-bottom: 0; }
+.user-host-empty { color: var(--muted); text-align: center !important; }
+.user-host-fields { display: grid; grid-template-columns: 1fr 160px auto; align-items: end; gap: 10px; padding: 11px; border: 1px solid #cfe0f1; border-radius: 8px; background: #f7faff; }
+.user-host-fields > div { display: flex; gap: 7px; }
+.user-edit-actions { display: flex; justify-content: flex-end; gap: 7px; }
+@media(max-width:700px) {
+  .user-create-form,.user-edit-form { grid-template-columns: 1fr; }
+  .user-edit-form > h2,.user-edit-form > .user-host-section,.user-edit-form > .user-readonly-field,.user-edit-form > .user-edit-actions { grid-column: 1; }
+  .user-host-fields { grid-template-columns: 1fr; }
+}
+.admin-action-buttons{display:flex;align-items:center;justify-content:center;gap:5px;margin-inline:auto;white-space:nowrap}.admin-action-buttons button{display:grid;place-items:center;width:30px;height:30px;padding:0;border:1px solid #bdd2ec;border-radius:6px;background:#fff;color:#1e5d9e;cursor:pointer;transition:border-color .15s,background .15s,transform .15s}.admin-action-buttons button:hover{border-color:#78a7dc;background:#f2f7fd;transform:translateY(-1px)}.admin-action-buttons button:focus-visible{outline:2px solid #245ba8;outline-offset:2px}.admin-action-buttons button.danger{border-color:#f0beb9;color:#d42d24}.admin-action-buttons button.danger:hover{border-color:#df8179;background:#fff5f4}.admin-action-buttons svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}

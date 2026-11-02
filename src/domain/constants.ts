@@ -14,9 +14,15 @@ export const USERS: User[] = [
   { id: "user-admin-1", name: "Vendor Administrator", email: "vendoradmin@site.example", role: "USER_ADMIN", authMethod: "PASSWORD" },
   { id: "assessor-1", name: "Permit Assessor", email: "assessor@site.example", role: "ASSESSOR", authMethod: "PASSWORD" },
 ];
+export const USER_ACCOUNT_GROUPS: Array<{ label: string; roles: Role[] }> = [
+  { label: "Contractors", roles: ["CONTRACTOR_REQUESTOR", "CONTRACTOR_PM"] },
+  { label: "Micron Staff", roles: ["MICRON_STAFF"] },
+  { label: "Administrators & Supervisors", roles: ["SUPER_ADMIN", "MICRON_SUPERVISOR", "USER_ADMIN"] },
+  { label: "Assessors", roles: ["ASSESSOR"] },
+];
 export const ROLE_LABELS: Record<Role, string> = { SUPER_ADMIN: "Micron Admin", MICRON_SUPERVISOR: "Micron Supervisor", USER_ADMIN: "Vendor Admin", MICRON_STAFF: "Micron Staff", CONTRACTOR_REQUESTOR: "Contractor Requestor", CONTRACTOR_PM: "Contractor PM", ASSESSOR: "Assessor" };
 export const APPROVAL_ROLE_LABELS: Partial<Record<PermitStatus, string>> = { INDIVIDUAL_REVIEW: "Vendor PM", MT_REVIEW: "Host Supervisor", PM_REVIEW: "Host Manager", AREA_MANAGER_REVIEW: "Area Manager", MT_GROUP_REVIEW: "MT Groups", FINAL_MT_REVIEW: "Final Approval MT Group" };
-export const STATUS_LABELS: Record<PermitStatus, string> = { DRAFT: "Draft", INDIVIDUAL_REVIEW: "Pending Vendor PM approval", MT_REVIEW: "Pending Host Supervisor approval", PM_REVIEW: "Pending Host Manager approval", AREA_MANAGER_REVIEW: "Pending Area Manager approval", MT_GROUP_REVIEW: "Pending MT Groups approval", FINAL_MT_REVIEW: "Pending Final Approval MT Group approval", CHANGES_REQUESTED: "Changes requested", APPROVED: "Approved", ACTIVE: "Active", SUSPENDED: "Suspended", CLOSURE_REQUESTED: "Closure requested", CLOSED: "Closed", REJECTED: "Rejected", CANCELLED: "Cancelled", EXPIRED: "Expired", SUPERSEDED: "Superseded" };
+export const STATUS_LABELS: Record<PermitStatus, string> = { DRAFT: "Draft", INDIVIDUAL_REVIEW: "Pending Vendor PM approval", MT_REVIEW: "Pending Host Supervisor approval", PM_REVIEW: "Pending Host Manager approval", AREA_MANAGER_REVIEW: "Pending Area Manager approval", MT_GROUP_REVIEW: "Pending MT Groups approval", FINAL_MT_REVIEW: "Pending Final Approval MT Group approval", CHANGES_REQUESTED: "Changes requested", APPROVED: "Approved", ACTIVE: "Active", SUSPENDED: "Suspended", CANCELLATION_REQUESTED: "Cancellation requested", CLOSURE_REQUESTED: "Closure requested", CLOSED: "Completed", REJECTED: "Rejected", CANCELLED: "Cancelled", EXPIRED: "Expired", SUPERSEDED: "Superseded" };
 export const SITES = ["F10A1", "F10A2", "F10N", "F10NX", "F10W", "F10X", "MSH", "TC"];
 export const DISCIPLINE_RECORDS = [
   ["WAREHOUSE", "WAREHOUSE"],

@@ -1,14 +1,26 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { cleanup, fireEvent, render, screen, within } from "@testing-library/react";
+import { cleanup, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import App from "../src/app/App";
 import { APPROVAL_ROLE_LABELS, DISCIPLINE_RECORDS, SITES, STATUS_LABELS, USERS } from "../src/domain/constants";
 import { createSeedState } from "../src/domain/data";
 import { currentRevision } from "../src/domain/types";
 
+const applyWorkflowSignature = () => {
+  const context = { scale: vi.fn(), beginPath: vi.fn(), moveTo: vi.fn(), lineTo: vi.fn(), stroke: vi.fn(), clearRect: vi.fn(), lineWidth: 0, lineCap: "round", lineJoin: "round", strokeStyle: "" };
+  vi.spyOn(HTMLCanvasElement.prototype as never, "getContext").mockReturnValue(context);
+  vi.spyOn(HTMLCanvasElement.prototype, "toDataURL").mockReturnValue("data:image/png;base64,workflow-signature");
+  fireEvent.click(screen.getByRole("button", { name: "Sign here" }));
+  const signatureDialog = screen.getByRole("dialog", { name: "Add signature" });
+  const canvas = signatureDialog.querySelector("canvas")!;
+  Object.assign(canvas, { setPointerCapture: vi.fn(), hasPointerCapture: () => true, releasePointerCapture: vi.fn() });
+  fireEvent.pointerDown(canvas, { pointerId: 1, clientX: 10, clientY: 10 });
+  fireEvent.click(within(signatureDialog).getByRole("button", { name: "Apply signature" }));
+};
+
 describe("application shell", () => {
   beforeEach(() => { localStorage.clear(); localStorage.setItem("eptw-demo-user", "req-1"); });
-  afterEach(() => { cleanup(); vi.useRealTimers(); });
+  afterEach(() => { cleanup(); vi.useRealTimers(); vi.restoreAllMocks(); });
 
   it("uses the current approval role in every pending permit status label", () => {
     expect(APPROVAL_ROLE_LABELS.INDIVIDUAL_REVIEW).toBe("Vendor PM");
@@ -26,6 +38,20 @@ describe("application shell", () => {
     const status = document.querySelector(".permit-decision-status .status-copy")!;
     expect(status.querySelector("strong")?.textContent).toBe("Pending Approval:");
     expect(status.querySelector("small")?.textContent).toBe("Vendor PM");
+  });
+
+  it("shows the permit start and end dates in the view summary", () => {
+    const state = createSeedState(); const permit = state.permits.find((item) => item.id === "permit-review")!;
+    currentRevision(permit).data.startAt = "2026-10-30";
+    currentRevision(permit).data.endAt = "2026-11-01";
+    localStorage.setItem("eptw-functional-draft:v2", JSON.stringify(state));
+    render(<MemoryRouter initialEntries={["/permits/permit-review"]}><App /></MemoryRouter>);
+
+    const summary = within(document.querySelector<HTMLElement>(".permit-hero-details")!);
+    expect(summary.getByText("Start date")).toBeTruthy();
+    expect(summary.getByText("30 Oct 2026")).toBeTruthy();
+    expect(summary.getByText("End date")).toBeTruthy();
+    expect(summary.getByText("1 Nov 2026")).toBeTruthy();
   });
 
   it("emphasizes permits awaiting the signed-in user's approval", () => {
@@ -62,6 +88,36 @@ describe("application shell", () => {
     expect(progress[1].dataset.approvalState).toBe("approved");
     expect(progress[2].dataset.approvalState).toBe("pending");
     expect(progress[3].dataset.approvalState).toBe("upcoming");
+    expect(screen.getByRole("button", { name: "Revert Approval" })).toBeTruthy();
+    fireEvent.click(screen.getByRole("button", { name: "Revert Approval" }));
+    expect(document.querySelector(".permit-decision-status .status-copy small")?.textContent).toBe("Vendor PM (YOU)");
+    expect(screen.queryByRole("button", { name: "Revert Approval" })).toBeNull();
+  });
+
+  it("shows only approve and red reject actions during review", () => {
+    localStorage.setItem("eptw-demo-user", "pm-1");
+    render(<MemoryRouter initialEntries={["/permits/permit-review"]}><App /></MemoryRouter>);
+
+    expect(screen.queryByRole("button", { name: "Request changes" })).toBeNull();
+    expect(screen.getByRole("button", { name: "Approve permit" })).toBeTruthy();
+    expect(screen.getByRole("button", { name: "Reject permit" }).classList.contains("danger")).toBe(true);
+  });
+
+  it("lets the current reviewer edit submitted permit sections", () => {
+    const state = createSeedState();
+    const permit = state.permits.find((item) => item.id === "permit-review")!;
+    currentRevision(permit).data.templateId = "review-edit-template";
+    localStorage.setItem("eptw-functional-draft:v2", JSON.stringify(state));
+    localStorage.setItem("eptw-templates:v4", JSON.stringify([{ id: "review-edit-template", kind: "PARENT", name: "Review edit", code: "RE", discipline: "AMHS", description: "Review fields", active: true, updatedAt: "2026-10-30T00:00:00.000Z", sections: [{ id: "review-section", title: "Reviewer checks", description: "Complete during review.", fields: [{ id: "review-note", label: "Review note", type: "TEXT", required: false, width: 6 }] }] }]));
+    localStorage.setItem("eptw-demo-user", "pm-1");
+
+    render(<MemoryRouter initialEntries={["/permits/permit-review"]}><App /></MemoryRouter>);
+    expect(screen.getByText("Editable during your review")).toBeTruthy();
+    const note = screen.getByLabelText("Review note") as HTMLInputElement;
+    expect(note.disabled).toBe(false);
+    fireEvent.change(note, { target: { value: "Vendor PM review completed" } });
+    fireEvent.click(screen.getByRole("button", { name: "Save section" }));
+    expect(screen.getByText("Section saved.")).toBeTruthy();
   });
 
   it("renders the requestor dashboard and role-aware navigation", () => {
@@ -73,6 +129,8 @@ describe("application shell", () => {
     expect(screen.getByRole("button", { name: /pending approval/i })).toBeTruthy();
     expect(screen.getByRole("button", { name: /approved permits/i })).toBeTruthy();
     expect(screen.getByRole("button", { name: /rejected permits/i })).toBeTruthy();
+    expect(screen.getByRole("button", { name: /pending cancelled/i }).className).toContain("cancelled");
+    expect(screen.getByRole("button", { name: /pending closure/i }).className).toContain("closure");
     expect(screen.getByRole("heading", { name: /all available permits/i })).toBeTruthy();
     expect(screen.getByRole("button", { name: /pending approval/i }).getAttribute("aria-pressed")).toBe("false");
     expect(document.querySelector(".nav-section p")?.textContent).toBe("Overview");
@@ -83,50 +141,84 @@ describe("application shell", () => {
     expect(screen.getByRole("link", { name: /account settings/i })).toBeTruthy();
   });
 
-  it("redirects signed-out users to login and signs in a known Micron user with SSO", () => {
+  it("redirects signed-out users to login and exposes an external Micron SSO link", () => {
     localStorage.clear();
     render(<MemoryRouter initialEntries={["/dashboard"]}><App /></MemoryRouter>);
     expect(screen.getByRole("heading", { name: /sign in to your account/i })).toBeTruthy();
-    fireEvent.change(screen.getByLabelText("Micron email address"), { target: { value: "irene@micron.com" } });
-    fireEvent.click(screen.getByRole("button", { name: /continue with micron sso/i }));
-    expect(screen.getByRole("heading", { name: /welcome, irene/i })).toBeTruthy();
+    const ssoLink = screen.getByRole("link", { name: "Login with Micron SSO" });
+    expect(ssoLink.getAttribute("href")).toBe("https://login.microsoftonline.com/");
   });
 
-  it("sends an unknown Micron SSO identity to a prefilled registration form", () => {
+  it("signs in a temporary demo identity with email and password", () => {
     localStorage.clear();
     render(<MemoryRouter initialEntries={["/login"]}><App /></MemoryRouter>);
-    fireEvent.change(screen.getByLabelText("Micron email address"), { target: { value: "new.user@micron.com" } });
-    fireEvent.click(screen.getByRole("button", { name: /continue with micron sso/i }));
-    expect(screen.getByRole("heading", { name: /register your eptw account/i })).toBeTruthy();
-    expect((screen.getByLabelText("Email address") as HTMLInputElement).value).toBe("new.user@micron.com");
-    expect((screen.getByLabelText("Company") as HTMLInputElement).value).toBe("Micron");
+    fireEvent.change(screen.getByLabelText("Email"), { target: { value: "aisha@contractor.example" } });
+    fireEvent.change(screen.getByLabelText("Password"), { target: { value: "temporary-password" } });
+    fireEvent.click(screen.getByRole("button", { name: "Login" }));
+    expect(screen.getByRole("heading", { name: /welcome, aisha/i })).toBeTruthy();
   });
 
-  it("registers Micron staff with course evidence and opens the tutorial", () => {
+  it("keeps Micron SSO independent from the email and password fields", () => {
+    localStorage.clear();
+    render(<MemoryRouter initialEntries={["/login"]}><App /></MemoryRouter>);
+    fireEvent.change(screen.getByLabelText("Email"), { target: { value: "new.user@micron.com" } });
+    fireEvent.change(screen.getByLabelText("Password"), { target: { value: "not-used-by-sso" } });
+    expect(screen.getByRole("link", { name: "Login with Micron SSO" }).getAttribute("href")).toBe("https://login.microsoftonline.com/");
+    expect(screen.queryByRole("alert")).toBeNull();
+  });
+
+  it("auto-activates Micron staff registration without requiring the quiz", () => {
     localStorage.clear();
     render(<MemoryRouter initialEntries={["/register/micron?email=new.user%40micron.com"]}><App /></MemoryRouter>);
     fireEvent.change(screen.getByLabelText("Full name"), { target: { value: "New User" } });
     fireEvent.change(screen.getByLabelText("Learning course completion"), { target: { files: [new File(["evidence"], "course.pdf", { type: "application/pdf" })] } });
-    fireEvent.click(screen.getByRole("button", { name: /register and view tutorial/i }));
-    expect(screen.getByRole("heading", { name: /welcome, new/i })).toBeTruthy();
-    expect(screen.getByText(/micron staff profile is ready/i)).toBeTruthy();
+    fireEvent.click(screen.getByRole("button", { name: /register account/i }));
+    expect(screen.getByRole("heading", { name: /your account has been created/i })).toBeTruthy();
+    expect(screen.getByText("Account status: Active")).toBeTruthy();
+    expect(screen.getByText(/approved automatically/i)).toBeTruthy();
+    expect(document.querySelector(".sidebar")).toBeNull();
+    expect(localStorage.getItem("eptw-user-directory:v1")).toContain('"status":"Active"');
+    expect(localStorage.getItem("eptw-user-directory:v1")).toContain('"company":"Micron Semiconductor Asia Pte Ltd"');
     expect(localStorage.getItem("eptw-demo-user")).toBeNull();
+    expect(screen.queryByRole("link", { name: /continue to tutorial/i })).toBeNull();
     fireEvent.click(screen.getByRole("link", { name: /continue to dashboard/i }));
-    expect(screen.getByRole("heading", { name: /welcome, new/i })).toBeTruthy();
+    expect(screen.getByRole("heading", { name: /welcome/i })).toBeTruthy();
   });
 
   it("self-registers a contractor with active companies and all sites selected", () => {
     localStorage.clear();
     render(<MemoryRouter initialEntries={["/login"]}><App /></MemoryRouter>);
-    fireEvent.click(screen.getByRole("link", { name: /self-registration/i }));
+    fireEvent.click(screen.getByRole("link", { name: /self registration/i }));
     expect(screen.getByRole("heading", { name: /self-registration/i })).toBeTruthy();
     expect((screen.getByLabelText("F10A1") as HTMLInputElement).checked).toBe(true);
     expect(screen.getByRole("option", { name: "Acme Engineering" })).toBeTruthy();
     fireEvent.change(screen.getByLabelText("Full name"), { target: { value: "Chris Contractor" } });
     fireEvent.change(screen.getByLabelText("Email address"), { target: { value: "chris@example.com" } });
     fireEvent.change(screen.getByLabelText("Role"), { target: { value: "CONTRACTOR_PM" } });
-    fireEvent.click(screen.getByRole("button", { name: /register and view tutorial/i }));
-    expect(screen.getByText(/contractor pm profile is ready/i)).toBeTruthy();
+    fireEvent.click(screen.getByRole("button", { name: /register account/i }));
+    expect(screen.getByRole("heading", { name: /your account has been created/i })).toBeTruthy();
+    expect(screen.getByText("Account status: Pending")).toBeTruthy();
+    expect(document.querySelector(".sidebar")).toBeNull();
+    const directory = JSON.parse(localStorage.getItem("eptw-user-directory:v1") ?? "[]") as Array<{ name: string; status: string; sites: string[] }>;
+    expect(directory.find((item) => item.name === "Chris Contractor")).toMatchObject({ status: "Pending", sites: SITES });
+    fireEvent.click(screen.getByRole("link", { name: /continue to tutorial & quiz page/i }));
+    expect(screen.getByRole("heading", { name: /tutorial videos & quiz/i })).toBeTruthy();
+    expect(document.querySelector(".sidebar")).toBeNull();
+    expect(screen.getByText(/attempt limit/i)).toBeTruthy();
+    fireEvent.click(screen.getByRole("link", { name: /start quiz/i }));
+    expect(document.querySelector(".sidebar")).toBeNull();
+    fireEvent.click(screen.getByLabelText("The permit must be approved"));
+    fireEvent.click(screen.getByLabelText("Stop work and reassess the permit"));
+    fireEvent.click(screen.getByLabelText("After completion checks and authorised confirmation"));
+    fireEvent.click(screen.getByRole("button", { name: /submit quiz/i }));
+    expect(screen.getByText("Passed")).toBeTruthy();
+    fireEvent.click(screen.getByRole("button", { name: /finish and return to login/i }));
+    cleanup();
+    localStorage.setItem("eptw-demo-user", "admin-1");
+    render(<MemoryRouter initialEntries={["/settings/users"]}><App /></MemoryRouter>);
+    const pendingRow = screen.getByText("Chris Contractor").closest("tr")!;
+    expect(within(pendingRow).getByText("Active")).toBeTruthy();
+    expect(within(pendingRow).getByText("Acme Engineering")).toBeTruthy();
   });
 
   it("logs out to the public login page", () => {
@@ -136,27 +228,63 @@ describe("application shell", () => {
     expect(localStorage.getItem("eptw-demo-user")).toBeNull();
   });
 
-  it("switches roles only from Account settings", () => {
+  it("allows Micron Staff to update their name and primary site", () => {
+    localStorage.setItem("eptw-demo-user", "ir-1");
     render(<MemoryRouter initialEntries={["/account"]}><App /></MemoryRouter>);
-    expect(screen.queryByLabelText("Demo identity")).toBeNull();
-    fireEvent.change(screen.getByLabelText("User and role"), { target: { value: "admin-1" } });
-    expect(screen.getByText("Micron Admin", { selector: ".role-summary strong" })).toBeTruthy();
-    expect(screen.getByRole("link", { name: /sites/i })).toBeTruthy();
+
+    fireEvent.change(screen.getByLabelText("Full name"), { target: { value: "Irene Tan" } });
+    fireEvent.change(screen.getByLabelText("Primary site"), { target: { value: "F10N" } });
+    fireEvent.click(screen.getByRole("button", { name: "Save changes" }));
+
+    expect(screen.getByText("Profile details updated.")).toBeTruthy();
+    expect(screen.getByRole("link", { name: /irene tan, irene@micron.com/i })).toBeTruthy();
+    expect(JSON.parse(localStorage.getItem("eptw-account-profile:ir-1") ?? "null")).toEqual({ name: "Irene Tan", sites: ["F10N"] });
   });
 
-  it("groups account identities in the configured role order", () => {
+  it("allows Micron Staff to update their password", () => {
+    localStorage.setItem("eptw-demo-user", "ir-1");
     render(<MemoryRouter initialEntries={["/account"]}><App /></MemoryRouter>);
 
-    const select = screen.getByLabelText("User and role") as HTMLSelectElement;
-    expect(Array.from(select.querySelectorAll("optgroup")).map((group) => group.label)).toEqual([
-      "Micron Admin",
-      "Vendor Admin",
-      "Micron Staff",
-      "Micron Supervisor",
-      "Contractor Requestor",
-      "Contractor PM",
-      "Assessor",
-    ]);
+    fireEvent.change(screen.getByLabelText("New password"), { target: { value: "micron-password" } });
+    fireEvent.change(screen.getByLabelText("Confirm new password"), { target: { value: "micron-password" } });
+    fireEvent.click(screen.getByRole("button", { name: "Update password" }));
+
+    expect(screen.getByText("Password updated successfully.")).toBeTruthy();
+    expect(localStorage.getItem("eptw-password-updated:ir-1")).toBeTruthy();
+  });
+
+  it("limits contractors to password reset", () => {
+    render(<MemoryRouter initialEntries={["/account"]}><App /></MemoryRouter>);
+
+    expect(screen.getByRole("heading", { name: "Reset password" })).toBeTruthy();
+    expect(screen.queryByLabelText("Full name")).toBeNull();
+    expect(screen.queryByLabelText("Primary site")).toBeNull();
+    fireEvent.change(screen.getByLabelText("New password"), { target: { value: "new-password" } });
+    fireEvent.change(screen.getByLabelText("Confirm new password"), { target: { value: "new-password" } });
+    fireEvent.click(screen.getByRole("button", { name: "Reset password" }));
+    expect(screen.getByText("Password reset successfully.")).toBeTruthy();
+  });
+
+  it("shows dated host assignments in Account settings for non-admin users", () => {
+    localStorage.setItem("eptw-user-directory:v1", JSON.stringify([{ id: "req-1", name: "Aisha Rahman", email: "aisha@contractor.example", role: "Contractor Requestor", hosts: [{ id: "host-a", name: "Marcus Teo", date: "2026-10-08" }, { id: "host-b", name: "Irene Lim", date: "2026-10-18" }] }]));
+    render(<MemoryRouter initialEntries={["/account"]}><App /></MemoryRouter>);
+
+    expect(screen.getByRole("heading", { name: "Host assignments" })).toBeTruthy();
+    expect(screen.getByRole("columnheader", { name: "Host name (Micron staff)" })).toBeTruthy();
+    expect(screen.getByText("Marcus Teo")).toBeTruthy();
+    expect(screen.getByText("Irene Lim")).toBeTruthy();
+    expect(screen.getByText("08 Oct 2026")).toBeTruthy();
+    expect(screen.getByText("18 Oct 2026")).toBeTruthy();
+  });
+
+  it("hides host assignments from admins and Micron Supervisors", () => {
+    for (const userId of ["admin-1", "user-admin-1", "supervisor-1"]) {
+      cleanup();
+      localStorage.clear();
+      localStorage.setItem("eptw-demo-user", userId);
+      render(<MemoryRouter initialEntries={["/account"]}><App /></MemoryRouter>);
+      expect(screen.queryByRole("heading", { name: "Host assignments" })).toBeNull();
+    }
   });
 
   it("shows the current login account in the sidebar and opens Account settings", () => {
@@ -172,14 +300,45 @@ describe("application shell", () => {
     expect(screen.getByRole("heading", { name: "Account settings" })).toBeTruthy();
   });
 
+  it("switches demo accounts by double-clicking the signed-in account", () => {
+    localStorage.setItem("eptw-demo-user", "admin-1");
+    render(<MemoryRouter initialEntries={["/dashboard"]}><App /></MemoryRouter>);
+
+    fireEvent.doubleClick(screen.getByRole("link", { name: /micron administrator, micronadmin@site.example/i }));
+    expect(screen.getByRole("dialog", { name: "Switch account" })).toBeTruthy();
+    fireEvent.change(screen.getByLabelText("Account"), { target: { value: "ir-1" } });
+    fireEvent.click(screen.getByRole("button", { name: "Switch account" }));
+
+    expect(screen.getByRole("link", { name: /irene lim, irene@micron.com/i })).toBeTruthy();
+    expect(localStorage.getItem("eptw-demo-user")).toBe("ir-1");
+  });
+
+  it("groups demo identities consistently in login and account switcher dropdowns", () => {
+    localStorage.removeItem("eptw-demo-user");
+    render(<MemoryRouter initialEntries={["/login"]}><App /></MemoryRouter>);
+    const loginSelect = screen.getByLabelText("Demo identity");
+    expect(Array.from(loginSelect.querySelectorAll("optgroup")).map((group) => group.label)).toEqual(["Contractors", "Micron Staff", "Administrators & Supervisors", "Assessors"]);
+    expect(Array.from(loginSelect.querySelectorAll('optgroup[label="Contractors"] option')).map((option) => option.textContent)).toEqual(["Aisha Rahman · Contractor Requestor", "Daniel Tan · Contractor Requestor", "Priya Menon · Contractor PM"]);
+
+    cleanup();
+    localStorage.setItem("eptw-demo-user", "admin-1");
+    render(<MemoryRouter initialEntries={["/dashboard"]}><App /></MemoryRouter>);
+    fireEvent.doubleClick(screen.getByRole("link", { name: /micron administrator, micronadmin@site.example/i }));
+    const switchSelect = screen.getByLabelText("Account");
+    expect(Array.from(switchSelect.querySelectorAll("optgroup")).map((group) => group.label)).toEqual(["Contractors", "Micron Staff", "Administrators & Supervisors", "Assessors"]);
+  });
+
   it("shows organisation-wide status counts on the Micron Admin dashboard", () => {
     localStorage.setItem("eptw-demo-user", "admin-1");
     render(<MemoryRouter initialEntries={["/dashboard"]}><App /></MemoryRouter>);
     expect(screen.getByRole("heading", { name: /permit overview/i })).toBeTruthy();
-    expect(screen.getByRole("button", { name: /total permits/i })).toBeTruthy();
-    expect(screen.getByRole("button", { name: /all pending approval/i })).toBeTruthy();
-    expect(screen.getByRole("button", { name: /all approved permits/i })).toBeTruthy();
-    expect(screen.getByRole("button", { name: /all rejected permits/i })).toBeTruthy();
+    expect(Array.from(document.querySelectorAll<HTMLButtonElement>(".dashboard-metric")).map((card) => card.querySelector("span")?.textContent)).toEqual(["Total Parent Permits", "Pending Parent Permits", "Approved Parent Permits", "Rejected Parent Permits", "Total Child Permits", "Pending Child Permits", "Approved Child Permits", "Rejected Child Permits"]);
+    expect(document.querySelector(".dashboard-metric-group")?.classList.contains("two-row")).toBe(true);
+    expect(document.querySelectorAll(".dashboard-results")).toHaveLength(1);
+    fireEvent.click(screen.getByRole("button", { name: /^Total Child Permits/i }));
+    expect(screen.getByRole("heading", { name: "Total Child Permits" })).toBeTruthy();
+    expect(screen.getAllByText("B1-Facilities-2026-09-09/0002-1").length).toBeGreaterThan(0);
+    expect(screen.queryByText("F10A1-G-Facilities-2026-09-09/0002")).toBeNull();
   });
 
   it("shows a Micron Supervisor all submitted parent permits but hides other users' drafts", () => {
@@ -227,6 +386,23 @@ describe("application shell", () => {
     expect(screen.getAllByText("F10A1-G-AMHS-2026-09-08/0001").length).toBeGreaterThan(0);
   });
 
+  it("filters dashboard permit tables by site and discipline", () => {
+    localStorage.setItem("eptw-demo-user", "admin-1");
+    render(<MemoryRouter initialEntries={["/dashboard"]}><App /></MemoryRouter>);
+
+    const permitSection = screen.getByRole("heading", { name: "All available permits" }).closest(".dashboard-results") as HTMLElement;
+    expect(permitSection.querySelector(".card-heading .dashboard-table-filters")).toBeTruthy();
+    expect(permitSection.querySelector(".card-heading .button.primary")?.textContent).toMatch(/Create permit/i);
+    fireEvent.change(within(permitSection).getByLabelText("Filter All available permits by site"), { target: { value: "F10N" } });
+    expect(within(permitSection).getAllByText("F10N-G-IT-2026-09-09/0003").length).toBeGreaterThan(0);
+    expect(within(permitSection).queryByText("F10A1-G-AMHS-2026-09-08/0001")).toBeNull();
+
+    fireEvent.click(within(permitSection).getByRole("button", { name: "Clear filters" }));
+    fireEvent.change(within(permitSection).getByLabelText("Filter All available permits by discipline"), { target: { value: "AMHS" } });
+    expect(within(permitSection).getAllByText("F10A1-G-AMHS-2026-09-08/0001").length).toBeGreaterThan(0);
+    expect(within(permitSection).queryByText("F10N-G-IT-2026-09-09/0003")).toBeNull();
+  });
+
   it("returns to the Dashboard when a permit was opened from the Dashboard", () => {
     render(<MemoryRouter initialEntries={["/dashboard"]}><App /></MemoryRouter>);
     const permitLink = document.querySelector<HTMLAnchorElement>(".dashboard-results .permit-table .permit-number")!;
@@ -249,13 +425,15 @@ describe("application shell", () => {
     expect(screen.getAllByRole("heading", { name: "My Approval" })).toHaveLength(2);
     expect(screen.getAllByRole("heading", { name: "Submitted Permit" })).toHaveLength(2);
     const cards = Array.from(document.querySelectorAll<HTMLButtonElement>(".dashboard-metric"));
-    expect(cards.map((card) => card.querySelector("span")?.textContent)).toEqual(["Pending My Approval", "Approved By Me", "Rejected By Me", "Drafted Permit", "Pending Approval", "Approved Permits", "Rejected Permits"]);
+    expect(cards.map((card) => card.querySelector("span")?.textContent)).toEqual(["Pending My Approval", "Approved By Me", "Rejected By Me", "Drafted Permit", "Pending Approval", "Approved Permits", "Rejected Permits", "Pending Cancelled", "Pending Closure"]);
     expect(Array.from(document.querySelectorAll(".dashboard-section-count")).map((pill) => pill.textContent)).toEqual(["1", "0"]);
     expect(screen.queryByRole("heading", { name: /awaiting approval/i })).toBeNull();
     expect(screen.getByRole("button", { name: /^approved permits/i })).toBeTruthy();
     expect(document.querySelectorAll(".dashboard-grouped-results .dashboard-results")).toHaveLength(2);
     const sections = Array.from(document.querySelectorAll<HTMLElement>(".dashboard-staff-section"));
     expect(sections).toHaveLength(2);
+    expect(within(sections[1]).getByRole("button", { name: /Pending Cancelled/i }).className).toContain("cancelled");
+    expect(within(sections[1]).getByRole("button", { name: /Pending Closure/i }).className).toContain("closure");
     expect(sections[0].querySelector(".dashboard-metric-group h2 > span")?.textContent).toBe("My Approval");
     expect(sections[0].querySelector(".dashboard-results h2")?.textContent).toBe("My Approval");
     expect(sections[1].querySelector(".dashboard-metric-group h2 > span")?.textContent).toBe("Submitted Permit");
@@ -327,7 +505,7 @@ describe("application shell", () => {
     expect(screen.getByRole("button", { name: /^Approved By Me/i }).getAttribute("aria-pressed")).toBe("true");
   });
 
-  it("shows Assessors only assigned editable permits in a quarter-width Allow Reading card", () => {
+  it("shows Assessors only assigned editable permits in a quarter-width Permit Assigned card", () => {
     const state = createSeedState();
     const assignedPermit = state.permits[0];
     const revision = currentRevision(assignedPermit);
@@ -338,7 +516,7 @@ describe("application shell", () => {
     localStorage.setItem("eptw-demo-user", "assessor-1");
     render(<MemoryRouter initialEntries={["/dashboard"]}><App /></MemoryRouter>);
 
-    const cards = screen.getAllByRole("button", { name: /Allow Reading/i });
+    const cards = screen.getAllByRole("button", { name: /Permit Assigned/i });
     expect(cards).toHaveLength(1);
     expect(cards[0].textContent).toContain("1");
     expect(cards[0].closest(".dashboard-metric-group")?.classList.contains("quarter-width")).toBe(true);
@@ -360,8 +538,7 @@ describe("application shell", () => {
       localStorage.setItem("eptw-demo-user", userId);
       render(<MemoryRouter initialEntries={["/dashboard"]}><App /></MemoryRouter>);
       expect(screen.getByRole("link", { name: /dashboard/i })).toBeTruthy();
-      expect(screen.getByRole("link", { name: /tutorial videos/i })).toBeTruthy();
-      expect(screen.getByRole("link", { name: /form downloads/i })).toBeTruthy();
+      expect(screen.getByRole("link", { name: /tutorial videos & quiz/i })).toBeTruthy();
       expect(screen.getByRole("link", { name: /report issue/i })).toBeTruthy();
     });
   });
@@ -374,7 +551,7 @@ describe("application shell", () => {
     expect(screen.getByRole("link", { name: /parent permits/i })).toBeTruthy();
     expect(screen.getByRole("link", { name: /child permits/i })).toBeTruthy();
     expect(screen.getByRole("heading", { name: /child permits/i })).toBeTruthy();
-    fireEvent.click(screen.getByLabelText(/actions for f10a1-b1/i));
+    fireEvent.click(screen.getByLabelText(/actions for b1-facilities/i));
     expect(screen.getAllByRole("link", { name: /^view$/i }).length).toBeGreaterThan(0);
     expect(screen.queryByRole("link", { name: /^review$/i })).toBeNull();
     expect(screen.queryByRole("button", { name: /export as pdf/i })).toBeNull();
@@ -383,10 +560,10 @@ describe("application shell", () => {
 
   it("opens the selected sidebar resource page", () => {
     render(<MemoryRouter initialEntries={["/help?resource=tutorials"]}><App /></MemoryRouter>);
-    expect(screen.getByRole("heading", { name: /tutorial videos/i })).toBeTruthy();
-    expect(screen.getByRole("link", { name: /tutorial videos/i }).className).toContain("active");
+    expect(screen.getByRole("heading", { name: /tutorial & quiz/i })).toBeTruthy();
+    expect(screen.getByRole("link", { name: /tutorial & quiz/i }).className).toContain("active");
     expect(screen.queryByRole("link", { name: /form downloads/i })).toBeNull();
-    expect(screen.getByRole("link", { name: "Watch B1 Hot Work permit" })).toBeTruthy();
+    expect(screen.getByRole("link", { name: "Open B1 Hot Work permit video" })).toBeTruthy();
     fireEvent.click(screen.getByRole("button", { name: "Workflow" }));
     expect(screen.getByText("Approval and rejection flow")).toBeTruthy();
     expect(screen.queryByText("B1 Hot Work permit")).toBeNull();
@@ -555,6 +732,48 @@ describe("application shell", () => {
     approvedStages.forEach((stage) => expect(stage.querySelector("b")?.textContent).toBe("✓"));
   });
 
+  it("lets the Vendor PM request cancellation and Final MT Group approve it", () => {
+    const state = createSeedState(); const permit = state.permits.find((item) => item.id === "permit-review")!;
+    currentRevision(permit).status = "APPROVED";
+    localStorage.setItem("eptw-functional-draft:v2", JSON.stringify(state));
+    localStorage.setItem("eptw-demo-user", "pm-1");
+    render(<MemoryRouter initialEntries={["/permits/permit-review"]}><App /></MemoryRouter>);
+
+    fireEvent.click(screen.getByRole("button", { name: "Request Cancellation" }));
+    const requestDialog = screen.getByRole("dialog", { name: "Sign cancellation request" });
+    fireEvent.change(within(requestDialog).getByLabelText("Cancellation reason *"), { target: { value: "The work is no longer required." } });
+    applyWorkflowSignature();
+    fireEvent.click(within(requestDialog).getByRole("button", { name: "Request Cancellation" }));
+    expect(screen.getByText("Cancellation requested", { selector: ".status-pill" })).toBeTruthy();
+
+    cleanup();
+    localStorage.setItem("eptw-demo-user", "mt-1");
+    render(<MemoryRouter initialEntries={["/permits/permit-review"]}><App /></MemoryRouter>);
+    fireEvent.click(screen.getByRole("button", { name: "Approve Cancellation" }));
+    expect(screen.getByText("Cancelled", { selector: ".status-pill" })).toBeTruthy();
+  });
+
+  it("lets the Host Supervisor request closure and Final MT Group complete it", () => {
+    const state = createSeedState(); const permit = state.permits.find((item) => item.id === "permit-review")!;
+    currentRevision(permit).status = "APPROVED";
+    localStorage.setItem("eptw-functional-draft:v2", JSON.stringify(state));
+    localStorage.setItem("eptw-demo-user", "supervisor-1");
+    render(<MemoryRouter initialEntries={["/permits/permit-review"]}><App /></MemoryRouter>);
+
+    fireEvent.click(screen.getByRole("button", { name: "Request Closure" }));
+    const requestDialog = screen.getByRole("dialog", { name: "Sign closure request" });
+    fireEvent.change(within(requestDialog).getByLabelText("Closure note *"), { target: { value: "The work is complete and the area is restored." } });
+    applyWorkflowSignature();
+    fireEvent.click(within(requestDialog).getByRole("button", { name: "Request Closure" }));
+    expect(screen.getByText("Closure requested", { selector: ".status-pill" })).toBeTruthy();
+
+    cleanup();
+    localStorage.setItem("eptw-demo-user", "mt-1");
+    render(<MemoryRouter initialEntries={["/permits/permit-review"]}><App /></MemoryRouter>);
+    fireEvent.click(screen.getByRole("button", { name: "Approve Closure" }));
+    expect(screen.getByText("Completed", { selector: ".status-pill" })).toBeTruthy();
+  });
+
   it("shows the template code badge and template name in the permit register", () => {
     localStorage.setItem("eptw-demo-user", "admin-1");
     render(<MemoryRouter initialEntries={["/permits"]}><App /></MemoryRouter>);
@@ -574,9 +793,9 @@ describe("application shell", () => {
     render(<MemoryRouter initialEntries={["/permits/permit-hot-parent"]}><App /></MemoryRouter>);
     fireEvent.click(screen.getByRole("tab", { name: /B1.B4 permits/i }));
 
-    expect(screen.getAllByText("F10A1-B1-Facilities-2026-09-09/0002-1").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("B1-Facilities-2026-09-09/0002-1").length).toBeGreaterThan(0);
     fireEvent.click(screen.getAllByRole("link", { name: "View child permit" })[0]);
-    expect(screen.getByRole("heading", { name: "F10A1-B1-Facilities-2026-09-09/0002-1" })).toBeTruthy();
+    expect(screen.getByRole("heading", { name: "B1-Facilities-2026-09-09/0002-1" })).toBeTruthy();
   });
 
   it("shows child information and its attached parent without permit tabs", () => {
@@ -605,6 +824,9 @@ describe("application shell", () => {
     fireEvent.change(screen.getByLabelText("Permit template type"), { target: { value: "tpl-child-b1" } });
     fireEvent.change(screen.getByLabelText("Parent permit"), { target: { value: "permit-review" } });
     fireEvent.click(screen.getByRole("button", { name: "Create Permit" }));
+    expect(screen.getByRole("dialog", { name: "Sign and submit permit" })).toBeTruthy();
+    applyWorkflowSignature();
+    fireEvent.click(screen.getByRole("button", { name: "Submit permit" }));
 
     const state = JSON.parse(localStorage.getItem("eptw-functional-draft:v2")!);
     const child = state.permits.find((permit: { parentId?: string; revisions: { data: { templateId?: string } }[] }) => permit.parentId === "permit-review" && permit.revisions[0].data.templateId === "tpl-child-b1");
@@ -621,6 +843,8 @@ describe("application shell", () => {
     fireEvent.change(screen.getByLabelText("Permit template type"), { target: { value: "parent" } });
     fireEvent.click(screen.getByRole("checkbox", { name: /HOT WORK PERMIT/i }));
     fireEvent.click(screen.getByRole("button", { name: "Create Permit" }));
+    applyWorkflowSignature();
+    fireEvent.click(screen.getByRole("button", { name: "Submit permit" }));
     fireEvent.click(screen.getByRole("tab", { name: /B1.B4 permits/i }));
 
     expect(screen.getByText("HOT WORKS")).toBeTruthy();
@@ -797,6 +1021,11 @@ describe("application shell", () => {
 
     expect(screen.getByRole("heading", { name: "Permit setup & approval route" })).toBeTruthy();
     expect(screen.getByText("Host & approval route")).toBeTruthy();
+    expect(screen.getByText("Work schedule")).toBeTruthy();
+    fireEvent.change(screen.getByLabelText("Start Date"), { target: { value: "2026-11-05" } });
+    fireEvent.change(screen.getByLabelText("Start Time"), { target: { value: "09:30" } });
+    fireEvent.change(screen.getByLabelText("End Date"), { target: { value: "2026-11-06" } });
+    fireEvent.change(screen.getByLabelText("End Time"), { target: { value: "17:45" } });
     fireEvent.change(screen.getByText("Site", { selector: "label > span" }).closest("label")!.querySelector("select")!, { target: { value: "F10N" } });
     const hostSupervisor = screen.getByLabelText("Host supervisor *");
     fireEvent.click(hostSupervisor);
@@ -808,6 +1037,44 @@ describe("application shell", () => {
     const revision = draft.revisions.find((item: { id: string }) => item.id === draft.currentRevisionId);
     expect(revision.data.site).toBe("F10N");
     expect(revision.data.hostSupervisorId).toBe("mt-1");
+    expect(revision.data.startAt).toBe(new Date("2026-11-05T09:30").toISOString());
+    expect(revision.data.endAt).toBe(new Date("2026-11-06T17:45").toISOString());
+  });
+
+  it("requires the permit end schedule to be after its start schedule", () => {
+    render(<MemoryRouter initialEntries={["/permits/permit-draft/edit"]}><App /></MemoryRouter>);
+    fireEvent.change(screen.getByLabelText("Start Date"), { target: { value: "2026-11-06" } });
+    fireEvent.change(screen.getByLabelText("Start Time"), { target: { value: "18:00" } });
+    fireEvent.change(screen.getByLabelText("End Date"), { target: { value: "2026-11-06" } });
+    fireEvent.change(screen.getByLabelText("End Time"), { target: { value: "17:00" } });
+    fireEvent.click(screen.getByRole("button", { name: "Save as draft" }));
+    expect(screen.getByRole("alert")).toHaveTextContent("End date and time must be after the start date and time.");
+  });
+
+  it("allows optional permit times and stores date-only schedules", () => {
+    render(<MemoryRouter initialEntries={["/permits/permit-draft/edit"]}><App /></MemoryRouter>);
+    fireEvent.change(screen.getByLabelText("Start Date"), { target: { value: "2026-11-06" } });
+    fireEvent.change(screen.getByLabelText("Start Time"), { target: { value: "" } });
+    fireEvent.change(screen.getByLabelText("End Date"), { target: { value: "2026-11-07" } });
+    fireEvent.change(screen.getByLabelText("End Time"), { target: { value: "" } });
+    fireEvent.click(screen.getByRole("button", { name: "Save as draft" }));
+
+    const state = JSON.parse(localStorage.getItem("eptw-functional-draft:v2")!);
+    const draft = state.permits.find((permit: { id: string }) => permit.id === "permit-draft");
+    const revision = draft.revisions.find((item: { id: string }) => item.id === draft.currentRevisionId);
+    expect(revision.data.startAt).toBe("2026-11-06");
+    expect(revision.data.endAt).toBe("2026-11-07");
+  });
+
+  it("shows compulsory permit-field asterisks in red", () => {
+    render(<MemoryRouter initialEntries={["/permits/permit-draft/edit"]}><App /></MemoryRouter>);
+    const startDateLabel = screen.getByLabelText("Start Date").closest("label")!;
+    const endDateLabel = screen.getByLabelText("End Date").closest("label")!;
+    expect(startDateLabel.querySelector(".required-marker")?.textContent).toBe("*");
+    expect(endDateLabel.querySelector(".required-marker")?.textContent).toBe("*");
+    expect(screen.getByLabelText("Start Time").closest("label")!.querySelector(".required-marker")).toBeNull();
+    expect(screen.getByLabelText("End Time").closest("label")!.querySelector(".required-marker")).toBeNull();
+    expect(document.querySelectorAll(".required-marker").length).toBeGreaterThan(2);
   });
 
   it("opens action menus upward for the bottom permit rows", () => {
@@ -828,6 +1095,7 @@ describe("application shell", () => {
     fireEvent.click(menu);
     expect(menu.closest("details")?.hasAttribute("open")).toBe(true);
     expect(within(menu.closest("details")!).getByRole("link", { name: "View" })).toBeTruthy();
+    expect(within(menu.closest("details")!).queryByRole("button", { name: "Duplicate" })).toBeNull();
   });
 
   it("shows a create permit action instead of view-all links on dashboards for permitted users", () => {
@@ -835,7 +1103,9 @@ describe("application shell", () => {
     render(<MemoryRouter initialEntries={["/dashboard"]}><App /></MemoryRouter>);
 
     const submittedResults = Array.from(document.querySelectorAll<HTMLElement>(".dashboard-results")).find((section) => section.querySelector("h2")?.textContent === "Submitted Permit")!;
-    expect(within(submittedResults).getByRole("link", { name: /Create permit/i }).getAttribute("href")).toBe("/permits/new");
+    fireEvent.click(within(submittedResults).getByText(/Create permit/i).closest("summary")!);
+    expect(within(submittedResults).getByRole("link", { name: /Parent Permit/i }).getAttribute("href")).toBe("/permits/new");
+    expect(within(submittedResults).getByRole("link", { name: /Child Permit/i }).getAttribute("href")).toBe("/child-permits/new");
     expect(document.querySelector(".page-header a[href='/permits/new']")).toBeNull();
     expect(screen.queryByRole("link", { name: /View all/i })).toBeNull();
   });
@@ -844,7 +1114,7 @@ describe("application shell", () => {
     localStorage.setItem("eptw-demo-user", "pm-1");
     render(<MemoryRouter initialEntries={["/dashboard"]}><App /></MemoryRouter>);
 
-    expect(screen.queryByRole("link", { name: /Create permit/i })).toBeNull();
+    expect(screen.queryByText(/Create permit/i)).toBeNull();
     expect(screen.queryByRole("link", { name: /View all/i })).toBeNull();
   });
 
@@ -899,8 +1169,9 @@ describe("application shell", () => {
   it("lets a user delete their own draft from the permit menu", () => {
     render(<MemoryRouter initialEntries={["/permits"]}><App /></MemoryRouter>);
     const permitNumber = "F10A2-G-Facilities-2026-09-09/0004";
-    fireEvent.click(screen.getByLabelText(`Actions for ${permitNumber}`));
-    fireEvent.click(screen.getByRole("button", { name: "Delete draft" }));
+    const actions = screen.getByLabelText(`Actions for ${permitNumber}`);
+    fireEvent.click(actions);
+    fireEvent.click(within(actions.closest("details")!).getByRole("button", { name: "Delete draft" }));
     const dialog = screen.getByRole("dialog", { name: "Delete draft?" });
     expect(within(dialog).getByText(permitNumber)).toBeTruthy();
     fireEvent.click(within(dialog).getByRole("button", { name: "Delete draft" }));
@@ -908,15 +1179,36 @@ describe("application shell", () => {
     expect(screen.queryAllByText(permitNumber)).toHaveLength(0);
   });
 
+  it("keeps a deleted seeded child draft removed after the dashboard reloads", () => {
+    localStorage.setItem("eptw-demo-user", "req-2");
+    const permitNumber = "B2-Facilities-2026-09-09/0002-2";
+    render(<MemoryRouter initialEntries={["/dashboard"]}><App /></MemoryRouter>);
+    const actions = screen.getByLabelText(`Actions for ${permitNumber}`);
+    fireEvent.click(actions);
+    fireEvent.click(within(actions.closest("details")!).getByRole("button", { name: "Delete draft" }));
+    const dialog = screen.getByRole("dialog", { name: "Delete draft?" });
+    fireEvent.click(within(dialog).getByRole("button", { name: "Delete draft" }));
+    expect(screen.queryAllByText(permitNumber)).toHaveLength(0);
+
+    const saved = JSON.parse(localStorage.getItem("eptw-functional-draft:v2")!);
+    expect(saved.deletedPermitIds).toContain("permit-confined-child");
+    expect(saved.deletedChildSelections).toContain("permit-hot-parent:tpl-child-b2");
+    expect(saved.permits.find((permit: { id: string }) => permit.id === "permit-hot-parent").childIds).not.toContain("permit-confined-child");
+
+    cleanup();
+    render(<MemoryRouter initialEntries={["/dashboard"]}><App /></MemoryRouter>);
+    expect(screen.queryAllByText(permitNumber)).toHaveLength(0);
+  });
+
   it("hides drafts owned by another user from the permit register", () => {
     localStorage.setItem("eptw-demo-user", "pm-1");
     render(<MemoryRouter initialEntries={["/child-permits"]}><App /></MemoryRouter>);
 
-    expect(screen.getAllByText("F10A1-B1-Facilities-2026-09-09/0002-1").length).toBeGreaterThan(0);
-    expect(screen.queryByText("F10A1-B2-Facilities-2026-09-09/0002-2")).toBeNull();
-    expect(screen.queryByText("F10A1-B3-Facilities-2026-09-09/0002-3")).toBeNull();
-    expect(screen.queryByText("F10A1-B4-Facilities-2026-09-09/0002-4")).toBeNull();
-    expect(screen.queryByText("F10A1-A01-Facilities-2026-09-09/0002-5")).toBeNull();
+    expect(screen.getAllByText("B1-Facilities-2026-09-09/0002-1").length).toBeGreaterThan(0);
+    expect(screen.queryByText("B2-Facilities-2026-09-09/0002-2")).toBeNull();
+    expect(screen.queryByText("B3-Facilities-2026-09-09/0002-3")).toBeNull();
+    expect(screen.queryByText("B4-Facilities-2026-09-09/0002-4")).toBeNull();
+    expect(screen.queryByText("A01-Facilities-2026-09-09/0002-5")).toBeNull();
   });
 
   it("keeps parent and child templates in separate tabs and adds a child template", () => {
@@ -1022,6 +1314,19 @@ describe("application shell", () => {
     expect((screen.getByLabelText("Dropdown option 1") as HTMLInputElement).value).toBe("Approved");
     expect((screen.getByLabelText("Dropdown option 2") as HTMLInputElement).value).toBe("Rejected");
     expect(screen.queryByPlaceholderText("Choices separated by commas")).toBeNull();
+  });
+
+  it("adds a combined sign and date form element", () => {
+    localStorage.setItem("eptw-demo-user", "admin-1");
+    render(<MemoryRouter initialEntries={["/settings/templates/new?kind=PARENT"]}><App /></MemoryRouter>);
+    fireEvent.change(screen.getByLabelText("Field type"), { target: { value: "SIGN_DATE" } });
+    const selected = screen.getByLabelText("Field type") as HTMLSelectElement;
+    expect(selected.selectedOptions[0].text).toBe("Sign and Date");
+    const field = selected.closest("article")!;
+    expect(within(field).getByText("Sign here")).toBeTruthy();
+    expect(within(field).getByLabelText("Date preview")).toBeTruthy();
+    expect(field.querySelector(".builder-sign-date-preview span")).toBeNull();
+    expect(field.className).toContain("span-6");
   });
 
   it("closes field settings when clicking away or opening another field", () => {
@@ -1155,25 +1460,201 @@ describe("application shell", () => {
     expect(screen.getByText("Micron Test Fab")).toBeTruthy();
   });
 
-  it("lets only the Micron Admin add a company", () => {
+  it("lets the Micron Admin set company status from Edit", () => {
     localStorage.setItem("eptw-demo-user", "admin-1");
     render(<MemoryRouter initialEntries={["/settings/companies"]}><App /></MemoryRouter>);
     expect(screen.getByRole("heading", { name: "Company List" })).toBeTruthy();
     expect(screen.getByRole("link", { name: /company list/i })).toBeTruthy();
+    expect(screen.getAllByRole("columnheader").map((header) => header.textContent)).toEqual(["Company name", "Status", "Action"]);
     fireEvent.click(screen.getByRole("button", { name: /add company/i }));
     fireEvent.change(screen.getByLabelText("Company name"), { target: { value: "Northstar Engineering Pte Ltd" } });
-    fireEvent.change(screen.getByLabelText("Registration number"), { target: { value: "202612345A" } });
-    fireEvent.change(screen.getByLabelText("Primary contact"), { target: { value: "Jamie Lee" } });
-    fireEvent.change(screen.getByLabelText("Contact email"), { target: { value: "jamie@northstar.example" } });
     fireEvent.click(screen.getByRole("button", { name: /save company/i }));
-    expect(screen.getByText("Northstar Engineering Pte Ltd")).toBeTruthy();
-    expect(localStorage.getItem("eptw-companies:v1")).toContain("202612345A");
+    expect(screen.queryByRole("button", { name: /deactivate|reactivate/i })).toBeNull();
+    fireEvent.click(screen.getByRole("button", { name: "Edit Northstar Engineering Pte Ltd" }));
+    fireEvent.change(screen.getByLabelText("Company status"), { target: { value: "Inactive" } });
+    fireEvent.click(screen.getByRole("button", { name: "Save changes" }));
+    expect(screen.getByText("Inactive")).toBeTruthy();
+    expect(localStorage.getItem("eptw-companies:v1")).toContain('"status":"Inactive"');
   });
 
-  it("does not expose Company List to a Vendor Admin", () => {
-    localStorage.setItem("eptw-demo-user", "user-admin-1");
-    render(<MemoryRouter initialEntries={["/dashboard"]}><App /></MemoryRouter>);
-    expect(screen.queryByRole("link", { name: /company list/i })).toBeNull();
+  it("shows every System Management page to both admin roles", () => {
+    for (const userId of ["admin-1", "user-admin-1"]) {
+      cleanup();
+      localStorage.clear();
+      localStorage.setItem("eptw-demo-user", userId);
+      render(<MemoryRouter initialEntries={["/dashboard"]}><App /></MemoryRouter>);
+      for (const label of ["Company List", "Sites", "Users", "Templates", "Disciplines", "MT Groups", "Tutorial & Quiz", "Announcement"]) {
+        if (label === "Tutorial & Quiz") expect(document.querySelector('a[href="/settings/quiz"]')).toBeTruthy();
+        else expect(screen.getByRole("link", { name: new RegExp(label, "i") })).toBeTruthy();
+      }
+    }
+  });
+
+  it("lets both admin roles configure the random quiz pool and attempt rules", () => {
+    for (const userId of ["admin-1", "user-admin-1"]) {
+      cleanup();
+      localStorage.clear();
+      localStorage.setItem("eptw-demo-user", userId);
+      render(<MemoryRouter initialEntries={["/settings/quiz"]}><App /></MemoryRouter>);
+      expect(screen.getByRole("heading", { name: "Tutorial & Quiz" })).toBeTruthy();
+      expect(screen.getByRole("tab", { name: "Tutorial" }).getAttribute("aria-selected")).toBe("true");
+      fireEvent.click(screen.getByRole("tab", { name: "Quiz" }));
+      expect(screen.getByRole("tab", { name: "Quiz" }).getAttribute("aria-selected")).toBe("true");
+      fireEvent.change(screen.getByLabelText("Questions per attempt"), { target: { value: "2" } });
+      fireEvent.change(screen.getByLabelText("Attempt limit"), { target: { value: "1" } });
+      fireEvent.change(screen.getByLabelText("Pass mark"), { target: { value: "50" } });
+      fireEvent.click(screen.getByRole("button", { name: "Save settings" }));
+      fireEvent.click(screen.getByRole("button", { name: /add question/i }));
+      fireEvent.change(screen.getByLabelText("Question"), { target: { value: "Who must follow the approved permit?" } });
+      fireEvent.change(screen.getByLabelText("Answer 1"), { target: { value: "Everyone performing the work" } });
+      fireEvent.change(screen.getByLabelText("Answer 2"), { target: { value: "Only the requestor" } });
+      fireEvent.click(screen.getByRole("button", { name: "Add to pool" }));
+      expect(screen.getByText("4 total")).toBeTruthy();
+      expect(localStorage.getItem("eptw-quiz-config:v1")).toContain('"questionsPerAttempt":2');
+      expect(localStorage.getItem("eptw-quiz-config:v1")).toContain('"maxAttempts":1');
+      expect(localStorage.getItem("eptw-quiz-config:v1")).toContain("Who must follow the approved permit?");
+    }
+    cleanup();
+    localStorage.setItem("eptw-demo-user", "req-1");
+    render(<MemoryRouter initialEntries={["/help?resource=tutorials"]}><App /></MemoryRouter>);
+    expect(screen.getByText("50%")).toBeTruthy();
+    expect(document.querySelector(".quiz-requirements")?.textContent).toContain("2 Random questions");
+    fireEvent.click(screen.getByRole("link", { name: /start quiz/i }));
+    expect(screen.getByText("1 attempt")).toBeTruthy();
+    expect(document.querySelectorAll(".activation-quiz fieldset")).toHaveLength(2);
+  });
+
+  it("lets an admin upload an ordered tutorial video and shows its card in the tutorial library", async () => {
+    localStorage.setItem("eptw-demo-user", "admin-1");
+    render(<MemoryRouter initialEntries={["/settings/quiz"]}><App /></MemoryRouter>);
+    expect(screen.getByRole("tab", { name: "Tutorial" }).getAttribute("aria-selected")).toBe("true");
+    fireEvent.click(screen.getByRole("button", { name: "+ Add video" }));
+    fireEvent.change(screen.getByLabelText("Tutorial title"), { target: { value: "Permit closure walkthrough" } });
+    fireEvent.change(screen.getByLabelText("Tutorial section"), { target: { value: "Workflow" } });
+    fireEvent.change(screen.getByLabelText("Tutorial display order"), { target: { value: "15" } });
+    fireEvent.change(screen.getByLabelText("Tutorial update information"), { target: { value: "Updated 30 October 2026 · Closure process revised" } });
+    fireEvent.change(screen.getByLabelText("Tutorial video file"), { target: { files: [new File(["demo-video"], "closure-guide.mp4", { type: "video/mp4" })] } });
+    await waitFor(() => expect(screen.getByText("closure-guide.mp4")).toBeTruthy());
+    const videoForm = screen.getByLabelText("Tutorial title").closest("form")!;
+    fireEvent.click(within(videoForm).getByRole("button", { name: "Add video" }));
+    expect(localStorage.getItem("eptw-tutorial-videos:v1")).toContain("Permit closure walkthrough");
+
+    cleanup();
+    localStorage.setItem("eptw-demo-user", "req-1");
+    render(<MemoryRouter initialEntries={["/help?resource=tutorials"]}><App /></MemoryRouter>);
+    const tutorialHeading = screen.getByRole("heading", { name: "Permit closure walkthrough" });
+    expect(tutorialHeading).toBeTruthy();
+    expect(screen.getByText("Updated 30 October 2026 · Closure process revised")).toBeTruthy();
+    expect(screen.queryByText("Watch tutorial")).toBeNull();
+    fireEvent.click(within(tutorialHeading.closest("article")!).getByRole("link", { name: "Open Permit closure walkthrough video" }));
+    expect(screen.getByLabelText("Permit closure walkthrough video").querySelector("video")?.getAttribute("src")).toContain("data:video/mp4;base64");
+  });
+
+  it("shows View only for Users and Templates and centers all System Management actions", () => {
+    const pages = [
+      { path: "/settings/companies", seed: () => localStorage.setItem("eptw-companies:v1", JSON.stringify([{ id: "company-test", name: "Test Company", status: "Active", createdAt: "2026-01-01T00:00:00.000Z" }])) },
+      { path: "/settings/sites", seed: () => localStorage.setItem("eptw-sites:v1", JSON.stringify([{ id: "site-test", name: "Test Site", code: "TS", address: "1 Test Road", createdAt: "2026-01-01T00:00:00.000Z" }])) },
+      { path: "/settings/users", seed: () => localStorage.setItem("eptw-user-directory:v1", JSON.stringify([{ id: "custom-user", name: "Test User", email: "test@example.com", sites: ["F10A1"], role: "Contractor Requestor", groups: [], status: "Approved" }])), view: "View Test User" },
+      { path: "/settings/templates", seed: () => localStorage.setItem("eptw-templates:v4", JSON.stringify([{ id: "template-test", kind: "PARENT", name: "Test Template", code: "TT", discipline: "Facilities", description: "Test template.", active: true, updatedAt: "2026-01-01T00:00:00.000Z", sections: [] }])), view: "View" },
+      { path: "/settings/disciplines", seed: () => localStorage.setItem("eptw-disciplines:v2", JSON.stringify([{ id: "discipline-test", number: 1, code: "TEST", description: "Test discipline" }])) },
+      { path: "/settings/mt-groups", seed: () => localStorage.setItem("eptw-mt-groups:v2", JSON.stringify([{ id: "group-test", number: 1, name: "Test Group", site: "F10A1", canClose: false, editable: false, memberIds: [] }])) },
+    ];
+
+    for (const userId of ["admin-1", "user-admin-1"]) {
+      for (const page of pages) {
+        cleanup();
+        localStorage.clear();
+        localStorage.setItem("eptw-demo-user", userId);
+        page.seed();
+        render(<MemoryRouter initialEntries={[page.path]}><App /></MemoryRouter>);
+        const actions = document.querySelector(".admin-action-buttons")!;
+        const buttons = within(actions as HTMLElement).getAllByRole("button");
+        expect(buttons).toHaveLength(page.view ? 3 : 2);
+        expect(buttons.every((button) => Boolean(button.querySelector("svg")))).toBe(true);
+        expect(buttons[0].classList.contains("danger")).toBe(false);
+        expect(buttons.at(-1)?.classList.contains("danger")).toBe(true);
+        if (page.view) {
+          fireEvent.click(screen.getByRole("button", { name: page.view }));
+          const dialog = screen.getByRole("dialog");
+          expect(dialog).toBeTruthy();
+          fireEvent.click(within(dialog).getByRole("button", { name: "Close" }));
+        } else {
+          expect(within(actions as HTMLElement).queryByRole("button", { name: /view/i })).toBeNull();
+        }
+      }
+    }
+  });
+
+  it("allows both admin roles to edit and delete System Management data", () => {
+    const confirmDelete = vi.spyOn(window, "confirm").mockReturnValue(true);
+    const renderPage = (userId: string, path: string) => {
+      cleanup();
+      localStorage.setItem("eptw-demo-user", userId);
+      render(<MemoryRouter initialEntries={[path]}><App /></MemoryRouter>);
+    };
+
+    for (const userId of ["admin-1", "user-admin-1"]) {
+      localStorage.clear();
+      localStorage.setItem("eptw-companies:v1", JSON.stringify([{ id: "company-test", name: "Test Company", status: "Active", createdAt: "2026-01-01T00:00:00.000Z" }]));
+      renderPage(userId, "/settings/companies");
+      fireEvent.click(screen.getByRole("button", { name: "Edit Test Company" }));
+      fireEvent.change(screen.getByLabelText("Company name"), { target: { value: "Edited Company" } });
+      fireEvent.click(screen.getByRole("button", { name: "Save changes" }));
+      fireEvent.click(screen.getByRole("button", { name: "Delete Edited Company" }));
+      expect(screen.queryByText("Edited Company", { selector: "strong" })).toBeNull();
+
+      localStorage.clear();
+      localStorage.setItem("eptw-sites:v1", JSON.stringify([{ id: "site-test", name: "Test Site", code: "TS", address: "1 Test Road", createdAt: "2026-01-01T00:00:00.000Z" }]));
+      renderPage(userId, "/settings/sites");
+      fireEvent.click(screen.getByRole("button", { name: "Edit Test Site" }));
+      fireEvent.change(screen.getByLabelText("Site name"), { target: { value: "Edited Site" } });
+      fireEvent.click(screen.getByRole("button", { name: "Save changes" }));
+      fireEvent.click(screen.getByRole("button", { name: "Delete Edited Site" }));
+      expect(screen.queryByText("Edited Site", { selector: "strong" })).toBeNull();
+
+      localStorage.clear();
+      localStorage.setItem("eptw-user-directory:v1", JSON.stringify([{ id: "custom-user", name: "Test User", email: "test@example.com", sites: ["F10A1"], role: "Contractor Requestor", groups: [], status: "Approved" }]));
+      renderPage(userId, "/settings/users");
+      let userRow = screen.getByText("Test User").closest("tr")!;
+      fireEvent.click(within(userRow).getByRole("button", { name: "Edit Test User" }));
+      fireEvent.change(screen.getByLabelText("Edit user name"), { target: { value: "Edited User" } });
+      fireEvent.click(screen.getByRole("button", { name: "Save changes" }));
+      userRow = screen.getByText("Edited User").closest("tr")!;
+      fireEvent.click(within(userRow).getByRole("button", { name: "Delete Edited User" }));
+      expect(screen.queryByText("Edited User", { selector: "strong" })).toBeNull();
+
+      localStorage.clear();
+      localStorage.setItem("eptw-templates:v4", JSON.stringify([{ id: "template-test", kind: "PARENT", name: "Test Template", code: "TT", discipline: "Facilities", description: "Test template.", active: true, updatedAt: "2026-01-01T00:00:00.000Z", sections: [{ id: "general", title: "General", description: "", fields: [] }] }]));
+      renderPage(userId, "/settings/templates");
+      let templateRow = screen.getByText("Test Template").closest("tr")!;
+      fireEvent.click(within(templateRow).getByRole("button", { name: "Edit" }));
+      fireEvent.change(screen.getByLabelText("Template name"), { target: { value: "Edited Template" } });
+      fireEvent.click(screen.getByRole("button", { name: "Save changes" }));
+      templateRow = screen.getByText("Edited Template").closest("tr")!;
+      fireEvent.click(within(templateRow).getByRole("button", { name: "Delete" }));
+      expect(screen.queryByText("Edited Template")).toBeNull();
+
+      localStorage.clear();
+      localStorage.setItem("eptw-disciplines:v2", JSON.stringify([{ id: "discipline-test", number: 1, code: "TEST", description: "Test discipline" }]));
+      renderPage(userId, "/settings/disciplines");
+      let disciplineRow = screen.getByText("TEST").closest("tr")!;
+      fireEvent.click(within(disciplineRow).getByRole("button", { name: "Edit TEST" }));
+      fireEvent.change(screen.getByLabelText("Discipline code"), { target: { value: "EDITED" } });
+      fireEvent.click(screen.getByRole("button", { name: "Save changes" }));
+      disciplineRow = screen.getByText("EDITED").closest("tr")!;
+      fireEvent.click(within(disciplineRow).getByRole("button", { name: "Delete EDITED" }));
+      expect(screen.queryByText("EDITED")).toBeNull();
+
+      localStorage.clear();
+      localStorage.setItem("eptw-mt-groups:v2", JSON.stringify([{ id: "group-test", number: 1, name: "Test Group", site: "F10A1", canClose: false, editable: false, memberIds: [] }]));
+      renderPage(userId, "/settings/mt-groups");
+      fireEvent.click(screen.getByRole("button", { name: "Edit Test Group" }));
+      fireEvent.change(screen.getByLabelText("Edit group name"), { target: { value: "Edited Group" } });
+      fireEvent.click(screen.getByRole("button", { name: "Save changes" }));
+      fireEvent.click(screen.getByRole("button", { name: "Delete Edited Group" }));
+      expect(screen.queryByText("Edited Group")).toBeNull();
+    }
+    confirmDelete.mockRestore();
   });
 
   it("shows Analytics and SIPP Daily Report only to administrators", () => {
@@ -1207,6 +1688,11 @@ describe("application shell", () => {
     expect((dateSelectors[1] as HTMLSelectElement).value).toBe("approval");
     expect(screen.getAllByRole("img").filter((item) => item.classList.contains("bar-chart"))).toHaveLength(6);
     expect(screen.getByText("Facilities", { selector: "strong" })).toBeTruthy();
+    const analyticsTables = screen.getAllByRole("table");
+    expect(within(analyticsTables[0]).getAllByRole("columnheader").map((header) => header.textContent)).toEqual([
+      "Month", "General", "Tool Install", "Child", "B1-B4", "Total",
+    ]);
+    expect(screen.getAllByRole("columnheader", { name: "B1-B4" })).toHaveLength(5);
   });
 
   it("exports the currently filtered user list as CSV", () => {
@@ -1239,6 +1725,86 @@ describe("application shell", () => {
     expect(screen.getByText("Permit Assessor")).toBeTruthy();
     expect(screen.queryByText("Legacy Demo User")).toBeNull();
     expect(screen.getByText(`${USERS.length} users`)).toBeTruthy();
+    expect(within(screen.getByText("Aisha Rahman").closest("tr")!).getByText("Acme Engineering")).toBeTruthy();
+    expect(within(screen.getByText("Irene Lim").closest("tr")!).getByText("Micron Semiconductor Asia Pte Ltd")).toBeTruthy();
+  });
+
+  it("shows company and lets admins edit user fields while MT Groups remain view only", () => {
+    localStorage.setItem("eptw-demo-user", "admin-1");
+    localStorage.setItem("eptw-user-directory:v1", JSON.stringify([{ id: "custom-lifecycle-user", name: "Lifecycle User", email: "lifecycle@example.com", company: "Acme Engineering", sites: ["F10A1"], hosts: [{ id: "host-1", name: "Marcus Teo", date: "2026-10-01" }], role: "Contractor Requestor", groups: ["Facilities MT"], status: "Pending" }]));
+    render(<MemoryRouter initialEntries={["/settings/users"]}><App /></MemoryRouter>);
+    expect(screen.getAllByRole("columnheader").map((header) => header.textContent)).toContain("Company Name");
+    const row = screen.getByText("Lifecycle User").closest("tr")!;
+    expect(within(row).getByText("Acme Engineering")).toBeTruthy();
+    fireEvent.click(within(row).getByRole("button", { name: "View Lifecycle User" }));
+    const viewDialog = screen.getByRole("dialog", { name: "View Lifecycle User" });
+    expect(within(viewDialog).getByRole("columnheader", { name: "Host name (Micron staff)" })).toBeTruthy();
+    expect(within(viewDialog).getByText("Marcus Teo")).toBeTruthy();
+    expect(within(viewDialog).getByText("01 Oct 2026")).toBeTruthy();
+    expect(within(viewDialog).queryByRole("columnheader", { name: "Action" })).toBeNull();
+    fireEvent.click(within(viewDialog).getByRole("button", { name: "Close" }));
+    fireEvent.click(within(row).getByRole("button", { name: "Edit Lifecycle User" }));
+    const editDialog = screen.getByRole("dialog", { name: "Edit Lifecycle User" });
+    expect(screen.getByText(/view only. manage membership from MT Groups/i)).toBeTruthy();
+    expect(screen.queryByLabelText(/edit.*MT Groups/i)).toBeNull();
+    fireEvent.change(screen.getByLabelText("Edit user name"), { target: { value: "Updated User" } });
+    fireEvent.change(screen.getByLabelText("Edit user email"), { target: { value: "updated@example.com" } });
+    fireEvent.change(screen.getByLabelText("Edit user company"), { target: { value: "Vendor Services" } });
+    fireEvent.change(screen.getByLabelText("Edit user site"), { target: { value: "F10N" } });
+    expect(within(editDialog).getByRole("columnheader", { name: "Host name (Micron staff)" })).toBeTruthy();
+    expect(within(editDialog).getByRole("button", { name: "Edit Marcus Teo" })).toBeTruthy();
+    expect(within(editDialog).getByRole("button", { name: "Delete Marcus Teo" })).toBeTruthy();
+    fireEvent.click(within(editDialog).getByRole("button", { name: "Edit Marcus Teo" }));
+    fireEvent.change(screen.getByLabelText("Host name"), { target: { value: "Irene Lim" } });
+    fireEvent.change(screen.getByLabelText("Host date"), { target: { value: "2026-10-15" } });
+    fireEvent.click(screen.getByRole("button", { name: "Update host" }));
+    fireEvent.change(screen.getByLabelText("Edit user role"), { target: { value: "Contractor PM" } });
+    fireEvent.change(screen.getByLabelText("Edit user status"), { target: { value: "Active" } });
+    fireEvent.click(screen.getByRole("button", { name: "Save changes" }));
+    const updatedRow = screen.getByText("Updated User").closest("tr")!;
+    expect(within(updatedRow).getByText("Vendor Services")).toBeTruthy();
+    expect(within(updatedRow).getByText("Active")).toBeTruthy();
+    expect(localStorage.getItem("eptw-user-directory:v1")).toContain('"groups":["Facilities MT"]');
+    expect(localStorage.getItem("eptw-user-directory:v1")).toContain('"name":"Irene Lim","date":"2026-10-15"');
+  });
+
+  it("adds multiple dated hosts while creating a user", () => {
+    localStorage.setItem("eptw-demo-user", "admin-1");
+    render(<MemoryRouter initialEntries={["/settings/users"]}><App /></MemoryRouter>);
+
+    fireEvent.click(screen.getByRole("button", { name: /create user/i }));
+    fireEvent.change(screen.getByLabelText("Name"), { target: { value: "Hosted User" } });
+    fireEvent.change(screen.getByLabelText("Email address"), { target: { value: "hosted@example.com" } });
+
+    fireEvent.click(screen.getByRole("button", { name: "+ Add host" }));
+    fireEvent.change(screen.getByLabelText("New user host name"), { target: { value: "Marcus Teo" } });
+    fireEvent.change(screen.getByLabelText("New user host date"), { target: { value: "2026-10-10" } });
+    fireEvent.click(screen.getByRole("button", { name: "Add host" }));
+
+    fireEvent.click(screen.getByRole("button", { name: "+ Add host" }));
+    fireEvent.change(screen.getByLabelText("New user host name"), { target: { value: "Irene Lim" } });
+    fireEvent.change(screen.getByLabelText("New user host date"), { target: { value: "2026-10-20" } });
+    fireEvent.click(screen.getByRole("button", { name: "Add host" }));
+
+    expect(screen.getByText("10 Oct 2026")).toBeTruthy();
+    expect(screen.getByText("20 Oct 2026")).toBeTruthy();
+    fireEvent.click(screen.getByRole("button", { name: "Save user" }));
+
+    const row = screen.getByText("Hosted User").closest("tr")!;
+    fireEvent.click(within(row).getByRole("button", { name: "View Hosted User" }));
+    const dialog = screen.getByRole("dialog", { name: "View Hosted User" });
+    expect(within(dialog).getByText("Marcus Teo")).toBeTruthy();
+    expect(within(dialog).getByText("Irene Lim")).toBeTruthy();
+    expect(within(dialog).getByText("10 Oct 2026")).toBeTruthy();
+    expect(within(dialog).getByText("20 Oct 2026")).toBeTruthy();
+  });
+
+  it("marks active users inactive after six months without a login", () => {
+    localStorage.setItem("eptw-demo-user", "admin-1");
+    localStorage.setItem("eptw-user-directory:v1", JSON.stringify([{ id: "custom-inactive-user", name: "Dormant User", email: "dormant@example.com", company: "Acme Engineering", sites: ["F10A1"], host: "Not assigned", role: "Contractor Requestor", groups: [], status: "Active", lastLoginAt: "2025-01-01T00:00:00.000Z" }]));
+    render(<MemoryRouter initialEntries={["/settings/users"]}><App /></MemoryRouter>);
+    const row = screen.getByText("Dormant User").closest("tr")!;
+    expect(within(row).getByText("Inactive")).toBeTruthy();
   });
 
   it("shows the configured 53 discipline records in the required order", () => {
@@ -1266,11 +1832,68 @@ describe("application shell", () => {
     localStorage.setItem("eptw-demo-user", "admin-1");
     render(<MemoryRouter initialEntries={["/settings/mt-groups"]}><App /></MemoryRouter>);
     expect(screen.getByRole("columnheader", { name: "User" })).toBeTruthy();
+    const userDirectory = document.querySelector(".user-directory-table") as HTMLTableElement;
+    expect(within(userDirectory).getAllByRole("columnheader").map((header) => header.textContent)).toEqual(["", "User", "MT groups", "Actions"]);
+    expect(within(userDirectory).queryByRole("columnheader", { name: "Status" })).toBeNull();
     expect(screen.getByText("Aisha Rahman")).toBeTruthy();
     expect(screen.getAllByText("Micron Administrator").length).toBeGreaterThan(0);
     expect(screen.getByText("Showing 13 of 13 users")).toBeTruthy();
     fireEvent.click(screen.getByRole("button", { name: /add mt group/i }));
     expect(screen.getByText("Can edit permit information", { selector: "label" })).toBeTruthy();
+  });
+
+  it("uses role-based avatar colors and the sidebar initials pattern for every user", () => {
+    localStorage.setItem("eptw-demo-user", "admin-1");
+    render(<MemoryRouter initialEntries={["/settings/mt-groups"]}><App /></MemoryRouter>);
+
+    const avatars = Array.from(document.querySelectorAll<HTMLElement>(".user-directory-table .user-list-avatar"));
+    expect(avatars).toHaveLength(USERS.length);
+    avatars.forEach((avatar) => expect(Array.from(avatar.classList).some((name) => name.startsWith("avatar-role-"))).toBe(true));
+    expect(new Set(avatars.flatMap((avatar) => Array.from(avatar.classList).filter((name) => name.startsWith("avatar-role-")))).size).toBe(7);
+
+    const sidebarAvatar = document.querySelector<HTMLElement>(".sidebar-account-avatar")!;
+    const adminRowAvatar = screen.getAllByText("Micron Administrator").find((element) => element.closest("tr"))!.closest("tr")!.querySelector<HTMLElement>(".user-list-avatar")!;
+    expect(sidebarAvatar.textContent).toBe("MA");
+    expect(adminRowAvatar.textContent).toBe("MA");
+    expect(Array.from(adminRowAvatar.classList).find((name) => name.startsWith("avatar-role-"))).toBe("avatar-role-micron-admin");
+    expect(Array.from(sidebarAvatar.classList).find((name) => name.startsWith("avatar-role-"))).toBe("avatar-role-micron-admin");
+  });
+
+  it("lists MT Groups row by row with Manage, Edit, and Delete actions", () => {
+    localStorage.setItem("eptw-demo-user", "admin-1");
+    render(<MemoryRouter initialEntries={["/settings/mt-groups"]}><App /></MemoryRouter>);
+    const table = document.querySelector(".mt-group-table") as HTMLTableElement;
+    const groupTable = within(table);
+    for (const heading of ["#", "Group name", "Site", "Members", "Confirm closure", "Edit permits", "Action"]) {
+      expect(groupTable.getByRole("columnheader", { name: heading })).toBeTruthy();
+    }
+    const firstRow = table.querySelector("tbody tr") as HTMLTableRowElement;
+    const actions = within(firstRow);
+    const manageButton = actions.getByRole("button", { name: "Manage members for Facilities MT" });
+    expect(manageButton.querySelector("svg")).toBeTruthy();
+    expect(manageButton.textContent).toBe("");
+    expect(actions.getByRole("button", { name: "Edit Facilities MT" })).toBeTruthy();
+    expect(actions.getByRole("button", { name: "Delete Facilities MT" })).toBeTruthy();
+    fireEvent.click(actions.getByRole("button", { name: "Manage members for Facilities MT" }));
+    expect(screen.getByRole("dialog", { name: "Facilities MT" })).toBeTruthy();
+  });
+
+  it("shows Edit and Delete icons for MT Group users and removes deleted users from memberships", () => {
+    const confirmDelete = vi.spyOn(window, "confirm").mockReturnValue(true);
+    localStorage.setItem("eptw-demo-user", "admin-1");
+    render(<MemoryRouter initialEntries={["/settings/mt-groups"]}><App /></MemoryRouter>);
+    const userRow = screen.getByText("Marcus Teo").closest("tr") as HTMLTableRowElement;
+    const actions = within(userRow);
+    const editButton = actions.getByRole("button", { name: "Edit Marcus Teo" });
+    const deleteButton = actions.getByRole("button", { name: "Delete Marcus Teo" });
+    expect(editButton.querySelector("svg")).toBeTruthy();
+    expect(deleteButton.querySelector("svg")).toBeTruthy();
+    fireEvent.click(deleteButton);
+    expect(screen.queryByText("Marcus Teo")).toBeNull();
+    expect(localStorage.getItem("eptw-user-directory-deleted:v1")).toContain('"mt-1"');
+    const savedGroups = JSON.parse(localStorage.getItem("eptw-mt-groups:v2") ?? "[]") as Array<{ memberIds?: string[] }>;
+    expect(savedGroups.every((group) => !group.memberIds?.includes("mt-1"))).toBe(true);
+    confirmDelete.mockRestore();
   });
 
   it("lets an admin edit MT groups for an individual user", () => {

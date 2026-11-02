@@ -15,5 +15,8 @@ import "./styles/companies.css";
 import "./styles/auth.css";
 import "./styles/analytics.css";
 import "./styles/resources.css";
+import "./styles/admin-actions.css";
+import "./styles/announcements.css";
+import "./styles/account-settings.css";
 
 createRoot(document.getElementById("root")!).render(<StrictMode><BrowserRouter><App /></BrowserRouter></StrictMode>);

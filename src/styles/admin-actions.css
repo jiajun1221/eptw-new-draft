@@ -1,0 +1,16 @@
+.company-table th:first-child { width: 50%; }
+.company-table th:nth-child(2) { width: 30%; }
+.company-table th:last-child { width: 20%; }
+.company-table th:last-child,
+.company-table td:last-child,
+.grouped-sites-table thead th:last-child,
+.grouped-sites-table .site-child-row td:last-child { text-align: center; }
+.company-form-grid.editing { grid-template-columns: minmax(0, 1fr) 220px; }
+.company-form-grid select { width: 100%; padding: 10px 11px; border: 1px solid #cbd6e4; border-radius: 8px; background: #fff; color: var(--ink); font: inherit; }
+
+@media (max-width: 700px) {
+  .company-form-grid.editing { grid-template-columns: 1fr; }
+  .company-table th:first-child { width: 38%; }
+  .company-table th:nth-child(2) { width: 30%; }
+  .company-table th:last-child { width: 32%; }
+}

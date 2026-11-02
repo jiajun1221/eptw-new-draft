@@ -1,10 +1,12 @@
 import { currentRevision, type Permit, type User } from "./types";
 import { readGroups } from "./groupStore";
+import { getActionDecision } from "./policy";
 
 export type SectionEditAccess = { assessor?: boolean; assessorIds?: string[]; mtGroupIds?: string[] };
 export function canEditTemplateSection(permit: Permit, actor: User, access?: SectionEditAccess) {
   const revision = currentRevision(permit);
   if (["CLOSED", "CANCELLED", "REJECTED", "EXPIRED", "SUPERSEDED"].includes(revision.status)) return false;
+  if (getActionDecision(permit, "APPROVE", actor, [permit]).allowed) return true;
   if (actor.role === "ASSESSOR") {
     const permittedByTemplate = access?.assessorIds?.length ? access.assessorIds.includes(actor.id) : access?.assessor;
     return Boolean(permittedByTemplate && revision.data.assessorIds?.includes(actor.id));

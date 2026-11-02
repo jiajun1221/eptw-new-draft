@@ -71,9 +71,27 @@ describe("central workflow policy", () => {
     expect(getActionDecision(parent, "APPROVE", user("admin-1"), state.permits).allowed).toBe(true);
   });
 
-  it.each(["REQUEST_CHANGES", "REJECT", "SUSPEND", "RESUME", "REQUEST_CLOSURE", "CLOSE"] as const)("requires a comment for %s", (action) => {
+  it.each(["REQUEST_CHANGES", "REJECT", "REQUEST_CANCELLATION", "SUSPEND", "RESUME", "REQUEST_CLOSURE", "CLOSE"] as const)("requires a comment for %s", (action) => {
     const state = createSeedState(); const permit = state.permits.find((p) => p.id === "permit-review")!;
     expect(getActionDecision(permit, action, user("ir-1"), state.permits).reason).toMatch(/required/i);
+  });
+
+  it("lets only the assigned Vendor PM or Host Supervisor request a final cancellation or closure", () => {
+    const state = createSeedState(); const permit = state.permits.find((p) => p.id === "permit-review")!;
+    currentRevision(permit).status = "APPROVED";
+    expect(getActionDecision(permit, "REQUEST_CANCELLATION", user("pm-1"), state.permits, "No longer required").allowed).toBe(true);
+    expect(getActionDecision(permit, "REQUEST_CLOSURE", user("supervisor-1"), state.permits, "Work completed").allowed).toBe(true);
+    expect(getActionDecision(permit, "REQUEST_CANCELLATION", user("req-1"), state.permits, "No longer required").allowed).toBe(false);
+  });
+
+  it("restricts final cancellation and closure approval to Final MT Group personnel", () => {
+    const state = createSeedState(); const permit = state.permits.find((p) => p.id === "permit-review")!;
+    currentRevision(permit).status = "CANCELLATION_REQUESTED";
+    expect(getActionDecision(permit, "APPROVE_CANCELLATION", user("mt-1"), state.permits).allowed).toBe(true);
+    expect(getActionDecision(permit, "APPROVE_CANCELLATION", user("pm-1"), state.permits).allowed).toBe(false);
+    currentRevision(permit).status = "CLOSURE_REQUESTED";
+    expect(getActionDecision(permit, "APPROVE_CLOSURE", user("mt-1"), state.permits).allowed).toBe(true);
+    expect(getActionDecision(permit, "APPROVE_CLOSURE", user("supervisor-1"), state.permits).allowed).toBe(false);
   });
 
   it("derives expiry and prevents resumption", () => {
